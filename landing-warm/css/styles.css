@@ -1,0 +1,565 @@
+/* =========================================================
+   BS.CKI Hạnh Quyên — Ung bướu & Chăm sóc giảm nhẹ
+   Cảm hứng: worldcancerday.org (cam/xanh ấm áp, hy vọng)
+   + vividkit.dev (bố cục sạch, nhiều khoảng trắng)
+   ========================================================= */
+
+:root {
+  --orange: #f26e21;
+  --orange-soft: #fdeee2;
+  --orange-dark: #d85a10;
+  --navy: #123b63;
+  --navy-deep: #0c2a48;
+  --ink: #22303f;
+  --muted: #5b6b7b;
+  --cream: #fff9f4;
+  --white: #ffffff;
+  --line: #ecdfd3;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(18, 59, 99, 0.10);
+  --font: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--orange-dark); }
+
+.container {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+.container.narrow { width: min(760px, 100% - 2.5rem); }
+
+/* ---------- Typography ---------- */
+h1, h2, h3 { line-height: 1.2; color: var(--navy); font-weight: 700; }
+
+h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; }
+h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); margin-bottom: .75rem; }
+h3 { font-size: 1.15rem; }
+
+h1 em { font-style: normal; color: var(--orange); }
+
+.eyebrow {
+  display: inline-block;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--orange-dark);
+  background: var(--orange-soft);
+  border-radius: 999px;
+  padding: .3rem .9rem;
+  margin-bottom: 1rem;
+}
+
+.eyebrow.light { background: rgba(255,255,255,.15); color: #ffd9bd; }
+
+.lead { font-size: 1.15rem; color: var(--muted); margin-top: 1rem; }
+
+.subheading { margin-bottom: 1.25rem; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  padding: .8rem 1.6rem;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(242, 110, 33, .35);
+}
+.btn-primary:hover { background: var(--orange-dark); }
+
+.btn-outline {
+  border-color: var(--navy);
+  color: var(--navy);
+  background: transparent;
+}
+.btn-outline.light { border-color: rgba(255,255,255,.7); color: #fff; }
+
+.btn-sm { padding: .5rem 1.1rem; font-size: .92rem; }
+.btn-lg { padding: 1rem 2.2rem; font-size: 1.08rem; }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 249, 244, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: .7rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  text-decoration: none;
+  color: var(--navy);
+}
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-text strong { font-size: 1.02rem; }
+.brand-text small { color: var(--muted); font-size: .78rem; }
+
+.site-nav { display: flex; align-items: center; gap: 1.4rem; }
+
+.site-nav a:not(.btn) {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: .97rem;
+}
+.site-nav a:not(.btn):hover { color: var(--orange-dark); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  padding: .5rem;
+  cursor: pointer;
+}
+.nav-toggle span {
+  width: 24px; height: 2.5px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background:
+    radial-gradient(60% 80% at 85% 15%, var(--orange-soft) 0%, transparent 60%),
+    radial-gradient(50% 70% at 5% 90%, #e8f1fa 0%, transparent 60%),
+    var(--cream);
+  padding-block: 4.5rem 3.5rem;
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-top: 1.8rem;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  list-style: none;
+  margin-top: 2rem;
+}
+
+.hero-badges li {
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .35rem .95rem;
+}
+
+.hero-visual { position: relative; }
+
+.portrait-frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--white);
+  border: 6px solid var(--white);
+}
+
+.hero-card {
+  position: absolute;
+  left: -1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  gap: .7rem;
+  align-items: flex-start;
+  max-width: 290px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: .9rem 1.1rem;
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.hero-card svg { flex-shrink: 0; margin-top: .15rem; }
+
+/* ---------- Sections ---------- */
+.section { padding-block: 4.5rem; }
+
+.section-tint { background: var(--white); }
+
+.section-head { text-align: center; margin-bottom: 2.6rem; }
+.section-sub { color: var(--muted); max-width: 560px; margin: .5rem auto 0; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.quote {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.4rem;
+  border-left: 4px solid var(--orange);
+  background: var(--orange-soft);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--navy);
+  font-style: italic;
+}
+
+/* Timeline học vấn */
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 1.6rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+.timeline li { position: relative; padding-bottom: 1.4rem; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -1.6rem; top: 8px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--orange);
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 2px var(--orange);
+}
+.timeline strong { display: block; color: var(--navy); }
+.timeline span { color: var(--muted); font-size: .95rem; }
+
+/* ---------- Cards dịch vụ ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.6rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+.card-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: var(--orange-soft);
+  color: var(--orange-dark);
+  margin-bottom: 1.1rem;
+}
+
+.card h3 { margin-bottom: .6rem; }
+.card p { color: var(--muted); font-size: .97rem; }
+
+/* ---------- Steps ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.8rem 1.6rem;
+  text-align: center;
+}
+
+.step-num {
+  display: inline-grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.steps h3 { margin-bottom: .5rem; }
+.steps p { color: var(--muted); font-size: .95rem; }
+
+/* ---------- Phòng khám ---------- */
+.info-list { list-style: none; margin-block: 1.4rem 1.8rem; }
+.info-list li {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: .8rem;
+  padding-block: .8rem;
+  border-bottom: 1px dashed var(--line);
+}
+.info-list strong { color: var(--navy); }
+.info-list em { color: var(--muted); font-size: .88rem; }
+
+.map-frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  min-height: 380px;
+}
+.map-frame iframe { width: 100%; height: 100%; min-height: 380px; border: 0; }
+
+/* ---------- FAQ ---------- */
+.faq details {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.3rem;
+  margin-bottom: .9rem;
+}
+
+.faq summary {
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 2rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: .2rem; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: var(--orange);
+  transition: transform .2s ease;
+}
+.faq details[open] summary::after { content: "–"; }
+.faq details p { margin-top: .7rem; color: var(--muted); font-size: .97rem; }
+
+/* ---------- Đặt lịch (CTA) ---------- */
+.section-cta {
+  background:
+    radial-gradient(70% 90% at 90% 0%, rgba(242,110,33,.25) 0%, transparent 55%),
+    linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: #eaf1f8;
+}
+
+.section-cta h2 { color: #fff; }
+.section-cta .section-sub { color: #c4d3e2; }
+.section-cta a { color: #ffb47e; }
+
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem 1.3rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.field { display: flex; flex-direction: column; gap: .4rem; }
+.field-full { grid-column: 1 / -1; }
+
+.field label { font-weight: 600; font-size: .92rem; color: #dbe6f1; }
+.field label span { color: var(--orange); }
+
+.field input,
+.field select,
+.field textarea {
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: .75rem .95rem;
+  width: 100%;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.field input.invalid,
+.field select.invalid { border-color: #e5484d; }
+
+.form-error {
+  grid-column: 1 / -1;
+  color: #ffb3b5;
+  font-size: .93rem;
+  font-weight: 500;
+}
+
+.booking-form .btn { justify-self: start; }
+
+/* Kết quả sau khi gửi form */
+.booking-result {
+  margin-top: 1.6rem;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+}
+.booking-result h3 { color: #fff; margin-bottom: .4rem; }
+
+.composed {
+  white-space: pre-wrap;
+  font-family: var(--font);
+  font-size: .95rem;
+  background: rgba(0,0,0,.25);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-block: 1rem;
+  color: #eaf1f8;
+}
+
+.result-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+.result-note { margin-top: .9rem; font-size: .92rem; color: #b9f6ca; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--navy-deep);
+  color: #b9c9d9;
+  padding-block: 2.2rem;
+  font-size: .93rem;
+}
+.site-footer a { color: #ffb47e; }
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.4rem;
+}
+.footer-inner .brand-text strong { color: #fff; }
+.disclaimer { max-width: 420px; font-size: .85rem; opacity: .8; }
+
+/* ---------- Quick bar (mobile) ---------- */
+.quick-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 60;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -6px 20px rgba(18,59,99,.12);
+}
+.quick-bar a {
+  flex: 1;
+  text-align: center;
+  padding: .85rem .4rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--navy);
+}
+.quick-bar a + a { border-left: 1px solid var(--line); }
+
+/* ---------- Reveal animation ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero-inner, .grid-2 { grid-template-columns: 1fr; }
+  .cards, .steps { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 420px; margin-inline: auto; }
+  .hero-card { left: .5rem; }
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: 52px; } /* chừa chỗ cho quick-bar */
+  .quick-bar { display: flex; }
+
+  .nav-toggle { display: flex; }
+  .site-nav {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    display: none;
+    padding: .6rem 1.25rem 1rem;
+  }
+  .site-nav.open { display: flex; }
+  .site-nav a:not(.btn) { padding: .75rem 0; border-bottom: 1px dashed var(--line); }
+  .site-nav .btn { margin-top: .8rem; justify-content: center; }
+
+  .booking-form { grid-template-columns: 1fr; padding: 1.4rem; }
+  .info-list li { grid-template-columns: 1fr; gap: .15rem; }
+  .section { padding-block: 3.2rem; }
+}
