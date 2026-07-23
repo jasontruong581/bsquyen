@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BS.CKI Hạnh Quyên — Chọn phiên bản website giới thiệu</title>
+  <meta name="description" content="Trang tổng hợp ba phiên bản website giới thiệu BS.CKI Hạnh Quyên — chuyên khoa Ung bướu &amp; Chăm sóc giảm nhẹ.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://bsquyen.vercel.app/demo/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="BS.CKI Hạnh Quyên — Ung bướu &amp; Chăm sóc giảm nhẹ">
+  <meta property="og:description" content="Khám, tư vấn điều trị ung bướu và chăm sóc giảm nhẹ tại nhà — 297A Bùi Hữu Nghĩa, Phường Gia Định, TP.HCM. ĐT/Zalo: 0776 196 601.">
+  <meta property="og:url" content="https://bsquyen.vercel.app/demo/">
+  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1c2b3a;
+      --muted: #5d6d7e;
+      --line: #e3e8ef;
+      --warm: #f26e21;
+      --cool: #2f7fff;
+      --bg: #f6f8fb;
+      --radius: 20px;
+      --shadow: 0 14px 40px rgba(28, 43, 58, .12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      background:
+        radial-gradient(55% 60% at 15% 0%, #fdeee2 0%, transparent 55%),
+        radial-gradient(55% 60% at 90% 100%, #e3edfc 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    .wrap { width: min(1150px, 100% - 2.5rem); margin-inline: auto; padding-block: 3.5rem 4rem; }
+
+    .hub-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
+    .hub-head .eyebrow {
+      display: inline-block;
+      font-size: .82rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: #8a5a2f; background: #fdeee2; border-radius: 999px; padding: .3rem 1rem; margin-bottom: 1rem;
+    }
+    .hub-head h1 { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.2; }
+    .hub-head p { color: var(--muted); margin-top: .9rem; }
+
+    .versions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+
+    .badge-best {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      color: #fff; background: linear-gradient(95deg, var(--warm), var(--cool));
+      border-radius: 999px; padding: .22rem .7rem;
+    }
+
+    .version-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .version-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(28,43,58,.18); }
+
+    /* Preview thu nhỏ trực tiếp trang thật bằng iframe scale 30% */
+    .preview {
+      position: relative; display: block;
+      aspect-ratio: 16 / 10.5;
+      overflow: hidden;
+      background: #eef1f6;
+      border-bottom: 1px solid var(--line);
+    }
+    .preview iframe {
+      width: 333.34%; height: 333.34%;
+      transform: scale(.3); transform-origin: 0 0;
+      border: 0; pointer-events: none;
+    }
+    .preview .open-hint {
+      position: absolute; inset: 0;
+      display: grid; place-items: center;
+      background: rgba(28,43,58,0);
+      color: transparent; font-weight: 700;
+      transition: background .2s ease, color .2s ease;
+    }
+    .preview:hover .open-hint { background: rgba(28,43,58,.45); color: #fff; }
+
+    .card-body { padding: 1.6rem 1.7rem 1.8rem; display: flex; flex-direction: column; gap: .9rem; flex: 1; }
+    .card-title { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+    .card-title h2 { font-size: 1.25rem; }
+    .swatches { display: inline-flex; gap: .3rem; }
+    .swatches i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line); }
+
+    .card-body p { color: var(--muted); font-size: .95rem; }
+
+    .traits { list-style: none; display: flex; flex-direction: column; gap: .35rem; font-size: .92rem; }
+    .traits li::before { content: "✓"; font-weight: 800; margin-right: .5rem; }
+    .traits.warm li::before { color: var(--warm); }
+    .traits.cool li::before { color: var(--cool); }
+
+    .card-actions { margin-top: auto; padding-top: .6rem; }
+    .btn {
+      display: inline-block; text-decoration: none; text-align: center;
+      font-weight: 700; font-size: 1rem; color: #fff;
+      border-radius: 999px; padding: .8rem 1.9rem;
+      transition: transform .15s ease, filter .15s ease;
+      width: 100%;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .btn.warm { background: linear-gradient(95deg, #f26e21, #e2530e); box-shadow: 0 8px 20px rgba(242,110,33,.35); }
+    .btn.cool { background: linear-gradient(95deg, #2f7fff, #12b6e6); box-shadow: 0 8px 20px rgba(47,127,255,.35); }
+    .btn.mix  { background: linear-gradient(95deg, #f26e21, #2f7fff); box-shadow: 0 8px 20px rgba(120,110,140,.35); }
+    .traits.mix li::before { color: #8a56c9; }
+
+    footer { text-align: center; color: var(--muted); font-size: .88rem; margin-top: 3.2rem; }
+
+    @media (max-width: 1020px) {
+      .versions { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+      .wrap { padding-block: 2.4rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hub-head">
+      <span class="eyebrow">BS.CKI Hạnh Quyên — Ung bướu &amp; Chăm sóc giảm nhẹ</span>
+      <h1>Ba phiên bản website giới thiệu</h1>
+      <p>
+        Cùng một bác sĩ, ba phong cách trình bày khác nhau.
+        Bấm vào từng phiên bản để xem trang đầy đủ và so sánh trải nghiệm.
+      </p>
+    </header>
+
+    <div class="versions">
+      <!-- Phiên bản 1: tông cam ấm áp -->
+      <article class="version-card">
+        <a class="preview" href="../" aria-label="Mở phiên bản Ấm áp">
+          <iframe src="../" title="Xem trước phiên bản Ấm áp" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+          <span class="open-hint">Mở trang đầy đủ →</span>
+        </a>
+        <div class="card-body">
+          <div class="card-title">
+            <h2>Phiên bản Ấm áp</h2>
+            <span class="swatches" aria-hidden="true">
+              <i style="background:#f26e21"></i><i style="background:#123b63"></i><i style="background:#fff9f4"></i>
+            </span>
+          </div>
+          <p>
+            Tông cam – xanh navy lấy cảm hứng từ World Cancer Day: gần gũi, trấn an,
+            tập trung tối đa vào hành động liên hệ của bệnh nhân.
+          </p>
+          <ul class="traits warm">
+            <li>Form đặt lịch hoạt động (gửi qua Zalo / email / gọi)</li>
+            <li>Bản đồ phòng khám + thông tin liên hệ đầy đủ</li>
+            <li>Thanh Gọi / Zalo / Đặt lịch cố định trên mobile</li>
+            <li>Timeline học vấn trực quan</li>
+          </ul>
+          <div class="card-actions">
+            <a class="btn warm" href="../">Xem phiên bản Ấm áp</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Phiên bản 2: tông xanh hiện đại -->
+      <article class="version-card">
+        <a class="preview" href="../landing-page-bundle/" aria-label="Mở phiên bản Hiện đại">
+          <iframe src="../landing-page-bundle/" title="Xem trước phiên bản Hiện đại" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+          <span class="open-hint">Mở trang đầy đủ →</span>
+        </a>
+        <div class="card-body">
+          <div class="card-title">
+            <h2>Phiên bản Hiện đại</h2>
+            <span class="swatches" aria-hidden="true">
+              <i style="background:#2f7fff"></i><i style="background:#12b6e6"></i><i style="background:#edf1f6"></i>
+            </span>
+          </div>
+          <p>
+            Tông xanh glassmorphism với hiệu ứng chuyển động tinh tế —
+            thiên về chiều sâu nội dung chuyên môn và cảm giác cao cấp.
+          </p>
+          <ul class="traits cool">
+            <li>9 lĩnh vực chuyên môn + quy trình đồng hành 5 bước</li>
+            <li>10 câu hỏi thường gặp chi tiết</li>
+            <li>Song ngữ Việt – Anh &amp; chế độ sáng / tối</li>
+            <li>Hiệu ứng thị giác hiện đại (glow, parallax, progress)</li>
+          </ul>
+          <div class="card-actions">
+            <a class="btn cool" href="../landing-page-bundle/">Xem phiên bản Hiện đại</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Phiên bản 3: tổng hợp điểm mạnh của cả hai -->
+      <article class="version-card">
+        <a class="preview" href="../landing-mix/" aria-label="Mở phiên bản Tổng hợp">
+          <iframe src="../landing-mix/" title="Xem trước phiên bản Tổng hợp" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+          <span class="open-hint">Mở trang đầy đủ →</span>
+        </a>
+        <div class="card-body">
+          <div class="card-title">
+            <h2>Phiên bản Tổng hợp</h2>
+            <span class="badge-best">Đề xuất</span>
+            <span class="swatches" aria-hidden="true">
+              <i style="background:#f26e21"></i><i style="background:#2f7fff"></i><i style="background:#123b63"></i>
+            </span>
+          </div>
+          <p>
+            Gộp điểm mạnh của cả hai: khung liên hệ hoàn chỉnh của bản Ấm áp
+            + chiều sâu nội dung của bản Hiện đại, thêm header nổi và thanh tiến trình.
+          </p>
+          <ul class="traits mix">
+            <li>Form đặt lịch + Zalo + bản đồ + quick bar mobile</li>
+            <li>9 lĩnh vực chuyên môn + quy trình 5 bước + 10 FAQ</li>
+            <li>Header pill nổi có menu mobile đầy đủ</li>
+            <li>Thông tin phòng khám &amp; giờ làm việc thật</li>
+          </ul>
+          <div class="card-actions">
+            <a class="btn mix" href="../landing-mix/">Xem phiên bản Tổng hợp</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <footer>
+      Thông tin trên các trang chỉ mang tính tham khảo, không thay thế thăm khám trực tiếp bởi bác sĩ.
+    </footer>
+  </div>
+</body>
+</html>
