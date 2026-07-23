@@ -61,3 +61,29 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 
 - Google Business Profile: bác sĩ tự đăng ký bằng tài khoản Google, xác minh qua video/bưu thiếp; sẽ soạn hướng dẫn từng bước khi user mua domain xong
 - Cập nhật `lastmod` trong sitemap.xml khi nội dung thay đổi lớn
+
+## Mục Kiến thức (Eleventy) — thêm bài viết mới
+
+Stack: Eleventy v3 (`npm run build` → output `_site/`, Vercel build theo `vercel.json`). Site tĩnh cũ được passthrough copy nguyên trạng; chỉ `/kien-thuc/` sinh từ Markdown.
+
+Quy trình mỗi bài (2 bài/tháng, AI soạn — bác sĩ duyệt):
+
+1. Tạo `kien-thuc/<slug-khong-dau>.md` với frontmatter:
+   ```yaml
+   ---
+   title: "Tiêu đề bài viết"
+   description: "Mô tả 1-2 câu (hiện ở đầu bài, meta description, schema)"
+   date: 2026-08-01          # ngày đăng
+   updated: 2026-08-15       # tùy chọn, khi sửa nội dung
+   sources:                  # tùy chọn nhưng nên có (E-E-A-T)
+     - title: "Tên nguồn"
+       url: "https://..."
+   ---
+   ```
+2. Viết nội dung Markdown bên dưới (h2 `##`, h3 `###`, blockquote `>` cho câu nhấn mạnh)
+3. Chạy `npm run build` kiểm tra local (`python3 -m http.server 8081 -d _site`)
+4. Mở PR riêng cho bài viết → bác sĩ duyệt trên Vercel preview URL → merge = xuất bản
+
+Tự động khi build: trang danh sách `/kien-thuc/`, sitemap.xml (kèm lastmod), schema `MedicalWebPage` + byline bác sĩ, khối CTA đặt lịch + disclaimer cuối bài.
+
+Lưu ý nội dung (YMYL): bác sĩ là người duyệt cuối; không hứa hẹn kết quả điều trị; có nguồn tham khảo; cập nhật `updated` khi sửa đáng kể.

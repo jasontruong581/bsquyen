@@ -1,0 +1,58 @@
+---
+layout: false
+permalink: /kien-thuc/
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ | BS.CKI Hạnh Quyên</title>
+  <meta name="description" content="Bài viết kiến thức về ung bướu, tầm soát ung thư và chăm sóc giảm nhẹ — biên soạn và duyệt nội dung bởi BS.CKI Hạnh Quyên, chuyên khoa Ung bướu.">
+  <link rel="canonical" href="https://bsquyen.vercel.app/kien-thuc/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ | BS.CKI Hạnh Quyên">
+  <meta property="og:description" content="Bài viết kiến thức về ung bướu, tầm soát ung thư và chăm sóc giảm nhẹ — biên soạn bởi bác sĩ chuyên khoa.">
+  <meta property="og:url" content="https://bsquyen.vercel.app/kien-thuc/">
+  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/kien-thuc.css">
+</head>
+<body>
+
+  {% include "partials/site-header.njk" %}
+
+  <main>
+    <section class="section">
+      <div class="container article-container">
+        <p class="eyebrow">Kiến thức</p>
+        <h1>Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ</h1>
+        <p class="article-lead">
+          Giải đáp dễ hiểu cho những câu hỏi bệnh nhân và gia đình thường gặp —
+          biên soạn và duyệt nội dung bởi BS.CKI Hạnh Quyên.
+        </p>
+
+        <div class="article-list">
+          {% for post in collections.baiviet %}
+          <a class="article-item" href="{{ post.url }}">
+            <h2>{{ post.data.title }}</h2>
+            <p>{{ post.data.description }}</p>
+            <span class="article-item-meta">{{ post.date | ngayVN }} · Đọc tiếp →</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include "partials/site-footer.njk" %}
+
+  <script src="/js/kien-thuc.js"></script>
+</body>
+</html>

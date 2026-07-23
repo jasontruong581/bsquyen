@@ -16,6 +16,7 @@
 ## Trang chính
 
 - [Trang giới thiệu chính thức](https://bsquyen.vercel.app/): thông tin bác sĩ, dịch vụ, câu hỏi thường gặp và form đặt lịch hẹn
+- [Kiến thức Ung bướu & Chăm sóc giảm nhẹ](https://bsquyen.vercel.app/kien-thuc/): bài viết chuyên môn do bác sĩ biên soạn và duyệt nội dung
 
 ## Ghi chú
 

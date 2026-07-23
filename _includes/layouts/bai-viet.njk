@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | BS.CKI Hạnh Quyên</title>
+  <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="https://bsquyen.vercel.app{{ page.url }}">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="https://bsquyen.vercel.app{{ page.url }}">
+  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "headline": {{ title | dump | safe }},
+    "description": {{ description | dump | safe }},
+    "inLanguage": "vi",
+    "url": "https://bsquyen.vercel.app{{ page.url }}",
+    "datePublished": "{{ page.date | ngayISO }}",
+    "dateModified": "{{ (updated or page.date) | ngayISO }}",
+    "author": {
+      "@type": "Physician",
+      "name": "BS.CKI Hạnh Quyên",
+      "url": "https://bsquyen.vercel.app/",
+      "medicalSpecialty": "Oncologic"
+    },
+    "reviewedBy": {
+      "@type": "Physician",
+      "name": "BS.CKI Hạnh Quyên",
+      "url": "https://bsquyen.vercel.app/"
+    }
+  }
+  </script>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/kien-thuc.css">
+</head>
+<body>
+
+  {% include "partials/site-header.njk" %}
+
+  <main>
+    <article class="article">
+      <div class="container article-container">
+        <nav class="breadcrumb" aria-label="Đường dẫn">
+          <a href="/">Trang chủ</a> › <a href="/kien-thuc/">Kiến thức</a>
+        </nav>
+        <h1>{{ title }}</h1>
+        <p class="article-meta">
+          <strong>BS.CKI Hạnh Quyên</strong> — Chuyên khoa Ung bướu
+          · Đăng ngày {{ page.date | ngayVN }}{% if updated %} · Cập nhật {{ updated | ngayVN }}{% endif %}
+        </p>
+        <p class="article-lead">{{ description }}</p>
+
+        <div class="article-body">
+          {{ content | safe }}
+        </div>
+
+        {% if sources and sources.length %}
+        <section class="article-sources">
+          <h2>Nguồn tham khảo</h2>
+          <ul>
+            {% for s in sources %}
+            <li>{% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener nofollow">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+        <aside class="article-cta">
+          <h2>Cần tư vấn trực tiếp?</h2>
+          <p>
+            BS.CKI Hạnh Quyên nhận khám, tư vấn điều trị ung bướu và chăm sóc giảm nhẹ
+            tại nhà ở TP.HCM. Phòng khám: 297A Bùi Hữu Nghĩa, Phường Gia Định
+            (Thứ 2–6: 17:00–19:30 · Thứ 7 &amp; CN: 9:00–17:00).
+          </p>
+          <div class="hero-actions">
+            <a href="/#dat-lich" class="btn btn-primary">Đặt lịch hẹn</a>
+            <a href="tel:0776196601" class="btn btn-outline">Gọi 0776 196 601</a>
+          </div>
+        </aside>
+
+        <p class="article-disclaimer">
+          Bài viết mang tính tham khảo, không thay thế chẩn đoán hoặc chỉ định
+          điều trị của bác sĩ với từng trường hợp cụ thể.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  {% include "partials/site-footer.njk" %}
+
+  <script src="/js/kien-thuc.js"></script>
+</body>
+</html>
