@@ -1,0 +1,33 @@
+# Cho phép mọi crawler, bao gồm bot của các công cụ AI
+User-agent: *
+Allow: /
+
+# Bot AI — cho phép rõ ràng để nội dung xuất hiện trong ChatGPT/Claude/Gemini/Perplexity
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://bsquyen.vercel.app/sitemap.xml
