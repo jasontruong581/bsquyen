@@ -1,6 +1,10 @@
 ---
 layout: false
-permalink: /kien-thuc/
+pagination:
+  data: collections.baiviet
+  size: 15
+  alias: posts
+permalink: "/kien-thuc/{% if pagination.pageNumber > 0 %}trang/{{ pagination.pageNumber + 1 }}/{% endif %}"
 eleventyExcludeFromCollections: true
 ---
 <!DOCTYPE html>
@@ -8,9 +12,15 @@ eleventyExcludeFromCollections: true
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ | BS.CKI Hạnh Quyên</title>
+  <title>Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ{% if pagination.pageNumber > 0 %} — Trang {{ pagination.pageNumber + 1 }}{% endif %} | BS.CKI Hạnh Quyên</title>
   <meta name="description" content="Bài viết kiến thức về ung bướu, tầm soát ung thư và chăm sóc giảm nhẹ — biên soạn và duyệt nội dung bởi BS.CKI Hạnh Quyên, chuyên khoa Ung bướu.">
-  <link rel="canonical" href="https://bsquyen.vercel.app/kien-thuc/">
+  <link rel="canonical" href="https://bsquyen.vercel.app{{ page.url }}">
+  {%- if pagination.href.previous %}
+  <link rel="prev" href="https://bsquyen.vercel.app{{ pagination.href.previous }}">
+  {%- endif %}
+  {%- if pagination.href.next %}
+  <link rel="next" href="https://bsquyen.vercel.app{{ pagination.href.next }}">
+  {%- endif %}
   <meta property="og:type" content="website">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:title" content="Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ | BS.CKI Hạnh Quyên">
@@ -39,7 +49,7 @@ eleventyExcludeFromCollections: true
         </p>
 
         <div class="article-list">
-          {% for post in collections.baiviet %}
+          {% for post in posts %}
           <a class="article-item" href="{{ post.url }}">
             <h2>{{ post.data.title }}</h2>
             <p>{{ post.data.description }}</p>
@@ -47,6 +57,20 @@ eleventyExcludeFromCollections: true
           </a>
           {% endfor %}
         </div>
+
+        {% if pagination.pages.length > 1 %}
+        <nav class="pagination" aria-label="Phân trang">
+          {% if pagination.href.previous %}
+          <a class="page-arrow" href="{{ pagination.href.previous }}">← Mới hơn</a>
+          {% endif %}
+          {% for href in pagination.hrefs %}
+          <a class="page-num{% if page.url == href %} active{% endif %}" href="{{ href }}"{% if page.url == href %} aria-current="page"{% endif %}>{{ loop.index }}</a>
+          {% endfor %}
+          {% if pagination.href.next %}
+          <a class="page-arrow" href="{{ pagination.href.next }}">Cũ hơn →</a>
+          {% endif %}
+        </nav>
+        {% endif %}
       </div>
     </section>
   </main>
