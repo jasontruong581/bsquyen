@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa kính lúp phát hiện polyp trên thành đại tràng">
+  <defs>
+    <clipPath id="lens"><circle cx="250" cy="255" r="88"/></clipPath>
+  </defs>
+
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- đại tràng cách điệu: lên bên phải, ngang qua trên, xuống bên trái, sigmoid -->
+  <path d="M510 360
+           L510 180
+           Q510 125 455 125
+           L305 125
+           Q250 125 250 180
+           L250 305"
+        fill="none" stroke="#f2a56e" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M250 305 q0 42 42 42 q38 0 38 32" fill="none" stroke="#f2a56e" stroke-width="40" stroke-linecap="round"/>
+  <!-- ngấn ruột (haustra) -->
+  <g stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity=".65">
+    <path d="M488 210 h44"/>
+    <path d="M488 265 h44"/>
+    <path d="M488 320 h44"/>
+    <path d="M340 103 v44"/>
+    <path d="M405 103 v44"/>
+  </g>
+
+  <!-- kính lúp đặt trên đoạn ruột trái -->
+  <circle cx="250" cy="255" r="88" fill="#ffffff" stroke="#123b63" stroke-width="10"/>
+  <g clip-path="url(#lens)">
+    <!-- phóng to: thành ruột dọc bên trái + lòng ruột -->
+    <rect x="162" y="167" width="176" height="176" fill="#fdeee2"/>
+    <rect x="162" y="167" width="52" height="176" fill="#f2a56e"/>
+    <path d="M214 167 v176" stroke="#d85a10" stroke-width="5" opacity=".5"/>
+    <!-- polyp có cuống mọc từ thành ruột -->
+    <path d="M214 255 q16 0 26 0" fill="none" stroke="#d85a10" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="262" cy="255" r="23" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+    <circle cx="255" cy="247" r="6" fill="#ffd9bd"/>
+  </g>
+  <circle cx="250" cy="255" r="88" fill="none" stroke="#123b63" stroke-width="10"/>
+  <!-- tay cầm kính lúp -->
+  <path d="M315 315 L372 372" stroke="#123b63" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- dấu tích: phát hiện sớm -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

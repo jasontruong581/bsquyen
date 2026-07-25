@@ -99,3 +99,21 @@
 .article-item h2 { font-size: 1.2rem; margin-bottom: .4rem; }
 .article-item p { color: var(--muted); font-size: .95rem; margin-bottom: .6rem; }
 .article-item-meta { color: var(--orange-dark); font-weight: 600; font-size: .88rem; }
+
+/* Hình minh họa trong bài viết */
+.article-body figure {
+  margin: 1.6rem 0;
+}
+.article-body figure img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.article-body figcaption {
+  margin-top: .5rem;
+  font-size: .85rem;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}

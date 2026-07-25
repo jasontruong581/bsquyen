@@ -11,7 +11,8 @@
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:url" content="https://bsquyen.vercel.app{{ page.url }}">
-  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  {# Ảnh share riêng của bài (frontmatter image:) — mặc định dùng chân dung bác sĩ #}
+  <meta property="og:image" content="https://bsquyen.vercel.app{{ image or '/bsquyen/bsquyen.jpg' }}">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -20,6 +21,7 @@
     "description": {{ description | dump | safe }},
     "inLanguage": "vi",
     "url": "https://bsquyen.vercel.app{{ page.url }}",
+    "image": "https://bsquyen.vercel.app{{ image or '/bsquyen/bsquyen.jpg' }}",
     "datePublished": "{{ page.date | ngayISO }}",
     "dateModified": "{{ (updated or page.date) | ngayISO }}",
     "author": {
