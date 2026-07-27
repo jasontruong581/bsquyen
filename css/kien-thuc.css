@@ -117,3 +117,37 @@
   text-align: center;
   font-style: italic;
 }
+
+/* Phân trang danh sách bài viết */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: 2.2rem;
+}
+.pagination a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  transition: background .15s ease, color .15s ease;
+}
+.pagination a:hover { background: var(--orange-soft); }
+.page-num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  padding-inline: .5rem;
+}
+.page-num.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  pointer-events: none;
+}
+.page-arrow { padding: .55rem 1.1rem; font-size: .92rem; }
