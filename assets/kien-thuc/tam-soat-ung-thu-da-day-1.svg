@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa ống nội soi mềm đi qua thực quản vào dạ dày, đèn soi chiếu sáng phát hiện tổn thương nhỏ ở niêm mạc">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- thực quản -->
+  <path d="M330 40 L330 150" fill="none" stroke="#f2a56e" stroke-width="44" stroke-linecap="round"/>
+
+  <!-- dạ dày cách điệu: phình trái, thon dần sang môn vị bên phải -->
+  <path d="M308 140
+           Q235 170 232 255
+           Q230 345 330 358
+           Q430 370 490 305
+           Q515 278 545 285
+           L560 289
+           Q575 250 552 244
+           Q520 236 500 250
+           Q470 190 415 165
+           Q380 148 352 143
+           Z"
+        fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- lòng dạ dày -->
+  <path d="M320 175
+           Q272 195 270 258
+           Q268 322 338 332
+           Q412 340 458 292
+           Q420 225 385 200
+           Q355 182 320 175
+           Z"
+        fill="#fdeee2"/>
+
+  <!-- nếp niêm mạc -->
+  <g stroke="#f2a56e" stroke-width="6" stroke-linecap="round" opacity=".55" fill="none">
+    <path d="M300 220 q20 -8 42 -4"/>
+    <path d="M296 262 q26 -8 52 -2"/>
+    <path d="M306 300 q28 -4 54 4"/>
+  </g>
+
+  <!-- chùm sáng từ đầu ống soi chiếu vào tổn thương -->
+  <path d="M372 252 L398 318 L448 300 Z" fill="#ffd9bd" opacity=".85"/>
+
+  <!-- tổn thương nhỏ ở niêm mạc bờ dưới -->
+  <circle cx="422" cy="306" r="15" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="417" cy="301" r="4" fill="#ffd9bd"/>
+
+  <!-- ống nội soi mềm: đi từ trên qua thực quản, uốn trong lòng dạ dày -->
+  <path d="M330 30
+           L330 160
+           Q330 205 348 228
+           Q358 240 368 248"
+        fill="none" stroke="#123b63" stroke-width="14" stroke-linecap="round"/>
+  <!-- đầu đèn soi -->
+  <circle cx="371" cy="250" r="13" fill="#f26e21" stroke="#d85a10" stroke-width="4"/>
+  <circle cx="367" cy="246" r="4" fill="#ffd9bd"/>
+
+  <!-- dấu tích: phát hiện sớm -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
