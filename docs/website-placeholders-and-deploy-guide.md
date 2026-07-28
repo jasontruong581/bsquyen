@@ -46,21 +46,53 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 Đã có:
 
 - JSON-LD schema.org trong `index.html` (gốc): `Physician` + `MedicalClinic` (địa chỉ, giờ mở cửa, dịch vụ) + `FAQPage`
-- Open Graph + canonical cho trang gốc và trang demo
-- `robots.txt` (cho phép GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot…), `sitemap.xml`, `llms.txt`
+- JSON-LD `MedicalWebPage` + byline/`reviewedBy` bác sĩ cho mỗi bài Kiến thức (trong `_includes/layouts/bai-viet.njk`)
+- Open Graph + canonical cho trang gốc, trang demo, trang danh sách `/kien-thuc/` và từng bài viết
+- `robots.txt` (cho phép GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot…), `llms.txt`
+- `sitemap.xml` **sinh tự động khi build** từ `sitemap.njk` — bài mới tự vào, kèm `lastmod`
 
-### Checklist khi mua domain chính thức (ví dụ bsquyen.com)
+### Checklist khi mua domain chính thức (bsquyen.com)
 
-1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm primary để `*.vercel.app` tự redirect
-2. Thay toàn bộ URL: `grep -rln "bsquyen.vercel.app"` → thay bằng `bsquyen.com` (index.html, demo/index.html, robots.txt, sitemap.xml, llms.txt)
-3. Đăng ký Google Search Console + Bing Webmaster Tools, submit sitemap
-4. Tạo Google Business Profile cho phòng khám (cần hướng dẫn riêng — xem ghi chú bên dưới)
-5. Kiểm tra structured data bằng https://search.google.com/test/rich-results
+1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm **primary** để `*.vercel.app` tự 301 redirect — nhờ đó các URL đã được Google index không mất giá trị.
+
+2. Thay toàn bộ URL trong **source** (31 chỗ / 7 file):
+
+   | File | Số chỗ | Chứa gì |
+   |---|---|---|
+   | `index.html` | 10 | canonical, Open Graph, JSON-LD `Physician`/`MedicalClinic` |
+   | `_includes/layouts/bai-viet.njk` | 7 | canonical, `og:url`, `og:image`, JSON-LD của **mọi bài viết** |
+   | `kien-thuc/index.njk` | 5 | canonical + Open Graph trang danh sách (kèm `rel=prev/next`) |
+   | `sitemap.njk` | 3 | `<loc>` trang gốc, trang danh sách, và từng bài |
+   | `llms.txt` | 2 | |
+   | `robots.txt` | 1 | dòng `Sitemap:` |
+   | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
+
+   ```bash
+   grep -rl 'bsquyen\.vercel\.app' --include='*.html' --include='*.njk' --include='*.txt' . \
+     | grep -v '^./_site' | grep -v node_modules \
+     | xargs sed -i 's|bsquyen\.vercel\.app|bsquyen.com|g'
+   ```
+
+   ⚠️ **Sửa `sitemap.njk`, KHÔNG sửa `sitemap.xml`** — `sitemap.xml` là file Eleventy sinh ra khi build, sửa vào đó sẽ bị ghi đè. Tương tự: đừng sửa gì trong `_site/`.
+
+   ⚠️ Bỏ sót `_includes/layouts/bai-viet.njk` là lỗi tốn kém nhất: các bài viết sẽ có `canonical` trỏ về domain cũ, tức báo Google "bản chính thức nằm ở vercel.app" → domain mới không lên hạng.
+
+3. Hậu kiểm — build lại rồi xác nhận không còn URL cũ nào trong output:
+
+   ```bash
+   npm run build
+   grep -rc 'bsquyen\.vercel\.app' _site/ | grep -v ':0$'   # không ra dòng nào = sạch
+   grep -o '<loc>[^<]*</loc>' _site/sitemap.xml             # phải toàn bsquyen.com
+   ```
+
+4. Đăng ký Google Search Console + Bing Webmaster Tools cho domain mới, submit `sitemap.xml`
+5. Tạo Google Business Profile cho phòng khám (cần hướng dẫn riêng — xem ghi chú bên dưới)
+6. Kiểm tra structured data bằng https://search.google.com/test/rich-results (test cả trang gốc **và** một trang bài viết — hai schema khác nhau: `Physician`/`MedicalClinic` vs `MedicalWebPage`)
 
 ### Việc chưa làm (chờ domain)
 
 - Google Business Profile: bác sĩ tự đăng ký bằng tài khoản Google, xác minh qua video/bưu thiếp; sẽ soạn hướng dẫn từng bước khi user mua domain xong
-- Cập nhật `lastmod` trong sitemap.xml khi nội dung thay đổi lớn
+- `lastmod` của bài viết **tự sinh** từ frontmatter (`updated` nếu có, không thì `date`) — khi sửa một bài đáng kể thì thêm `updated: YYYY-MM-DD` vào frontmatter bài đó, sitemap tự cập nhật khi build. Không sửa tay `sitemap.xml`.
 
 ## Mục Kiến thức (Eleventy) — thêm bài viết mới
 
