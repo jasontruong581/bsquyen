@@ -21,6 +21,9 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 
 ## Quy trình bài viết Kiến thức (QUAN TRỌNG)
 
+- **Viết bài mới: dùng skill `bai-kien-thuc`** (`.claude/skills/bai-kien-thuc/`) — đã mã hoá
+  cấu trúc, văn phong, ràng buộc YMYL và script tạo ảnh OG của các bài đã publish.
+  Không dùng `/ckm:write:good` cho việc này (tốn >120k token/bài vì fan-out subagent).
 - Mục tiêu 50–100 bài, ~2 bài/tháng. **Mỗi bài = 1 PR riêng** → bác sĩ duyệt nội dung trên Vercel preview URL → merge = xuất bản. Không bao giờ merge bài chưa được bác sĩ duyệt.
 - Frontmatter bắt buộc: `title`, `description`, `date`; nên có `sources` (E-E-A-T); thêm `updated` khi sửa đáng kể.
 - Ảnh minh họa: lưu `assets/kien-thuc/<slug>-N.(svg|jpg)`, alt text rõ nghĩa, nén ≤200KB với ảnh raster; ảnh AI phải chú thích "Ảnh minh họa".

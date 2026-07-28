@@ -19,6 +19,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("docs/**");
   eleventyConfig.ignores.add("plans/**");
   eleventyConfig.ignores.add("README.md");
+  // Hướng dẫn nội bộ — không được thành trang public (trước đây lọt ra /CLAUDE/)
+  eleventyConfig.ignores.add("CLAUDE.md");
+  // Skill Claude Code: chứa .md có frontmatter mẫu, không phải nội dung site
+  eleventyConfig.ignores.add(".claude/**");
 
   // Bài viết Kiến thức: mọi file markdown trong kien-thuc/, mới nhất trước
   eleventyConfig.addCollection("baiviet", (api) =>
