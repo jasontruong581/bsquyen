@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa đầu dò siêu âm phát sóng qua thành bụng vào gan, phát hiện một tổn thương nhỏ trong gan">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- gan cách điệu: thùy phải lớn bên trái hình, thon dần sang phải -->
+  <path d="M205 165
+           Q210 128 255 122
+           Q340 110 430 116
+           Q510 121 552 148
+           Q575 164 566 190
+           Q556 220 515 243
+           Q455 276 385 283
+           Q305 291 253 262
+           Q212 238 205 200
+           Z"
+        fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- khe liên thùy -->
+  <path d="M468 120 Q458 175 470 236" fill="none" stroke="#e08b4f" stroke-width="5"
+        stroke-linecap="round" opacity=".65"/>
+
+  <!-- túi mật -->
+  <path d="M432 272 q22 6 26 26 q3 20 -16 22 q-20 2 -24 -20 Z"
+        fill="#e08b4f" opacity=".55"/>
+
+  <!-- tổn thương nhỏ trong gan (điểm cần phát hiện) -->
+  <circle cx="310" cy="238" r="16" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="304" cy="232" r="4" fill="#ffd9bd"/>
+
+  <!-- chùm sóng siêu âm từ đầu dò lên gan -->
+  <g fill="none" stroke="#f2a56e" stroke-width="6" stroke-linecap="round" opacity=".75">
+    <path d="M284 336 A26 26 0 0 1 336 336"/>
+    <path d="M268 336 A42 42 0 0 1 352 336"/>
+    <path d="M252 336 A58 58 0 0 1 368 336"/>
+  </g>
+
+  <!-- đầu dò siêu âm -->
+  <rect x="294" y="340" width="32" height="58" rx="11" fill="#123b63"/>
+  <rect x="297" y="340" width="26" height="7" rx="3.5" fill="#e8f1fa"/>
+  <!-- dây nối -->
+  <path d="M310 398 q0 30 42 34 q40 4 52 -18" fill="none" stroke="#123b63"
+        stroke-width="9" stroke-linecap="round"/>
+
+  <!-- huy hiệu dấu tích: phát hiện sớm -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
