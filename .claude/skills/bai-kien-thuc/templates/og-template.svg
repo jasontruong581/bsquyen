@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" font-family="'Be Vietnam Pro', 'DejaVu Sans', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#173f66"/>
+      <stop offset="1" stop-color="#0e2c49"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="150" r="150" fill="#1c4a76" opacity=".55"/>
+  <circle cx="150" cy="560" r="120" fill="#1c4a76" opacity=".45"/>
+
+  <!-- logo + tên bác sĩ -->
+  <g transform="translate(70,60)">
+    <circle cx="34" cy="34" r="34" fill="#f26e21"/>
+    <path d="M34 50 C18 39 20 26 30 26 C35 26 34 31 34 31 C34 31 33 26 38 26 C48 26 50 39 34 50 Z" fill="#ffffff"/>
+    <text x="86" y="30" font-size="30" font-weight="800" fill="#ffffff">BS.CKI Hạnh Quyên</text>
+    <text x="86" y="60" font-size="20" font-weight="500" fill="#9fb6cc">Ung bướu &amp; Chăm sóc giảm nhẹ</text>
+  </g>
+
+  <!-- tiêu đề: dòng 2 nhấn màu cam nhạt -->
+  <text x="70" y="298" font-size="{{TITLE_SIZE}}" font-weight="800" fill="#ffffff">{{TITLE_1}}</text>
+  <text x="70" y="374" font-size="{{TITLE_SIZE}}" font-weight="800" fill="#f2a56e">{{TITLE_2}}</text>
+  <text x="70" y="440" font-size="{{SUB_SIZE}}" font-weight="400" fill="#c9d7e5">{{SUBTITLE}}</text>
+
+  <!-- nhãn thương hiệu -->
+  <g transform="translate(70,500)">
+    <rect x="0" y="0" width="470" height="66" rx="33" fill="#f26e21"/>
+    <text x="34" y="43" font-size="27" font-weight="700" fill="#ffffff">Kiến thức từ bác sĩ chuyên khoa</text>
+  </g>
+
+  <!-- ================================================================
+       SLOT MINH HOẠ — mặc định là huy hiệu dấu tích (dùng được cho mọi bài).
+       Muốn dùng hình riêng: thay toàn bộ nội dung <g id="minh-hoa"> bằng các
+       shape lấy từ assets/kien-thuc/<slug>-1.svg, bọc trong
+       transform="translate(-232,-140) scale(0.62)" như ví dụ ở
+       references/minh-hoa.md, và đổi màu nét đậm sang #e8f1fa cho nổi trên nền navy.
+       ================================================================ -->
+  <g id="minh-hoa" transform="translate(915,175)">
+    <circle cx="0" cy="0" r="88" fill="#1c4a76" opacity=".8"/>
+    <circle cx="0" cy="0" r="62" fill="#f26e21"/>
+    <path d="M-28 2 l20 21 l38 -43" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
