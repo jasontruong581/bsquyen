@@ -55,13 +55,15 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 
 1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm **primary** để `*.vercel.app` tự 301 redirect — nhờ đó các URL đã được Google index không mất giá trị.
 
-2. Thay toàn bộ URL trong **source** (31 chỗ / 7 file):
+2. Thay toàn bộ URL trong **source** (34 chỗ / 8 file — con số này thay đổi khi thêm
+   template mới, nên **luôn chạy lệnh `grep` bên dưới** thay vì tin bảng này):
 
    | File | Số chỗ | Chứa gì |
    |---|---|---|
    | `index.html` | 10 | canonical, Open Graph, JSON-LD `Physician`/`MedicalClinic` |
    | `_includes/layouts/bai-viet.njk` | 7 | canonical, `og:url`, `og:image`, JSON-LD của **mọi bài viết** |
    | `kien-thuc/index.njk` | 5 | canonical + Open Graph trang danh sách (kèm `rel=prev/next`) |
+   | `kien-thuc/chu-de.njk` | 3 | canonical + Open Graph **6 trang lọc chủ đề** |
    | `sitemap.njk` | 3 | `<loc>` trang gốc, trang danh sách, và từng bài |
    | `llms.txt` | 2 | |
    | `robots.txt` | 1 | dòng `Sitemap:` |

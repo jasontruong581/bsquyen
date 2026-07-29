@@ -110,6 +110,7 @@
   padding: 0;
 }
 .tag {
+  display: inline-block;
   font-size: .78rem;
   font-weight: 600;
   color: var(--orange-dark);
@@ -118,6 +119,29 @@
   border-radius: 999px;
   padding: .18rem .6rem;
   line-height: 1.5;
+  text-decoration: none;
+}
+/* Chip bấm được: chỉ ở đầu bài viết và trên thanh lọc.
+   Chip trong card danh sách là nhãn tĩnh (card vốn đã là link). */
+a.tag:hover,
+a.tag:focus-visible {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+}
+.tag-nav {
+  margin-bottom: 1.4rem;
+  gap: .45rem;
+}
+.tag-active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+a.tag-active:hover,
+a.tag-active:focus-visible {
+  background: var(--navy-deep);
+  border-color: var(--navy-deep);
 }
 
 /* Hình minh họa trong bài viết */

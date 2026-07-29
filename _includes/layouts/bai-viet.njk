@@ -61,7 +61,7 @@
         </p>
         {% if tags and tags.length %}
         <ul class="tag-list" aria-label="Chủ đề">
-          {% for t in tags %}<li class="tag">{{ t }}</li>{% endfor %}
+          {% for t in tags %}<li><a class="tag" href="/kien-thuc/chu-de/{{ t | slugify }}/">{{ t }}</a></li>{% endfor %}
         </ul>
         {% endif %}
         <p class="article-lead">{{ description }}</p>
