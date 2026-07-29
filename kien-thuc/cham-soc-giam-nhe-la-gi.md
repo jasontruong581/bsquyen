@@ -2,6 +2,9 @@
 title: "Chăm sóc giảm nhẹ là gì? Những hiểu lầm thường gặp"
 description: "Chăm sóc giảm nhẹ không phải là buông xuôi. Bài viết giải thích chăm sóc giảm nhẹ là gì, dành cho ai, bắt đầu khi nào và giải đáp các hiểu lầm phổ biến của bệnh nhân ung thư và gia đình."
 date: 2026-07-24
+tags:
+  - "Chăm sóc giảm nhẹ"
+cta: tai-nha
 sources:
   - title: "WHO — Palliative care (Fact sheet)"
     url: "https://www.who.int/news-room/fact-sheets/detail/palliative-care"

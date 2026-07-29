@@ -2,6 +2,9 @@
 title: "<Chủ đề>: <câu hỏi phụ dẫn dắt>?"
 description: "<1–2 câu, 150–200 ký tự, nêu đúng những câu hỏi bài trả lời>"
 date: <YYYY-MM-DD>
+tags:
+  - "<1 tag chính: Tầm soát | Dấu hiệu | Chăm sóc giảm nhẹ | Điều trị | Dinh dưỡng | Phòng ngừa>"
+cta: <tam-soat | tai-nha — hoặc XOÁ dòng này để dùng CTA mặc định>
 image: /assets/kien-thuc/<slug>-og.png
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm>)"

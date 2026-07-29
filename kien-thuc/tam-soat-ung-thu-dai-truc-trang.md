@@ -2,6 +2,9 @@
 title: "Tầm soát ung thư đại trực tràng: Ai cần, khi nào và bằng cách nào?"
 description: "Ung thư đại trực tràng phòng ngừa được nhờ tầm soát đúng lúc: ai cần tầm soát, từ tuổi nào, chọn xét nghiệm FIT hay nội soi, và dấu hiệu cần khám ngay."
 date: 2026-07-25
+tags:
+  - "Tầm soát"
+cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-dai-truc-trang-og.png
 sources:
   - title: "American Cancer Society — Colorectal Cancer Screening Guidelines"

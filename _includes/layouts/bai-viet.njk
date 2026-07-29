@@ -59,6 +59,11 @@
           <strong>BS.CKI Hạnh Quyên</strong> — Chuyên khoa Ung bướu
           · Đăng ngày {{ page.date | ngayVN }}{% if updated %} · Cập nhật {{ updated | ngayVN }}{% endif %}
         </p>
+        {% if tags and tags.length %}
+        <ul class="tag-list" aria-label="Chủ đề">
+          {% for t in tags %}<li class="tag">{{ t }}</li>{% endfor %}
+        </ul>
+        {% endif %}
         <p class="article-lead">{{ description }}</p>
 
         <div class="article-body">
@@ -76,7 +81,33 @@
         </section>
         {% endif %}
 
+        {# CTA khớp ý định người đọc. Chọn bằng frontmatter `cta:`; không có thì dùng bản mặc định. #}
         <aside class="article-cta">
+          {% if cta == "tam-soat" %}
+          {# Bài tầm soát/phòng ngừa: người đọc đang tìm hiểu, hạ rào cản — hỏi nhanh qua Zalo #}
+          <h2>Chưa rõ mình có cần tầm soát?</h2>
+          <p>
+            Bạn có thể nhắn Zalo hỏi BS.CKI Hạnh Quyên trước, mô tả tuổi và
+            tình trạng sức khỏe của mình — bác sĩ sẽ tư vấn bạn có cần tầm soát
+            hay chưa, cần làm gì, trước khi bạn quyết định đi khám.
+          </p>
+          <div class="hero-actions">
+            <a href="https://zalo.me/0776196601" class="btn btn-primary" target="_blank" rel="noopener">Nhắn Zalo hỏi bác sĩ</a>
+            <a href="/#dat-lich" class="btn btn-outline">Đặt lịch khám</a>
+          </div>
+          {% elif cta == "tai-nha" %}
+          {# Bài chăm sóc giảm nhẹ/người chăm sóc: nhu cầu cấp bách, ưu tiên gọi ngay #}
+          <h2>Cần bác sĩ đến nhà?</h2>
+          <p>
+            BS.CKI Hạnh Quyên nhận khám, kiểm soát đau và chăm sóc giảm nhẹ
+            tại nhà ở TP.HCM — phù hợp khi người bệnh yếu, đi lại khó khăn.
+            Bạn có thể gọi trực tiếp hoặc nhắn Zalo để trao đổi tình trạng người bệnh.
+          </p>
+          <div class="hero-actions">
+            <a href="tel:0776196601" class="btn btn-primary">Gọi 0776 196 601</a>
+            <a href="https://zalo.me/0776196601" class="btn btn-outline" target="_blank" rel="noopener">Nhắn Zalo</a>
+          </div>
+          {% else %}
           <h2>Cần tư vấn trực tiếp?</h2>
           <p>
             BS.CKI Hạnh Quyên nhận khám, tư vấn điều trị ung bướu và chăm sóc giảm nhẹ
@@ -87,6 +118,7 @@
             <a href="/#dat-lich" class="btn btn-primary">Đặt lịch hẹn</a>
             <a href="tel:0776196601" class="btn btn-outline">Gọi 0776 196 601</a>
           </div>
+          {% endif %}
         </aside>
 
         <p class="article-disclaimer">

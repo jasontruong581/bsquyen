@@ -127,12 +127,25 @@ dòng nhắc "⚠️ Chờ bác sĩ duyệt nội dung trước khi merge".
 title: "<Chủ đề>: <câu hỏi phụ dẫn dắt>?"
 description: "<1–2 câu, 150–200 ký tự, nêu đúng những câu hỏi bài trả lời — đây là article-lead hiện trên trang và meta description>"
 date: YYYY-MM-DD
+tags:
+  - "<1 tag chính, chọn từ 6 tag cố định>"
+cta: tam-soat | tai-nha        # bỏ dòng này nếu dùng CTA mặc định
 image: /assets/kien-thuc/<slug>-og.png
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm nếu có>)"
     url: "https://..."
 ---
 ```
+
+- `tags`: **chỉ dùng 6 tag cố định** — `Tầm soát` · `Dấu hiệu` · `Chăm sóc giảm nhẹ` ·
+  `Điều trị` · `Dinh dưỡng` · `Phòng ngừa`. Mỗi bài 1 tag chính; tag thứ hai chỉ khi
+  bài thật sự phủ hai cụm. **Không tự tạo tag mới** — tag lẻ chỉ có 1–2 bài thì vô dụng
+  khi lọc. Tag hiện thành chip ở đầu bài và trên card danh sách.
+- `cta`: chọn lời mời hành động khớp ý định người đọc.
+  `tam-soat` (bài tầm soát/phòng ngừa → mời nhắn Zalo hỏi trước, hạ rào cản) ·
+  `tai-nha` (bài chăm sóc giảm nhẹ/người chăm sóc → mời gọi ngay, khám tại nhà) ·
+  bỏ trống = CTA chung. Bảng suy ra `tags` + `cta` theo cụm chủ đề nằm ở
+  `docs/chu-de-bai-viet.md`.
 
 - `title` theo công thức đã dùng: `"Tầm soát ung thư dạ dày: Ai nên tầm soát, khi nào và bằng cách nào?"`,
   `"Chăm sóc giảm nhẹ là gì? Những hiểu lầm thường gặp"`.
@@ -189,7 +202,8 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 
 ## Checklist trước khi báo xong
 
-- [ ] Frontmatter đủ `title`, `description`, `date`, `image`, `sources` (2–4 nguồn uy tín)
+- [ ] Frontmatter đủ `title`, `description`, `date`, `tags`, `image`, `sources` (2–4 nguồn uy tín)
+- [ ] `tags` chỉ dùng 6 tag cố định, không bịa tag mới; `cta` khớp cụm chủ đề (hoặc bỏ trống)
 - [ ] Không trùng chủ đề bài đã có
 - [ ] Hard-wrap ~76 ký tự; blockquote ≤ 2
 - [ ] Có đoạn cảnh báo ngược sau danh sách dấu hiệu
