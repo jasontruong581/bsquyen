@@ -16,7 +16,8 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - `index.html` + `css/` + `js/` + `assets/` — **bản chính thức** (phiên bản "Ấm áp"), được index
 - `demo/`, `landing-mix/`, `landing-page-bundle/` — bản demo cho khách hàng, gắn `noindex` — **giữ lại, đừng xóa**
 - `kien-thuc/*.md` — bài viết Kiến thức; layout ở `_includes/layouts/bai-viet.njk`, partials header/footer dùng chung
-- `sitemap.njk` — sitemap tự sinh khi build (bài mới tự vào, kèm lastmod)
+- `kien-thuc/chu-de.njk` + `_data/chuDe.js` — sinh 6 trang lọc `/kien-thuc/chu-de/<slug>/` từ bộ tag cố định
+- `sitemap.njk` — sitemap tự sinh khi build (bài mới tự vào, kèm lastmod); trang lọc chủ đề chưa đưa vào (còn mỏng)
 - `bsquyen/` — ảnh chân dung bác sĩ
 
 ## Quy trình bài viết Kiến thức (QUAN TRỌNG)
