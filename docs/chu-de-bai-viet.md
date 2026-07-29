@@ -1,7 +1,11 @@
 # Hàng đợi chủ đề bài Kiến thức
 
-File này điều khiển routine viết bài tự động (2 tuần/lần, sáng thứ Hai).
+File này điều khiển routine viết bài tự động (**hàng tuần**, sáng thứ Hai).
 Routine lấy chủ đề **đầu tiên trong "Hàng đợi"** mà `kien-thuc/<slug>.md` chưa tồn tại.
+
+Nhịp thực tế do **cổng chặn** quyết định, không do lịch: routine bỏ lượt nếu đang
+còn PR bài viết chờ bác sĩ duyệt. Nghĩa là tốc độ ra bài tự khớp với tốc độ duyệt,
+tối đa 1 bài/tuần — không bao giờ dồn PR.
 
 **Muốn đổi thứ tự hay chen bài gấp:** sửa thứ tự trong mục Hàng đợi. Không cần sửa routine.
 
@@ -50,13 +54,13 @@ Routine lấy chủ đề **đầu tiên trong "Hàng đợi"** mà `kien-thuc/<
 | 23 | `kiet-suc-nguoi-cham-soc` | Kiệt sức người chăm sóc — dấu hiệu và cách tự bảo vệ | C |
 | 24 | `kiem-chung-thong-tin-chua-ung-thu` | Cách kiểm chứng thông tin chữa ung thư trên mạng xã hội | B |
 
-Hết hàng đợi (~1 năm) thì đưa chủ đề từ Backlog lên và gán slug.
+Hết hàng đợi (~6 tháng ở nhịp hàng tuần) thì đưa chủ đề từ Backlog lên và gán slug.
 
 ## Cần xử lý riêng — chưa đưa vào hàng đợi
 
 | Chủ đề | Vướng gì |
 |---|---|
-| Câu chuyện người bệnh (ẩn danh, có đồng ý) | **Không viết.** Quảng cáo dịch vụ khám chữa bệnh không được dùng lời chứng thực người bệnh (site đã thay "Phản hồi bệnh nhân" bằng "Cam kết đồng hành" vì lý do này). Ẩn danh + có đồng ý vẫn không gỡ được rào. Nếu muốn giữ tinh thần: viết dạng "tình huống thường gặp" — ca giả định tổng hợp, nói rõ không phải người bệnh cụ thể. |
+| ~~Câu chuyện người bệnh (ẩn danh, có đồng ý)~~ | **ĐÃ BỎ HẲN — không viết, kể cả dạng ca giả định.** Quảng cáo dịch vụ khám chữa bệnh không được dùng lời chứng thực người bệnh; site đã thay "Phản hồi bệnh nhân" bằng "Cam kết đồng hành" vì lý do này. Ẩn danh + có đồng ý vẫn không gỡ được rào. Đừng đưa lại vào hàng đợi. |
 | Chi phí điều trị ung thư và vai trò BHYT | Viết được, nhưng **không đưa bảng giá/con số cụ thể** — chỉ giải thích cơ chế BHYT, nhóm được chi trả, thủ tục. Giá dịch vụ là ràng buộc YMYL trong skill. |
 | Thực đơn mẫu 7 ngày cho người kém ăn | Viết được, nhưng phải đóng khung là **ví dụ tham khảo**, kèm nhắc trao đổi bác sĩ/chuyên gia dinh dưỡng. Không kê đơn dinh dưỡng. |
 | Sổ theo dõi triệu chứng tại nhà (kèm mẫu tải về) | Cần tạo thêm file mẫu in được (PDF/HTML). Ngoài phạm vi skill hiện tại — làm riêng. |
