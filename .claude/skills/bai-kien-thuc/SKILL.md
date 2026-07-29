@@ -9,8 +9,9 @@ Skill này thay `/ckm:write:good` cho repo này. `ckm:write:good` tốn >120k to
 vì fan-out researcher + planner + copywriter. Khuôn mẫu bài đã ổn định và được
 mã hoá sẵn ở đây, nên không cần khám phá lại.
 
-**Ngân sách mục tiêu: ≤ 30k token/bài.** Nếu đang vượt xa mức này, bạn đang làm
-sai quy trình — dừng lại và cắt bớt việc tra cứu.
+**Ngân sách mục tiêu: 30–40k token/bài** (đo thực tế bài đầu: ~35k). Vượt mức này
+nhiều thì xem lại quy trình. Nhưng **đừng cắt việc xác minh số liệu y khoa để về
+dưới ngân sách** — thà tốn thêm vài nghìn token còn hơn đăng con số không có nguồn.
 
 ## Nguyên tắc tiết kiệm (đọc trước khi làm gì khác)
 
