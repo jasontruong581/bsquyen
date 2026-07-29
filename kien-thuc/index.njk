@@ -48,6 +48,15 @@ eleventyExcludeFromCollections: true
           biên soạn và duyệt nội dung bởi BS.CKI Hạnh Quyên.
         </p>
 
+        {# Thanh lọc chủ đề. Chip trên từng card không thể là link vì card vốn đã
+           là <a> — lồng <a> trong <a> là HTML không hợp lệ. #}
+        <ul class="tag-list tag-nav" aria-label="Lọc theo chủ đề">
+          <li><a class="tag tag-active" href="/kien-thuc/" aria-current="page">Tất cả bài</a></li>
+          {% for t in chuDe %}
+          <li><a class="tag" href="/kien-thuc/chu-de/{{ t | slugify }}/">{{ t }}</a></li>
+          {% endfor %}
+        </ul>
+
         <div class="article-list">
           {% for post in posts %}
           <a class="article-item" href="{{ post.url }}">

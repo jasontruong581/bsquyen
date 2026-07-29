@@ -1,0 +1,94 @@
+---
+layout: false
+pagination:
+  data: chuDe
+  size: 1
+  alias: tag
+permalink: "/kien-thuc/chu-de/{{ tag | slugify }}/"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ tag }} — Kiến thức Ung bướu &amp; Chăm sóc giảm nhẹ | BS.CKI Hạnh Quyên</title>
+  <meta name="description" content="Các bài viết về chủ đề {{ tag }} — biên soạn và duyệt nội dung bởi BS.CKI Hạnh Quyên, chuyên khoa Ung bướu.">
+  <link rel="canonical" href="https://bsquyen.vercel.app{{ page.url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="{{ tag }} — Kiến thức | BS.CKI Hạnh Quyên">
+  <meta property="og:description" content="Các bài viết về chủ đề {{ tag }} — biên soạn bởi bác sĩ chuyên khoa.">
+  <meta property="og:url" content="https://bsquyen.vercel.app{{ page.url }}">
+  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/kien-thuc.css">
+</head>
+<body>
+
+  {% include "partials/site-header.njk" %}
+
+  <main>
+    <section class="section">
+      <div class="container article-container">
+        <nav class="breadcrumb" aria-label="Đường dẫn">
+          <a href="/">Trang chủ</a> › <a href="/kien-thuc/">Kiến thức</a>
+        </nav>
+        <p class="eyebrow">Chủ đề</p>
+        <h1>{{ tag }}</h1>
+
+        {# Thanh chọn chủ đề — có mặt trên mọi trang lọc để chuyển qua lại nhanh #}
+        <ul class="tag-list tag-nav" aria-label="Chọn chủ đề khác">
+          <li><a class="tag" href="/kien-thuc/">Tất cả bài</a></li>
+          {% for t in chuDe %}
+          <li><a class="tag{% if t == tag %} tag-active{% endif %}"
+                 href="/kien-thuc/chu-de/{{ t | slugify }}/"
+                 {% if t == tag %}aria-current="page"{% endif %}>{{ t }}</a></li>
+          {% endfor %}
+        </ul>
+
+        {%- set baiTrongChuDe = [] -%}
+        {%- for post in collections.baiviet -%}
+          {%- if post.data.tags and tag in post.data.tags -%}
+            {%- set baiTrongChuDe = (baiTrongChuDe.push(post), baiTrongChuDe) -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        <p class="article-lead">
+          {% if baiTrongChuDe.length %}
+          {{ baiTrongChuDe.length }} bài về chủ đề này.
+          {% else %}
+          Chưa có bài nào về chủ đề này. Bạn xem
+          <a href="/kien-thuc/">toàn bộ bài Kiến thức</a> nhé.
+          {% endif %}
+        </p>
+
+        {% if baiTrongChuDe.length %}
+        <div class="article-list">
+          {% for post in baiTrongChuDe %}
+          <a class="article-item" href="{{ post.url }}">
+            <h2>{{ post.data.title }}</h2>
+            {% if post.data.tags and post.data.tags.length %}
+            <ul class="tag-list" aria-label="Chủ đề">
+              {% for t in post.data.tags %}<li class="tag">{{ t }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+            <p>{{ post.data.description }}</p>
+            <span class="article-item-meta">{{ post.date | ngayVN }} · Đọc tiếp →</span>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+
+  {% include "partials/site-footer.njk" %}
+
+  <script src="/js/kien-thuc.js"></script>
+</body>
+</html>
