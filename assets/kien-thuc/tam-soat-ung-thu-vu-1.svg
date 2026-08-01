@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa đầu dò siêu âm áp trên tuyến vú, chùm sóng đi vào bên trong và phát hiện một tổn thương nhỏ nằm sâu trong mô tuyến">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- thành ngực (dải dọc bên trái) -->
+  <rect x="178" y="100" width="38" height="272" rx="14" fill="#e08b4f" opacity=".35"/>
+
+  <!-- tuyến vú nhìn ngang, núm vú hướng sang phải -->
+  <path d="M215 130
+           C330 132 460 175 478 245
+           C462 320 340 358 215 360
+           Z"
+        fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- núm vú -->
+  <rect x="472" y="228" width="28" height="34" rx="14" fill="#e08b4f"/>
+
+  <!-- hệ ống tuyến sữa quy tụ về núm vú -->
+  <g fill="none" stroke="#f26e21" stroke-width="6" stroke-linecap="round" opacity=".45">
+    <path d="M468 243 C400 233 340 208 268 188"/>
+    <path d="M468 250 C400 255 345 256 262 251"/>
+    <path d="M468 257 C400 276 345 301 272 314"/>
+  </g>
+
+  <!-- chùm sóng siêu âm từ đầu dò đi xuống vào mô tuyến (vẽ TRƯỚC tổn thương,
+       màu sáng để nổi trên nền mô tuyến cùng tông cam) -->
+  <path d="M322 146 L350 146 L380 248 L288 248 Z" fill="#ffd9bd" opacity=".9"/>
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".8">
+    <path d="M310 176 A28 28 0 0 0 362 176"/>
+    <path d="M298 206 A46 46 0 0 0 374 206"/>
+  </g>
+
+  <!-- tổn thương nhỏ trong mô tuyến (điểm cần phát hiện) -->
+  <circle cx="330" cy="207" r="16" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="324" cy="201" r="4" fill="#ffd9bd"/>
+
+  <!-- đầu dò siêu âm áp trên da -->
+  <rect x="320" y="86" width="32" height="58" rx="11" fill="#123b63"/>
+  <rect x="323" y="137" width="26" height="7" rx="3.5" fill="#e8f1fa"/>
+  <!-- dây nối -->
+  <path d="M336 86 q0 -30 46 -34 q42 -4 56 16" fill="none" stroke="#123b63"
+        stroke-width="9" stroke-linecap="round"/>
+
+  <!-- huy hiệu dấu tích: phát hiện sớm -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
