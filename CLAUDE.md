@@ -8,8 +8,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 ## Lệnh
 
 - `npm run build` — build Eleventy → `_site/`
-- `npm run dev` — dev server có watch
-- `python3 -m http.server 8081 -d _site` — preview output đã build
+- `npm run dev` — dev server có watch, dùng để preview output đã build
 
 ## Cấu trúc
 

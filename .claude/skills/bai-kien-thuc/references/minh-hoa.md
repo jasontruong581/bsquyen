@@ -118,7 +118,8 @@ Kính lúp (phát hiện sớm):
 ## Kiểm tra ảnh
 
 ```bash
-rsvg-convert -w 760 assets/kien-thuc/<slug>-1.svg -o /tmp/check.png
+node .claude/skills/bai-kien-thuc/scripts/render-svg.mjs \
+  assets/kien-thuc/<slug>-1.svg /tmp/check.png 760
 ```
 Rồi Read `/tmp/check.png`. Nhìn 3 điểm: hình có đọc ra đúng thứ cần thể hiện không,
 chữ có tràn/đè nhau không, tổn thương/vật nhấn có bị dụng cụ che không.

@@ -8,18 +8,18 @@ viết bài tự động.
 | Cần | Dùng để làm gì | Cài (Ubuntu/Debian) |
 |---|---|---|
 | `git` | | `apt install git` |
-| Node.js + npm | build Eleventy | nvm hoặc `apt install nodejs npm` |
+| Node.js + npm | build Eleventy, **sinh ảnh OG** | nvm hoặc `apt install nodejs npm` |
 | `gh` (GitHub CLI) | mở PR | [cli.github.com](https://cli.github.com) → `gh auth login` |
-| `rsvg-convert` | **sinh ảnh OG cho bài viết** | `apt install librsvg2-bin` |
 | Claude Desktop / Claude Code | chạy skill + routine | |
 
-`rsvg-convert` là thứ dễ quên nhất. Không có nó thì script
-`.claude/skills/bai-kien-thuc/scripts/tao-anh-og.sh` chết và không tạo được ảnh OG.
+Không cần dependency hệ thống nào để tạo ảnh OG. Bước render SVG→PNG chạy trên Node
+(`@resvg/resvg-js`, cài sẵn qua `npm install`) và dùng font Be Vietnam Pro nhúng trong
+`.claude/skills/bai-kien-thuc/fonts/`, nên ảnh ra **giống nhau trên mọi máy**.
 
 Kiểm tra nhanh:
 
 ```bash
-for c in git node npm gh rsvg-convert; do
+for c in git node npm gh; do
   printf "%-14s %s\n" "$c" "$(command -v $c || echo THIẾU)"
 done
 ```
@@ -31,8 +31,18 @@ git clone https://github.com/jasontruong581/bsquyen.git
 cd bsquyen
 npm install
 npm run build          # phải ghi ra _site/ không lỗi
-python3 -m http.server 8081 -d _site
+npm run dev            # xem trước ở localhost
 ```
+
+Đặt identity cho commit — `gh auth login` **không** làm việc này, thiếu nó thì routine
+chết ở bước commit:
+
+```bash
+git config user.name "jasontruong581"
+git config user.email "124644088+jasontruong581@users.noreply.github.com"
+```
+
+Đặt ở phạm vi repo (không `--global`) để không ảnh hưởng project khác trên cùng máy.
 
 ## 3. Skill viết bài
 
@@ -58,7 +68,7 @@ Không cần copy dotfile giữa các máy.
 - Chỉ chạy khi Claude Desktop đang mở. Đến hẹn mà app đóng thì nó chạy vào **lần mở kế
   tiếp** — nên nhịp tuần vẫn giữ được dù máy không bật đúng sáng thứ Hai.
 - Chạy trên máy local, không phải cloud. Đây là **lựa chọn có chủ ý**: workflow cần
-  `rsvg-convert`, `npm`, và `gh` đã đăng nhập — cloud agent không có sẵn những thứ này.
+  `npm` và `gh` đã đăng nhập — cloud agent không có sẵn những thứ này.
 - Lần chạy thật đầu tiên trên máy mới có thể hỏi quyền vài tool. Duyệt một lần, các
   lần sau tự áp dụng.
 - **Đừng chạy routine trên hai máy cùng lúc.** Cổng chặn dựa trên "có PR bài viết đang
@@ -67,9 +77,10 @@ Không cần copy dotfile giữa các máy.
 
 ## 5. Nếu muốn chạy hoàn toàn không phụ thuộc máy cá nhân
 
-Hướng đúng là **GitHub Actions** thay vì scheduled task: runner cài được
-`librsvg2-bin`, có `GITHUB_TOKEN` sẵn để mở PR, và chạy theo cron của GitHub. Đổi lại
-cần thêm khoá API Claude làm repo secret và chi phí chuyển sang tính theo API.
+Hướng đúng là **GitHub Actions** thay vì scheduled task: runner chỉ cần Node (pipeline
+ảnh OG không còn dependency hệ thống), có `GITHUB_TOKEN` sẵn để mở PR, và chạy theo cron
+của GitHub. Đổi lại cần thêm khoá API Claude làm repo secret và chi phí chuyển sang tính
+theo API.
 
 Chưa làm, vì workflow này **vốn đã có cổng người duyệt** (bác sĩ đọc PR rồi mới merge),
 nên việc bài được viết lúc 9h sáng đúng giờ không mang lại lợi ích gì so với việc nó

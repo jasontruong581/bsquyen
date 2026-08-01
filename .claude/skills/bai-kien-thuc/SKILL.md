@@ -23,6 +23,8 @@ dưới ngân sách** — thà tốn thêm vài nghìn token còn hơn đăng co
   dẫn, hoặc mốc tuổi/khoảng cách tầm soát của một hướng dẫn cụ thể. Bài không cần
   nhiều số — xem "Văn phong" bên dưới.
 - **Dùng script + template** cho ảnh OG, đừng viết SVG 1200×630 bằng tay.
+- Render SVG→PNG chỉ qua script trong `scripts/` — chúng nạp Be Vietnam Pro nhúng
+  trong `fonts/` và tắt font hệ thống, nên ảnh ra giống nhau trên mọi máy.
 - Ảnh minh họa: chép biến thể từ `references/minh-hoa.md` (đã có palette + layout sẵn),
   render kiểm tra **một lần**, chỉ sửa nếu thật sự sai.
 
@@ -80,13 +82,14 @@ Copy `templates/bai-viet.md` làm điểm khởi đầu. Tuân thủ mục "Văn
 `assets/kien-thuc/<slug>-1.svg`, `-2.svg`. Render kiểm tra:
 
 ```bash
-rsvg-convert -w 760 assets/kien-thuc/<slug>-1.svg -o /tmp/check.png   # rồi Read file PNG
+# rồi Read file PNG
+node .claude/skills/bai-kien-thuc/scripts/render-svg.mjs assets/kien-thuc/<slug>-1.svg /tmp/check.png 760
 ```
 
 Ảnh OG (bắt buộc, mọi bài) — dùng script, **không viết SVG bằng tay**:
 
 ```bash
-.claude/skills/bai-kien-thuc/scripts/tao-anh-og.sh <slug> "Dòng tiêu đề 1" "Dòng 2 nhấn màu" "Phụ đề một dòng"
+node .claude/skills/bai-kien-thuc/scripts/tao-anh-og.mjs <slug> "Dòng tiêu đề 1" "Dòng 2 nhấn màu" "Phụ đề một dòng"
 ```
 
 Script tự canh cỡ chữ, xuất `assets/kien-thuc/<slug>-og.png` (1200×630, <200KB) và
