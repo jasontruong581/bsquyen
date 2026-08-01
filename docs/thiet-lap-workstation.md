@@ -34,6 +34,16 @@ npm run build          # phải ghi ra _site/ không lỗi
 npm run dev            # xem trước ở localhost
 ```
 
+Đặt identity cho commit — `gh auth login` **không** làm việc này, thiếu nó thì routine
+chết ở bước commit:
+
+```bash
+git config user.name "jasontruong581"
+git config user.email "124644088+jasontruong581@users.noreply.github.com"
+```
+
+Đặt ở phạm vi repo (không `--global`) để không ảnh hưởng project khác trên cùng máy.
+
 ## 3. Skill viết bài
 
 Không cần cài gì. Skill nằm **trong repo** ở `.claude/skills/bai-kien-thuc/`, nên
