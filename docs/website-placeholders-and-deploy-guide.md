@@ -24,9 +24,9 @@ Khi cần đổi: sửa `CONTACT` đầu file `js/main.js` và `landing-mix/js/m
 ## Chạy thử local
 
 ```bash
-cd /home/hoang/project/bsquyen
-python3 -m http.server 8080
-# mở http://localhost:8080
+cd <đường-dẫn-repo>
+npm run dev
+# mở URL mà Eleventy in ra (mặc định http://localhost:8080)
 ```
 
 ## Deploy (miễn phí)
@@ -115,7 +115,7 @@ Quy trình mỗi bài (2 bài/tháng, AI soạn — bác sĩ duyệt):
    ---
    ```
 2. Viết nội dung Markdown bên dưới (h2 `##`, h3 `###`, blockquote `>` cho câu nhấn mạnh)
-3. Chạy `npm run build` kiểm tra local (`python3 -m http.server 8081 -d _site`)
+3. Chạy `npm run build` kiểm tra local (hoặc `npm run dev` để xem trực tiếp)
 4. Mở PR riêng cho bài viết → bác sĩ duyệt trên Vercel preview URL → merge = xuất bản
 
 Tự động khi build: trang danh sách `/kien-thuc/`, sitemap.xml (kèm lastmod), schema `MedicalWebPage` + byline bác sĩ, khối CTA đặt lịch + disclaimer cuối bài.
