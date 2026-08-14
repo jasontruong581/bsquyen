@@ -1,13 +1,17 @@
 # Hàng đợi chủ đề bài Kiến thức
 
 File này điều khiển routine viết bài tự động (**hàng tuần**, sáng thứ Hai).
-Routine lấy chủ đề **đầu tiên trong "Hàng đợi"** mà `kien-thuc/<slug>.md` chưa tồn tại.
+Routine lấy chủ đề **đầu tiên trong "Hàng đợi"** mà `kien-thuc/<slug>.md` chưa tồn tại,
+rồi **tự chuyển dòng đó xuống bảng "Đã xuất bản"** ngay trong PR bài viết. Nhờ vậy bảng
+luôn khớp thực tế mà không cần ai nhớ dọn tay.
 
 Nhịp thực tế do **cổng chặn** quyết định, không do lịch: routine bỏ lượt nếu đang
 còn PR bài viết chờ bác sĩ duyệt. Nghĩa là tốc độ ra bài tự khớp với tốc độ duyệt,
 tối đa 1 bài/tuần — không bao giờ dồn PR.
 
-**Muốn đổi thứ tự hay chen bài gấp:** sửa thứ tự trong mục Hàng đợi. Không cần sửa routine.
+**Muốn đổi thứ tự hay chen bài gấp:** sửa thứ tự dòng trong mục Hàng đợi. Không cần sửa
+routine. Bảng hàng đợi **không đánh số** — thứ tự dòng là thứ tự viết, nên xoá hay chèn
+một dòng không kéo theo việc đánh số lại cả bảng.
 
 - `Loại` = **khung bài** trong `.claude/skills/bai-kien-thuc/SKILL.md`
   (**A** tầm soát · **B** giải thích/gỡ hiểu lầm · **C** hướng dẫn sống chung/chăm sóc)
@@ -26,35 +30,37 @@ tối đa 1 bài/tuần — không bao giờ dồn PR.
 | `tam-soat-ung-thu-dai-truc-trang` | Tầm soát ung thư đại trực tràng |
 | `tam-soat-ung-thu-gan` | Tầm soát ung thư gan (đã bao gồm nhóm viêm gan B/C, xơ gan) |
 | `cham-soc-giam-nhe-la-gi` | Chăm sóc giảm nhẹ là gì, gỡ hiểu lầm |
+| `tam-soat-ung-thu-vu` | Tầm soát ung thư vú: tự khám, siêu âm hay nhũ ảnh? |
+| `dau-hieu-canh-bao-ung-thu` | 10 dấu hiệu cảnh báo ung thư không nên bỏ qua |
 
 ## Hàng đợi
 
-| # | slug | Chủ đề | Loại | Nhóm |
-|---|---|---|---|---|
-| 1 | `tam-soat-ung-thu-vu` | Tầm soát ung thư vú: tự khám, siêu âm hay nhũ ảnh? | A | A |
-| 2 | `dau-hieu-canh-bao-ung-thu` | 10 dấu hiệu cảnh báo ung thư không nên bỏ qua | B | B |
-| 3 | `kiem-soat-dau-ung-thu` | Kiểm soát đau ung thư: thang giảm đau 3 bậc của WHO | C | D |
-| 4 | `hieu-lam-pho-bien-ve-ung-thu` | 7 hiểu lầm phổ biến nhất về bệnh ung thư | B | H |
-| 5 | `tam-soat-ung-thu-co-tu-cung` | Tầm soát ung thư cổ tử cung: Pap, HPV test và vắc-xin HPV | A | A |
-| 6 | `di-cau-ra-mau-tri-hay-ung-thu` | Đi cầu ra máu: trĩ hay ung thư đại tràng? | B | B |
-| 7 | `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? | B | D |
-| 8 | `vac-xin-phong-ung-thu` | Hai loại vắc-xin giúp phòng ung thư: HPV và viêm gan B | B | C |
-| 9 | `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm | A | A |
-| 10 | `sut-can-khong-ro-nguyen-nhan` | Sụt cân không rõ nguyên nhân — khi nào là đáng lo? | B | B |
-| 11 | `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? | B | D |
-| 12 | `thuoc-la-va-ung-thu` | Thuốc lá gây ra bao nhiêu loại ung thư? **(mùa: tháng 5)** | B | C |
-| 13 | `vi-khuan-hp-va-ung-thu-da-day` | Vi khuẩn HP và ung thư dạ dày — mối liên hệ đến đâu? | B | A |
-| 14 | `nuot-nghen-nuot-vuong` | Nuốt nghẹn, nuốt vướng — dấu hiệu sớm của ung thư thực quản | B | B |
-| 15 | `buon-non-non-oi-xu-tri-tai-nha` | Buồn nôn, nôn ói: xử trí tại nhà và khi nào cần nhập viện | C | D |
-| 16 | `khi-nao-goi-bac-si-ngay` | Khi nào cần gọi bác sĩ ngay, khi nào cần nhập viện? | C | G |
-| 17 | `xet-nghiem-dau-an-ung-thu` | Dấu ấn ung thư (CEA, CA 19-9, CA 125…) — hiểu đúng để khỏi hoang mang | B | A |
-| 18 | `tu-kham-vu-dung-cach` | Sờ thấy khối ở vú — tự khám vú đúng cách từng bước **(mùa: tháng 10)** | C | B |
-| 19 | `chan-an-va-suy-mon` | Chán ăn và suy mòn — hiểu để không ép ăn sai cách | C | D |
-| 20 | `nhin-an-bo-doi-te-bao-ung-thu` | "Nhịn ăn để bỏ đói tế bào ung thư" — đúng hay sai? | B | F |
-| 21 | `tien-su-gia-dinh-ung-thu-tam-soat` | Có người thân bị ung thư, tôi nên tầm soát từ mấy tuổi? | A | A |
-| 22 | `ho-keo-dai-tren-3-tuan` | Ho kéo dài trên 3 tuần — đừng chỉ nghĩ đến viêm phổi | B | B |
-| 23 | `kiet-suc-nguoi-cham-soc` | Kiệt sức người chăm sóc — dấu hiệu và cách tự bảo vệ | C | G |
-| 24 | `kiem-chung-thong-tin-chua-ung-thu` | Cách kiểm chứng thông tin chữa ung thư trên mạng xã hội | B | H |
+Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và thêm vào bảng trên khi mở PR.
+
+| slug | Chủ đề | Loại | Nhóm |
+|---|---|---|---|
+| `kiem-soat-dau-ung-thu` | Kiểm soát đau ung thư: thang giảm đau 3 bậc của WHO | C | D |
+| `hieu-lam-pho-bien-ve-ung-thu` | 7 hiểu lầm phổ biến nhất về bệnh ung thư | B | H |
+| `tam-soat-ung-thu-co-tu-cung` | Tầm soát ung thư cổ tử cung: Pap, HPV test và vắc-xin HPV | A | A |
+| `di-cau-ra-mau-tri-hay-ung-thu` | Đi cầu ra máu: trĩ hay ung thư đại tràng? | B | B |
+| `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? | B | D |
+| `vac-xin-phong-ung-thu` | Hai loại vắc-xin giúp phòng ung thư: HPV và viêm gan B | B | C |
+| `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm | A | A |
+| `sut-can-khong-ro-nguyen-nhan` | Sụt cân không rõ nguyên nhân — khi nào là đáng lo? | B | B |
+| `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? | B | D |
+| `thuoc-la-va-ung-thu` | Thuốc lá gây ra bao nhiêu loại ung thư? **(mùa: tháng 5)** | B | C |
+| `vi-khuan-hp-va-ung-thu-da-day` | Vi khuẩn HP và ung thư dạ dày — mối liên hệ đến đâu? | B | A |
+| `nuot-nghen-nuot-vuong` | Nuốt nghẹn, nuốt vướng — dấu hiệu sớm của ung thư thực quản | B | B |
+| `buon-non-non-oi-xu-tri-tai-nha` | Buồn nôn, nôn ói: xử trí tại nhà và khi nào cần nhập viện | C | D |
+| `khi-nao-goi-bac-si-ngay` | Khi nào cần gọi bác sĩ ngay, khi nào cần nhập viện? | C | G |
+| `xet-nghiem-dau-an-ung-thu` | Dấu ấn ung thư (CEA, CA 19-9, CA 125…) — hiểu đúng để khỏi hoang mang | B | A |
+| `tu-kham-vu-dung-cach` | Sờ thấy khối ở vú — tự khám vú đúng cách từng bước **(mùa: tháng 10)** | C | B |
+| `chan-an-va-suy-mon` | Chán ăn và suy mòn — hiểu để không ép ăn sai cách | C | D |
+| `nhin-an-bo-doi-te-bao-ung-thu` | "Nhịn ăn để bỏ đói tế bào ung thư" — đúng hay sai? | B | F |
+| `tien-su-gia-dinh-ung-thu-tam-soat` | Có người thân bị ung thư, tôi nên tầm soát từ mấy tuổi? | A | A |
+| `ho-keo-dai-tren-3-tuan` | Ho kéo dài trên 3 tuần — đừng chỉ nghĩ đến viêm phổi | B | B |
+| `kiet-suc-nguoi-cham-soc` | Kiệt sức người chăm sóc — dấu hiệu và cách tự bảo vệ | C | G |
+| `kiem-chung-thong-tin-chua-ung-thu` | Cách kiểm chứng thông tin chữa ung thư trên mạng xã hội | B | H |
 
 Hết hàng đợi (~6 tháng ở nhịp hàng tuần) thì đưa chủ đề từ Backlog lên và gán slug.
 
@@ -85,7 +91,7 @@ phủ trọn hai cụm (ví dụ bài tầm soát gan có phần phòng ngừa d
 | Chi phí điều trị ung thư và vai trò BHYT | Viết được, nhưng **không đưa bảng giá/con số cụ thể** — chỉ giải thích cơ chế BHYT, nhóm được chi trả, thủ tục. Giá dịch vụ là ràng buộc YMYL trong skill. |
 | Thực đơn mẫu 7 ngày cho người kém ăn | Viết được, nhưng phải đóng khung là **ví dụ tham khảo**, kèm nhắc trao đổi bác sĩ/chuyên gia dinh dưỡng. Không kê đơn dinh dưỡng. |
 | Sổ theo dõi triệu chứng tại nhà (kèm mẫu tải về) | Cần tạo thêm file mẫu in được (PDF/HTML). Ngoài phạm vi skill hiện tại — làm riêng. |
-| Bài trụ cột 2000+ từ (dạng cẩm nang) | Skill hiện tối ưu cho bài ~900–1200 từ. Cần bổ sung khung "bài trụ cột" trước khi viết loại này. Lưu ý 4 bài trụ cột bạn nhắm (#1, #4, #6, #49) **đã xuất bản ở độ dài thường** — muốn nâng cấp thì là việc mở rộng bài cũ, không phải viết mới. |
+| Bài trụ cột 2000+ từ (dạng cẩm nang) | Skill hiện tối ưu cho bài ~900–1200 từ. Cần bổ sung khung "bài trụ cột" trước khi viết loại này. Lưu ý các bài trụ cột bạn nhắm đều **đã xuất bản ở độ dài thường** — muốn nâng cấp thì là việc mở rộng bài cũ, không phải viết mới. |
 | CTA khác nhau theo nhóm bài | Layout `_includes/layouts/bai-viet.njk` hiện dùng **một CTA cố định** cho mọi bài. Muốn CTA riêng (tầm soát → gói tầm soát; chăm sóc giảm nhẹ → khám tại nhà) thì phải thêm field frontmatter `cta:` + nhánh trong layout. Việc riêng, chưa làm. |
 
 ## Backlog

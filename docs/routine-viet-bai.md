@@ -55,7 +55,14 @@ Lưu ý riêng cho lần chạy tự động này:
 
 ## BƯỚC 3 — MỞ PR
 
+Trước khi commit, **dọn hàng đợi trong cùng PR**: mở `docs/chu-de-bai-viet.md`, xoá dòng
+vừa viết khỏi bảng "Hàng đợi" và thêm nó vào cuối bảng "Đã xuất bản" (2 cột: slug, chủ đề).
+Bảng hàng đợi không đánh số nên không phải sửa gì thêm. Bỏ bước này thì bảng sẽ lệch dần
+so với thực tế — không làm routine chạy sai (routine lọc theo sự tồn tại của file
+`kien-thuc/<slug>.md`), nhưng người đọc doc sẽ không biết bài nào đã ra.
+
 Theo bước 6 của skill: feature branch `feat/bai-<slug>`, conventional commit, push, `gh pr create`.
+`git add` phải gồm cả `docs/chu-de-bai-viet.md`.
 
 **TUYỆT ĐỐI KHÔNG merge.** Bác sĩ duyệt nội dung trên Vercel preview URL rồi user tự merge. PR body phải có dòng "⚠️ Chờ bác sĩ duyệt nội dung trước khi merge".
 

@@ -114,6 +114,9 @@ Bài chỉ có chữ thì bỏ bước này.
 git checkout main && git pull --ff-only
 git checkout -b feat/bai-<slug>
 git add kien-thuc/<slug>.md assets/kien-thuc/<slug>-*
+# Nếu chủ đề lấy từ hàng đợi: chuyển dòng đó từ bảng "Hàng đợi" sang bảng
+# "Đã xuất bản" trong docs/chu-de-bai-viet.md, rồi add file đó vào cùng commit.
+git add docs/chu-de-bai-viet.md
 git commit -m "feat: add <topic> article with illustrations"
 git push -u origin feat/bai-<slug>
 gh pr create --base main --title "feat: bài Kiến thức — <Tiêu đề>" --body "..."
@@ -215,4 +218,5 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 - [ ] Không hứa kết quả / không testimonial / không giá / không liều thuốc
 - [ ] Ảnh: alt mô tả rõ nghĩa, figcaption kết bằng "(Ảnh minh họa)", SVG hoặc raster ≤200KB
 - [ ] `npm run build` sạch, bài vào sitemap, `og:image` trỏ đúng file tồn tại
+- [ ] Nếu chủ đề lấy từ hàng đợi: đã chuyển dòng sang bảng "Đã xuất bản" trong `docs/chu-de-bai-viet.md`
 - [ ] Đã push branch + mở PR, **chưa merge**, PR có dòng chờ bác sĩ duyệt
