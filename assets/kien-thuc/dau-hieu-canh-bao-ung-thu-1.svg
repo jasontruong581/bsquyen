@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Trục thời gian cho thấy triệu chứng càng kéo dài thì càng cần được thăm khám">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Tiêu đề ảnh -->
+  <text x="380" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#123b63">Cùng một triệu chứng — khác nhau ở thời gian</text>
+  <text x="380" y="82" text-anchor="middle" font-size="16" fill="#5b6b7b">Càng dai dẳng, càng nên đi khám</text>
+
+  <!-- Chuông cảnh báo phía trên mốc thứ ba -->
+  <path d="M590 105 a34 34 0 0 1 34 34 v28 l12 18 h-92 l12 -18 v-28 a34 34 0 0 1 34 -34 Z"
+        fill="#f26e21" stroke="#d85a10" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="590" cy="196" r="10" fill="#d85a10"/>
+
+  <!-- Trục thời gian + mũi tên -->
+  <path d="M80 280 H655" stroke="#ecdfd3" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M655 264 l30 16 l-30 16 Z" fill="#ecdfd3"/>
+
+  <!-- Mốc 1: vài ngày -->
+  <circle cx="170" cy="280" r="26" fill="#fdeee2" stroke="#f2a56e" stroke-width="4"/>
+  <circle cx="170" cy="280" r="7" fill="#f2a56e"/>
+  <text x="170" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Vài ngày</text>
+  <text x="170" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Thường tự khỏi</text>
+
+  <!-- Mốc 2: một đến hai tuần -->
+  <circle cx="380" cy="280" r="32" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <text x="380" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">1–2 tuần</text>
+  <text x="380" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Chưa đỡ — chú ý</text>
+
+  <!-- Mốc 3: trên ba tuần, cần đi khám -->
+  <circle cx="590" cy="280" r="40" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="577" cy="267" r="9" fill="#ffd9bd"/>
+  <text x="590" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Trên 3 tuần</text>
+  <text x="590" y="375" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Nên đi khám</text>
+
+  <text x="380" y="425" text-anchor="middle" font-size="12" fill="#5b6b7b">*Mốc 3 tuần với ho và khàn tiếng — theo hướng dẫn y tế Anh (NHS)</text>
+</svg>
