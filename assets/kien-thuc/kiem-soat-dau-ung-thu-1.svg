@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" font-family="'Be Vietnam Pro', system-ui, sans-serif" aria-label="Thang giảm đau ba bậc của WHO: bậc 1 dùng thuốc không opioid cho đau nhẹ, bậc 2 dùng opioid yếu cho đau vừa, bậc 3 dùng opioid mạnh cho đau nặng; thuốc hỗ trợ và biện pháp không dùng thuốc đi kèm ở cả ba bậc">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- tiêu đề ảnh -->
+  <text x="52" y="62" font-size="26" font-weight="800" fill="#123b63">Thang giảm đau 3 bậc (WHO)</text>
+  <text x="52" y="92" font-size="15" fill="#5b6b7b">Bắt đầu ở bậc khớp với mức đau — không bắt buộc leo tuần tự</text>
+
+  <!-- bậc 1: đau nhẹ -->
+  <rect x="52" y="282" width="200" height="90" rx="14" fill="#ffffff" stroke="#ecdfd3" stroke-width="3"/>
+  <text x="152" y="315" text-anchor="middle" font-size="19" font-weight="700" fill="#123b63">Bậc 1 · Đau nhẹ</text>
+  <text x="152" y="344" text-anchor="middle" font-size="16" fill="#5b6b7b">Thuốc không opioid</text>
+
+  <!-- bậc 2: đau vừa -->
+  <rect x="272" y="207" width="200" height="165" rx="14" fill="#fdeee2" stroke="#f2a56e" stroke-width="3"/>
+  <text x="372" y="242" text-anchor="middle" font-size="19" font-weight="700" fill="#123b63">Bậc 2 · Đau vừa</text>
+  <text x="372" y="271" font-size="16" text-anchor="middle" fill="#5b6b7b">Opioid yếu</text>
+  <text x="372" y="297" font-size="15" text-anchor="middle" fill="#5b6b7b">+ thuốc không opioid</text>
+
+  <!-- bậc 3: đau nặng — bậc được nhấn -->
+  <rect x="492" y="132" width="200" height="240" rx="14" fill="#f26e21" stroke="#d85a10" stroke-width="3"/>
+  <text x="592" y="169" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">Bậc 3 · Đau nặng</text>
+  <text x="592" y="198" text-anchor="middle" font-size="16" fill="#ffd9bd">Opioid mạnh</text>
+  <text x="592" y="224" text-anchor="middle" font-size="15" fill="#ffd9bd">+ thuốc không opioid</text>
+
+  <!-- dải nền chung cho cả ba bậc -->
+  <rect x="52" y="386" width="640" height="42" rx="14" fill="#e8f1fa"/>
+  <text x="372" y="413" text-anchor="middle" font-size="16" fill="#123b63">Ở cả ba bậc: thuốc hỗ trợ và biện pháp không dùng thuốc</text>
+</svg>
