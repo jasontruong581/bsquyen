@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Bên trái là bong bóng thoại tin truyền miệng gắn dấu gạch chéo, bên phải là bong bóng thoại thông tin y khoa gắn dấu tích, phía dưới là kính lúp với dòng chữ kiểm chứng trước khi tin">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="700" cy="392" r="104" fill="#fdeee2"/>
+  <circle cx="44" cy="44" r="70" fill="#e8f1fa"/>
+
+  <!-- ===== Bong bóng TIN TRUYỀN MIỆNG (lạnh, gạch chéo) ===== -->
+  <rect x="48" y="64" width="280" height="170" rx="26" fill="#e8f1fa"
+        stroke="#5b6b7b" stroke-width="3"/>
+  <!-- đuôi bong bóng -->
+  <path d="M96 234 v34 l40 -34 Z" fill="#e8f1fa" stroke="#5b6b7b"
+        stroke-width="3" stroke-linejoin="round"/>
+  <!-- 3 dòng chữ mờ tượng trưng lời truyền miệng -->
+  <g fill="#5b6b7b" opacity=".32">
+    <rect x="78" y="132" width="196" height="14" rx="7"/>
+    <rect x="78" y="162" width="216" height="14" rx="7"/>
+    <rect x="78" y="192" width="140" height="14" rx="7"/>
+  </g>
+  <!-- huy hiệu dấu gạch chéo -->
+  <circle cx="298" cy="98" r="26" fill="#5b6b7b"/>
+  <path d="M288 88 l20 20 M308 88 l-20 20" fill="none" stroke="#ffffff"
+        stroke-width="7" stroke-linecap="round"/>
+
+  <!-- ===== Bong bóng BẰNG CHỨNG Y KHOA (ấm, dấu tích) ===== -->
+  <rect x="432" y="64" width="280" height="170" rx="26" fill="#fdeee2"
+        stroke="#f2a56e" stroke-width="3"/>
+  <path d="M664 234 v34 l-40 -34 Z" fill="#fdeee2" stroke="#f2a56e"
+        stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#f2a56e" opacity=".55">
+    <rect x="462" y="132" width="196" height="14" rx="7"/>
+    <rect x="462" y="162" width="216" height="14" rx="7"/>
+    <rect x="462" y="192" width="140" height="14" rx="7"/>
+  </g>
+  <!-- huy hiệu dấu tích -->
+  <circle cx="684" cy="98" r="26" fill="#f26e21"/>
+  <path d="M672 98 l9 10 l16 -19" fill="none" stroke="#ffffff"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ===== Nhãn dưới mỗi bong bóng ===== -->
+  <text x="188" y="300" text-anchor="middle" font-size="23" font-weight="700"
+        fill="#123b63">Nghe nói</text>
+  <text x="188" y="328" text-anchor="middle" font-size="16" fill="#5b6b7b">chưa ai kiểm chứng</text>
+
+  <text x="572" y="300" text-anchor="middle" font-size="23" font-weight="700"
+        fill="#123b63">Bằng chứng y khoa</text>
+  <text x="572" y="328" text-anchor="middle" font-size="16" fill="#5b6b7b">WHO, NCI, hội chuyên ngành</text>
+
+  <!-- ===== Kính lúp + thông điệp chân ảnh ===== -->
+  <circle cx="238" cy="386" r="32" fill="#ffffff" stroke="#123b63" stroke-width="8"/>
+  <path d="M262 410 l24 24" stroke="#123b63" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="228" cy="376" r="7" fill="#ffd9bd"/>
+  <text x="306" y="396" font-size="23" font-weight="700" fill="#123b63">Kiểm chứng trước khi tin</text>
+</svg>
