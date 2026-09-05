@@ -2,6 +2,7 @@
 title: "Bảy hiểu lầm phổ biến nhất về bệnh ung thư: đâu là sự thật?"
 description: "Ung thư có phải bản án tử? Có lây không? Sinh thiết làm bệnh lan nhanh, đường nuôi tế bào ung thư? Bảy hiểu lầm thường gặp nhất, đối chiếu với bằng chứng y khoa."
 date: 2026-08-24
+thumb: /assets/kien-thuc/hieu-lam-pho-bien-ve-ung-thu-thumb.svg
 tags:
   - "Phòng ngừa"
 image: /assets/kien-thuc/hieu-lam-pho-bien-ve-ung-thu-og.png

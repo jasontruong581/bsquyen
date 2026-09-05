@@ -2,6 +2,7 @@
 title: "Kiểm soát đau ung thư: thang giảm đau 3 bậc của WHO là gì?"
 description: "Đau trong bệnh ung thư kiểm soát được trong phần lớn trường hợp. Bài viết giải thích thang giảm đau 3 bậc của WHO, cách mô tả cơn đau với bác sĩ và những dấu hiệu cần gọi ngay."
 date: 2026-08-17
+thumb: /assets/kien-thuc/kiem-soat-dau-ung-thu-thumb.svg
 tags:
   - "Chăm sóc giảm nhẹ"
 cta: tai-nha

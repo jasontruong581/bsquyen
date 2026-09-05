@@ -2,6 +2,7 @@
 title: "10 dấu hiệu cảnh báo ung thư: Khi nào một triệu chứng cần được thăm khám?"
 description: "Mười dấu hiệu cơ thể không nên bỏ qua, ba câu hỏi giúp bạn phân biệt triệu chứng chờ được và triệu chứng nên đi khám, cùng những dấu hiệu cần khám ngay."
 date: 2026-08-14
+thumb: /assets/kien-thuc/dau-hieu-canh-bao-ung-thu-thumb.svg
 tags:
   - "Dấu hiệu"
 image: /assets/kien-thuc/dau-hieu-canh-bao-ung-thu-og.png

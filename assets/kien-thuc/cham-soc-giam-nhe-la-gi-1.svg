@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Từ thời điểm chẩn đoán có hai dải chạy song song: dải trên là điều trị đặc hiệu, dải dưới là chăm sóc giảm nhẹ và kéo dài hơn dải trên">
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- thời điểm chẩn đoán -->
+  <g stroke="#123b63" stroke-width="9" stroke-linecap="round" opacity=".25">
+    <path d="M150 200 L176 166"/>
+    <path d="M150 240 L176 274"/>
+  </g>
+  <circle cx="110" cy="220" r="38" fill="#ffffff" stroke="#123b63" stroke-width="9"/>
+  <circle cx="110" cy="220" r="13" fill="#123b63"/>
+
+  <!-- dải trên: điều trị đặc hiệu -->
+  <rect x="176" y="118" width="420" height="92" rx="46" fill="#f2a56e" stroke="#e08b4f" stroke-width="5"/>
+  <g fill="#ffffff" opacity=".5">
+    <circle cx="380" cy="164" r="10"/>
+    <circle cx="480" cy="164" r="10"/>
+  </g>
+  <circle cx="218" cy="164" r="30" fill="#ffffff"/>
+  <path d="M218 146 v36 M200 164 h36" stroke="#f26e21" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- dải dưới: chăm sóc giảm nhẹ — đi cùng từ đầu và đồng hành lâu hơn -->
+  <rect x="176" y="230" width="524" height="92" rx="46" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <g fill="#ffffff" opacity=".5">
+    <circle cx="380" cy="276" r="10"/>
+    <circle cx="480" cy="276" r="10"/>
+    <circle cx="580" cy="276" r="10"/>
+  </g>
+  <circle cx="218" cy="276" r="30" fill="#ffffff"/>
+  <path d="M218 289 c-12 -8.5 -19 -14.5 -19 -21.5 a7.75 7.75 0 0 1 19 -5 a7.75 7.75 0 0 1 19 5 c0 7 -7 13 -19 21.5 Z"
+        fill="#f26e21"/>
+</svg>

@@ -2,6 +2,7 @@
 title: "Tầm soát ung thư dạ dày: Ai nên tầm soát, khi nào và bằng cách nào?"
 description: "Ung thư dạ dày ở Việt Nam thường phát hiện muộn, nhưng phát hiện sớm lại điều trị rất hiệu quả. Ai nên tầm soát, vai trò của vi khuẩn HP, nội soi dạ dày và dấu hiệu cần khám ngay."
 date: 2026-07-27
+thumb: /assets/kien-thuc/tam-soat-ung-thu-da-day-1.svg
 tags:
   - "Tầm soát"
 cta: tam-soat

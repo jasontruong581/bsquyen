@@ -2,6 +2,7 @@
 title: "Tầm soát ung thư gan: Ai cần tầm soát và bao lâu một lần?"
 description: "Ung thư gan đứng đầu ở nam giới Việt Nam và thường phát hiện muộn, nhưng lại có nhóm nguy cơ rõ ràng: viêm gan B, C và xơ gan. Ai cần siêu âm định kỳ, nhịp 6 tháng, và cách phòng ngừa."
 date: 2026-07-28
+thumb: /assets/kien-thuc/tam-soat-ung-thu-gan-1.svg
 tags:
   - "Tầm soát"
   - "Phòng ngừa"

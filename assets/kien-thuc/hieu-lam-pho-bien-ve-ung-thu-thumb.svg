@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Hai bong bóng thoại: bên trái gắn dấu gạch chéo, bên phải gắn dấu tích, phía dưới là một chiếc kính lúp">
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="700" cy="392" r="104" fill="#fdeee2"/>
+  <circle cx="44" cy="44" r="70" fill="#e8f1fa"/>
+
+  <!-- tin truyền miệng: tông lạnh, gắn dấu gạch chéo -->
+  <rect x="48" y="90" width="300" height="190" rx="28" fill="#e8f1fa" stroke="#5b6b7b" stroke-width="4"/>
+  <path d="M100 280 v40 l44 -40 Z" fill="#e8f1fa" stroke="#5b6b7b" stroke-width="4" stroke-linejoin="round"/>
+  <g fill="#5b6b7b" opacity=".32">
+    <rect x="82" y="150" width="210" height="16" rx="8"/>
+    <rect x="82" y="184" width="232" height="16" rx="8"/>
+    <rect x="82" y="218" width="150" height="16" rx="8"/>
+  </g>
+  <circle cx="320" cy="126" r="30" fill="#5b6b7b"/>
+  <path d="M308 114 l24 24 M332 114 l-24 24" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- bằng chứng y khoa: tông ấm, gắn dấu tích -->
+  <rect x="412" y="90" width="300" height="190" rx="28" fill="#fdeee2" stroke="#f2a56e" stroke-width="4"/>
+  <path d="M660 280 v40 l-44 -40 Z" fill="#fdeee2" stroke="#f2a56e" stroke-width="4" stroke-linejoin="round"/>
+  <g fill="#f2a56e" opacity=".55">
+    <rect x="446" y="150" width="210" height="16" rx="8"/>
+    <rect x="446" y="184" width="232" height="16" rx="8"/>
+    <rect x="446" y="218" width="150" height="16" rx="8"/>
+  </g>
+  <circle cx="692" cy="126" r="30" fill="#f26e21"/>
+  <path d="M678 126 l11 12 l19 -22" fill="none" stroke="#ffffff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- kính lúp: kiểm chứng trước khi tin -->
+  <circle cx="380" cy="382" r="38" fill="#ffffff" stroke="#123b63" stroke-width="10"/>
+  <path d="M408 410 l30 30" stroke="#123b63" stroke-width="17" stroke-linecap="round"/>
+  <circle cx="368" cy="370" r="8" fill="#ffd9bd"/>
+</svg>

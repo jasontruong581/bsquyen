@@ -6,6 +6,7 @@ tags:
   - "<1 tag chính: Tầm soát | Dấu hiệu | Chăm sóc giảm nhẹ | Điều trị | Dinh dưỡng | Phòng ngừa>"
 cta: <tam-soat | tai-nha — hoặc XOÁ dòng này để dùng CTA mặc định>
 image: /assets/kien-thuc/<slug>-og.png
+thumb: /assets/kien-thuc/<slug>-1.svg   # ảnh card, phải là SVG KHÔNG chữ
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm>)"
     url: "https://..."
