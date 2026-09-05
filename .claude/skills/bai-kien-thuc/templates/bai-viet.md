@@ -7,6 +7,14 @@ tags:
 cta: <tam-soat | tai-nha — hoặc XOÁ dòng này để dùng CTA mặc định>
 image: /assets/kien-thuc/<slug>-og.png
 thumb: /assets/kien-thuc/<slug>-1.svg   # ảnh card, phải là SVG KHÔNG chữ
+facebook: |
+  <Câu mở: câu hỏi bệnh nhân hay hỏi hoặc một hiểu lầm — phải đứng được một mình
+  trong 125 ký tự đầu, vì Facebook cắt ở đó.>
+
+  <2–3 dòng nêu đúng thứ bài trả lời. Đừng chép lại description.>
+
+  <Một câu trấn an hoặc mời đọc.>
+  # KHÔNG gõ link, hashtag hay số điện thoại — script tự nối link + hashtag.
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm>)"
     url: "https://..."
