@@ -5,6 +5,7 @@ date: 2026-07-24
 tags:
   - "Chăm sóc giảm nhẹ"
 cta: tai-nha
+image: /assets/kien-thuc/cham-soc-giam-nhe-la-gi-og.png
 sources:
   - title: "WHO — Palliative care (Fact sheet)"
     url: "https://www.who.int/news-room/fact-sheets/detail/palliative-care"
