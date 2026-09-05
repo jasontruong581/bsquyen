@@ -59,16 +59,8 @@ eleventyExcludeFromCollections: true
 
         <div class="article-list">
           {% for post in posts %}
-          <a class="article-item" href="{{ post.url }}">
-            <h2>{{ post.data.title }}</h2>
-            {% if post.data.tags and post.data.tags.length %}
-            <ul class="tag-list" aria-label="Chủ đề">
-              {% for t in post.data.tags %}<li class="tag">{{ t }}</li>{% endfor %}
-            </ul>
-            {% endif %}
-            <p>{{ post.data.description }}</p>
-            <span class="article-item-meta">{{ post.date | ngayVN }} · Đọc tiếp →</span>
-          </a>
+          {% set dauTien = loop.first %}
+          {% include "partials/article-card.njk" %}
           {% endfor %}
         </div>
 

@@ -2,6 +2,7 @@
 title: "Tầm soát ung thư vú: Tự khám, siêu âm hay nhũ ảnh?"
 description: "Tự khám vú có đủ không, siêu âm khác nhũ ảnh thế nào, và từ tuổi nào nên bắt đầu tầm soát ung thư vú — giải đáp theo các hướng dẫn quốc tế hiện hành."
 date: 2026-08-01
+thumb: /assets/kien-thuc/tam-soat-ung-thu-vu-1.svg
 tags:
   - "Tầm soát"
 cta: tam-soat

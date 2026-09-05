@@ -124,3 +124,30 @@ node .claude/skills/bai-kien-thuc/scripts/render-svg.mjs \
 Rồi Read `/tmp/check.png`. Nhìn 3 điểm: hình có đọc ra đúng thứ cần thể hiện không,
 chữ có tràn/đè nhau không, tổn thương/vật nhấn có bị dụng cụ che không.
 **Sửa tối đa 1 lượt** — ảnh minh họa không cần hoàn hảo, cần rõ nghĩa.
+
+## Ảnh thumbnail cho card danh sách (`thumb`)
+
+Card ở `/kien-thuc/` và các trang lọc chủ đề hiện ảnh trong khung **200×125**,
+`object-fit: contain` trên nền `#fff9f4` — trùng đúng màu nền của mọi SVG minh họa,
+nên phần thừa không lộ viền và hình không bao giờ bị cắt.
+
+Ràng buộc duy nhất: **thumbnail không được có chữ.** Ở 200px, `font-size` 16–24
+trong khung 760 co lại còn 4–6px và biến thành vệt mờ.
+
+- `-1.svg` không có `<text>` → trỏ `thumb` thẳng vào nó.
+- `-1.svg` có `<text>` → vẽ thêm `assets/kien-thuc/<slug>-thumb.svg`: giữ nguyên bố
+  cục và palette của `-1.svg`, bỏ hết chữ, phóng to các hình khối chính cho cân khung.
+  Bản đã làm để tham khảo: `dau-hieu-canh-bao-ung-thu-thumb.svg` (trục thời gian ba
+  chấm lớn dần + chuông), `kiem-soat-dau-ung-thu-thumb.svg` (ba bậc thang, số chấm
+  trắng thay nhãn bậc), `hieu-lam-pho-bien-ve-ung-thu-thumb.svg` (hai bong bóng
+  thoại ✗/✓ + kính lúp).
+
+Mẹo thay nhãn chữ: dùng **số lượng chấm tròn** (1/2/3 chấm = bậc 1/2/3), **kích cỡ
+tăng dần** (mốc thời gian), hoặc **huy hiệu ✓/✗** — đọc được ở mọi cỡ.
+
+Kiểm tra nhanh ở đúng cỡ card:
+
+```bash
+node .claude/skills/bai-kien-thuc/scripts/render-svg.mjs \
+  assets/kien-thuc/<slug>-thumb.svg /tmp/thumb.png 200
+```

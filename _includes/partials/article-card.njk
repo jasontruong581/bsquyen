@@ -1,0 +1,21 @@
+{# Card bài viết dùng chung cho /kien-thuc/ và các trang lọc chủ đề.
+   Card vốn đã là <a> nên chip chủ đề bên trong không thể là link (lồng <a> trong
+   <a> là HTML không hợp lệ). Ảnh minh họa chỉ để trang trí — tiêu đề đã mô tả
+   bài rồi — nên alt rỗng, tránh trình đọc màn hình đọc trùng. Ảnh của card đầu
+   tiên không lazy-load vì nhiều khả năng là phần tử LCP của trang. #}
+<a class="article-item" href="{{ post.url }}">
+  <div class="article-item-body">
+    <h2>{{ post.data.title }}</h2>
+    {% if post.data.tags and post.data.tags.length %}
+    <ul class="tag-list" aria-label="Chủ đề">
+      {% for t in post.data.tags %}<li class="tag">{{ t }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ post.data.description }}</p>
+    <span class="article-item-meta">{{ post.date | ngayVN }} · Đọc tiếp →</span>
+  </div>
+  {% if post.data.thumb %}
+  <img class="article-item-thumb" src="{{ post.data.thumb }}" alt="" aria-hidden="true"
+       width="760" height="440"{% if not dauTien %} loading="lazy" decoding="async"{% endif %}>
+  {% endif %}
+</a>

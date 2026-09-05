@@ -2,6 +2,7 @@
 title: "Chăm sóc giảm nhẹ là gì? Những hiểu lầm thường gặp"
 description: "Chăm sóc giảm nhẹ không phải là buông xuôi. Bài viết giải thích chăm sóc giảm nhẹ là gì, dành cho ai, bắt đầu khi nào và giải đáp các hiểu lầm phổ biến của bệnh nhân ung thư và gia đình."
 date: 2026-07-24
+thumb: /assets/kien-thuc/cham-soc-giam-nhe-la-gi-1.svg
 tags:
   - "Chăm sóc giảm nhẹ"
 cta: tai-nha
@@ -15,6 +16,11 @@ sources:
 Khi bác sĩ nhắc đến "chăm sóc giảm nhẹ", nhiều bệnh nhân và gia đình lập tức
 nghĩ rằng "vậy là hết cách rồi". Đây là hiểu lầm phổ biến nhất — và cũng là
 điều khiến nhiều người bệnh chịu đau đớn không cần thiết trong thời gian dài.
+
+<figure>
+  <img src="/assets/kien-thuc/cham-soc-giam-nhe-la-gi-1.svg" alt="Sơ đồ: từ thời điểm chẩn đoán, điều trị đặc hiệu và chăm sóc giảm nhẹ chạy song song với nhau, trong đó chăm sóc giảm nhẹ đồng hành lâu hơn" width="760" height="440">
+  <figcaption>Chăm sóc giảm nhẹ không thay thế điều trị mà đi song song từ khi chẩn đoán, và đồng hành cùng người bệnh lâu hơn. (Ảnh minh họa)</figcaption>
+</figure>
 
 ## Chăm sóc giảm nhẹ là gì?
 

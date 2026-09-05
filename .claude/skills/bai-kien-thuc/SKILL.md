@@ -77,9 +77,10 @@ Copy `templates/bai-viet.md` làm điểm khởi đầu. Tuân thủ mục "Văn
 
 ### 4. Ảnh minh họa + ảnh OG (~5–8k token)
 
-Ảnh minh họa (tùy chọn với bài loại B/C, **bắt buộc 2 ảnh với bài tầm soát**):
-đọc `references/minh-hoa.md`, chép layout gần nhất, đổi hình/chữ. Lưu vào
-`assets/kien-thuc/<slug>-1.svg`, `-2.svg`. Render kiểm tra:
+Ảnh minh họa (**bắt buộc ít nhất 1 ảnh với mọi bài** — card ở trang danh sách cần
+`thumb`; bài tầm soát cần đủ 2 ảnh): đọc `references/minh-hoa.md`, chép layout gần
+nhất, đổi hình/chữ. Lưu vào `assets/kien-thuc/<slug>-1.svg`, `-2.svg`. Nếu `-1.svg`
+có chữ thì vẽ thêm `-thumb.svg` không chữ để dùng làm `thumb`. Render kiểm tra:
 
 ```bash
 # rồi Read file PNG
@@ -137,6 +138,7 @@ tags:
   - "<1 tag chính, chọn từ 6 tag cố định>"
 cta: tam-soat | tai-nha        # bỏ dòng này nếu dùng CTA mặc định
 image: /assets/kien-thuc/<slug>-og.png
+thumb: /assets/kien-thuc/<slug>-1.svg
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm nếu có>)"
     url: "https://..."
@@ -159,6 +161,11 @@ sources:
   Bộ Y tế, PubMed/NCBI. Không dùng blog, không dùng trang bán dịch vụ.
 - `updated: YYYY-MM-DD` chỉ thêm khi sửa bài đáng kể về sau.
 - `image` bỏ được, nhưng khi đó share link chỉ ra ảnh chân dung mặc định — nên luôn tạo.
+- `thumb`: ảnh hiện trên card ở trang danh sách và trang lọc chủ đề, khung 200×125.
+  Trỏ vào `-1.svg` **nếu ảnh đó không có chữ**; ảnh nhiều chữ thu nhỏ còn ~180px thì
+  chữ thành vệt mờ. Khi `-1.svg` có chữ, vẽ thêm bản không chữ `-thumb.svg` (xem
+  `references/minh-hoa.md`). Bỏ `thumb` thì card về dạng chỉ có chữ, lệch với các bài
+  khác — luôn khai báo.
 - Layout tự lo `<h1>`, ngày, breadcrumb, lead, khối nguồn, CTA đặt lịch, disclaimer.
   **Đừng viết lại những phần này trong body.**
 
@@ -208,7 +215,7 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 
 ## Checklist trước khi báo xong
 
-- [ ] Frontmatter đủ `title`, `description`, `date`, `tags`, `image`, `sources` (2–4 nguồn uy tín)
+- [ ] Frontmatter đủ `title`, `description`, `date`, `tags`, `image`, `thumb`, `sources` (2–4 nguồn uy tín)
 - [ ] `tags` chỉ dùng 6 tag cố định, không bịa tag mới; `cta` khớp cụm chủ đề (hoặc bỏ trống)
 - [ ] Không trùng chủ đề bài đã có
 - [ ] Hard-wrap ~76 ký tự; blockquote ≤ 2
@@ -217,6 +224,7 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 - [ ] Mọi con số đều truy được về một nguồn trong `sources`
 - [ ] Không hứa kết quả / không testimonial / không giá / không liều thuốc
 - [ ] Ảnh: alt mô tả rõ nghĩa, figcaption kết bằng "(Ảnh minh họa)", SVG hoặc raster ≤200KB
+- [ ] `thumb` trỏ vào file có thật và **không có chữ**; xem thử card ở `/kien-thuc/`
 - [ ] `npm run build` sạch, bài vào sitemap, `og:image` trỏ đúng file tồn tại
 - [ ] Nếu chủ đề lấy từ hàng đợi: đã chuyển dòng sang bảng "Đã xuất bản" trong `docs/chu-de-bai-viet.md`
 - [ ] Đã push branch + mở PR, **chưa merge**, PR có dòng chờ bác sĩ duyệt

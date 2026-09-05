@@ -87,7 +87,9 @@
 }
 
 .article-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
   text-decoration: none;
   background: var(--white);
   border: 1px solid var(--line);
@@ -96,9 +98,37 @@
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .article-item:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+/* min-width:0 để phần chữ co lại được thay vì đẩy ảnh tràn ra ngoài card */
+.article-item-body { min-width: 0; }
 .article-item h2 { font-size: 1.2rem; margin-bottom: .4rem; }
 .article-item p { color: var(--muted); font-size: .95rem; margin-bottom: .6rem; }
 .article-item-meta { color: var(--orange-dark); font-weight: 600; font-size: .88rem; }
+
+/* Ảnh minh họa lấy từ trong bài. Nền cream trùng đúng nền của các SVG minh họa
+   nên object-fit:contain không để lộ viền — hình giữ nguyên bố cục, không bị cắt. */
+.article-item-thumb {
+  flex: 0 0 200px;
+  width: 200px;
+  height: 125px;
+  object-fit: contain;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+@media (max-width: 760px) {
+  .article-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .article-item-thumb {
+    order: -1;
+    flex: none;
+    width: 100%;
+    height: 132px;
+  }
+}
 
 /* Chip chủ đề (tag) — dùng cả ở đầu bài và trên card danh sách */
 .tag-list {

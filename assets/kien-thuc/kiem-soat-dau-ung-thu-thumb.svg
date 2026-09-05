@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Ba bậc thang cao dần tượng trưng thang giảm đau ba bậc, cùng đứng trên một nền chung">
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- bậc 1 · đau nhẹ -->
+  <rect x="70" y="270" width="180" height="90" rx="20" fill="#ffffff" stroke="#ecdfd3" stroke-width="5"/>
+  <circle cx="160" cy="315" r="14" fill="#f2a56e"/>
+
+  <!-- bậc 2 · đau vừa -->
+  <rect x="290" y="195" width="180" height="165" rx="20" fill="#fdeee2" stroke="#f2a56e" stroke-width="5"/>
+  <circle cx="355" cy="277" r="14" fill="#f26e21"/>
+  <circle cx="405" cy="277" r="14" fill="#f26e21"/>
+
+  <!-- bậc 3 · đau nặng -->
+  <rect x="510" y="110" width="180" height="250" rx="20" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="555" cy="235" r="14" fill="#ffffff"/>
+  <circle cx="600" cy="235" r="14" fill="#ffffff"/>
+  <circle cx="645" cy="235" r="14" fill="#ffffff"/>
+
+  <!-- nền chung cho cả ba bậc: thuốc hỗ trợ và biện pháp không dùng thuốc -->
+  <rect x="70" y="382" width="620" height="38" rx="19" fill="#e8f1fa"/>
+</svg>

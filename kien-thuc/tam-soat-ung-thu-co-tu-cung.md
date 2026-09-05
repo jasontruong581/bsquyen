@@ -2,6 +2,7 @@
 title: "Tầm soát ung thư cổ tử cung: Pap, HPV test và vắc-xin HPV"
 description: "Pap khác HPV test thế nào, nên làm từ tuổi nào và bao lâu một lần, tiêm vắc-xin HPV rồi có còn cần tầm soát không — giải đáp theo hướng dẫn của WHO và Bộ Y tế."
 date: 2026-09-05
+thumb: /assets/kien-thuc/tam-soat-ung-thu-co-tu-cung-1.svg
 tags:
   - "Tầm soát"
   - "Phòng ngừa"
