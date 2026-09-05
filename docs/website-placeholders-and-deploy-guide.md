@@ -68,9 +68,11 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `llms.txt` | 2 | |
    | `robots.txt` | 1 | dòng `Sitemap:` |
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
+   | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
 
    ```bash
-   grep -rl 'bsquyen\.vercel\.app' --include='*.html' --include='*.njk' --include='*.txt' . \
+   grep -rl 'bsquyen\.vercel\.app' \
+     --include='*.html' --include='*.njk' --include='*.txt' --include='*.yml' . \
      | grep -v '^./_site' | grep -v node_modules \
      | xargs sed -i 's|bsquyen\.vercel\.app|bsquyen.com|g'
    ```
