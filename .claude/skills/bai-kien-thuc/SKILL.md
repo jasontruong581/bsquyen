@@ -199,6 +199,10 @@ biết". Trang này là của một bác sĩ, không phải trang tin câu view.
 
 Emoji: tối đa 1–2, hoặc không dùng. Không đặt emoji ở câu mở.
 
+**Xuống dòng.** Cứ hard-wrap ~76 ký tự như thân bài. Script đăng Facebook tự gộp các
+dòng trong cùng một đoạn lại thành dòng liền — nếu để nguyên thì Facebook hiện đúng chỗ
+ngắt và caption thành câu cụt giữa chừng. Muốn ngắt đoạn thật thì **để một dòng trống**.
+
 
 ## Văn phong
 
