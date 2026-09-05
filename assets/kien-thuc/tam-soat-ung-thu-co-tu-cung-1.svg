@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa tử cung và cổ tử cung nhìn thẳng, mỏ vịt mở rộng đường âm đạo và que lấy mẫu đưa lên tới cổ tử cung, phát hiện một tổn thương nhỏ ở lỗ cổ tử cung">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- vòi trứng hai bên -->
+  <g fill="none" stroke="#f2a56e" stroke-width="12" stroke-linecap="round">
+    <path d="M238 94 C202 62 176 58 152 72"/>
+    <path d="M362 94 C398 62 424 58 448 72"/>
+  </g>
+
+  <!-- buồng trứng hai bên -->
+  <ellipse cx="139" cy="81" rx="24" ry="17" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <ellipse cx="461" cy="81" rx="24" ry="17" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+
+  <!-- lòng âm đạo (vẽ trước để cổ tử cung nằm đè lên miệng ống) -->
+  <path d="M270 280 L256 420 L344 420 L330 280 Z" fill="#fdeee2" stroke="#f2a56e" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- thân tử cung, hình quả lê úp ngược -->
+  <path d="M230 124
+           C230 66 268 50 300 50
+           C332 50 370 66 370 124
+           L356 212
+           C352 232 330 242 300 242
+           C270 242 248 232 244 212 Z"
+        fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- lòng tử cung -->
+  <path d="M262 118
+           C268 88 284 78 300 78
+           C316 78 332 88 338 118
+           L313 210 C309 218 291 218 287 210 Z"
+        fill="#fdeee2"/>
+
+  <!-- nếp cơ tử cung -->
+  <g fill="none" stroke="#f26e21" stroke-width="6" stroke-linecap="round" opacity=".4">
+    <path d="M248 142 C258 166 260 190 256 212"/>
+    <path d="M352 142 C342 166 340 190 344 212"/>
+  </g>
+
+  <!-- cổ tử cung -->
+  <path d="M272 238 L328 238 L326 282 C316 294 284 294 274 282 Z"
+        fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+  <!-- ống cổ tử cung -->
+  <path d="M292 240 L308 240 L305 280 L295 280 Z" fill="#fdeee2"/>
+
+  <!-- mỏ vịt: hai lưỡi navy áp hai thành âm đạo, giữ đường vào mở -->
+  <g stroke="#123b63" stroke-width="13" stroke-linecap="round" fill="none">
+    <path d="M265 308 L256 410"/>
+    <path d="M335 308 L344 410"/>
+  </g>
+
+  <!-- chùm sáng từ đầu que lấy mẫu tới tổn thương (đặt TRƯỚC tổn thương) -->
+  <path d="M300 348 L266 296 L334 296 Z" fill="#ffd9bd" opacity=".9"/>
+
+  <!-- que lấy mẫu tế bào đưa lên dọc lòng âm đạo -->
+  <path d="M300 424 L300 356" stroke="#123b63" stroke-width="13" stroke-linecap="round"/>
+  <!-- đầu chổi mềm lấy mẫu -->
+  <g stroke="#123b63" stroke-width="5" stroke-linecap="round">
+    <path d="M300 358 L284 344"/>
+    <path d="M300 358 L316 344"/>
+    <path d="M300 360 L291 340"/>
+    <path d="M300 360 L309 340"/>
+  </g>
+
+  <!-- tổn thương ở lỗ cổ tử cung -->
+  <circle cx="300" cy="288" r="17" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="294" cy="282" r="5" fill="#ffd9bd"/>
+
+  <!-- huy hiệu dấu tích: phát hiện sớm -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

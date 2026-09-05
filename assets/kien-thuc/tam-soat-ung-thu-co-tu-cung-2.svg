@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Ba thẻ so sánh phương pháp tầm soát: xét nghiệm Pap tìm tế bào bất thường mỗi 3 năm từ 21 tuổi, xét nghiệm HPV tìm vi-rút nguy cơ cao mỗi 5 năm từ 30 tuổi, và phối hợp cả hai mỗi 5 năm từ 30 tuổi">
+  <rect width="760" height="320" fill="#fff9f4"/>
+
+  <!-- thẻ 1: Pap -->
+  <rect x="20" y="20" width="226" height="280" rx="18" fill="#ffffff" stroke="#ecdfd3"/>
+  <!-- lam kính với tế bào, một tế bào bất thường màu cam -->
+  <rect x="86" y="60" width="94" height="100" rx="12" fill="#e8f1fa" stroke="#123b63" stroke-width="6"/>
+  <g fill="#fdeee2" stroke="#f2a56e" stroke-width="4">
+    <circle cx="110" cy="88" r="12"/>
+    <circle cx="156" cy="90" r="12"/>
+    <circle cx="108" cy="132" r="12"/>
+    <circle cx="154" cy="134" r="12"/>
+  </g>
+  <circle cx="132" cy="111" r="15" fill="#f26e21" stroke="#d85a10" stroke-width="4"/>
+  <text x="133" y="205" text-anchor="middle" font-size="22" font-weight="700" fill="#123b63">Xét nghiệm Pap</text>
+  <text x="133" y="235" text-anchor="middle" font-size="17" fill="#5b6b7b">Tìm tế bào bất thường</text>
+  <text x="133" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Mỗi 3 năm — từ 21 tuổi</text>
+
+  <!-- thẻ 2: HPV test -->
+  <rect x="267" y="20" width="226" height="280" rx="18" fill="#ffffff" stroke="#ecdfd3"/>
+  <!-- vi-rút HPV: thân tròn và các gai bề mặt -->
+  <g stroke="#d85a10" stroke-width="6" stroke-linecap="round">
+    <path d="M414 108 L430 108"/>
+    <path d="M404 84 L415 73"/>
+    <path d="M380 74 L380 58"/>
+    <path d="M356 84 L345 73"/>
+    <path d="M346 108 L330 108"/>
+    <path d="M356 132 L345 143"/>
+    <path d="M380 142 L380 158"/>
+    <path d="M404 132 L415 143"/>
+  </g>
+  <circle cx="380" cy="108" r="34" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="370" cy="99" r="6" fill="#ffd9bd"/>
+  <circle cx="390" cy="117" r="5" fill="#ffd9bd"/>
+  <text x="380" y="205" text-anchor="middle" font-size="22" font-weight="700" fill="#123b63">Xét nghiệm HPV</text>
+  <text x="380" y="235" text-anchor="middle" font-size="17" fill="#5b6b7b">Tìm vi-rút nguy cơ cao</text>
+  <text x="380" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Mỗi 5 năm — từ 30 tuổi</text>
+
+  <!-- thẻ 3: phối hợp (thẻ nhấn) -->
+  <rect x="514" y="20" width="226" height="280" rx="18" fill="#fdeee2" stroke="#f2a56e"/>
+  <!-- lam kính nhỏ -->
+  <rect x="566" y="68" width="52" height="84" rx="10" fill="#e8f1fa" stroke="#123b63" stroke-width="5"/>
+  <g fill="#ffffff" stroke="#f2a56e" stroke-width="3">
+    <circle cx="582" cy="90" r="8"/>
+    <circle cx="602" cy="110" r="8"/>
+    <circle cx="582" cy="132" r="8"/>
+  </g>
+  <!-- vi-rút nhỏ -->
+  <g stroke="#d85a10" stroke-width="5" stroke-linecap="round">
+    <path d="M682 112 L693 112"/>
+    <path d="M671 93 L677 83"/>
+    <path d="M649 93 L643 83"/>
+    <path d="M638 112 L627 112"/>
+    <path d="M649 131 L643 141"/>
+    <path d="M671 131 L677 141"/>
+  </g>
+  <circle cx="660" cy="112" r="22" fill="#f26e21" stroke="#d85a10" stroke-width="4"/>
+  <text x="627" y="205" text-anchor="middle" font-size="22" font-weight="700" fill="#123b63">Phối hợp cả hai</text>
+  <text x="627" y="235" text-anchor="middle" font-size="17" fill="#5b6b7b">Tế bào và vi-rút</text>
+  <text x="627" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Mỗi 5 năm — từ 30 tuổi</text>
+
+  <text x="380" y="313" text-anchor="middle" font-size="12" fill="#5b6b7b">*Mốc tuổi theo hướng dẫn quốc tế; bác sĩ sẽ chọn lịch phù hợp với bạn.</text>
+</svg>
