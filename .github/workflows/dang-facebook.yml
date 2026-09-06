@@ -47,7 +47,7 @@ jobs:
           # Đổi domain thì sửa đúng một dòng này — xem docs/tu-dong-dang-facebook.md
           SITE_URL: https://bsquyen.vercel.app
           # Phiên bản Graph API hết hạn sau ~2 năm; kiểm tra changelog khi job báo lỗi version.
-          FB_API_VERSION: v21.0
+          FB_API_VERSION: v26.0
           # Cửa sổ sửa/huỷ trước khi bài tự đăng (phút). Facebook yêu cầu ≥ 10.
           DELAY_PHUT: "120"
         run: node scripts/dang-facebook.mjs

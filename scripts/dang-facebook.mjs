@@ -16,7 +16,7 @@ import { existsSync, readFileSync } from "node:fs";
 import matter from "gray-matter";
 
 const SITE_URL = (process.env.SITE_URL || "https://bsquyen.vercel.app").replace(/\/$/, "");
-const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v21.0"}`;
+const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
 const DELAY_PHUT = Number(process.env.DELAY_PHUT || 120);
 const PAGE_ID = process.env.FB_PAGE_ID;
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;

@@ -22,11 +22,16 @@ Cần đúng hai secret trong repo: `FB_PAGE_ID` và `FB_PAGE_ACCESS_TOKEN`.
 
 ### 1. Page ID
 
-Page hiện tại: <https://www.facebook.com/profile.php?id=61594348400419> → Page ID là
-**`61594348400419`**.
+Page: **Hiểu Đúng Y Khoa**, Page ID **`1326029250593644`**
+(Meta Business Suite → Cài đặt → Trang cá nhân → chọn page → *ID Trang*).
 
-Xác nhận lại ở bước 3 bằng `GET /me/accounts` — con số trong URL và Page ID của Graph API
-gần như luôn trùng nhau, nhưng đừng tin mà không kiểm.
+⚠️ **Đừng lấy số trong URL `facebook.com/profile.php?id=...`.** Page tạo theo New Pages
+Experience hiện URL kèm một ID khác (ở đây là `61594348400419`) — đó không phải ID mà
+Graph API dùng. Số đúng là số Business Suite gọi là *ID Trang*, và `GET /me/accounts`
+trả về đúng số đó.
+
+Script `lay-token-facebook.mjs` ở mục dưới tự đọc ID từ `/me/accounts`, nên cách chắc
+chắn nhất là để nó điền hộ thay vì chép tay.
 
 ### 2. Tạo Meta app
 
@@ -45,48 +50,46 @@ làm xác minh doanh nghiệp trong Business Manager rồi quay lại.)*
 
 Vào **Graph API Explorer** (<https://developers.facebook.com/tools/explorer>):
 
-1. Chọn app vừa tạo, chọn **User Token**, cấp hai quyền:
-   `pages_manage_posts` và `pages_read_engagement`
-2. **Generate Access Token** → được *short-lived user token* (sống 1–2 giờ)
-3. Đổi sang **long-lived user token** (sống 60 ngày):
+1. Chọn app vừa tạo, chọn **User Token**, cấp **ba** quyền:
+   `pages_show_list`, `pages_manage_posts`, `pages_read_engagement`
 
-   ```
-   GET /oauth/access_token
-       ?grant_type=fb_exchange_token
-       &client_id=<APP_ID>
-       &client_secret=<APP_SECRET>
-       &fb_exchange_token=<SHORT_LIVED_USER_TOKEN>
-   ```
+   Thiếu `pages_show_list` thì bước sau trả về danh sách page **rỗng** dù bạn là admin
+   của page. Lỗi này không có thông báo gì — chỉ là không thấy page nào.
 
-4. Dùng long-lived user token vừa nhận để gọi:
+2. **Generate Access Token** → đăng nhập → **tick chọn đúng page** trong hộp thoại
+3. Copy token vừa hiện ra. Đây là *short-lived user token*, sống 1–2 giờ — đủ cho bước 4.
 
-   ```
-   GET /me/accounts
-   ```
+### 4. Đổi thành Page Access Token vĩnh viễn
 
-   Trong kết quả, tìm đúng page và lấy `access_token` của nó — **đây mới là token cần
-   dùng**. Đối chiếu luôn `id` với Page ID ở bước 1.
-
-Điểm mấu chốt: Page Access Token dẫn xuất từ một **long-lived** user token thì
-**không có hạn dùng**. Nếu bạn lỡ lấy page token từ short-lived user token thì nó chết
-sau vài giờ — đó là lý do phổ biến nhất khiến job đang chạy tốt bỗng hỏng.
-
-Kiểm tra hạn của token tại <https://developers.facebook.com/tools/debug/accesstoken> —
-ô **Expires** phải ghi *Never*.
-
-### 4. Nạp secret vào repo
-
-> ⚠️ Token là mật khẩu của page. **Đừng dán vào chat, commit, hay PR.** Chỉ nhập thẳng
-> vào GitHub.
-
-Cách 1 — giao diện: **Settings → Secrets and variables → Actions → New repository secret**
-
-Cách 2 — dòng lệnh (dán token vào lời nhắc, không để nó vào lịch sử shell):
+Ba bước còn lại (đổi sang long-lived, tìm đúng page, kiểm tra hạn dùng) đều dễ sai, nên
+có script làm hộ:
 
 ```bash
-gh secret set FB_PAGE_ID
-gh secret set FB_PAGE_ACCESS_TOKEN
+node scripts/lay-token-facebook.mjs
 ```
+
+Script hỏi **App ID**, **App Secret** (Meta app → Settings → Basic) và **short-lived user
+token** vừa lấy, rồi:
+
+1. đổi short-lived → long-lived user token
+2. gọi `/me/accounts`, cho bạn chọn page, lấy Page Access Token của page đó
+3. gọi `debug_token` xác nhận token **không có hạn dùng** — sai là nó dừng và báo, chứ
+   không để bạn nạp nhầm một token sẽ chết sau vài giờ
+4. `gh secret set FB_PAGE_ID` và `FB_PAGE_ACCESS_TOKEN`
+
+Token đi qua stdin sang `gh`, **không in ra màn hình** và không nằm lại trong lịch sử
+terminal. Không có `gh` thì chạy `node scripts/lay-token-facebook.mjs --chi-in` để in ra
+rồi tự dán vào **Settings → Secrets and variables → Actions**.
+
+> ⚠️ Token là mật khẩu của page. **Đừng dán vào chat, commit, hay PR.**
+
+Điểm mấu chốt script đang bảo vệ bạn: Page Access Token chỉ **vĩnh viễn** khi được dẫn
+xuất từ một user token **long-lived**. Lấy từ short-lived thì page token cũng chết theo
+sau vài giờ — đây là lý do phổ biến nhất khiến job đang chạy tốt bỗng hỏng, và nhìn bằng
+mắt thì hai token trông y hệt nhau.
+
+Muốn tự kiểm bất cứ lúc nào: <https://developers.facebook.com/tools/debug/accesstoken> —
+ô **Expires** phải ghi *Never*.
 
 ## Chạy thử trước khi dùng thật
 
@@ -131,7 +134,8 @@ Job fail thì GitHub gửi mail cho chủ repo. Log ở tab **Actions**.
 | `thiếu field facebook` | Bài merge mà quên caption. Bài vẫn lên web. Bổ sung `facebook:` rồi Run workflow với slug đó. |
 | `Token hoặc Page ID không dùng được` | Token hết hạn hoặc bị thu hồi (đổi mật khẩu Facebook, gỡ app). Lấy lại token theo bước 3. |
 | `không lên sau 5 phút` | Vercel deploy fail hoặc quá chậm. Kiểm tra deploy, rồi Run workflow lại với slug đó. |
-| Lỗi nhắc tới version | Phiên bản Graph API đã hết hạn (~2 năm/phiên bản). Đổi `FB_API_VERSION` trong workflow theo <https://developers.facebook.com/docs/graph-api/changelog>. |
+| Lỗi nhắc tới version | Phiên bản Graph API hết hạn ~2 năm sau khi ra. Đang pin `v26.0` (ra 29/07/2026). Đổi `FB_API_VERSION` trong workflow theo <https://developers.facebook.com/docs/graph-api/changelog>. |
+| `/me/accounts` không thấy page nào | User token thiếu `pages_show_list`, hoặc lúc đăng nhập chưa tick chọn page. Lấy lại token từ bước 3. |
 
 Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page của bác sĩ tệ hơn là đăng trễ.
 
