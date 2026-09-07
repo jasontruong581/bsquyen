@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Sơ đồ đại tràng và trực tràng với hai nguồn chảy máu: khối u trong lòng đại tràng và búi trĩ ngay ống hậu môn">
+  <!-- Nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Ống tiêu hoá: đại tràng ngang -> xuống -> sigma -> trực tràng.
+       Vẽ 3 lớp: viền, thân, lòng ống. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M230 80 H430 Q500 80 500 150 V240 Q500 275 455 285 Q400 295 400 330 V405"
+          stroke="#e08b4f" stroke-width="54"/>
+    <path d="M230 80 H430 Q500 80 500 150 V240 Q500 275 455 285 Q400 295 400 330 V405"
+          stroke="#f2a56e" stroke-width="46"/>
+    <path d="M230 80 H430 Q500 80 500 150 V240 Q500 275 455 285 Q400 295 400 330 V405"
+          stroke="#fdeee2" stroke-width="22"/>
+  </g>
+
+  <!-- Nguồn 1: khối u / polyp trong lòng đại tràng -->
+  <circle cx="500" cy="200" r="15" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="495" cy="195" r="4" fill="#ffd9bd"/>
+  <path d="M522 200 H540" stroke="#123b63" stroke-width="3" stroke-linecap="round"/>
+  <text x="548" y="194" font-size="20" font-weight="700" fill="#123b63">Polyp / khối u</text>
+  <text x="548" y="220" font-size="15" fill="#5b6b7b">trong lòng đại tràng</text>
+  <text x="548" y="245" font-size="15" font-weight="700" fill="#d85a10">máu đỏ tươi hoặc sẫm</text>
+
+  <!-- Nguồn 2: búi trĩ ngay ống hậu môn -->
+  <g fill="#f26e21" stroke="#d85a10" stroke-width="4">
+    <circle cx="388" cy="388" r="9"/>
+    <circle cx="412" cy="388" r="9"/>
+    <circle cx="400" cy="404" r="9"/>
+  </g>
+  <path d="M352 394 H375" stroke="#123b63" stroke-width="3" stroke-linecap="round"/>
+  <text x="340" y="360" text-anchor="end" font-size="20" font-weight="700" fill="#123b63">Trĩ, nứt kẽ hậu môn</text>
+  <text x="340" y="386" text-anchor="end" font-size="15" fill="#5b6b7b">ngay ống hậu môn</text>
+  <text x="340" y="411" text-anchor="end" font-size="15" font-weight="700" fill="#d85a10">máu đỏ tươi</text>
+
+  <!-- Thẻ ý chính -->
+  <rect x="40" y="150" width="270" height="132" rx="18" fill="#ffffff" stroke="#ecdfd3"/>
+  <text x="175" y="192" text-anchor="middle" font-size="21" font-weight="700" fill="#123b63">Cùng một dấu hiệu</text>
+  <text x="175" y="222" text-anchor="middle" font-size="20" font-weight="700" fill="#f26e21">“đi cầu ra máu”</text>
+  <text x="175" y="256" text-anchor="middle" font-size="16" fill="#5b6b7b">hai nguồn rất khác nhau</text>
+</svg>
