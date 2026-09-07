@@ -30,6 +30,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - `cta`: `tam-soat` (mời nhắn Zalo) hoặc `tai-nha` (mời gọi/khám tại nhà); bỏ trống = CTA chung. Bảng suy ra tag/CTA theo cụm chủ đề ở `docs/chu-de-bai-viet.md`.
 - Ảnh minh họa: lưu `assets/kien-thuc/<slug>-N.(svg|jpg)`, alt text rõ nghĩa, nén ≤200KB với ảnh raster; ảnh AI phải chú thích "Ảnh minh họa".
 - Nội dung y tế là YMYL: không hứa hẹn kết quả điều trị, không dùng testimonial bệnh nhân (quy định quảng cáo y tế VN — site dùng section "Cam kết đồng hành" thay thế), giọng trấn an, có nguồn tham khảo.
+- Merge PR bài viết cũng kích hoạt job đăng Facebook (bài ảnh hẹn giờ +2h, huỷ được trong Meta Business Suite). Setup token và xử lý sự cố: `docs/tu-dong-dang-facebook.md`.
 
 ## Thông tin liên hệ chuẩn (single source of truth)
 

@@ -1,0 +1,53 @@
+name: Đăng bài mới lên Facebook
+
+# Xuất bản = merge PR vào main, nên đó cũng là trigger đăng Facebook.
+# Job chỉ đăng khi có file kien-thuc/*.md được THÊM MỚI; sửa bài cũ không đăng lại.
+on:
+  push:
+    branches: [main]
+    paths: ["kien-thuc/*.md"]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Slug bài cần đăng (bỏ trống = dò bài mới từ commit cuối)"
+        required: false
+        type: string
+      dry_run:
+        description: "Chỉ in caption sẽ đăng, không gọi Facebook"
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: dang-facebook
+  cancel-in-progress: false
+
+jobs:
+  dang-bai:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # cần HEAD^ để so ra file mới thêm
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Đăng bài
+        env:
+          # Input đi qua env, không nội suy vào dòng lệnh shell.
+          INPUT_SLUG: ${{ inputs.slug }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          # Đổi domain thì sửa đúng một dòng này — xem docs/tu-dong-dang-facebook.md
+          SITE_URL: https://bsquyen.vercel.app
+          # Phiên bản Graph API hết hạn sau ~2 năm; kiểm tra changelog khi job báo lỗi version.
+          FB_API_VERSION: v26.0
+          # Cửa sổ sửa/huỷ trước khi bài tự đăng (phút). Facebook yêu cầu ≥ 10.
+          DELAY_PHUT: "120"
+        run: node scripts/dang-facebook.mjs
