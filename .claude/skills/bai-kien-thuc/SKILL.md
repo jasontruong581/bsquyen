@@ -139,6 +139,8 @@ tags:
 cta: tam-soat | tai-nha        # bỏ dòng này nếu dùng CTA mặc định
 image: /assets/kien-thuc/<slug>-og.png
 thumb: /assets/kien-thuc/<slug>-1.svg
+facebook: |
+  <caption Facebook — chỉ phần chữ, xem mục dưới>
 sources:
   - title: "<Tổ chức> — <Tên tài liệu> (<năm nếu có>)"
     url: "https://..."
@@ -166,8 +168,41 @@ sources:
   chữ thành vệt mờ. Khi `-1.svg` có chữ, vẽ thêm bản không chữ `-thumb.svg` (xem
   `references/minh-hoa.md`). Bỏ `thumb` thì card về dạng chỉ có chữ, lệch với các bài
   khác — luôn khai báo.
+- `facebook`: caption cho bài đăng Facebook tự động — xem mục ngay dưới. Thiếu field này
+  thì job đăng Facebook **fail có báo lỗi**, bài vẫn lên web bình thường nhưng không lên page.
 - Layout tự lo `<h1>`, ngày, breadcrumb, lead, khối nguồn, CTA đặt lịch, disclaimer.
   **Đừng viết lại những phần này trong body.**
+
+### Caption Facebook (`facebook:`)
+
+Page Facebook **tự đăng bài này khi PR được merge**, dùng đúng caption trong frontmatter.
+Bác sĩ duyệt caption cùng lúc duyệt bài — nên viết cẩn thận đúng như viết thân bài.
+
+**Chỉ viết phần chữ.** Script tự nối link bài và hashtag suy từ `tags` — đừng gõ tay hai
+thứ đó vào caption. Domain sắp đổi sang `bsquyen.com`; link gõ tay nghĩa là 50–100 file
+phải sửa lại.
+
+Khung 4 phần, 400–700 ký tự:
+
+1. **Câu mở** — câu hỏi bệnh nhân hay hỏi, hoặc một hiểu lầm. Facebook cắt caption ở
+   khoảng 125 ký tự rồi mới hiện "Xem thêm", nên câu này phải đứng được một mình.
+2. **2–3 dòng nội dung** — nêu đúng thứ bài trả lời. Không chép lại `description`:
+   câu đó viết cho Google, đọc khô.
+3. **Một câu trấn an hoặc mời đọc.**
+4. Hết. **Không chèn số điện thoại / Zalo / địa chỉ** — trang bài đã có CTA, nhắc lại ở
+   đây là thêm một chỗ nữa phải sửa mỗi khi đổi thông tin liên hệ.
+
+Ràng buộc YMYL giữ nguyên như thân bài: không hứa kết quả điều trị, không testimonial,
+không liều thuốc, không giá dịch vụ. Thêm một ràng buộc riêng của mạng xã hội:
+**không giật tít doạ người đọc** — kiểu "dấu hiệu chết người", "ai cũng mắc mà không
+biết". Trang này là của một bác sĩ, không phải trang tin câu view.
+
+Emoji: tối đa 1–2, hoặc không dùng. Không đặt emoji ở câu mở.
+
+**Xuống dòng.** Cứ hard-wrap ~76 ký tự như thân bài. Script đăng Facebook tự gộp các
+dòng trong cùng một đoạn lại thành dòng liền — nếu để nguyên thì Facebook hiện đúng chỗ
+ngắt và caption thành câu cụt giữa chừng. Muốn ngắt đoạn thật thì **để một dòng trống**.
+
 
 ## Văn phong
 
@@ -215,7 +250,7 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 
 ## Checklist trước khi báo xong
 
-- [ ] Frontmatter đủ `title`, `description`, `date`, `tags`, `image`, `thumb`, `sources` (2–4 nguồn uy tín)
+- [ ] Frontmatter đủ `title`, `description`, `date`, `tags`, `image`, `thumb`, `facebook`, `sources` (2–4 nguồn uy tín)
 - [ ] `tags` chỉ dùng 6 tag cố định, không bịa tag mới; `cta` khớp cụm chủ đề (hoặc bỏ trống)
 - [ ] Không trùng chủ đề bài đã có
 - [ ] Hard-wrap ~76 ký tự; blockquote ≤ 2
@@ -225,6 +260,8 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 - [ ] Không hứa kết quả / không testimonial / không giá / không liều thuốc
 - [ ] Ảnh: alt mô tả rõ nghĩa, figcaption kết bằng "(Ảnh minh họa)", SVG hoặc raster ≤200KB
 - [ ] `thumb` trỏ vào file có thật và **không có chữ**; xem thử card ở `/kien-thuc/`
+- [ ] `facebook` dài 400–700 ký tự, câu mở đứng được một mình trong 125 ký tự đầu,
+      **không** chứa link / hashtag / số điện thoại
 - [ ] `npm run build` sạch, bài vào sitemap, `og:image` trỏ đúng file tồn tại
 - [ ] Nếu chủ đề lấy từ hàng đợi: đã chuyển dòng sang bảng "Đã xuất bản" trong `docs/chu-de-bai-viet.md`
 - [ ] Đã push branch + mở PR, **chưa merge**, PR có dòng chờ bác sĩ duyệt
