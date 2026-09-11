@@ -25,8 +25,9 @@ dưới ngân sách** — thà tốn thêm vài nghìn token còn hơn đăng co
 - **Dùng script + template** cho ảnh OG, đừng viết SVG 1200×630 bằng tay.
 - Render SVG→PNG chỉ qua script trong `scripts/` — chúng nạp Be Vietnam Pro nhúng
   trong `fonts/` và tắt font hệ thống, nên ảnh ra giống nhau trên mọi máy.
-- Ảnh minh họa: chép biến thể từ `references/minh-hoa.md` (đã có palette + layout sẵn),
-  render kiểm tra **một lần**, chỉ sửa nếu thật sự sai.
+- Ảnh minh họa: `references/minh-hoa.md` có bảng "chọn layout theo dạng nội dung"
+  (7 layout A–G) + palette + thư viện icon. Chọn layout theo bảng, chép toạ độ, đổi
+  hình/chữ, render kiểm tra **một lần**, chỉ sửa nếu thật sự sai.
 
 ## Quy trình
 
@@ -78,14 +79,19 @@ Copy `templates/bai-viet.md` làm điểm khởi đầu. Tuân thủ mục "Văn
 ### 4. Ảnh minh họa + ảnh OG (~5–8k token)
 
 Ảnh minh họa (**bắt buộc ít nhất 1 ảnh với mọi bài** — card ở trang danh sách cần
-`thumb`; bài tầm soát cần đủ 2 ảnh): đọc `references/minh-hoa.md`, chép layout gần
-nhất, đổi hình/chữ. Lưu vào `assets/kien-thuc/<slug>-1.svg`, `-2.svg`. Nếu `-1.svg`
+`thumb`; bài tầm soát cần đủ 2 ảnh): đọc `references/minh-hoa.md`, chọn layout theo
+bảng "chọn layout theo dạng nội dung", chép toạ độ, đổi hình/chữ. Ảnh `-2.svg` gần
+như luôn là layout B. Lưu vào `assets/kien-thuc/<slug>-1.svg`, `-2.svg`. Nếu `-1.svg`
 có chữ thì vẽ thêm `-thumb.svg` không chữ để dùng làm `thumb`. Render kiểm tra:
 
 ```bash
 # rồi Read file PNG
 node .claude/skills/bai-kien-thuc/scripts/render-svg.mjs assets/kien-thuc/<slug>-1.svg /tmp/check.png 760
 ```
+
+Animation là **tuỳ chọn**, chỉ dùng khi nội dung tự nó là chuyển động (layout C, D, F).
+Nếu dùng thì đọc mục "Animation nhẹ" trong `references/minh-hoa.md` — có một bẫy làm
+mất phần tử trên thumbnail và ảnh OG nếu làm sai.
 
 Ảnh OG (bắt buộc, mọi bài) — dùng script, **không viết SVG bằng tay**:
 
