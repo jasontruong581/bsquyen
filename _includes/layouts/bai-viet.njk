@@ -24,6 +24,13 @@
     "image": "https://bsquyen.vercel.app{{ image or '/bsquyen/bsquyen.jpg' }}",
     "datePublished": "{{ page.date | ngayISO }}",
     "dateModified": "{{ (updated or page.date) | ngayISO }}",
+{%- if sources %}
+    "citation": [
+{%- for nguon in sources %}
+      { "@type": "CreativeWork", "name": {{ nguon.title | dump | safe }}, "url": {{ nguon.url | dump | safe }} }{{ "," if not loop.last }}
+{%- endfor %}
+    ],
+{%- endif %}
     "author": {
       "@type": "Physician",
       "name": "BS.CKI Hạnh Quyên",
