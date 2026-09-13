@@ -46,9 +46,10 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 Đã có:
 
 - JSON-LD schema.org trong `index.html` (gốc): `Physician` + `MedicalClinic` (địa chỉ, giờ mở cửa, dịch vụ) + `FAQPage`
-- JSON-LD `MedicalWebPage` + byline/`reviewedBy` bác sĩ cho mỗi bài Kiến thức (trong `_includes/layouts/bai-viet.njk`)
+- JSON-LD `MedicalWebPage` + byline/`reviewedBy` bác sĩ + `citation` (sinh từ frontmatter `sources`) cho mỗi bài Kiến thức (trong `_includes/layouts/bai-viet.njk`)
 - Open Graph + canonical cho trang gốc, trang demo, trang danh sách `/kien-thuc/` và từng bài viết
-- `robots.txt` (cho phép GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot…), `llms.txt`
+- `robots.txt` (cho phép GPTBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot…)
+- `llms.txt` **sinh tự động khi build** từ `llms.njk` — liệt kê đầy đủ từng bài Kiến thức kèm mô tả và ngày cập nhật, bài mới tự vào
 - `sitemap.xml` **sinh tự động khi build** từ `sitemap.njk` — bài mới tự vào, kèm `lastmod`
 
 ### Checklist khi mua domain chính thức (bsquyen.com)
@@ -65,7 +66,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `kien-thuc/index.njk` | 5 | canonical + Open Graph trang danh sách (kèm `rel=prev/next`) |
    | `kien-thuc/chu-de.njk` | 3 | canonical + Open Graph **6 trang lọc chủ đề** |
    | `sitemap.njk` | 3 | `<loc>` trang gốc, trang danh sách, và từng bài |
-   | `llms.txt` | 2 | |
+   | `llms.njk` | 3 | `<loc>`-tương đương: trang gốc, trang danh sách, và từng bài |
    | `robots.txt` | 1 | dòng `Sitemap:` |
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
    | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
@@ -77,7 +78,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
      | xargs sed -i 's|bsquyen\.vercel\.app|bsquyen.com|g'
    ```
 
-   ⚠️ **Sửa `sitemap.njk`, KHÔNG sửa `sitemap.xml`** — `sitemap.xml` là file Eleventy sinh ra khi build, sửa vào đó sẽ bị ghi đè. Tương tự: đừng sửa gì trong `_site/`.
+   ⚠️ **Sửa `sitemap.njk` và `llms.njk`, KHÔNG sửa `sitemap.xml` / `llms.txt`** — hai file này do Eleventy sinh ra khi build, sửa vào đó sẽ bị ghi đè. Tương tự: đừng sửa gì trong `_site/`.
 
    ⚠️ Bỏ sót `_includes/layouts/bai-viet.njk` là lỗi tốn kém nhất: các bài viết sẽ có `canonical` trỏ về domain cũ, tức báo Google "bản chính thức nằm ở vercel.app" → domain mới không lên hạng.
 
