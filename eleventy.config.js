@@ -12,7 +12,6 @@ module.exports = function (eleventyConfig) {
     "landing-mix",
     "landing-page-bundle",
     "robots.txt",
-    "llms.txt",
   ].forEach((path) => eleventyConfig.addPassthroughCopy(path));
 
   // Không quét các thư mục không thuộc website
