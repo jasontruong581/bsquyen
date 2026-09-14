@@ -36,6 +36,7 @@ một dòng không kéo theo việc đánh số lại cả bảng.
 | `hieu-lam-pho-bien-ve-ung-thu` | 7 hiểu lầm phổ biến nhất về bệnh ung thư |
 | `tam-soat-ung-thu-co-tu-cung` | Tầm soát ung thư cổ tử cung: Pap, HPV test và vắc-xin HPV |
 | `di-cau-ra-mau-tri-hay-ung-thu` | Đi cầu ra máu: trĩ hay ung thư đại tràng? |
+| `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? |
 
 ## Hàng đợi
 
@@ -43,7 +44,6 @@ Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và 
 
 | slug | Chủ đề | Loại | Nhóm |
 |---|---|---|---|
-| `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? | B | D |
 | `vac-xin-phong-ung-thu` | Hai loại vắc-xin giúp phòng ung thư: HPV và viêm gan B | B | C |
 | `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm | A | A |
 | `sut-can-khong-ro-nguyen-nhan` | Sụt cân không rõ nguyên nhân — khi nào là đáng lo? | B | B |
