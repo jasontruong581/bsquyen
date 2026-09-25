@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Hai tấm khiên màu cam, mỗi tấm che chắn một loại vi-rút đã bị vô hiệu hoá: vi-rút viêm gan B bên trái và vi-rút HPV bên phải; ở giữa là một ống tiêm vắc-xin">
+  <!-- khung nền chung -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- khiên trái: viêm gan B (tâm x=210) -->
+  <path d="M210 80 L320 118 V230 Q320 318 210 364 Q100 318 100 230 V118 Z"
+        fill="#fdeee2" stroke="#f2a56e" stroke-width="6" stroke-linejoin="round"/>
+  <!-- vi-rút viêm gan B: hạt tròn, gai đầu tròn, màu lạnh = đã bị chặn -->
+  <g fill="#5b6b7b" opacity=".55">
+    <circle cx="210" cy="178" r="11"/>
+    <circle cx="263" cy="220" r="11"/>
+    <circle cx="241" cy="268" r="11"/>
+    <circle cx="179" cy="268" r="11"/>
+    <circle cx="157" cy="220" r="11"/>
+  </g>
+  <circle cx="210" cy="226" r="40" fill="#e8f1fa" stroke="#5b6b7b" stroke-width="5"/>
+  <circle cx="210" cy="226" r="16" fill="#5b6b7b" opacity=".4"/>
+  <!-- huy hiệu dấu tích -->
+  <circle cx="300" cy="118" r="30" fill="#f26e21"/>
+  <path d="M286 118 l10 11 l19 -22" fill="none" stroke="#fff" stroke-width="7"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- khiên phải: HPV (tâm x=550) -->
+  <path d="M550 80 L660 118 V230 Q660 318 550 364 Q440 318 440 230 V118 Z"
+        fill="#fdeee2" stroke="#f2a56e" stroke-width="6" stroke-linejoin="round"/>
+  <!-- vi-rút HPV: 8 gai thẳng, màu lạnh = đã bị chặn -->
+  <g stroke="#5b6b7b" stroke-width="6" stroke-linecap="round" opacity=".55">
+    <path d="M590 226 L606 226"/>
+    <path d="M578 198 L589 187"/>
+    <path d="M550 186 L550 170"/>
+    <path d="M522 198 L511 187"/>
+    <path d="M510 226 L494 226"/>
+    <path d="M522 254 L511 265"/>
+    <path d="M550 266 L550 282"/>
+    <path d="M578 254 L589 265"/>
+  </g>
+  <circle cx="550" cy="226" r="38" fill="#e8f1fa" stroke="#5b6b7b" stroke-width="5"/>
+  <circle cx="540" cy="216" r="7" fill="#5b6b7b" opacity=".4"/>
+  <circle cx="561" cy="236" r="6" fill="#5b6b7b" opacity=".4"/>
+  <!-- huy hiệu dấu tích -->
+  <circle cx="640" cy="118" r="30" fill="#f26e21"/>
+  <path d="M626 118 l10 11 l19 -22" fill="none" stroke="#fff" stroke-width="7"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ống tiêm ở giữa (x=380) -->
+  <path d="M358 150 H402" stroke="#123b63" stroke-width="10" stroke-linecap="round"/>
+  <path d="M380 150 V186" stroke="#123b63" stroke-width="8" stroke-linecap="round"/>
+  <rect x="362" y="186" width="36" height="112" rx="8" fill="#ffffff" stroke="#123b63" stroke-width="6"/>
+  <rect x="368" y="240" width="24" height="52" rx="4" fill="#f26e21"/>
+  <g stroke="#123b63" stroke-width="3" stroke-linecap="round">
+    <path d="M362 212 h10"/>
+    <path d="M362 234 h10"/>
+    <path d="M362 256 h10"/>
+  </g>
+  <path d="M380 298 V340" stroke="#123b63" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="380" cy="352" r="5" fill="#f26e21"/>
+</svg>
