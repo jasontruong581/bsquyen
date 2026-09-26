@@ -11,15 +11,23 @@ lại, không đăng comment mới.
 
 ## Comment có gì
 
-1. **Cần xem lại** — thiếu field bắt buộc, tag lạ, thiếu file ảnh (✗); và câu nên liếc lại
-   (⚠) kèm đoạn trích:
-   - thân bài + caption: hứa hẹn kết quả ("chữa khỏi", "dứt điểm", "100%"…), có vẻ là lời
-     chứng thực của người bệnh, giật tít ("chết người", "ai cũng mắc"…)
-   - riêng caption: nêu tên bác sĩ, có số điện thoại / Zalo / địa chỉ, có link hay hashtag
-     (script tự nối), dài ngoài 400–700 ký tự, câu mở dài quá 125 ký tự
-2. **Bài đăng Facebook** — caption hoàn chỉnh, và đoạn người đọc thấy trước "Xem thêm".
-   Bài đã xuất bản thì bỏ phần này (sửa bài không đăng lại).
-3. **Ảnh** — ảnh Facebook, ảnh OG, thumbnail, hiện thẳng trong comment.
+1. **Cần xem lại** — thiếu field bắt buộc, tag lạ, thiếu file ảnh, frontmatter hỏng (✗); và
+   câu nên liếc lại (⚠) kèm đoạn trích, mỗi loại một dòng:
+   - tiêu đề + mô tả + thân bài + caption: hứa hẹn kết quả ("chữa khỏi", "dứt điểm",
+     "100%"…), có vẻ là lời chứng thực của người bệnh, giật tít ("chết người", "ai cũng
+     mắc"…), liều thuốc ("10 mg"), giá tiền / khuyến mãi ("1.500.000 đồng", "giảm giá")
+   - riêng caption: nêu tên bác sĩ (cả "BS Quyên", "BS.CK1", "Hanh Quyen"…), có số điện
+     thoại / Zalo / địa chỉ, có link hay hashtag (script tự nối), dài ngoài 400–700 ký tự,
+     câu mở dài quá 125 ký tự
+   - bài chưa có nguồn tham khảo
+2. **Bài đăng Facebook** — caption hoàn chỉnh, 125 ký tự đầu người đọc thấy trước "Xem
+   thêm", và giờ hẹn đăng (đọc từ `GIO_DANG` trong workflow đăng, nên không nói sai khi đổi giờ).
+3. **Ảnh** — ảnh Facebook, ảnh OG, thumbnail, hiện thẳng trong comment. File chưa có thì hiện "—".
+
+**Bài đã xuất bản** (có sẵn trên nhánh gốc) thì bỏ mọi thứ về Facebook — sửa bài không đăng
+lại, và các bài xuất bản trước khi có job Facebook vốn không có caption hay ảnh Facebook.
+PR đụng hơn 8 bài (vd tạo lại toàn bộ ảnh OG) thì 8 bài đầu trình bày đầy đủ, còn lại gom
+thành danh sách ngắn — comment GitHub tối đa 65 536 ký tự.
 4. **Nguồn tham khảo** — tình trạng từng link:
    - ✓ còn sống · ↪ chuyển hướng (kèm địa chỉ mới) · ✗ lỗi (404, không kết nối được…)
    - ⚠ **trang chặn kiểm tra tự động** (401/403/429): WHO, nhiều trang y tế chặn bot — mở tay
@@ -40,9 +48,16 @@ node scripts/tom-tat-duyet.mjs --files=kien-thuc/<slug>.md --khong-kiem-link  # 
 
 ## Sửa bộ quy tắc
 
-Regex nằm ở đầu `scripts/tom-tat-duyet.mjs` (`MAU_THAN_BAI`, `MAU_CAPTION`). Thêm mẫu thì
-thêm cả test trong `scripts/tom-tat-duyet.test.mjs`. Có một test chạy qua **mọi bài đã
-xuất bản** và phải không ra lỗi — thêm mẫu làm bài cũ ra lỗi nghĩa là mẫu quá rộng.
+Regex nằm ở đầu `scripts/tom-tat-duyet.mjs` (`MAU_NOI_DUNG`, `MAU_CAPTION`). Thêm mẫu thì
+thêm cả test trong `scripts/tom-tat-duyet.test.mjs`.
+
+Một test chạy qua **mọi bài đã xuất bản** và khoá số cảnh báo ở mức đã biết (hiện là 1).
+Nới mẫu mà con số tăng → mẫu đang bắt nhầm bài bác sĩ đã duyệt → thu hẹp lại. Test chạy tự
+động trên mọi PR (`.github/workflows/kiem-tra.yml`). Khi xuất bản bài mới làm con số này
+thay đổi có chủ đích, sửa con số trong test kèm lý do.
+
+Tránh bắt chữ trơn dễ nhầm: "giá" (dính "giá trị", "đánh giá"), "chi phí" ("chi phí thấp"),
+"quyên" ("quyên góp"), "triệu"/"nghìn" không kèm đơn vị tiền (số liệu thống kê).
 
 ## An toàn
 

@@ -1,0 +1,35 @@
+name: Kiểm tra
+
+# Build + test trên mọi PR. Trong đó có test chạy qua mọi bài đã xuất bản để giữ bộ quy tắc
+# cảnh báo của bot duyệt không bị nới quá rộng — test chỉ có tác dụng khi được chạy tự động.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kiem-tra-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  kiem-tra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      # Máy Actions vốn ở UTC; chạy thêm ở một múi giờ khác nữa — giờ đăng Facebook tính theo
+      # UTC+7 cố định nên kết quả không được phụ thuộc múi giờ của máy
+      - run: npm test
+        env:
+          TZ: Asia/Tokyo

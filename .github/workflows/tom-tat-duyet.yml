@@ -17,6 +17,13 @@ permissions:
   contents: read
   pull-requests: write
 
+# Hai commit đẩy sát nhau → hai lần chạy song song: cả hai không thấy comment cũ thì đăng
+# trùng, hoặc lần cũ về sau ghi đè bản mới. Huỷ lần đang chạy khi có commit mới là đúng ở
+# đây (khác job đăng Facebook): chỉ bản tóm tắt của commit mới nhất có giá trị.
+concurrency:
+  group: tom-tat-duyet-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   tom-tat:
     runs-on: ubuntu-latest
@@ -24,6 +31,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # cần cả commit gốc để biết bài nào bị đổi và bài nào đã xuất bản
+          persist-credentials: false # code của PR không cần token git
 
       - uses: actions/setup-node@v4
         with:
@@ -49,8 +57,10 @@ jobs:
             echo "Không có bài nào cần tóm tắt."
             exit 0
           fi
+          # Chỉ nhận comment do chính bot đăng: repo public, ai cũng comment được, và một
+          # comment lạ mở đầu bằng dấu hiệu này sẽ làm PATCH bị 403.
           id=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
-            --jq '.[] | select(.body | startswith("<!-- tom-tat-duyet -->")) | .id' | head -n 1)
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- tom-tat-duyet -->"))) | .id' | head -n 1)
           if [ -n "$id" ]; then
             gh api -X PATCH "repos/$REPO/issues/comments/$id" -F body=@tom-tat.md > /dev/null
             echo "Đã cập nhật comment $id"

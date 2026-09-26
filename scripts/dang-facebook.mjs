@@ -15,10 +15,9 @@ import { existsSync, readFileSync } from "node:fs";
 
 import matter from "gray-matter";
 
-import { taoCaption } from "./caption-facebook.mjs";
+import { SITE_URL, taoCaption } from "./caption-facebook.mjs";
 import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
 
-const SITE_URL = (process.env.SITE_URL || "https://bsquyen.vercel.app").replace(/\/$/, "");
 const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
 // GIO_DANG (HH:MM giờ VN) thắng DELAY_PHUT; để trống thì đăng sau DELAY_PHUT phút.
 const LICH = { gioCoDinh: process.env.GIO_DANG || "", delayPhut: process.env.DELAY_PHUT || 120 };

@@ -3,6 +3,11 @@
 // Dùng chung cho job đăng (dang-facebook.mjs) và bot tóm tắt duyệt PR (tom-tat-duyet.mjs),
 // để thứ bác sĩ duyệt trên PR đúng từng chữ với thứ sẽ lên page.
 
+// Domain đặt ở đúng một chỗ này (workflow ghi đè bằng env SITE_URL). Hai script mà mỗi
+// bên giữ một giá trị mặc định thì đổi domain sót một bên là caption trên PR lệch với
+// caption được đăng.
+export const SITE_URL = (process.env.SITE_URL || "https://bsquyen.vercel.app").replace(/\/$/, "");
+
 // Suy hashtag từ `tags`. Bộ tag cố định nằm ở _data/chuDe.js — đổi ở đó thì sửa cả đây.
 // Không có hashtag cố định mang tên bác sĩ: page có thương hiệu riêng, bài đăng không nêu
 // tên bác sĩ (cả caption lẫn ảnh).
