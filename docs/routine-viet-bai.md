@@ -51,7 +51,7 @@ khung bài theo đúng cột "Loại" (A/B/C) trong hàng đợi, văn phong, r�
 Lưu ý riêng cho lần chạy tự động này:
 - Không có ai giám sát, nên **đừng cắt việc xác minh số liệu y khoa** để tiết kiệm token. Con số nào không tìm được nguồn uy tín thì diễn đạt định tính, đừng đoán.
 - Vẫn phải Read file PNG của ảnh minh họa và ảnh OG để tự kiểm tra hình có rõ nghĩa, chữ không tràn.
-- **Liên kết nội bộ**: chạy `ls kien-thuc/` xem đã có bài nào liên quan; chèn 2–3 link nội bộ tới các bài đó ở chỗ tự nhiên trong bài (hoặc mục "Đọc thêm" cuối bài, trước blockquote kết). Đây là việc rẻ mà tăng cả SEO lẫn trải nghiệm đọc.
+- **Liên kết nội bộ**: chạy `ls kien-thuc/` xem đã có bài nào liên quan; chèn 2–3 link nội bộ tới các bài đó **ở chỗ tự nhiên trong thân bài**. Đây là việc rẻ mà tăng cả SEO lẫn trải nghiệm đọc. **Không** thêm mục "Đọc thêm" cuối bài nữa: layout đã tự sinh khối "Bài liên quan" (3 bài cùng chủ đề), thêm tay là lặp. Mục "Đọc thêm" có sẵn trong các bài cũ thì giữ nguyên.
 
 ## BƯỚC 3 — MỞ PR
 

@@ -66,6 +66,7 @@
         <p class="article-meta">
           <strong>BS.CKI Hạnh Quyên</strong> — Chuyên khoa Ung bướu
           · Đăng ngày {{ page.date | ngayVN }}{% if updated %} · Cập nhật {{ updated | ngayVN }}{% endif %}
+          · {{ content | thoiGianDoc }} phút đọc
         </p>
         {% if tags and tags.length %}
         <ul class="tag-list" aria-label="Chủ đề">
@@ -74,8 +75,32 @@
         {% endif %}
         <p class="article-lead">{{ description }}</p>
 
+        {# Mục lục chỉ đáng có khi bài đủ dài. <details> đóng sẵn để không đẩy nội dung
+           xuống quá sâu trên điện thoại; chạy không cần JavaScript. #}
+        {% set muc = content | mucLuc %}
+        {% if muc.length >= 4 %}
+        <details class="muc-luc">
+          <summary>Mục lục · {{ muc.length }} phần</summary>
+          <ol>
+            {% for m in muc %}<li><a href="#{{ m.id }}">{{ m.chu }}</a></li>{% endfor %}
+          </ol>
+        </details>
+        {% endif %}
+
         <div class="article-body">
           {{ content | safe }}
+        </div>
+
+        {# Đặt ngay chỗ người đọc vừa đọc xong. JavaScript mới hiện khối này (js/chia-se.js):
+           URL lấy từ thẻ canonical nên không gõ cứng domain thêm một chỗ nữa. #}
+        <div class="chia-se" hidden>
+          <p>Thấy bài hữu ích? Gửi cho người thân cùng đọc:</p>
+          <div class="chia-se-nut">
+            <button type="button" class="btn btn-primary" data-chia-se="he-thong" hidden>Chia sẻ qua Zalo, Messenger…</button>
+            <a class="btn btn-outline" data-chia-se="facebook" href="#" target="_blank" rel="noopener">Chia sẻ Facebook</a>
+            <button type="button" class="btn btn-outline" data-chia-se="sao-chep">Sao chép link</button>
+          </div>
+          <p class="chia-se-da-chep" role="status" hidden>Đã sao chép link bài viết.</p>
         </div>
 
         {% if sources and sources.length %}
@@ -133,6 +158,18 @@
           Bài viết mang tính tham khảo, không thay thế chẩn đoán hoặc chỉ định
           điều trị của bác sĩ với từng trường hợp cụ thể.
         </p>
+
+        {% set lienQuan = collections.baiviet | baiLienQuan(page.url, tags, 3) %}
+        {% if lienQuan.length %}
+        <section class="bai-lien-quan" aria-labelledby="bai-lien-quan-tieu-de">
+          <h2 id="bai-lien-quan-tieu-de">Bài liên quan</h2>
+          <div class="article-list">
+            {# theTieuDe: thẻ card dùng h3 ở đây vì đã nằm dưới h2 "Bài liên quan" #}
+            {% set theTieuDe = "h3" %}{% set dauTien = false %}
+            {% for post in lienQuan %}{% include "partials/article-card.njk" %}{% endfor %}
+          </div>
+        </section>
+        {% endif %}
       </div>
     </article>
   </main>
@@ -140,5 +177,6 @@
   {% include "partials/site-footer.njk" %}
 
   <script src="/js/kien-thuc.js"></script>
+  <script src="/js/chia-se.js"></script>
 </body>
 </html>

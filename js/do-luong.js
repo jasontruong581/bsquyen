@@ -12,6 +12,7 @@
     ['.article-cta', 'cuoi-bai'],
     ['.booking-result', 'form-dat-lich'],
     ['.hero', 'dau-trang'], // section đầu trang chủ không có id
+    ['.tim-kiem', 'tim-kiem'], // gợi ý Zalo khi tìm không ra bài
     ['.site-header', 'header'],
     ['.site-footer', 'footer'],
   ];
