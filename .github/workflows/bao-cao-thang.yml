@@ -1,0 +1,62 @@
+name: Báo cáo tháng
+
+# Ngày 1 hàng tháng mở một issue báo cáo tháng vừa xong: bài mới, số liệu Facebook từng
+# bài, job đăng nào lỗi, và bảng Umami để điền tay. Mục đích: đủ số liệu để quyết định có
+# đẩy mạnh hay không ở mốc 3–6 tháng chạy thử (Umami gói Hobby chỉ giữ 6 tháng dữ liệu).
+on:
+  schedule:
+    - cron: "0 2 1 * *" # 02:00 UTC = 09:00 giờ VN ngày 1 (GitHub có thể chạy trễ vài chục phút)
+  workflow_dispatch:
+    inputs:
+      thang:
+        description: "Tháng cần báo cáo, dạng YYYY-MM (bỏ trống = tháng trước)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+  actions: read # đọc lịch sử job đăng Facebook
+
+jobs:
+  bao-cao:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Soạn báo cáo
+        env:
+          THANG: ${{ inputs.thang }} # qua env, không nội suy vào dòng lệnh; script tự kiểm định dạng
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FB_API_VERSION: v26.0
+          GITHUB_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: node scripts/bao-cao-thang.mjs > bao-cao.md
+
+      - name: Mở issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          tieu_de=$(head -n 1 bao-cao.md | sed 's/^# //')
+          # Đã có issue của tháng này thì KHÔNG ghi đè: người dùng có thể đã điền tay bảng
+          # Umami vào đó. Muốn tạo lại thì đóng/xoá issue cũ rồi chạy lại.
+          # jq thật (có sẵn trên runner) vì `gh --jq` không nhận --arg; so tiêu đề bằng biến
+          # jq chứ không ghép chuỗi vào biểu thức
+          so=$(gh issue list --repo "$REPO" --state all --limit 200 --json number,title \
+            | jq -r --arg t "$tieu_de" '.[] | select(.title == $t) | .number' | head -n 1)
+          if [ -n "$so" ]; then
+            echo "Đã có issue #$so cho \"$tieu_de\" — không ghi đè."
+            exit 0
+          fi
+          gh issue create --repo "$REPO" --title "$tieu_de" --body-file bao-cao.md

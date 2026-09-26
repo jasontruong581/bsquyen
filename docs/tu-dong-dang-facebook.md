@@ -58,6 +58,12 @@ Vào **Graph API Explorer** (<https://developers.facebook.com/tools/explorer>):
    Thiếu `pages_show_list` thì bước sau trả về danh sách page **rỗng** dù bạn là admin
    của page. Lỗi này không có thông báo gì — chỉ là không thấy page nào.
 
+   Nên thêm quyền thứ tư **`read_insights`** (không bắt buộc để đăng): có nó thì báo cáo
+   tháng có thêm lượt tiếp cận và lượt bấm vào bài — xem `bao-cao-thang.md`. Nhớ thêm quyền
+   này vào use case của app trước (nút **+ Thêm**), không thì Explorer lặng lẽ bỏ nó đi.
+   Đừng thêm `pages_manage_engagement`: nó kéo theo `pages_read_user_content` và làm hộp
+   thoại báo lỗi *Invalid Scopes*.
+
 2. **Generate Access Token** → đăng nhập → **tick chọn đúng page** trong hộp thoại
 3. Copy token vừa hiện ra. Đây là *short-lived user token*, sống 1–2 giờ — đủ cho bước 4.
 
