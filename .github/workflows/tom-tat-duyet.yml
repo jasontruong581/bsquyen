@@ -1,0 +1,59 @@
+name: Tóm tắt duyệt bài
+
+# Mỗi PR đụng tới bài Kiến thức (hoặc ảnh của bài) có đúng MỘT comment tóm tắt cho bác sĩ:
+# caption Facebook như sẽ đăng, các ảnh, tình trạng link nguồn, câu dễ vướng quy định quảng
+# cáo y tế. Commit mới thì sửa lại comment đó, không đăng thêm. Chỉ gợi ý, không chặn merge.
+#
+# Dùng `pull_request` (không phải `pull_request_target`): code của PR chạy với token chỉ
+# ghi được comment, không đọc được secret.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "kien-thuc/*.md"
+      - "assets/kien-thuc/**"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  tom-tat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # cần cả commit gốc để biết bài nào bị đổi và bài nào đã xuất bản
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Soạn tóm tắt
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          REPO: ${{ github.repository }}
+        run: node scripts/tom-tat-duyet.mjs > tom-tat.md
+
+      - name: Đăng hoặc cập nhật comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ ! -s tom-tat.md ]; then
+            echo "Không có bài nào cần tóm tắt."
+            exit 0
+          fi
+          id=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
+            --jq '.[] | select(.body | startswith("<!-- tom-tat-duyet -->")) | .id' | head -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$id" -F body=@tom-tat.md > /dev/null
+            echo "Đã cập nhật comment $id"
+          else
+            gh pr comment "$PR" --repo "$REPO" --body-file tom-tat.md
+          fi
