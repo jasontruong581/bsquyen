@@ -27,6 +27,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
   Không dùng `/ckm:write:good` cho việc này (tốn >120k token/bài vì fan-out subagent).
 - Mục tiêu 50–100 bài, ~2 bài/tháng. **Mỗi bài = 1 PR riêng** → bác sĩ duyệt nội dung trên Vercel preview URL → merge = xuất bản. Không bao giờ merge bài chưa được bác sĩ duyệt.
 - Frontmatter bắt buộc: `title`, `description`, `date`, `tags`, `thumb` (ảnh card ở trang danh sách — SVG không chữ), `facebook` (caption cho bài đăng Facebook tự động — chỉ phần chữ, script tự nối link + hashtag); nên có `sources` (E-E-A-T) và `image` (ảnh OG riêng); thêm `updated` khi sửa đáng kể.
+- Mỗi bài cần thêm ảnh Facebook `assets/kien-thuc/<slug>-fb.png` (script `tao-anh-facebook.mjs` trong skill). Bài đăng Facebook (caption + ảnh) **không nêu tên bác sĩ** — page mang thương hiệu riêng "Hiểu Đúng Y Khoa"; website và ảnh OG vẫn giữ tên.
 - `tags`: chỉ dùng 6 tag cố định (Tầm soát · Dấu hiệu · Chăm sóc giảm nhẹ · Điều trị · Dinh dưỡng · Phòng ngừa) — không tạo tag mới.
 - `cta`: `tam-soat` (mời nhắn Zalo) hoặc `tai-nha` (mời gọi/khám tại nhà); bỏ trống = CTA chung. Bảng suy ra tag/CTA theo cụm chủ đề ở `docs/chu-de-bai-viet.md`.
 - Ảnh minh họa: lưu `assets/kien-thuc/<slug>-N.(svg|jpg)`, alt text rõ nghĩa, nén ≤200KB với ảnh raster; ảnh AI phải chú thích "Ảnh minh họa".

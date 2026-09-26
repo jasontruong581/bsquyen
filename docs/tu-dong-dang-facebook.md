@@ -111,8 +111,12 @@ có gì lên page.
 
 <link bài>
 
-<hashtag suy từ `tags`> #BSCKIHanhQuyen
+<hashtag suy từ `tags`>
 ```
+
+**Bài đăng không nêu tên bác sĩ** — không hashtag tên, không chữ trên ảnh. Page mang
+thương hiệu riêng "Hiểu Đúng Y Khoa". Ràng buộc này cho caption nằm trong skill
+`bai-kien-thuc`, mục Caption Facebook.
 
 Frontmatter **chỉ chứa phần chữ**. Link và hashtag nối lúc đăng, vì:
 
@@ -132,19 +136,21 @@ Job fail thì GitHub gửi mail cho chủ repo. Log ở tab **Actions**.
 | Triệu chứng | Nguyên nhân thường gặp |
 |---|---|
 | `thiếu field facebook` | Bài merge mà quên caption. Bài vẫn lên web. Bổ sung `facebook:` rồi Run workflow với slug đó. |
+| `Thiếu assets/kien-thuc/<slug>-fb.png` | Bài merge mà quên ảnh Facebook. Tạo bằng lệnh in trong log, merge, rồi Run workflow với slug đó. Cố ý không dùng ảnh OG thay thế vì ảnh OG có tên bác sĩ. |
 | `Token hoặc Page ID không dùng được` | Token hết hạn hoặc bị thu hồi (đổi mật khẩu Facebook, gỡ app). Lấy lại token theo bước 3. |
 | `không lên sau 5 phút` | Vercel deploy fail hoặc quá chậm. Kiểm tra deploy, rồi Run workflow lại với slug đó. |
 | Lỗi nhắc tới version | Phiên bản Graph API hết hạn ~2 năm sau khi ra. Đang pin `v26.0` (ra 29/07/2026). Đổi `FB_API_VERSION` trong workflow theo <https://developers.facebook.com/docs/graph-api/changelog>. |
 | `/me/accounts` không thấy page nào | User token thiếu `pages_show_list`, hoặc lúc đăng nhập chưa tick chọn page. Lấy lại token từ bước 3. |
 | `Token thiếu quyền pages_manage_posts` | App chưa bật quyền trong use case *Quản lý mọi thứ trên Trang* (Explorer vẫn tạo token, chỉ lặng lẽ bỏ quyền đó), hoặc bị bỏ tick trong hộp thoại đăng nhập. Bật quyền, lấy token mới, chạy lại script — secret mới ghi đè secret cũ. |
 
-Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page của bác sĩ tệ hơn là đăng trễ.
+Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page tệ hơn là đăng trễ.
 
 ## Bảo trì
 
 - **Đổi domain sang bsquyen.com**: sửa `SITE_URL` trong `.github/workflows/dang-facebook.yml`.
   Đã có trong checklist đổi domain ở `website-placeholders-and-deploy-guide.md`.
 - **Đổi cửa sổ huỷ**: `DELAY_PHUT` trong workflow. Facebook yêu cầu ≥ 10 phút.
-- **Ảnh đăng lên** là ảnh OG 1200×630 của bài. Tỉ lệ này chuẩn cho thẻ link preview nhưng
-  hơi dẹt khi làm ảnh chính trên feed điện thoại. Muốn đẹp hơn thì thêm biến thể vuông
-  1200×1200 vào `scripts/tao-anh-og.mjs` rồi trỏ script đăng sang ảnh đó.
+- **Ảnh đăng lên** là `assets/kien-thuc/<slug>-fb.png`, vuông 1080×1080 cho feed điện
+  thoại, tạo bằng `.claude/skills/bai-kien-thuc/scripts/tao-anh-facebook.mjs`. Ảnh dùng
+  hình minh họa của chính bài (field `thumb`) nên mỗi bài một hình. Ảnh OG 1200×630 vẫn
+  dùng cho website (thẻ preview khi share link), không đăng lên page.
