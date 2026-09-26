@@ -1,8 +1,10 @@
 # Tự động đăng bài Kiến thức lên Facebook Page
 
 Khi một PR bài viết được merge vào `main`, GitHub Actions đăng bài đó lên Facebook Page
-dưới dạng **bài ảnh đã hẹn giờ sau 2 tiếng**. Trong 2 tiếng đó bạn sửa hoặc huỷ được
-trong Meta Business Suite; không làm gì thì bài tự lên.
+dưới dạng **bài ảnh hẹn giờ lúc 19:30 (giờ Việt Nam) cùng ngày merge**. Merge sau 19:20
+thì bài dời sang 19:30 hôm sau — Facebook đòi giờ hẹn cách hiện tại ít nhất 10 phút, và
+giữ giờ đăng cố định có lợi hơn là đăng lệch giờ. Trước giờ đăng bạn sửa, đổi giờ hoặc huỷ
+được trong Meta Business Suite; không làm gì thì bài tự lên.
 
 - Workflow: `.github/workflows/dang-facebook.yml`
 - Script: `scripts/dang-facebook.mjs`
@@ -149,7 +151,10 @@ Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page tệ
 
 - **Đổi domain sang bsquyen.com**: sửa `SITE_URL` trong `.github/workflows/dang-facebook.yml`.
   Đã có trong checklist đổi domain ở `website-placeholders-and-deploy-guide.md`.
-- **Đổi cửa sổ huỷ**: `DELAY_PHUT` trong workflow. Facebook yêu cầu ≥ 10 phút.
+- **Đổi giờ đăng**: `GIO_DANG` trong workflow, dạng `HH:MM` theo giờ Việt Nam. Để trống
+  (`GIO_DANG: ""`) thì chuyển sang chế độ đăng sau `DELAY_PHUT` phút kể từ lúc merge
+  (≥ 10). Logic tính giờ nằm ở `scripts/gio-dang.mjs`; máy chạy Actions ở UTC nên giờ
+  luôn quy đổi theo UTC+7 cố định, không phụ thuộc múi giờ của máy.
 - **Ảnh đăng lên** là `assets/kien-thuc/<slug>-fb.png`, vuông 1080×1080 cho feed điện
   thoại, tạo bằng `.claude/skills/bai-kien-thuc/scripts/tao-anh-facebook.mjs`. Ảnh dùng
   hình minh họa của chính bài (field `thumb`) nên mỗi bài một hình. Ảnh OG 1200×630 vẫn

@@ -9,15 +9,18 @@
 // nội suy vào dòng lệnh shell — input của workflow_dispatch là chuỗi người dùng nhập.
 //
 // Env bắt buộc khi đăng thật: FB_PAGE_ID, FB_PAGE_ACCESS_TOKEN
-// Env có mặc định: SITE_URL, FB_API_VERSION, DELAY_PHUT
+// Env có mặc định: SITE_URL, FB_API_VERSION, GIO_DANG, DELAY_PHUT
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 
 import matter from "gray-matter";
 
+import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
+
 const SITE_URL = (process.env.SITE_URL || "https://bsquyen.vercel.app").replace(/\/$/, "");
 const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
-const DELAY_PHUT = Number(process.env.DELAY_PHUT || 120);
+// GIO_DANG (HH:MM giờ VN) thắng DELAY_PHUT; để trống thì đăng sau DELAY_PHUT phút.
+const LICH = { gioCoDinh: process.env.GIO_DANG || "", delayPhut: process.env.DELAY_PHUT || 120 };
 const PAGE_ID = process.env.FB_PAGE_ID;
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
 
@@ -158,9 +161,16 @@ async function main() {
   }
   log(`Bài cần đăng: ${slugs.join(", ")}${dryRun ? "  (DRY RUN)" : ""}`);
 
+  // Kiểm tra cấu hình lịch ngay đầu, kể cả dry run: GIO_DANG gõ sai thì biết trước
+  // khi tải ảnh lên. Giờ thật tính lại sát lúc gọi Facebook, sau khi chờ deploy.
+  try {
+    log(`Lịch dự kiến: ${hienGioVN(tinhGioDang(Date.now(), LICH))} (giờ VN)`);
+  } catch (e) {
+    chet(e.message);
+  }
+
   if (!dryRun) {
     if (!PAGE_ID || !TOKEN) chet("Thiếu secret FB_PAGE_ID hoặc FB_PAGE_ACCESS_TOKEN.");
-    if (DELAY_PHUT < 10) chet("DELAY_PHUT phải ≥ 10 — Facebook không nhận lịch gần hơn 10 phút.");
     // Preflight: token hỏng thì biết ngay, trước khi tải ảnh lên.
     const res = await fetch(`${API}/${PAGE_ID}?fields=name&access_token=${TOKEN}`);
     const page = await res.json().catch(() => ({}));
@@ -193,7 +203,7 @@ async function main() {
     const anh = await goiFB(`${PAGE_ID}/photos`, { url: bai.linkAnh, published: "false" });
     log(`Đã tải ảnh lên: media_fbid=${anh.id}`);
 
-    const gioDang = Math.floor(Date.now() / 1000) + DELAY_PHUT * 60;
+    const gioDang = tinhGioDang(Date.now(), LICH);
     const post = await goiFB(`${PAGE_ID}/feed`, {
       message: bai.caption,
       "attached_media[0]": JSON.stringify({ media_fbid: anh.id }),
@@ -201,11 +211,8 @@ async function main() {
       scheduled_publish_time: String(gioDang),
     });
 
-    const gioVN = new Date(gioDang * 1000).toLocaleString("vi-VN", {
-      timeZone: "Asia/Ho_Chi_Minh",
-    });
     log(
-      `✓ Đã hẹn lịch: post ${post.id} — tự đăng lúc ${gioVN}.\n` +
+      `✓ Đã hẹn lịch: post ${post.id} — tự đăng lúc ${hienGioVN(gioDang)}.\n` +
         `  Sửa hoặc huỷ trong Meta Business Suite → Nội dung → Đã lên lịch.`
     );
   }
