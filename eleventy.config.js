@@ -41,6 +41,56 @@ module.exports = function (eleventyConfig) {
   // Ngày dạng ISO cho schema.org / sitemap
   eleventyConfig.addFilter("ngayISO", (d) => new Date(d).toISOString().split("T")[0]);
 
+  // Gắn id cho mọi <h2> trong bài Markdown để mục lục và link chia sẻ trỏ thẳng tới
+  // từng phần. Làm lúc build (không phải bằng JS) nên link #muc vẫn chạy khi tắt JS.
+  // Dùng chung slugify với URL trang chủ đề, nên "Dạ dày" → "da-day" như ở mọi chỗ khác.
+  eleventyConfig.amendLibrary("md", (md) => {
+    const slugify = eleventyConfig.getFilter("slugify");
+    md.core.ruler.push("id_cho_h2", (state) => {
+      const daDung = new Set();
+      state.tokens.forEach((tok, i) => {
+        if (tok.type !== "heading_open" || tok.tag !== "h2" || tok.attrGet("id")) return;
+        const chu = (state.tokens[i + 1].children || [])
+          .filter((t) => t.type === "text" || t.type === "code_inline")
+          .map((t) => t.content)
+          .join("");
+        const goc = slugify(chu) || "muc";
+        let id = goc;
+        for (let k = 2; daDung.has(id); k++) id = `${goc}-${k}`;
+        daDung.add(id);
+        tok.attrSet("id", id);
+      });
+    });
+  });
+
+  // Mục lục: danh sách {id, chu} lấy từ các <h2 id> vừa gắn ở trên.
+  eleventyConfig.addFilter("mucLuc", (html) =>
+    [...String(html).matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)].map((m) => ({
+      id: m[1],
+      chu: m[2].replace(/<[^>]+>/g, "").trim(),
+    }))
+  );
+
+  // Thời gian đọc, tính theo tiếng (âm tiết) vì tiếng Việt tách chữ bằng khoảng trắng
+  // theo từng tiếng. ~250 tiếng/phút là tốc độ đọc bình thường của người lớn.
+  eleventyConfig.addFilter("thoiGianDoc", (html) => {
+    const soTieng = String(html)
+      .replace(/<[^>]+>/g, " ")
+      .split(/\s+/)
+      .filter(Boolean).length;
+    return Math.max(1, Math.round(soTieng / 250));
+  });
+
+  // Bài liên quan: ưu tiên bài chung tag (càng nhiều tag chung càng trước, cùng mức thì
+  // mới hơn trước), thiếu thì bù bằng bài mới nhất. Không bao giờ gồm chính bài đang đọc.
+  eleventyConfig.addFilter("baiLienQuan", (baiViet, urlHienTai, tags, soLuong = 3) => {
+    const tagBai = new Set(tags || []);
+    const khac = baiViet.filter((b) => b.url !== urlHienTai);
+    const chung = (b) => (b.data.tags || []).filter((t) => tagBai.has(t)).length;
+    // collection đã xếp mới nhất trước; sort ổn định nên giữ thứ tự đó khi cùng số tag chung
+    return [...khac].sort((a, b) => chung(b) - chung(a)).slice(0, soLuong);
+  });
+
   return {
     dir: {
       input: ".",

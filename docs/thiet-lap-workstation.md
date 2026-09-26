@@ -92,16 +92,25 @@ Kích hoạt theo **điều kiện**, không theo mốc ngày:
 
 | Việc | Làm khi | Vì sao chưa làm |
 |---|---|---|
-| Ô tìm kiếm bài viết | mục Kiến thức **vượt 15 bài** (vượt 1 trang phân trang) | Corpus nhỏ thì phần lớn truy vấn ra 0 kết quả — người đọc hiểu là "trang này không có thứ tôi cần" rồi thoát, tệ hơn một danh sách ngắn cuộn được |
+| ~~Ô tìm kiếm bài viết~~ | **Đã code, tự hiện** khi vượt 15 bài — ngưỡng ở `_data/timKiem.js` | Corpus nhỏ thì phần lớn truy vấn ra 0 kết quả — người đọc hiểu là "trang này không có thứ tôi cần" rồi thoát, tệ hơn một danh sách ngắn cuộn được |
 | Đưa 6 trang lọc chủ đề vào `sitemap.njk` | mỗi chủ đề đạt **~4 bài** | Hiện 1–3 bài/chủ đề, còn mỏng. Vẫn crawl được qua link chip |
 | Nâng 4 bài tầm soát thành bài trụ cột | đạt **25–30 bài** | Giá trị của pillar là làm trung tâm cho chùm bài vệ tinh; chưa có vệ tinh thì kéo dài bài chỉ làm loãng nội dung |
 
-Khi làm ô tìm kiếm, hai bẫy phải tránh:
+Ô tìm kiếm (`js/tim-kiem.js`, chỉ mục `kien-thuc/tim-kiem.json.njk`) đã tránh các bẫy dưới
+đây. Thử khi chưa đủ 15 bài: `$env:NGUONG_TIM_KIEM=0; npm run build` (PowerShell) hoặc
+`NGUONG_TIM_KIEM=0 npm run build` (bash). Ghi lại để ai sửa sau không làm hỏng:
 
 1. **Bỏ dấu hai đầu khi so khớp** (NFD + strip dấu + lowercase). Người Việt gõ
    "ung thu da day" phải khớp "ung thư dạ dày". Thiếu bước này thì search coi như không dùng được.
 2. **Tìm trên JSON index sinh lúc build, KHÔNG lọc DOM.** Trang danh sách phân trang
    15 bài/trang; lọc DOM chỉ lọc được trang hiện tại → sai âm thầm, càng nhiều bài càng sai.
+3. **So khớp ở đầu mỗi tiếng, không giữa chữ**, và khi người dùng **có** gõ dấu thì xếp
+   bài khớp đúng dấu lên trước. Bỏ dấu thì "đau", "dấu", "đầu" đều thành "dau" — ai đã gõ
+   "đau" thì muốn bài về đau.
+4. **Chỉ tải chỉ mục một lần** và bỏ kết quả về trễ. Gõ nhanh lúc chỉ mục chưa về mà mỗi
+   phím một request thì kết quả cũ có thể ghi đè kết quả mới.
+5. **Chuẩn hoá NFC trước khi tách từ.** Bộ gõ để "Unicode tổ hợp" gửi dấu thành ký tự
+   rời; không chuẩn hoá thì "dạ dày" vỡ thành "da", "da", "y" và không khớp bài nào.
 
 Chỉ cần index `title` + `description` + `tags` (~10KB gzip ở 100 bài), không index nội dung
 bài. Muốn tìm cả trong nội dung về sau thì thay bằng Pagefind, không phải đổi UI.
