@@ -15,27 +15,14 @@ import { existsSync, readFileSync } from "node:fs";
 
 import matter from "gray-matter";
 
+import { SITE_URL, taoCaption } from "./caption-facebook.mjs";
 import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
 
-const SITE_URL = (process.env.SITE_URL || "https://bsquyen.vercel.app").replace(/\/$/, "");
 const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
 // GIO_DANG (HH:MM giờ VN) thắng DELAY_PHUT; để trống thì đăng sau DELAY_PHUT phút.
 const LICH = { gioCoDinh: process.env.GIO_DANG || "", delayPhut: process.env.DELAY_PHUT || 120 };
 const PAGE_ID = process.env.FB_PAGE_ID;
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
-
-// Suy hashtag từ `tags`. Bộ tag cố định nằm ở _data/chuDe.js — đổi ở đó thì sửa cả đây.
-// Tag không có trong bảng bị bỏ qua kèm cảnh báo, không làm job fail.
-const HASHTAG = {
-  "Tầm soát": "#TamSoatUngThu",
-  "Dấu hiệu": "#DauHieuCanhBao",
-  "Chăm sóc giảm nhẹ": "#ChamSocGiamNhe",
-  "Điều trị": "#DieuTriUngThu",
-  "Dinh dưỡng": "#DinhDuongUngThu",
-  "Phòng ngừa": "#PhongNguaUngThu",
-};
-// Không có hashtag cố định mang tên bác sĩ: page có thương hiệu riêng, bài đăng
-// không nêu tên bác sĩ (cả caption lẫn ảnh).
 
 const argv = process.argv.slice(2);
 const cliSlug = argv.find((a) => a.startsWith("--slug="))?.slice(7);
@@ -68,20 +55,6 @@ function doBaiMoi() {
     .map((p) => p.replace(/^kien-thuc\//, "").replace(/\.md$/, ""));
 }
 
-/**
- * Gộp dòng gãy thành đoạn liền. Nguồn hard-wrap ~76 ký tự theo quy ước của repo,
- * để nguyên thì Facebook hiện đúng những chỗ ngắt đó — câu cụt giữa chừng.
- * Dòng trống vẫn là ngắt đoạn thật.
- */
-function gonCaption(raw) {
-  return String(raw)
-    .trim()
-    .split(/\n{2,}/)
-    .map((doan) => doan.replace(/\s*\n\s*/g, " ").trim())
-    .filter(Boolean)
-    .join("\n\n");
-}
-
 function docBai(slug) {
   const path = `kien-thuc/${slug}.md`;
   if (!existsSync(path)) chet(`Không thấy ${path}`);
@@ -104,27 +77,11 @@ function docBai(slug) {
     );
   }
 
-  const hashtags = [
-    ...new Set(
-      (data.tags || []).map((t) => {
-        if (!HASHTAG[t]) console.warn(`⚠ Tag "${t}" chưa có hashtag trong bảng — bỏ qua.`);
-        return HASHTAG[t];
-      })
-    ),
-  ].filter(Boolean);
+  // Tag không có trong bảng hashtag bị bỏ qua kèm cảnh báo, không làm job fail.
+  const { caption, linkBai, tagLa } = taoCaption(data, slug, SITE_URL);
+  tagLa.forEach((t) => console.warn(`⚠ Tag "${t}" chưa có hashtag trong bảng — bỏ qua.`));
 
-  const linkBai = `${SITE_URL}/kien-thuc/${slug}/`;
-  return {
-    slug,
-    title: data.title,
-    linkBai,
-    linkAnh: `${SITE_URL}/${anhFb}`,
-    // Link và hashtag nối ở đây chứ không gõ trong frontmatter: đổi domain thì chỉ
-    // sửa SITE_URL, thay vì sửa 50–100 file bài viết.
-    // utm_source để Umami tách lượt đến từ page: trình duyệt trong app Facebook không
-    // phải lúc nào cũng gửi referrer, thiếu UTM thì những lượt đó bị tính là "trực tiếp".
-    caption: `${gonCaption(data.facebook)}\n\n${linkBai}?utm_source=facebook\n\n${hashtags.join(" ")}`,
-  };
+  return { slug, title: data.title, linkBai, linkAnh: `${SITE_URL}/${anhFb}`, caption };
 }
 
 /** Chờ URL trả 200. Đăng trước khi Vercel deploy xong thì link trong caption chết. */

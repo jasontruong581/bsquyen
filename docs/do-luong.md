@@ -54,7 +54,7 @@ Viết `if (window.umami) window.umami.track(...)`.
 ## Nguồn Facebook
 
 Link trong caption Facebook có `?utm_source=facebook` (thêm tự động bởi
-`scripts/dang-facebook.mjs`). Xem ở dashboard → **UTM** hoặc lọc `utm_source`.
+`scripts/caption-facebook.mjs`, dùng chung cho job đăng và bot duyệt PR). Xem ở dashboard → **UTM** hoặc lọc `utm_source`.
 Trình duyệt trong app Facebook không phải lúc nào cũng gửi referrer, nên số ở mục
 Referrers sẽ thấp hơn thực tế — tin số UTM.
 

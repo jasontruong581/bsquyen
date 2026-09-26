@@ -71,7 +71,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
    | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
    | `_includes/partials/do-luong.njk` | 1 | `data-domains` của Umami — sót thì **site mới ngừng đếm số liệu** |
-   | `scripts/dang-facebook.mjs` | 1 | giá trị mặc định của `SITE_URL` (workflow ghi đè, nhưng chạy tay thì dùng giá trị này) |
+   | `scripts/caption-facebook.mjs` | 1 | `SITE_URL` mặc định, dùng chung cho job đăng Facebook và bot duyệt PR (workflow ghi đè bằng env, chạy tay thì dùng giá trị này) |
 
    ```bash
    grep -rl 'bsquyen\.vercel\.app' \
