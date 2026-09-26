@@ -40,17 +40,23 @@ const MAU_CAPTION = [
   ["Caption có hashtag (script tự nối từ tags)", /(^|\s)#[^\s#]/],
 ];
 
-/** Trả về danh sách {muc, cau} — cau là đoạn trích quanh chỗ khớp để bác sĩ đọc nhanh. */
+/**
+ * Mỗi nhóm khớp trả về MỘT mục {muc, cau, soCho}: cau là đoạn trích quanh chỗ khớp đầu
+ * tiên. Gộp theo nhóm vì các mẫu trong nhóm hay cùng nằm một câu ("chữa khỏi 100%",
+ * "BS.CKI Hạnh Quyên") — liệt kê từng chỗ thì comment toàn dòng trùng nhau.
+ */
 export function timMau(van, mau) {
   const ketQua = [];
+  van = String(van);
   for (const [muc, re] of mau) {
     const g = new RegExp(re.source, re.flags.includes("g") ? re.flags : re.flags + "g");
-    for (const m of String(van).matchAll(g)) {
-      const dau = Math.max(0, m.index - 50);
-      const cuoi = Math.min(van.length, m.index + m[0].length + 50);
-      const cau = van.slice(dau, cuoi).replace(/\s+/g, " ").trim();
-      ketQua.push({ muc, cau: `${dau > 0 ? "…" : ""}${cau}${cuoi < van.length ? "…" : ""}` });
-    }
+    const khop = [...van.matchAll(g)];
+    if (!khop.length) continue;
+    const m = khop[0];
+    const dau = Math.max(0, m.index - 50);
+    const cuoi = Math.min(van.length, m.index + m[0].length + 50);
+    const cau = van.slice(dau, cuoi).replace(/\s+/g, " ").trim();
+    ketQua.push({ muc, soCho: khop.length, cau: `${dau > 0 ? "…" : ""}${cau}${cuoi < van.length ? "…" : ""}` });
   }
   return ketQua;
 }
@@ -161,9 +167,10 @@ export function taoMarkdown({ bai, sha, repo }) {
     } else {
       dong.push("");
       kiemTra.loi.forEach((l) => dong.push(`- ✗ ${l}`));
-      kiemTra.canhBao.forEach((c) =>
-        dong.push(`- ⚠ **${c.muc}** _(${c.noi})_${c.cau ? `\n  > ${c.cau}` : ""}`)
-      );
+      kiemTra.canhBao.forEach((c) => {
+        const them = c.soCho > 1 ? `, ${c.soCho} chỗ — trích chỗ đầu` : "";
+        dong.push(`- ⚠ **${c.muc}** _(${c.noi}${them})_${c.cau ? `\n  > ${c.cau}` : ""}`);
+      });
     }
 
     if (data.facebook && !daXuatBan) {

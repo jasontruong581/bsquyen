@@ -92,6 +92,19 @@ test("câu mở: tính cả ngoặc kép đóng sau dấu hỏi", () => {
   assert.equal(cauMo("Không có dấu câu"), "Không có dấu câu");
 });
 
+test("nhiều mẫu cùng nhóm trong một câu: gộp thành một cảnh báo, kèm số chỗ", () => {
+  const kq = kiemTraBai({
+    data: { ...DATA_CHUAN, facebook: CAPTION_CHUAN + " Liên hệ BS.CKI Hạnh Quyên." },
+    noiDung: "Phương pháp này chữa khỏi 100% bệnh.",
+    slug: "x",
+    coFile: coHet,
+  });
+  const hua = kq.canhBao.filter((c) => c.muc.startsWith("Hứa hẹn"));
+  assert.equal(hua.length, 1);
+  assert.equal(hua[0].soCho, 2);
+  assert.equal(kq.canhBao.filter((c) => /tên bác sĩ/.test(c.muc)).length, 1);
+});
+
 test("timMau trích đoạn quanh chỗ khớp", () => {
   const [kq] = timMau("a".repeat(80) + " chữa khỏi " + "b".repeat(80), [["x", /chữa khỏi/i]]);
   assert.ok(kq.cau.startsWith("…") && kq.cau.endsWith("…") && kq.cau.includes("chữa khỏi"));
