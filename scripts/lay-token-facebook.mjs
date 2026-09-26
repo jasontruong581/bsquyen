@@ -130,10 +130,22 @@ async function main() {
   }
   console.log("  ✓ Token không có hạn dùng");
 
+  // Thiếu quyền thì dừng hẳn, không nạp secret: nạp rồi in "Xong" thì trông như thành
+  // công, và lỗi chỉ lộ ra lúc merge bài đầu tiên. Graph API Explorer vẫn tạo token bình
+  // thường khi app chưa bật quyền trong use case — nó chỉ lặng lẽ bỏ quyền đó đi.
   const quyen = debug.data?.scopes || [];
-  for (const can of ["pages_manage_posts", "pages_read_engagement"]) {
-    if (!quyen.includes(can)) console.warn(`  ⚠ Token thiếu quyền ${can} — job sẽ lỗi khi đăng.`);
+  const thieu = ["pages_manage_posts", "pages_read_engagement"].filter((q) => !quyen.includes(q));
+  if (thieu.length) {
+    chet(
+      `Token thiếu quyền ${thieu.join(", ")} — chưa nạp secret nào.\n` +
+        "  1. Mở developers.facebook.com/apps/<APP_ID>/use_cases/ → use case\n" +
+        '     "Quản lý mọi thứ trên Trang" → Tùy chỉnh → Thêm các quyền trên.\n' +
+        "  2. Graph API Explorer: kiểm tra ô Quyền có đủ, Tạo mã truy cập, và đừng bỏ\n" +
+        "     tick quyền nào trong hộp thoại đăng nhập.\n" +
+        "  3. Chạy lại script với token mới."
+    );
   }
+  console.log("  ✓ Token đủ quyền đăng bài");
 
   if (chiIn) {
     console.log("\n[4/4] In ra để tự dán vào GitHub Secrets:\n");
