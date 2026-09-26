@@ -397,7 +397,10 @@
           </p>
         </div>
 
-        <form id="bookingForm" class="booking-form reveal" novalidate>
+        <!-- method="post": form chỉ chạy qua js/main.js. Nếu JS chưa tải hay bị lỗi mà người
+             dùng vẫn bấm gửi, GET mặc định sẽ đặt họ tên, SĐT, lời nhắn (có thể nói về bệnh)
+             lên URL — và Umami ghi lại URL đó. POST giữ chúng khỏi URL. -->
+        <form id="bookingForm" class="booking-form reveal" method="post" novalidate>
           <div class="field">
             <label for="fullName">Họ và tên <span aria-hidden="true">*</span></label>
             <input type="text" id="fullName" name="fullName" required autocomplete="name" placeholder="Nguyễn Văn A">

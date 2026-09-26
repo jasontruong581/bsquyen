@@ -31,7 +31,8 @@ Vercel hay chạy `npm run dev` sẽ không bị đếm — kiểm tra bằng ta
 
 `vi_tri` là nơi đặt nút: `dau-trang` (khối lớn đầu trang chủ), `header`, `thanh-nhanh` (thanh dưới đáy màn hình điện thoại),
 `cuoi-bai` (khối CTA cuối bài Kiến thức), `form-dat-lich`, `footer`, hoặc tên section
-trên trang chủ (`gioi-thieu`, `phong-kham`…). Trang cụ thể thì Umami đã tự ghi theo URL.
+trên trang chủ (`gioi-thieu`, `phong-kham`…), hoặc `khac` khi không thuộc khối nào ở
+trên (vd link gọi nằm trong thân bài viết). Trang cụ thể thì Umami đã tự ghi theo URL.
 
 Listener nằm ở `js/do-luong.js` và bắt theo `href`, nên **nút liên hệ mới tự được đếm**.
 Chỉ cần đo thêm khi đó là `<button>` chứ không phải `<a>` — xem cách làm với nút Zalo của
@@ -39,6 +40,14 @@ form trong `js/main.js`.
 
 **Không gửi dữ liệu cá nhân:** không họ tên, SĐT, dịch vụ chọn trong form, không nội
 dung người dùng gõ. Giữ nguyên tắc này khi thêm sự kiện mới.
+
+Umami ghi **cả query string** của URL mỗi lượt xem trang. Vì vậy không form nào được gửi
+bằng GET: form đặt lịch để `method="post"`, dù bình thường JavaScript chặn việc gửi — để
+lỡ JS không chạy thì họ tên, SĐT, lời nhắn cũng không bao giờ nằm trên URL.
+
+**JavaScript của site không dùng `?.` hay cú pháp mới hơn ES2019.** Trình duyệt cũ gặp
+cú pháp không hiểu là bỏ cả file: với `js/main.js` nghĩa là menu chết và trang chủ trắng.
+Viết `if (window.umami) window.umami.track(...)`.
 
 ## Nguồn Facebook
 

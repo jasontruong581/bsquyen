@@ -74,7 +74,9 @@ form.addEventListener('submit', (e) => {
   }
   formError.hidden = true;
   // Chỉ đếm việc soạn xong — không gửi họ tên, SĐT hay dịch vụ lên analytics.
-  window.umami?.track('dat-lich-soan');
+  // Không dùng `?.`: trình duyệt cũ (iOS 12…) gặp cú pháp đó là bỏ cả file này, và trang
+  // chủ trắng vì các khối .reveal không bao giờ được hiện.
+  if (window.umami) window.umami.track('dat-lich-soan');
 
   const message = [
     'YÊU CẦU ĐẶT LỊCH HẸN',
@@ -103,7 +105,7 @@ form.addEventListener('submit', (e) => {
 // Sao chép nội dung rồi mở Zalo
 copyZaloBtn.addEventListener('click', async () => {
   // Nút này là <button>, listener chung trong do-luong.js chỉ bắt thẻ <a>.
-  window.umami?.track('bam-zalo', { vi_tri: 'form-dat-lich' });
+  if (window.umami) window.umami.track('bam-zalo', { vi_tri: 'form-dat-lich' });
   const text = composedEl.textContent;
   try {
     await navigator.clipboard.writeText(text);

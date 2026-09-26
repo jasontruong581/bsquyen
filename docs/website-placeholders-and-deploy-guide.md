@@ -56,7 +56,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 
 1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm **primary** để `*.vercel.app` tự 301 redirect — nhờ đó các URL đã được Google index không mất giá trị.
 
-2. Thay toàn bộ URL trong **source** (38 chỗ / 10 file — con số này thay đổi khi thêm
+2. Thay toàn bộ URL trong **source** (39 chỗ / 11 file — con số này thay đổi khi thêm
    template mới, nên **luôn chạy lệnh `grep` bên dưới** thay vì tin bảng này):
 
    | File | Số chỗ | Chứa gì |
@@ -71,10 +71,11 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
    | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
    | `_includes/partials/do-luong.njk` | 1 | `data-domains` của Umami — sót thì **site mới ngừng đếm số liệu** |
+   | `scripts/dang-facebook.mjs` | 1 | giá trị mặc định của `SITE_URL` (workflow ghi đè, nhưng chạy tay thì dùng giá trị này) |
 
    ```bash
    grep -rl 'bsquyen\.vercel\.app' \
-     --include='*.html' --include='*.njk' --include='*.txt' --include='*.yml' . \
+     --include='*.html' --include='*.njk' --include='*.txt' --include='*.yml' --include='*.mjs' . \
      | grep -v '^./_site' | grep -v node_modules \
      | xargs sed -i 's|bsquyen\.vercel\.app|bsquyen.com|g'
    ```
