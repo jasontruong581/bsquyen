@@ -1,6 +1,6 @@
 // Chạy: npm test
 import assert from "node:assert/strict";
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { test } from "node:test";
 
 import matter from "gray-matter";
@@ -152,11 +152,21 @@ test("markdown: có dấu hiệu để workflow tìm lại comment, bài đã xu
   assert.match(cu, /đã xuất bản/);
 });
 
+// Tập bài CỐ ĐỊNH — 12 bài bác sĩ đã duyệt lúc viết bộ quy tắc. Cố ý không quét mọi file
+// trong kien-thuc/: PR thêm bài mới có một câu bị cảnh báo sẽ làm CI đỏ, tức là cảnh báo
+// "chỉ để gợi ý" lại thành chặn merge. Bài mới đã có comment của bot lo; test này chỉ canh
+// việc regex bị nới rộng tới mức bắt nhầm bài đã duyệt.
+const BAI_DA_DUYET = [
+  "cham-soc-giam-nhe-la-gi", "dau-hieu-canh-bao-ung-thu", "di-cau-ra-mau-tri-hay-ung-thu",
+  "hieu-lam-pho-bien-ve-ung-thu", "kiem-soat-dau-ung-thu", "morphin-co-gay-nghien-khong",
+  "tam-soat-ung-thu-co-tu-cung", "tam-soat-ung-thu-da-day", "tam-soat-ung-thu-dai-truc-trang",
+  "tam-soat-ung-thu-gan", "tam-soat-ung-thu-vu", "vac-xin-phong-ung-thu",
+];
+
 test("bài đã duyệt: không lỗi nào, và số cảnh báo khoá ở mức đã biết (chặn regex bị nới quá rộng)", () => {
   const canhBao = [];
-  for (const f of readdirSync("kien-thuc").filter((f) => f.endsWith(".md"))) {
-    const slug = f.replace(/\.md$/, "");
-    const { data, content } = matter(readFileSync(`kien-thuc/${f}`, "utf8"));
+  for (const slug of BAI_DA_DUYET) {
+    const { data, content } = matter(readFileSync(`kien-thuc/${slug}.md`, "utf8"));
     // Mọi bài ở đây đều đã xuất bản — bot sẽ kiểm chúng với daXuatBan = true
     const kq = kiemTraBai({ data, noiDung: content, slug, coFile: existsSync, daXuatBan: true });
     assert.deepEqual(kq.loi, [], `${slug}: ${kq.loi.join("; ")}`);

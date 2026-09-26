@@ -51,10 +51,13 @@ node scripts/tom-tat-duyet.mjs --files=kien-thuc/<slug>.md --khong-kiem-link  # 
 Regex nằm ở đầu `scripts/tom-tat-duyet.mjs` (`MAU_NOI_DUNG`, `MAU_CAPTION`). Thêm mẫu thì
 thêm cả test trong `scripts/tom-tat-duyet.test.mjs`.
 
-Một test chạy qua **mọi bài đã xuất bản** và khoá số cảnh báo ở mức đã biết (hiện là 1).
-Nới mẫu mà con số tăng → mẫu đang bắt nhầm bài bác sĩ đã duyệt → thu hẹp lại. Test chạy tự
-động trên mọi PR (`.github/workflows/kiem-tra.yml`). Khi xuất bản bài mới làm con số này
-thay đổi có chủ đích, sửa con số trong test kèm lý do.
+Một test chạy qua **tập cố định 12 bài bác sĩ đã duyệt** (`BAI_DA_DUYET` trong file test)
+và khoá số cảnh báo ở mức đã biết (hiện là 1). Nới mẫu mà con số tăng → mẫu đang bắt nhầm
+bài đã duyệt → thu hẹp lại. Test chạy tự động trên mọi PR (`.github/workflows/kiem-tra.yml`).
+
+Tập bài là **cố định chứ không quét mọi file** trong `kien-thuc/`, có chủ đích: nếu quét cả
+bài mới của PR, bài mới nào có một câu bị cảnh báo cũng làm CI đỏ — cảnh báo "chỉ để gợi ý"
+thành chặn merge. Bài mới đã có comment của bot lo.
 
 Tránh bắt chữ trơn dễ nhầm: "giá" (dính "giá trị", "đánh giá"), "chi phí" ("chi phí thấp"),
 "quyên" ("quyên góp"), "triệu"/"nghìn" không kèm đơn vị tiền (số liệu thống kê).
