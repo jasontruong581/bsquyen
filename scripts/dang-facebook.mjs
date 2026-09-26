@@ -31,7 +31,8 @@ const HASHTAG = {
   "Dinh dưỡng": "#DinhDuongUngThu",
   "Phòng ngừa": "#PhongNguaUngThu",
 };
-const HASHTAG_CO_DINH = "#BSCKIHanhQuyen";
+// Không có hashtag cố định mang tên bác sĩ: page có thương hiệu riêng, bài đăng
+// không nêu tên bác sĩ (cả caption lẫn ảnh).
 
 const argv = process.argv.slice(2);
 const cliSlug = argv.find((a) => a.startsWith("--slug="))?.slice(7);
@@ -90,16 +91,23 @@ function docBai(slug) {
         `  Bổ sung caption rồi chạy lại job bằng tay với slug=${slug}.`
     );
   }
-  if (!data.image) chet(`${path} thiếu image — bài đăng dạng ảnh cần ảnh OG.`);
+  // Ảnh riêng cho Facebook, không dùng ảnh OG: ảnh OG làm cho website nên có tên bác
+  // sĩ, và mọi bài dùng chung một template. Không fallback về ảnh OG — thiếu thì fail.
+  const anhFb = `assets/kien-thuc/${slug}-fb.png`;
+  if (!existsSync(anhFb)) {
+    chet(
+      `Thiếu ${anhFb}. Tạo bằng:\n` +
+        `  node .claude/skills/bai-kien-thuc/scripts/tao-anh-facebook.mjs ${slug} "<dòng 1>" "<dòng 2>"`
+    );
+  }
 
   const hashtags = [
-    ...new Set([
-      ...(data.tags || []).map((t) => {
+    ...new Set(
+      (data.tags || []).map((t) => {
         if (!HASHTAG[t]) console.warn(`⚠ Tag "${t}" chưa có hashtag trong bảng — bỏ qua.`);
         return HASHTAG[t];
-      }),
-      HASHTAG_CO_DINH,
-    ]),
+      })
+    ),
   ].filter(Boolean);
 
   const linkBai = `${SITE_URL}/kien-thuc/${slug}/`;
@@ -107,7 +115,7 @@ function docBai(slug) {
     slug,
     title: data.title,
     linkBai,
-    linkAnh: `${SITE_URL}${data.image}`,
+    linkAnh: `${SITE_URL}/${anhFb}`,
     // Link và hashtag nối ở đây chứ không gõ trong frontmatter: đổi domain thì chỉ
     // sửa SITE_URL, thay vì sửa 50–100 file bài viết.
     caption: `${gonCaption(data.facebook)}\n\n${linkBai}\n\n${hashtags.join(" ")}`,

@@ -102,6 +102,18 @@ node .claude/skills/bai-kien-thuc/scripts/tao-anh-og.mjs <slug> "Dòng tiêu đ�
 Script tự canh cỡ chữ, xuất `assets/kien-thuc/<slug>-og.png` (1200×630, <200KB) và
 in ra đường dẫn PNG — Read nó **một lần** để xác nhận, không lặp.
 
+Ảnh Facebook (bắt buộc, mọi bài) — ảnh vuông cho bài đăng trên page, **khác ảnh OG**:
+
+```bash
+node .claude/skills/bai-kien-thuc/scripts/tao-anh-facebook.mjs <slug> "Dòng tiêu đề 1" "Dòng 2 nhấn màu"
+```
+
+Hình minh họa lấy từ `thumb`, chip chủ đề lấy từ tag đầu tiên, nên chỉ cần 2 dòng tiêu
+đề — ngắn hơn tiêu đề ảnh OG, mỗi dòng ≤ 22 ký tự để chữ đủ to trên điện thoại. Xuất
+`assets/kien-thuc/<slug>-fb.png` (1080×1080). Thiếu file này thì job đăng Facebook fail.
+Ảnh này **không có tên bác sĩ** — page mang thương hiệu riêng; ảnh OG là của website
+nên vẫn giữ tên. Read PNG một lần để xác nhận.
+
 ### 5. Kiểm tra (~3k token)
 
 ```bash
@@ -198,10 +210,14 @@ Khung 4 phần, 400–700 ký tự:
 4. Hết. **Không chèn số điện thoại / Zalo / địa chỉ** — trang bài đã có CTA, nhắc lại ở
    đây là thêm một chỗ nữa phải sửa mỗi khi đổi thông tin liên hệ.
 
+**Không nêu tên bác sĩ** (kể cả "BS.CKI Hạnh Quyên", "bác sĩ Quyên"). Page Facebook
+mang thương hiệu riêng "Hiểu Đúng Y Khoa". Chữ "bác sĩ" theo nghĩa chung thì được —
+"hỏi bác sĩ điều trị", hay câu bệnh nhân hỏi "…thật hả bác sĩ?".
+
 Ràng buộc YMYL giữ nguyên như thân bài: không hứa kết quả điều trị, không testimonial,
 không liều thuốc, không giá dịch vụ. Thêm một ràng buộc riêng của mạng xã hội:
 **không giật tít doạ người đọc** — kiểu "dấu hiệu chết người", "ai cũng mắc mà không
-biết". Trang này là của một bác sĩ, không phải trang tin câu view.
+biết". Đây là trang kiến thức y khoa, không phải trang tin câu view.
 
 Emoji: tối đa 1–2, hoặc không dùng. Không đặt emoji ở câu mở.
 
@@ -267,7 +283,8 @@ Nội dung y tế + quy định quảng cáo y tế VN:
 - [ ] Ảnh: alt mô tả rõ nghĩa, figcaption kết bằng "(Ảnh minh họa)", SVG hoặc raster ≤200KB
 - [ ] `thumb` trỏ vào file có thật và **không có chữ**; xem thử card ở `/kien-thuc/`
 - [ ] `facebook` dài 400–700 ký tự, câu mở đứng được một mình trong 125 ký tự đầu,
-      **không** chứa link / hashtag / số điện thoại
+      **không** chứa link / hashtag / số điện thoại / tên bác sĩ
+- [ ] Có `assets/kien-thuc/<slug>-fb.png` (tạo bằng `tao-anh-facebook.mjs`), đã Read xác nhận
 - [ ] `npm run build` sạch, bài vào sitemap, `og:image` trỏ đúng file tồn tại
 - [ ] Nếu chủ đề lấy từ hàng đợi: đã chuyển dòng sang bảng "Đã xuất bản" trong `docs/chu-de-bai-viet.md`
 - [ ] Đã push branch + mở PR, **chưa merge**, PR có dòng chờ bác sĩ duyệt

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" font-family="'Be Vietnam Pro', 'DejaVu Sans', system-ui, sans-serif">
+  <!-- Ảnh bài đăng Facebook, vuông cho feed điện thoại. Cố ý KHÔNG có tên bác sĩ:
+       avatar page đã đứng cạnh bài, và page mang thương hiệu riêng. Ảnh OG của
+       website (og-template.svg) mới là nơi ghi tên bác sĩ. -->
+  <defs>
+    <clipPath id="khung">
+      <rect x="60" y="410" width="960" height="610" rx="36"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1080" height="1080" fill="#fff9f4"/>
+  <circle cx="1000" cy="80" r="180" fill="#fdeee2"/>
+
+  <!-- chip chủ đề, lấy từ tag đầu tiên của bài -->
+  <g transform="translate(80,84)">
+    <rect width="{{CHIP_W}}" height="58" rx="29" fill="#fdeee2" stroke="#f2a56e" stroke-width="2"/>
+    <text x="30" y="39" font-size="24" font-weight="700" fill="#d85a10" letter-spacing="1.5">{{CHU_DE}}</text>
+  </g>
+
+  <!-- tiêu đề: dòng 2 nhấn màu cam -->
+  <text x="80" y="252" font-size="{{TITLE_SIZE}}" font-weight="800" fill="#123b63">{{TITLE_1}}</text>
+  <text x="80" y="{{TITLE_2_Y}}" font-size="{{TITLE_SIZE}}" font-weight="800" fill="#f26e21">{{TITLE_2}}</text>
+
+  <!-- hình minh họa của chính bài (field thumb — SVG không chữ), phủ kín khung.
+       slice cắt nhẹ hai bên vì khung 1.57:1 hẹp hơn hình 1.73:1; các hình minh họa
+       đều chừa lề nên không mất chi tiết chính. -->
+  <g clip-path="url(#khung)">
+    <rect x="60" y="410" width="960" height="610" fill="#fff9f4"/>
+    <svg x="60" y="410" width="960" height="610" viewBox="0 0 760 440" preserveAspectRatio="xMidYMid slice">{{MINH_HOA}}</svg>
+  </g>
+  <rect x="60" y="410" width="960" height="610" rx="36" fill="none" stroke="#ecdfd3" stroke-width="3"/>
+</svg>
