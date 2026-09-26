@@ -37,10 +37,18 @@
   // Clipboard API chỉ có trên HTTPS; thiếu thì ẩn nút thay vì để một nút bấm không ăn
   if (!navigator.clipboard) nutSaoChep.hidden = true;
   nutSaoChep.addEventListener('click', function () {
-    navigator.clipboard.writeText(url).then(function () {
-      baoDaChep.hidden = false;
-      dem('sao-chep');
-    });
+    navigator.clipboard.writeText(url).then(
+      function () {
+        baoDaChep.textContent = 'Đã sao chép link bài viết.';
+        baoDaChep.hidden = false;
+        dem('sao-chep');
+      },
+      // Trình duyệt từ chối quyền clipboard: vẫn đưa link để người đọc tự chép
+      function () {
+        baoDaChep.textContent = 'Không sao chép được. Link bài: ' + url;
+        baoDaChep.hidden = false;
+      }
+    );
   });
 
   khoi.hidden = false;

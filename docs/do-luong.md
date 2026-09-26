@@ -29,7 +29,7 @@ Vercel hay chạy `npm run dev` sẽ không bị đếm — kiểm tra bằng ta
 | `bam-dat-lich` | bấm link tới `#dat-lich` | `vi_tri` |
 | `dat-lich-soan` | điền form đặt lịch hợp lệ, bấm soạn | — |
 | `tim-kiem` | ngừng gõ 1,5 giây trong ô tìm kiếm `/kien-thuc/` (mỗi truy vấn đếm 1 lần) | `so_ket_qua` — **không** gửi chữ người dùng gõ |
-| `chia-se` | chia sẻ bài thành công | `kenh`: `he-thong` (bảng chia sẻ của máy — Zalo, Messenger…), `facebook`, `sao-chep` |
+| `chia-se` | `he-thong`, `sao-chep`: khi chia sẻ / sao chép **xong**; `facebook`: khi **bấm** nút (Facebook không báo lại là người đọc có đăng hay không) | `kenh`: `he-thong` (bảng chia sẻ của máy — Zalo, Messenger…), `facebook`, `sao-chep` |
 
 `vi_tri` là nơi đặt nút: `dau-trang` (khối lớn đầu trang chủ), `header`, `thanh-nhanh` (thanh dưới đáy màn hình điện thoại), `tim-kiem` (gợi ý nhắn Zalo khi tìm không ra bài),
 `cuoi-bai` (khối CTA cuối bài Kiến thức), `form-dat-lich`, `footer`, hoặc tên section

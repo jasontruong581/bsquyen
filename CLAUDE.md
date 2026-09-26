@@ -22,7 +22,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - `bsquyen/` — ảnh chân dung bác sĩ
 - Đo lường: Umami (`_includes/partials/do-luong.njk` + bản sao trong `index.html`, listener `js/do-luong.js`) — sự kiện và quy tắc ở `docs/do-luong.md`. Không gửi dữ liệu cá nhân lên analytics.
 - Trang bài tự sinh (lúc build, trong `eleventy.config.js`): id cho mọi `##`, mục lục (≥4 mục), thời gian đọc, 3 bài liên quan cùng chủ đề. Nút chia sẻ ở `js/chia-se.js`
-- Tìm kiếm `/kien-thuc/`: `js/tim-kiem.js` + chỉ mục `kien-thuc/tim-kiem.json.njk`, **tự hiện khi vượt 15 bài** (`_data/timKiem.js`); thử sớm bằng `NGUONG_TIM_KIEM=0 npm run build`
+- Tìm kiếm `/kien-thuc/`: `js/tim-kiem.js` + chỉ mục `kien-thuc/tim-kiem.json.njk`, **tự hiện khi vượt 15 bài** (`_data/timKiem.js`); thử sớm bằng `$env:NGUONG_TIM_KIEM=0; npm run build` (PowerShell)
 - `plans/` — plan đang chạy (không build ra site)
 
 ## Quy trình bài viết Kiến thức (QUAN TRỌNG)

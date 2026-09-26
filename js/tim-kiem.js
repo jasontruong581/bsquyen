@@ -21,7 +21,7 @@
   function boDau(s) {
     return s
       .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '')
+      .replace(/[̀-ͯ]/g, '') // viết bằng escape: ký tự tổ hợp gõ thẳng sẽ bị trình soạn thảo chuẩn hoá mất
       .replace(/[đĐ]/g, 'd')
       .toLowerCase();
   }
@@ -30,7 +30,10 @@
   // hai đầu) để so khớp ở ĐẦU mỗi tiếng bằng indexOf(' ' + tu). Khớp giữa chữ thì từ
   // ngắn như "an" dính cả "than", "ban".
   function chuoiTieng(s) {
-    return ' ' + s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim() + ' ';
+    // NFC trước: bộ gõ để "Unicode tổ hợp" (hay chữ dán từ nơi khác) gửi dấu thành ký tự
+    // rời, mà ký tự dấu rời không thuộc \p{L} nên bị cắt thành khoảng trắng — "dạ dày"
+    // vỡ thành "da", "da", "y".
+    return ' ' + s.normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim() + ' ';
   }
   function tachTu(q) {
     return chuoiTieng(q).split(' ').filter(Boolean);
@@ -131,7 +134,10 @@
 
   function hienThi(q) {
     q = q.trim();
-    if (!q) {
+    // Ô trống, hoặc chỉ gõ dấu câu ("?!" không có từ nào): coi như chưa tìm, trả lại danh
+    // sách gốc. Không có dòng này thì "không từ nào" khớp với mọi bài.
+    if (!tachTu(q).length) {
+      clearTimeout(hen); // xoá trước khi hết 1,5 giây thì truy vấn dở dang không bị đếm
       ketQua.hidden = true;
       trangThai.textContent = '';
       danhSach.hidden = false;
@@ -159,6 +165,7 @@
       }
       demSauKhiNgungGo(q, kq.length);
     }, function () {
+      if (input.value.trim() !== q) return;
       trangThai.textContent = 'Không tải được danh sách bài. Thử lại sau giây lát.';
     });
   }

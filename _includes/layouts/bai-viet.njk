@@ -82,7 +82,9 @@
         <details class="muc-luc">
           <summary>Mục lục · {{ muc.length }} phần</summary>
           <ol>
-            {% for m in muc %}<li><a href="#{{ m.id }}">{{ m.chu }}</a></li>{% endfor %}
+            {# | safe: m.chu lấy từ HTML markdown-it đã escape sẵn (và đã bỏ thẻ) — escape thêm
+               lần nữa thì dấu " trong tiêu đề hiện ra thành chữ &quot; #}
+            {% for m in muc %}<li><a href="#{{ m.id }}">{{ m.chu | safe }}</a></li>{% endfor %}
           </ol>
         </details>
         {% endif %}
