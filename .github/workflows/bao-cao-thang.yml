@@ -5,7 +5,9 @@ name: Báo cáo tháng
 # đẩy mạnh hay không ở mốc 3–6 tháng chạy thử (Umami gói Hobby chỉ giữ 6 tháng dữ liệu).
 on:
   schedule:
-    - cron: "0 2 1 * *" # 02:00 UTC = 09:00 giờ VN ngày 1 (GitHub có thể chạy trễ vài chục phút)
+    # 02:17 UTC = 09:17 giờ VN, ngày 1 VÀ ngày 2. Giờ tròn là lúc GitHub hay trễ hoặc bỏ lượt
+    # chạy theo lịch nhất, nên lệch phút; ngày 2 là lượt dự phòng — đã có issue thì nó tự bỏ qua.
+    - cron: "17 2 1,2 * *"
   workflow_dispatch:
     inputs:
       thang:
@@ -25,6 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 0 # cần lịch sử merge để biết ngày xuất bản thật của từng bài
 
       - uses: actions/setup-node@v4
         with:
@@ -44,13 +47,17 @@ jobs:
         run: node scripts/bao-cao-thang.mjs > bao-cao.md
 
       - name: Mở issue
+        # shell: bash tường minh để có pipefail: không có nó, `gh issue list` lỗi mà jq vẫn
+        # chạy thì $so rỗng → tạo issue trùng
+        shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
           tieu_de=$(head -n 1 bao-cao.md | sed 's/^# //')
-          # Đã có issue của tháng này thì KHÔNG ghi đè: người dùng có thể đã điền tay bảng
-          # Umami vào đó. Muốn tạo lại thì đóng/xoá issue cũ rồi chạy lại.
+          # Đã có issue trùng tên thì KHÔNG ghi đè: người dùng có thể đã điền tay bảng Umami.
+          # Muốn tạo lại: đổi tên hoặc xoá issue cũ (đóng thôi chưa đủ — tìm cả issue đã đóng).
+          # Bản chạy giữa tháng có tiêu đề "(tạm tính tới …)" nên không bao giờ trùng bản đầy đủ.
           # jq thật (có sẵn trên runner) vì `gh --jq` không nhận --arg; so tiêu đề bằng biến
           # jq chứ không ghép chuỗi vào biểu thức
           so=$(gh issue list --repo "$REPO" --state all --limit 200 --json number,title \
