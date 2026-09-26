@@ -20,6 +20,8 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - `sitemap.njk` — sitemap tự sinh khi build (bài mới tự vào, kèm lastmod); trang lọc chủ đề chưa đưa vào (còn mỏng)
 - `llms.njk` — sinh `llms.txt` khi build (bản đồ nội dung cho LLM, bài mới tự vào); đừng sửa `llms.txt` trong `_site/`
 - `bsquyen/` — ảnh chân dung bác sĩ
+- Đo lường: Umami (`_includes/partials/do-luong.njk` + bản sao trong `index.html`, listener `js/do-luong.js`) — sự kiện và quy tắc ở `docs/do-luong.md`. Không gửi dữ liệu cá nhân lên analytics.
+- `plans/` — plan đang chạy (không build ra site)
 
 ## Quy trình bài viết Kiến thức (QUAN TRỌNG)
 

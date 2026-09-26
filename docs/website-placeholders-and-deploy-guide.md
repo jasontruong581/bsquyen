@@ -56,12 +56,12 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 
 1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm **primary** để `*.vercel.app` tự 301 redirect — nhờ đó các URL đã được Google index không mất giá trị.
 
-2. Thay toàn bộ URL trong **source** (34 chỗ / 8 file — con số này thay đổi khi thêm
+2. Thay toàn bộ URL trong **source** (38 chỗ / 10 file — con số này thay đổi khi thêm
    template mới, nên **luôn chạy lệnh `grep` bên dưới** thay vì tin bảng này):
 
    | File | Số chỗ | Chứa gì |
    |---|---|---|
-   | `index.html` | 10 | canonical, Open Graph, JSON-LD `Physician`/`MedicalClinic` |
+   | `index.html` | 11 | canonical, Open Graph, JSON-LD `Physician`/`MedicalClinic`, `data-domains` của Umami |
    | `_includes/layouts/bai-viet.njk` | 7 | canonical, `og:url`, `og:image`, JSON-LD của **mọi bài viết** |
    | `kien-thuc/index.njk` | 5 | canonical + Open Graph trang danh sách (kèm `rel=prev/next`) |
    | `kien-thuc/chu-de.njk` | 3 | canonical + Open Graph **6 trang lọc chủ đề** |
@@ -70,6 +70,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `robots.txt` | 1 | dòng `Sitemap:` |
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
    | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
+   | `_includes/partials/do-luong.njk` | 1 | `data-domains` của Umami — sót thì **site mới ngừng đếm số liệu** |
 
    ```bash
    grep -rl 'bsquyen\.vercel\.app' \
@@ -90,9 +91,10 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    grep -o '<loc>[^<]*</loc>' _site/sitemap.xml             # phải toàn bsquyen.com
    ```
 
-4. Đăng ký Google Search Console + Bing Webmaster Tools cho domain mới, submit `sitemap.xml`
-5. Tạo Google Business Profile cho phòng khám (cần hướng dẫn riêng — xem ghi chú bên dưới)
-6. Kiểm tra structured data bằng https://search.google.com/test/rich-results (test cả trang gốc **và** một trang bài viết — hai schema khác nhau: `Physician`/`MedicalClinic` vs `MedicalWebPage`)
+4. Trong Umami: **Settings → Websites → sửa Domain** thành `bsquyen.com`. Sửa website hiện có, đừng thêm mới — gói Hobby chỉ 1 website, và sửa thì dữ liệu cũ vẫn liền mạch. Xem `docs/do-luong.md`.
+5. Đăng ký Google Search Console + Bing Webmaster Tools cho domain mới, submit `sitemap.xml`
+6. Tạo Google Business Profile cho phòng khám (cần hướng dẫn riêng — xem ghi chú bên dưới)
+7. Kiểm tra structured data bằng https://search.google.com/test/rich-results (test cả trang gốc **và** một trang bài viết — hai schema khác nhau: `Physician`/`MedicalClinic` vs `MedicalWebPage`)
 
 ### Việc chưa làm (chờ domain)
 
