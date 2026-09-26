@@ -18,10 +18,9 @@ on:
         type: boolean
         default: true
 
-concurrency:
-  group: dang-facebook
-  cancel-in-progress: false
-
+# Cố ý không có khối concurrency: GitHub chỉ giữ một job chờ mỗi nhóm, nên job thứ ba
+# xếp hàng sẽ huỷ job đang chờ — và job bị huỷ không gửi mail như job fail, bài đó lặng
+# lẽ không lên page. Mỗi job đăng một bài riêng nên chạy song song không có hại.
 jobs:
   dang-bai:
     runs-on: ubuntu-latest
