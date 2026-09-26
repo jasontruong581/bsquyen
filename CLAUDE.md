@@ -9,7 +9,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 
 - `npm run build` — build Eleventy → `_site/`
 - `npm run dev` — dev server có watch, dùng để preview output đã build
-- `npm test` — test logic của script đăng Facebook (hiện là phần tính giờ đăng theo giờ VN)
+- `npm test` — test các script trong `scripts/` (giờ đăng Facebook, caption, bot duyệt PR, báo cáo tháng); chạy tự động trên mọi PR (`.github/workflows/kiem-tra.yml`)
 
 ## Cấu trúc
 
