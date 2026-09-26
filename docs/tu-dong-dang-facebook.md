@@ -136,6 +136,7 @@ Job fail thì GitHub gửi mail cho chủ repo. Log ở tab **Actions**.
 | `không lên sau 5 phút` | Vercel deploy fail hoặc quá chậm. Kiểm tra deploy, rồi Run workflow lại với slug đó. |
 | Lỗi nhắc tới version | Phiên bản Graph API hết hạn ~2 năm sau khi ra. Đang pin `v26.0` (ra 29/07/2026). Đổi `FB_API_VERSION` trong workflow theo <https://developers.facebook.com/docs/graph-api/changelog>. |
 | `/me/accounts` không thấy page nào | User token thiếu `pages_show_list`, hoặc lúc đăng nhập chưa tick chọn page. Lấy lại token từ bước 3. |
+| `Token thiếu quyền pages_manage_posts` | App chưa bật quyền trong use case *Quản lý mọi thứ trên Trang* (Explorer vẫn tạo token, chỉ lặng lẽ bỏ quyền đó), hoặc bị bỏ tick trong hộp thoại đăng nhập. Bật quyền, lấy token mới, chạy lại script — secret mới ghi đè secret cũ. |
 
 Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page của bác sĩ tệ hơn là đăng trễ.
 
