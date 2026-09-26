@@ -6,7 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "build": "eleventy",
-    "dev": "eleventy --serve"
+    "dev": "eleventy --serve",
+    "test": "node --test \"scripts/*.test.mjs\""
   },
   "repository": {
     "type": "git",

@@ -47,6 +47,9 @@ jobs:
           SITE_URL: https://bsquyen.vercel.app
           # Phiên bản Graph API hết hạn sau ~2 năm; kiểm tra changelog khi job báo lỗi version.
           FB_API_VERSION: v26.0
-          # Cửa sổ sửa/huỷ trước khi bài tự đăng (phút). Facebook yêu cầu ≥ 10.
+          # Giờ đăng cố định, giờ Việt Nam (HH:MM). Merge sau 19:20 thì dời sang 19:30
+          # hôm sau, vì Facebook đòi giờ hẹn cách hiện tại ít nhất 10 phút.
+          GIO_DANG: "19:30"
+          # Chỉ dùng khi GIO_DANG để trống: đăng sau N phút kể từ lúc merge (≥ 10).
           DELAY_PHUT: "120"
         run: node scripts/dang-facebook.mjs
