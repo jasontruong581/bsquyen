@@ -34,6 +34,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - Ảnh minh họa: lưu `assets/kien-thuc/<slug>-N.(svg|jpg)`, alt text rõ nghĩa, nén ≤200KB với ảnh raster; ảnh AI phải chú thích "Ảnh minh họa".
 - Nội dung y tế là YMYL: không hứa hẹn kết quả điều trị, không dùng testimonial bệnh nhân (quy định quảng cáo y tế VN — site dùng section "Cam kết đồng hành" thay thế), giọng trấn an, có nguồn tham khảo.
 - Merge PR bài viết cũng kích hoạt job đăng Facebook (bài ảnh hẹn 19:30 giờ VN cùng ngày merge, merge sau 19:20 thì dời sang hôm sau; sửa/huỷ được trong Meta Business Suite). Setup token và xử lý sự cố: `docs/tu-dong-dang-facebook.md`.
+- Ngày 1 hàng tháng tự mở issue "Báo cáo tháng" (bài mới, số liệu Facebook, job lỗi, bảng Umami điền tay) — `docs/bao-cao-thang.md`.
 
 ## Thông tin liên hệ chuẩn (single source of truth)
 

@@ -146,6 +146,14 @@ async function main() {
     );
   }
   console.log("  ✓ Token đủ quyền đăng bài");
+  // read_insights không bắt buộc để đăng — thiếu thì chỉ báo cáo tháng mất số lượt tiếp cận
+  // và lượt bấm link (vẫn có reaction, bình luận, chia sẻ). Nên cảnh báo, không chặn.
+  if (!quyen.includes("read_insights")) {
+    console.warn(
+      "  ⚠ Token chưa có read_insights — báo cáo tháng sẽ thiếu lượt tiếp cận và lượt bấm link.\n" +
+        "    Muốn có: thêm read_insights vào use case và vào ô Quyền của Explorer, rồi chạy lại."
+    );
+  }
 
   if (chiIn) {
     console.log("\n[4/4] In ra để tự dán vào GitHub Secrets:\n");
