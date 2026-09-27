@@ -99,7 +99,11 @@
     e.preventDefault();
     var tuoi = Number(oTuoi.value);
     if (!oTuoi.value || !isFinite(tuoi) || tuoi < 1 || tuoi > 120 || Math.floor(tuoi) !== tuoi) {
+      // Đặt lại chữ để trình đọc màn hình đọc lại thông báo ở lần gửi sai thứ hai
+      var chuLoi = loiTuoi.textContent;
+      loiTuoi.textContent = '';
       loiTuoi.hidden = false;
+      loiTuoi.textContent = chuLoi;
       oTuoi.setAttribute('aria-invalid', 'true');
       oTuoi.focus();
       return;
@@ -125,6 +129,9 @@
       nut.type = 'button';
       nut.addEventListener('click', function () {
         lich.hidden = false;
+        // Chuyển focus trước khi ẩn nút, không thì focus rơi về đầu trang
+        lich.tabIndex = -1;
+        lich.focus();
         nut.hidden = true;
       });
       noiDung.appendChild(nut);
@@ -145,5 +152,6 @@
     oTuoi.focus();
   });
 
+  document.getElementById('tsDuPhong').hidden = true;
   form.hidden = false;
 })();

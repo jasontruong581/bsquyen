@@ -63,7 +63,7 @@ const escBang = (s) =>
     .replace(/\s+/g, " ")
     .trim();
 
-export function taoMarkdown({ thang, bai, facebook, jobs, congCu = [], nowMs = Date.now() }) {
+export function taoMarkdown({ thang, bai, facebook, jobs, congCu = [], congCuLoi = null, nowMs = Date.now() }) {
   const [nam, t] = thang.split("-");
   // Tháng chưa hết (chạy tay giữa tháng để thử) → tiêu đề khác hẳn, để issue tạm này không
   // bao giờ trùng tên và chặn báo cáo đầy đủ chạy ngày 1 tháng sau.
@@ -121,7 +121,9 @@ export function taoMarkdown({ thang, bai, facebook, jobs, congCu = [], nowMs = D
   }
 
   // Chỉ hiện khi có việc: bác sĩ muốn công cụ được rà lại khi có bài tầm soát mới.
-  if (congCu.length) {
+  if (congCuLoi) {
+    dong.push("", "## Công cụ tầm soát", "", `⚠ ${congCuLoi}`);
+  } else if (congCu.length) {
     dong.push("", "## Công cụ tầm soát — cần rà lại", "", `${congCu.length} bài tag "Tầm soát" đã xuất bản nhưng công cụ chưa dùng làm nguồn:`, "");
     congCu.forEach((b) => dong.push(`- [${escBang(b.title)}](https://bsquyen.vercel.app/kien-thuc/${b.slug}/)`));
     dong.push("", "Soạn quy tắc mới vào `docs/quy-tac-cong-cu-tam-soat.md` để bác sĩ duyệt trên PR, rồi thêm vào `js/tam-soat-quy-tac.js` kèm test.");
@@ -372,11 +374,12 @@ async function main() {
 
   const tatCa = docBai();
   let congCu = [];
+  let congCuLoi = null;
   try {
     congCu = baiTamSoatChuaDung(tatCa, urlNguonCongCu());
   } catch (e) {
-    // Không đọc được file quy tắc thì bỏ mục nhắc, không làm hỏng cả báo cáo.
-    console.error(`⚠ Bỏ qua mục công cụ tầm soát: ${e.message}`);
+    // Không đọc được file quy tắc thì ghi một dòng ⚠, không làm hỏng cả báo cáo.
+    congCuLoi = `Không kiểm được công cụ tầm soát: ${e.message}`;
   }
   const bai = baiTrongThang(tatCa, thang)
     .map((b) => ({ ...b, ngay: b.xuatBan ? ngayVN(b.xuatBan) : new Date(b.date).toISOString().slice(0, 10) }))
@@ -386,7 +389,7 @@ async function main() {
   const [fb, jb] = await Promise.allSettled([layFacebook(thang), layJobs(thang)]);
   const facebook = fb.status === "fulfilled" ? fb.value : { loi: `Lỗi không lường trước: ${fb.reason && fb.reason.message}` };
   const jobs = jb.status === "fulfilled" ? jb.value : { loi: `Lỗi không lường trước: ${jb.reason && jb.reason.message}` };
-  process.stdout.write(taoMarkdown({ thang, bai, facebook, jobs, congCu }) + "\n");
+  process.stdout.write(taoMarkdown({ thang, bai, facebook, jobs, congCu, congCuLoi }) + "\n");
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] || "").href) await main();

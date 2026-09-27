@@ -43,6 +43,12 @@ Listener nằm ở `js/do-luong.js` và bắt theo `href`, nên **nút liên h�
 Chỉ cần đo thêm khi đó là `<button>` chứ không phải `<a>` — xem cách làm với nút Zalo của
 form trong `js/main.js`.
 
+**Công cụ tầm soát — giới hạn đã chấp nhận:** Umami vẫn ghi lượt xem trang như mọi trang
+khác, nên nếu người dùng bấm từ kết quả sang một bài (vd bài dấu hiệu cảnh báo, chỉ có trong
+khối "nên đi khám sớm"), chuỗi trang trong phiên đó gợi ý được một phần câu trả lời. Chấp
+nhận vì người xem ẩn danh (không cookie, không tên, không SĐT), và bài đó cũng được mở từ
+nhiều chỗ khác. Không bao giờ gửi câu trả lời thẳng lên analytics.
+
 **Không gửi dữ liệu cá nhân:** không họ tên, SĐT, dịch vụ chọn trong form, không nội
 dung người dùng gõ. Giữ nguyên tắc này khi thêm sự kiện mới.
 

@@ -18,7 +18,7 @@ function chuTrongBang() {
   const kq = {};
   for (const dong of DOC.split("\n")) {
     const o = dong.split("|").map((s) => s.trim());
-    if (o.length >= 6 && /^[A-Z]{1,2}\d$/.test(o[1])) kq[o[1]] = boDam(o[3]);
+    if (o.length >= 6 && /^[A-Z]{1,3}\d+$/.test(o[1])) kq[o[1]] = boDam(o[3]);
   }
   return kq;
 }
@@ -37,7 +37,7 @@ function trichDanDuoi(tieuDe) {
 test("chữ trong code khớp nguyên văn bảng đã duyệt", () => {
   const bang = chuTrongBang();
   const idBang = Object.keys(bang).sort();
-  const idCode = Object.keys(CHU).filter((k) => /^[A-Z]{1,2}\d$/.test(k) && k !== "R0" && k !== "T0");
+  const idCode = Object.keys(CHU).filter((k) => /^[A-Z]{1,3}\d+$/.test(k) && k !== "R0" && k !== "T0");
   assert.deepEqual(idCode.sort(), idBang, "bộ ID trong code và trong bảng phải trùng nhau");
   for (const id of idBang) assert.equal(CHU[id], bang[id], `lệch chữ ở ${id}`);
 

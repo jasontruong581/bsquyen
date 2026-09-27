@@ -6,6 +6,7 @@
   margin-bottom: 1.6rem;
 }
 .ts-noscript {
+  margin-bottom: 1.6rem;
   padding: 1rem 1.2rem;
   background: var(--orange-soft);
   border-radius: var(--radius);
@@ -72,6 +73,7 @@
 .ts-ket-qua h2 { margin-bottom: 1rem; }
 .ts-ket-qua h2:focus { outline: none; }
 .ts-lich { display: flex; flex-direction: column; gap: 1rem; }
+.ts-lich:focus { outline: none; }
 .ts-hop {
   background: var(--white);
   border: 1px solid var(--line);

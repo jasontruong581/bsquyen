@@ -48,19 +48,21 @@ eleventyExcludeFromCollections: true
 
         {# Form ẩn tới khi js/tam-soat.js chạy: không có JavaScript thì trình duyệt sẽ gửi
            form bằng GET, đưa tuổi và tiền sử lên URL (lọt vào lịch sử trình duyệt, log). #}
-        <noscript>
-          <p class="ts-noscript">
-            Công cụ cần bật JavaScript. Bạn vẫn có thể đọc các bài
-            <a href="/kien-thuc/chu-de/tam-soat/">tầm soát ung thư</a>.
-          </p>
-        </noscript>
+        {# Hiện sẵn, script chạy được mới ẩn đi: tắt JavaScript, hay script bị chặn / lỗi tải,
+           người dùng vẫn thấy lời giải thích thay vì một trang trống. #}
+        <p class="ts-noscript" id="tsDuPhong">
+          Công cụ cần JavaScript để chạy. Bạn vẫn có thể đọc các bài
+          <a href="/kien-thuc/chu-de/tam-soat/">tầm soát ung thư</a>.
+        </p>
 
-        <form class="ts-form" id="tsForm" hidden novalidate>
+        {# autocomplete="off": trình duyệt không nhớ tuổi và tiền sử, kể cả khi tải lại trang
+           trên máy dùng chung trong gia đình. #}
+        <form class="ts-form" id="tsForm" hidden novalidate autocomplete="off">
           <fieldset class="ts-cau">
-            <legend>1. Bạn bao nhiêu tuổi?</legend>
+            <legend id="tsTuoiNhan">1. Bạn bao nhiêu tuổi?</legend>
             <input id="tsTuoi" type="number" inputmode="numeric" min="1" max="120" required
-                   aria-describedby="tsTuoiLoi" class="ts-tuoi">
-            <p class="ts-loi" id="tsTuoiLoi" role="alert" hidden>Hãy nhập tuổi của bạn (từ 1 đến 120).</p>
+                   aria-labelledby="tsTuoiNhan" aria-describedby="tsTuoiLoi" class="ts-tuoi">
+            <p class="ts-loi" id="tsTuoiLoi" role="alert" hidden>Hãy nhập tuổi của bạn bằng số tròn, từ 1 đến 120.</p>
           </fieldset>
 
           <fieldset class="ts-cau">
@@ -73,8 +75,8 @@ eleventyExcludeFromCollections: true
             <legend>3. Hiện bạn có dấu hiệu nào dưới đây không?</legend>
             <ul class="ts-dau-hieu">
               <li>Ho ra máu, nôn ra máu, đi cầu phân đen</li>
-              <li>Khó thở mới xuất hiện, đau ngực tăng dần</li>
-              <li>Đau dữ dội, không giảm với thuốc giảm đau thông thường</li>
+              <li>Khó thở mới xuất hiện, đau ngực tăng</li>
+              <li>Đau dữ dội không giảm với thuốc giảm đau thông thường</li>
               <li>Sụt cân nhanh kèm mệt nhiều</li>
               <li>Vàng da, vàng mắt tăng trong vài ngày</li>
               <li>Hạch to nhanh kèm sốt kéo dài</li>

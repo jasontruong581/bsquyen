@@ -543,8 +543,13 @@ h1 em { font-style: normal; color: var(--orange); }
   .hero-card { left: .5rem; }
 }
 
-/* Menu gập sớm hơn các phần khác: dưới ~970px, 6 mục menu không còn vừa một dòng cạnh
-   logo và bị rớt xuống dòng thứ hai. */
+/* Menu trang chủ có 7 mục: khít khoảng cách lại trước khi phải gập, để không rớt dòng. */
+@media (max-width: 1100px) {
+  .site-nav { gap: 1rem; }
+}
+
+/* Menu gập sớm hơn các phần khác: dưới ~980px, menu không còn vừa một dòng cạnh logo và
+   bị rớt xuống dòng thứ hai. */
 @media (max-width: 980px) {
   .nav-toggle { display: flex; }
   .site-nav {

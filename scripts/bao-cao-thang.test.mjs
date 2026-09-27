@@ -189,4 +189,8 @@ test("công cụ tầm soát: nhắc bài tag Tầm soát chưa có trong công 
   const md = taoMarkdown({ thang: "2026-09", bai: [], facebook: { loi: "x" }, jobs: { loi: "x" }, congCu: chua, nowMs: vn("2026-10-01T09:00:00") });
   assert.match(md, /## Công cụ tầm soát — cần rà lại/);
   assert.match(md, /\[Phổi\]\(https:\/\/bsquyen\.vercel\.app\/kien-thuc\/tam-soat-ung-thu-phoi\/\)/);
+
+  // Không đọc được file quy tắc: phải hiện ⚠, không được trông như "không có gì cần rà"
+  const loi = taoMarkdown({ thang: "2026-09", bai: [], facebook: { loi: "x" }, jobs: { loi: "x" }, congCuLoi: "Không kiểm được công cụ tầm soát: hỏng", nowMs: vn("2026-10-01T09:00:00") });
+  assert.match(loi, /## Công cụ tầm soát\n\n⚠ Không kiểm được/);
 });

@@ -1,9 +1,11 @@
 # Quy tắc công cụ "Tôi nên tầm soát gì?"
 
 > **Trạng thái: ĐÃ DUYỆT** (bác sĩ trả lời trên PR #37, 27/09/2026). Công cụ ở
-> `/cong-cu/tam-soat/`; quy tắc trong code nằm ở `js/tam-soat-quy-tac.js`, mỗi dòng dưới
-> đây có một test trong `scripts/tam-soat-quy-tac.test.mjs`. **Sửa bảng này thì sửa code và
-> test cùng PR**, và chữ ở cột "Người dùng thấy" phải khớp nguyên văn với code.
+> `/cong-cu/tam-soat/`; quy tắc trong code nằm ở `js/tam-soat-quy-tac.js`, test ở
+> `scripts/tam-soat-quy-tac.test.mjs`. **Sửa bảng này thì sửa code và test cùng PR.** Test tự
+> đối chiếu **chữ** ở cột "Người dùng thấy" với code (lệch một chữ là đỏ), nhưng **điều
+> kiện** (mốc tuổi, "không thuộc…") thì không đọc được từ bảng — đổi điều kiện phải tự sửa
+> test tương ứng.
 
 ## Nguyên tắc
 
