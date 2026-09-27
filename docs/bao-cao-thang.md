@@ -15,10 +15,14 @@ mạnh (mua domain, Google Business Profile, chọn host) hay không.
 | Facebook: reaction, bình luận, chia sẻ từng bài | Graph API, quyền `pages_read_engagement` | ✓ |
 | Facebook: tiếp cận, lượt xem, lượt bấm vào bài | Graph API, quyền **`read_insights`** | ✓ nếu token có quyền |
 | Job đăng Facebook: lần lỗi / quá giờ, link log | GitHub Actions API | ✓ |
+| Công cụ tầm soát cần rà lại: bài tag "Tầm soát" chưa có trong công cụ (chỉ hiện khi có) | `kien-thuc/*.md` so với `js/tam-soat-quy-tac.js` | ✓ |
+| Umami: lượt xem, nguồn Facebook / chia sẻ, bấm Gọi / Zalo, lượt dùng công cụ | dashboard Umami | ✗ **điền tay** (~2 phút) |
 
 Bài tính theo **ngày merge**, không theo field `date` (ngày viết). Bài chỉ lên site sau khi
 bác sĩ duyệt; bài viết 28/9 mà merge 3/10 thì tính theo `date` sẽ lọt khỏi cả hai báo cáo.
-| Umami: lượt xem, nguồn Facebook / chia sẻ, bấm Gọi / Zalo | dashboard Umami | ✗ **điền tay** (~2 phút) |
+
+Mục "Công cụ tầm soát" là cách công cụ được rà lại định kỳ theo yêu cầu của bác sĩ: có bài
+tầm soát mới (vd ung thư phổi) thì báo cáo nhắc, xem `quy-tac-cong-cu-tam-soat.md`.
 
 Umami phải điền tay vì gói Hobby **không có API**. Điền vào bảng có sẵn trong issue. Issue
 là **bản lưu lâu dài** — Umami Hobby chỉ giữ 6 tháng dữ liệu, số liệu đã chép vào issue thì

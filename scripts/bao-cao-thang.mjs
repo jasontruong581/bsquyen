@@ -12,6 +12,7 @@
 // Umami để bảng trống cho người điền tay từ dashboard (~2 phút).
 import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 
 import matter from "gray-matter";
@@ -62,7 +63,7 @@ const escBang = (s) =>
     .replace(/\s+/g, " ")
     .trim();
 
-export function taoMarkdown({ thang, bai, facebook, jobs, nowMs = Date.now() }) {
+export function taoMarkdown({ thang, bai, facebook, jobs, congCu = [], nowMs = Date.now() }) {
   const [nam, t] = thang.split("-");
   // Tháng chưa hết (chạy tay giữa tháng để thử) → tiêu đề khác hẳn, để issue tạm này không
   // bao giờ trùng tên và chặn báo cáo đầy đủ chạy ngày 1 tháng sau.
@@ -119,6 +120,13 @@ export function taoMarkdown({ thang, bai, facebook, jobs, nowMs = Date.now() }) 
     }
   }
 
+  // Chỉ hiện khi có việc: bác sĩ muốn công cụ được rà lại khi có bài tầm soát mới.
+  if (congCu.length) {
+    dong.push("", "## Công cụ tầm soát — cần rà lại", "", `${congCu.length} bài tag "Tầm soát" đã xuất bản nhưng công cụ chưa dùng làm nguồn:`, "");
+    congCu.forEach((b) => dong.push(`- [${escBang(b.title)}](https://bsquyen.vercel.app/kien-thuc/${b.slug}/)`));
+    dong.push("", "Soạn quy tắc mới vào `docs/quy-tac-cong-cu-tam-soat.md` để bác sĩ duyệt trên PR, rồi thêm vào `js/tam-soat-quy-tac.js` kèm test.");
+  }
+
   dong.push(
     "",
     "## Umami — điền tay từ [dashboard](https://cloud.umami.is)",
@@ -134,6 +142,7 @@ export function taoMarkdown({ thang, bai, facebook, jobs, nowMs = Date.now() }) 
     "| Sự kiện `bam-goi` | | vị trí nhiều nhất: |",
     "| Sự kiện `bam-zalo` | | vị trí nhiều nhất: |",
     "| Sự kiện `dat-lich-soan` | | |",
+    "| Sự kiện `dung-cong-cu` (công cụ tầm soát) | | |",
     "| Bài được xem nhiều nhất | | |",
     "",
     "## Ghi chú của tháng",
@@ -329,8 +338,25 @@ function docBai() {
     .filter((f) => f.endsWith(".md"))
     .map((f) => {
       const { data } = matter(readFileSync(`kien-thuc/${f}`, "utf8"));
-      return { slug: f.replace(/\.md$/, ""), title: data.title, date: data.date, xuatBan: ngayXuatBan(`kien-thuc/${f}`) };
+      return {
+        slug: f.replace(/\.md$/, ""),
+        title: data.title,
+        date: data.date,
+        tags: data.tags || [],
+        xuatBan: ngayXuatBan(`kien-thuc/${f}`),
+      };
     });
+}
+
+/** Bài tag "Tầm soát" (mọi thời điểm, không chỉ tháng này) mà công cụ tầm soát chưa dùng làm nguồn. */
+export function baiTamSoatChuaDung(dsBai, urlNguon) {
+  const daDung = new Set(urlNguon);
+  return dsBai.filter((b) => b.tags.includes("Tầm soát") && !daDung.has(`/kien-thuc/${b.slug}/`));
+}
+
+function urlNguonCongCu() {
+  const { BAI } = createRequire(import.meta.url)("../js/tam-soat-quy-tac.js");
+  return Object.values(BAI).map((b) => b.url);
 }
 
 async function main() {
@@ -344,7 +370,15 @@ async function main() {
     return;
   }
 
-  const bai = baiTrongThang(docBai(), thang)
+  const tatCa = docBai();
+  let congCu = [];
+  try {
+    congCu = baiTamSoatChuaDung(tatCa, urlNguonCongCu());
+  } catch (e) {
+    // Không đọc được file quy tắc thì bỏ mục nhắc, không làm hỏng cả báo cáo.
+    console.error(`⚠ Bỏ qua mục công cụ tầm soát: ${e.message}`);
+  }
+  const bai = baiTrongThang(tatCa, thang)
     .map((b) => ({ ...b, ngay: b.xuatBan ? ngayVN(b.xuatBan) : new Date(b.date).toISOString().slice(0, 10) }))
     .sort((a, b) => a.ngay.localeCompare(b.ngay));
   // allSettled làm lưới cuối: một nguồn lỡ văng lỗi chưa lường trước cũng không được làm
@@ -352,7 +386,7 @@ async function main() {
   const [fb, jb] = await Promise.allSettled([layFacebook(thang), layJobs(thang)]);
   const facebook = fb.status === "fulfilled" ? fb.value : { loi: `Lỗi không lường trước: ${fb.reason && fb.reason.message}` };
   const jobs = jb.status === "fulfilled" ? jb.value : { loi: `Lỗi không lường trước: ${jb.reason && jb.reason.message}` };
-  process.stdout.write(taoMarkdown({ thang, bai, facebook, jobs }) + "\n");
+  process.stdout.write(taoMarkdown({ thang, bai, facebook, jobs, congCu }) + "\n");
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] || "").href) await main();

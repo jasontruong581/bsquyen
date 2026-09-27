@@ -1,0 +1,136 @@
+---
+layout: false
+permalink: /cong-cu/tam-soat/
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tôi nên tầm soát ung thư gì? — Công cụ gợi ý | BS.CKI Hạnh Quyên</title>
+  <meta name="description" content="Trả lời vài câu về tuổi, giới và tiền sử để biết nên hỏi bác sĩ về những loại tầm soát ung thư nào. Chạy ngay trên máy của bạn, không gửi câu trả lời đi đâu.">
+  <link rel="canonical" href="https://bsquyen.vercel.app/cong-cu/tam-soat/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:title" content="Tôi nên tầm soát ung thư gì?">
+  <meta property="og:description" content="Vài câu hỏi ngắn để biết nên hỏi bác sĩ về loại tầm soát nào. Không gửi câu trả lời đi đâu.">
+  <meta property="og:url" content="https://bsquyen.vercel.app/cong-cu/tam-soat/">
+  <meta property="og:image" content="https://bsquyen.vercel.app/bsquyen/bsquyen.jpg">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/kien-thuc.css">
+  <link rel="stylesheet" href="/css/tam-soat.css">
+  {% include "partials/do-luong.njk" %}
+</head>
+<body>
+
+  {% include "partials/site-header.njk" %}
+
+  <main>
+    <section class="section">
+      <div class="container article-container">
+        <nav class="breadcrumb" aria-label="Đường dẫn">
+          <a href="/">Trang chủ</a> › Công cụ
+        </nav>
+        <p class="eyebrow">Công cụ</p>
+        <h1>Tôi nên tầm soát ung thư gì?</h1>
+        <p class="article-lead">
+          Trả lời vài câu dưới đây để biết nên hỏi bác sĩ về những loại tầm soát nào,
+          kèm bài viết giải thích chi tiết cho từng loại.
+        </p>
+        <p class="ts-rieng-tu">
+          Công cụ chạy ngay trên máy của bạn. Câu trả lời không được gửi hay lưu ở đâu cả.
+        </p>
+
+        {# Form ẩn tới khi js/tam-soat.js chạy: không có JavaScript thì trình duyệt sẽ gửi
+           form bằng GET, đưa tuổi và tiền sử lên URL (lọt vào lịch sử trình duyệt, log). #}
+        <noscript>
+          <p class="ts-noscript">
+            Công cụ cần bật JavaScript. Bạn vẫn có thể đọc các bài
+            <a href="/kien-thuc/chu-de/tam-soat/">tầm soát ung thư</a>.
+          </p>
+        </noscript>
+
+        <form class="ts-form" id="tsForm" hidden novalidate>
+          <fieldset class="ts-cau">
+            <legend>1. Bạn bao nhiêu tuổi?</legend>
+            <input id="tsTuoi" type="number" inputmode="numeric" min="1" max="120" required
+                   aria-describedby="tsTuoiLoi" class="ts-tuoi">
+            <p class="ts-loi" id="tsTuoiLoi" role="alert" hidden>Hãy nhập tuổi của bạn (từ 1 đến 120).</p>
+          </fieldset>
+
+          <fieldset class="ts-cau">
+            <legend>2. Giới tính (theo sinh học)</legend>
+            <label class="ts-chon"><input type="radio" name="gioi" value="nu" checked> Nữ</label>
+            <label class="ts-chon"><input type="radio" name="gioi" value="nam"> Nam</label>
+          </fieldset>
+
+          <fieldset class="ts-cau">
+            <legend>3. Hiện bạn có dấu hiệu nào dưới đây không?</legend>
+            <ul class="ts-dau-hieu">
+              <li>Ho ra máu, nôn ra máu, đi cầu phân đen</li>
+              <li>Khó thở mới xuất hiện, đau ngực tăng dần</li>
+              <li>Đau dữ dội, không giảm với thuốc giảm đau thông thường</li>
+              <li>Sụt cân nhanh kèm mệt nhiều</li>
+              <li>Vàng da, vàng mắt tăng trong vài ngày</li>
+              <li>Hạch to nhanh kèm sốt kéo dài</li>
+            </ul>
+            <label class="ts-chon"><input type="radio" name="dauHieu" value="khong" checked> Không có</label>
+            <label class="ts-chon"><input type="radio" name="dauHieu" value="co"> Có ít nhất một dấu hiệu</label>
+          </fieldset>
+
+          <fieldset class="ts-cau">
+            <legend>4. Người thân trực hệ (cha mẹ, anh chị em ruột, con) từng mắc</legend>
+            <p class="ts-goi-y">Chọn tất cả những mục đúng, hoặc bỏ trống.</p>
+            <label class="ts-chon"><input type="checkbox" data-nhom="giaDinh" value="vu"> Ung thư vú hoặc buồng trứng</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="giaDinh" value="dai-truc-trang"> Ung thư đại trực tràng, hoặc polyp nguy cơ cao</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="giaDinh" value="da-day"> Ung thư dạ dày</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="giaDinh" value="gan"> Ung thư gan</label>
+          </fieldset>
+
+          <fieldset class="ts-cau">
+            <legend>5. Bản thân bạn</legend>
+            <p class="ts-goi-y">Chọn tất cả những mục đúng, hoặc bỏ trống.</p>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="viem-gan-b"> Viêm gan B mạn</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="viem-gan-c"> Viêm gan C</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="xo-gan"> Xơ gan</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="chua-xn-viem-gan"> Chưa từng xét nghiệm viêm gan B/C</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="hp"> Nhiễm HP, hoặc viêm loét dạ dày kéo dài</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="polyp"> Từng có polyp đại tràng</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="viem-ruot"> Viêm ruột mạn (viêm loét đại tràng, Crohn)</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="suy-giam-mien-dich"> Suy giảm miễn dịch (HIV, dùng thuốc ức chế miễn dịch lâu dài)</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="brca"> Mang đột biến gen BRCA1 hoặc BRCA2</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="xa-tri-nguc"> Từng xạ trị vùng ngực</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="thuoc-ruou"> Hút thuốc lá, hoặc uống nhiều rượu bia</label>
+            <label class="ts-chon"><input type="checkbox" data-nhom="banThan" value="chua-tiem-hpv"> Chưa từng tiêm vắc-xin HPV</label>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">Xem gợi ý</button>
+        </form>
+
+        <section class="ts-ket-qua" id="tsKetQua" hidden aria-labelledby="tsKetQuaTieuDe">
+          <h2 id="tsKetQuaTieuDe" tabindex="-1">Gợi ý cho bạn</h2>
+          <div id="tsNoiDung"></div>
+          <p class="ts-lien-he">
+            Nếu muốn hỏi thêm, bạn có thể gọi hoặc nhắn Zalo cho BS.CKI Hạnh Quyên:
+            <a href="tel:0776196601">0776 196 601</a> ·
+            <a href="https://zalo.me/0776196601" target="_blank" rel="noopener">Zalo</a>
+          </p>
+          <p class="article-disclaimer" id="tsMienTru"></p>
+          <button type="button" class="btn btn-outline" id="tsLamLai">Trả lời lại</button>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  {% include "partials/site-footer.njk" %}
+
+  <script src="/js/kien-thuc.js"></script>
+  <script src="/js/tam-soat-quy-tac.js"></script>
+  <script src="/js/tam-soat.js"></script>
+</body>
+</html>
