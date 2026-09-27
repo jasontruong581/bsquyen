@@ -121,7 +121,9 @@ function docBai(slug) {
     linkAnh: `${SITE_URL}/${anhFb}`,
     // Link và hashtag nối ở đây chứ không gõ trong frontmatter: đổi domain thì chỉ
     // sửa SITE_URL, thay vì sửa 50–100 file bài viết.
-    caption: `${gonCaption(data.facebook)}\n\n${linkBai}\n\n${hashtags.join(" ")}`,
+    // utm_source để Umami tách lượt đến từ page: trình duyệt trong app Facebook không
+    // phải lúc nào cũng gửi referrer, thiếu UTM thì những lượt đó bị tính là "trực tiếp".
+    caption: `${gonCaption(data.facebook)}\n\n${linkBai}?utm_source=facebook\n\n${hashtags.join(" ")}`,
   };
 }
 
