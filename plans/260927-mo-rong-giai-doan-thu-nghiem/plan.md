@@ -36,9 +36,9 @@ domain + Google Business Profile + đổi host (quyết ở mốc 3–6 tháng).
 
 ## Việc còn lại
 
-- **Phase 4:** công cụ đã merge (#41). Bác sĩ đã trả lời 2/6 câu hỏi nội dung (cấp cứu 115 ở
-  R0, người dưới 18 có bệnh mạn tính tiếp tục tái khám). Còn 4 câu mở trong #41: giới hạn tuổi
-  C3, chữ "sớm hơn" cho người lớn tuổi (V3/D2), V3 khi chỉ có BRCA/xạ trị, DD2 dưới 40 tuổi.
+- **Phase 4:** công cụ đã merge (#41). #42 gom trả lời 6 câu hỏi nội dung; hai đề xuất (V5/D4
+  "theo dõi kỹ hơn" cho nhóm nguy cơ đã qua mốc tuổi, DD3 cho người dưới 40 chỉ hút thuốc /
+  rượu bia) chờ bác sĩ xác nhận trên preview.
 - **User:** bấm thử nút Gọi trên site thật, xem sự kiện `bam-goi` trong Umami.
 - **User:** chạy tay workflow "Báo cáo tháng" (`2026-09`). ~~Token có `read_insights`~~ và
   ~~tắt Vercel Authentication cho preview~~ — xong 27/09.
