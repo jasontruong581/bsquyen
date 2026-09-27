@@ -128,7 +128,8 @@ Frontmatter **chỉ chứa phần chữ**. Link và hashtag nối lúc đăng, v
 Nguồn hard-wrap ~76 ký tự theo quy ước repo; script tự gộp các dòng gãy lại thành đoạn,
 chỉ giữ ngắt đoạn ở chỗ có dòng trống. Nhờ vậy caption trên Facebook không bị câu cụt.
 
-Bảng hashtag nằm trong `scripts/dang-facebook.mjs`, khớp 6 tag cố định ở `_data/chuDe.js`.
+Caption và bảng hashtag dựng ở `scripts/caption-facebook.mjs` — dùng chung với bot tóm tắt
+duyệt PR, nên caption bác sĩ đọc trên PR đúng từng chữ với caption được đăng. Bảng hashtag khớp 6 tag cố định ở `_data/chuDe.js`.
 Tag lạ bị bỏ qua kèm cảnh báo, không làm job fail.
 
 ## Khi có sự cố

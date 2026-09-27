@@ -6,7 +6,9 @@
    mô tả, tag), so khớp sau khi bỏ dấu cả hai phía (NFD + bỏ dấu + `đ`→`d` + chữ thường).
    Ô tìm kiếm **chỉ hiện khi vượt 15 bài** — ngưỡng đã đặt ở
    `docs/thiet-lap-workstation.md`.
-2. **Bài liên quan** cuối bài: 3 bài cùng tag, mới nhất trước; thiếu thì bù bằng bài mới nhất.
+2. **Bài liên quan** cuối bài: 3 bài, xếp theo **số tag chung** (nhiều hơn trước), cùng mức
+   thì mới hơn trước; thiếu thì bù bằng bài mới nhất. *(Làm khác bản plan đầu — "cùng tag, mới
+   nhất trước" — vì bài có 2 tag nên ưu tiên bài chung cả 2.)*
 3. **Mục lục** cho bài có từ 4 mục `##` trở lên; **thời gian đọc** cạnh ngày đăng.
 4. **Nút chia sẻ**: điện thoại dùng Web Share API (bảng chia sẻ của máy, có Zalo);
    máy tính có nút Facebook + sao chép link. Không SDK bên thứ ba.
