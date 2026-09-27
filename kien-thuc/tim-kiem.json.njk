@@ -1,0 +1,10 @@
+---
+# Chỉ mục cho ô tìm kiếm (js/tim-kiem.js). Luôn sinh ra, kể cả khi ô tìm kiếm chưa hiện —
+# vài KB, và vượt ngưỡng thì không phải nhớ bật thêm gì.
+layout: false
+permalink: /kien-thuc/tim-kiem.json
+eleventyExcludeFromCollections: true
+---
+[{% for post in collections.baiviet %}
+{"t":{{ post.data.title | dump | safe }},"d":{{ post.data.description | dump | safe }},"g":{{ (post.data.tags or []) | dump | safe }},"u":{{ post.url | dump | safe }},"n":{{ post.date | ngayVN | dump | safe }}}{% if not loop.last %},{% endif %}{% endfor %}
+]

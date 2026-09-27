@@ -22,6 +22,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Thuộc tính `hidden` của trình duyệt chỉ là display:none mặc định, nên thua mọi class có
+   display riêng (.btn, .article-list, .pagination…) — phần tử vẫn hiện dù JS đã ẩn.
+   !important để `hidden` luôn thắng, bất kể class nào. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 body {

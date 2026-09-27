@@ -58,6 +58,19 @@ eleventyExcludeFromCollections: true
           {% endfor %}
         </ul>
 
+        {# Ô tìm kiếm: chỉ render khi số bài vượt ngưỡng (_data/timKiem.js), và để hidden
+           tới khi js/tim-kiem.js chạy — tắt JavaScript thì không có ô nào hỏng. #}
+        {% set coTimKiem = collections.baiviet.length > timKiem.nguong %}
+        {% if coTimKiem %}
+        <form class="tim-kiem" role="search" hidden onsubmit="return false">
+          <label for="o-tim-kiem" class="sr-only">Tìm bài viết</label>
+          <input id="o-tim-kiem" type="search" autocomplete="off"
+                 placeholder="Tìm bài: ví dụ “ung thu da day”, “tầm soát”…">
+          <p class="tim-kiem-trang-thai" role="status" aria-live="polite"></p>
+          <div class="article-list tim-kiem-ket-qua" hidden></div>
+        </form>
+        {% endif %}
+
         <div class="article-list">
           {% for post in posts %}
           {% set dauTien = loop.first %}
@@ -85,5 +98,6 @@ eleventyExcludeFromCollections: true
   {% include "partials/site-footer.njk" %}
 
   <script src="/js/kien-thuc.js"></script>
+  {% if coTimKiem %}<script src="/js/tim-kiem.js"></script>{% endif %}
 </body>
 </html>

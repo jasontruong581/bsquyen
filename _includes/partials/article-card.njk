@@ -2,10 +2,12 @@
    Card vốn đã là <a> nên chip chủ đề bên trong không thể là link (lồng <a> trong
    <a> là HTML không hợp lệ). Ảnh minh họa chỉ để trang trí — tiêu đề đã mô tả
    bài rồi — nên alt rỗng, tránh trình đọc màn hình đọc trùng. Ảnh của card đầu
-   tiên không lazy-load vì nhiều khả năng là phần tử LCP của trang. #}
+   tiên không lazy-load vì nhiều khả năng là phần tử LCP của trang.
+   theTieuDe: mặc định h2; khối "Bài liên quan" đặt h3 vì card đã nằm dưới một h2. #}
+{% set _the = theTieuDe or "h2" %}
 <a class="article-item" href="{{ post.url }}">
   <div class="article-item-body">
-    <h2>{{ post.data.title }}</h2>
+    <{{ _the }}>{{ post.data.title }}</{{ _the }}>
     {% if post.data.tags and post.data.tags.length %}
     <ul class="tag-list" aria-label="Chủ đề">
       {% for t in post.data.tags %}<li class="tag">{{ t }}</li>{% endfor %}

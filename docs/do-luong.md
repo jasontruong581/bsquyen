@@ -28,8 +28,10 @@ Vercel hay chạy `npm run dev` sẽ không bị đếm — kiểm tra bằng ta
 | `bam-email` | bấm link `mailto:` (kể cả nút "Gửi qua email" của form) | `vi_tri` |
 | `bam-dat-lich` | bấm link tới `#dat-lich` | `vi_tri` |
 | `dat-lich-soan` | điền form đặt lịch hợp lệ, bấm soạn | — |
+| `tim-kiem` | ngừng gõ 1,5 giây trong ô tìm kiếm `/kien-thuc/` (mỗi truy vấn đếm 1 lần) | `so_ket_qua` — **không** gửi chữ người dùng gõ |
+| `chia-se` | `he-thong`, `sao-chep`: khi chia sẻ / sao chép **xong**; `facebook`: khi **bấm** nút (Facebook không báo lại là người đọc có đăng hay không) | `kenh`: `he-thong` (bảng chia sẻ của máy — Zalo, Messenger…), `facebook`, `sao-chep` |
 
-`vi_tri` là nơi đặt nút: `dau-trang` (khối lớn đầu trang chủ), `header`, `thanh-nhanh` (thanh dưới đáy màn hình điện thoại),
+`vi_tri` là nơi đặt nút: `dau-trang` (khối lớn đầu trang chủ), `header`, `thanh-nhanh` (thanh dưới đáy màn hình điện thoại), `tim-kiem` (gợi ý nhắn Zalo khi tìm không ra bài),
 `cuoi-bai` (khối CTA cuối bài Kiến thức), `form-dat-lich`, `footer`, hoặc tên section
 trên trang chủ (`gioi-thieu`, `phong-kham`…), hoặc `khac` khi không thuộc khối nào ở
 trên (vd link gọi nằm trong thân bài viết). Trang cụ thể thì Umami đã tự ghi theo URL.
@@ -55,6 +57,9 @@ Link trong caption Facebook có `?utm_source=facebook` (thêm tự động bởi
 `scripts/dang-facebook.mjs`). Xem ở dashboard → **UTM** hoặc lọc `utm_source`.
 Trình duyệt trong app Facebook không phải lúc nào cũng gửi referrer, nên số ở mục
 Referrers sẽ thấp hơn thực tế — tin số UTM.
+
+Link chia sẻ từ nút cuối bài có `?utm_source=chia-se`, nên lượt đọc nhờ người đọc chuyển
+bài cho nhau (nhóm Zalo gia đình…) cũng tách riêng được trong mục **UTM**.
 
 ## Đổi domain
 
