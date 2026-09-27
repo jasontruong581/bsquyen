@@ -20,7 +20,8 @@
     T0: 'Ở tuổi của bạn, thường chưa cần tầm soát ung thư: cơ thể còn khỏe và các hướng dẫn tầm soát đều bắt đầu từ tuổi trưởng thành. Chỉ nên đi khám khi có dấu hiệu bất thường rõ. Nếu bạn đang có bệnh mạn tính (ví dụ viêm gan B) và được bác sĩ theo dõi, hãy tiếp tục tái khám đều đặn theo lịch. Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B giúp phòng một số bệnh ung thư về sau.',
     V1: 'Nên trao đổi với bác sĩ về chụp nhũ ảnh định kỳ. Các hướng dẫn quốc tế lấy mốc 40 tuổi (USPSTF 2024: mỗi 2 năm từ 40 đến 74 tuổi).',
     V2: 'Chưa cần chụp nhũ ảnh định kỳ. Việc nên làm là biết vú mình bình thường thế nào để nhận ra ngay khi có thay đổi, và đi khám khi thấy bất thường.',
-    V3: 'Bạn thuộc nhóm nên tầm soát sớm hơn và kỹ hơn. Hãy mang tiền sử gia đình cụ thể tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết.',
+    V3: 'Bạn thuộc nhóm nên tầm soát sớm hơn và kỹ hơn. Hãy mang thông tin tiền sử của bạn và gia đình tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết.',
+    V5: 'Bạn thuộc nhóm nguy cơ cao hơn, nên được theo dõi kỹ hơn người bình thường; bác sĩ có thể đề nghị chụp thêm MRI tuyến vú xen kẽ với nhũ ảnh. Hãy mang thông tin tiền sử của bạn và gia đình tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết.',
     V4: 'Sau 74 tuổi, bạn vẫn nên tầm soát vú khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu thấy thay đổi lạ ở vú thì nên đi khám ngay, không chờ tới lịch.',
     C1: 'Nên trao đổi với bác sĩ về tầm soát ung thư cổ tử cung và lặp lại đều đặn theo lịch. Tùy phương pháp, các hướng dẫn bắt đầu từ 21 tuổi (Pap) hoặc 30 tuổi (xét nghiệm HPV).',
     C2: 'Người suy giảm miễn dịch nên tầm soát sớm hơn và dày hơn (WHO: từ 25 tuổi, mỗi 3–5 năm). Hãy trao đổi với bác sĩ về lịch riêng.',
@@ -28,11 +29,13 @@
     C4: 'Sau 65 tuổi, bạn vẫn nên tầm soát cổ tử cung khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu có ra máu bất thường hay triệu chứng lạ thì nên đi khám ngay, không chờ tới lịch.',
     D1: 'Nên trao đổi với bác sĩ về tầm soát ung thư đại trực tràng. Các hướng dẫn quốc tế khuyến cáo bắt đầu từ 45 tuổi với người nguy cơ trung bình.',
     D2: 'Bạn thuộc nhóm cần bắt đầu sớm hơn mốc 45 tuổi. Hãy trao đổi kỹ với bác sĩ về thời điểm và phương pháp.',
+    D4: 'Bạn thuộc nhóm nguy cơ cao hơn, thường cần được theo dõi kỹ hơn người bình thường. Hãy trao đổi kỹ với bác sĩ về phương pháp và khoảng cách giữa các lần tầm soát.',
     D3: 'Sau 75 tuổi, bạn vẫn nên tầm soát đại trực tràng khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu đi cầu ra máu, đổi thói quen đi cầu hay sụt cân không rõ lý do thì nên đi khám ngay.',
     G1: 'Nên trao đổi với bác sĩ về lịch theo dõi gan định kỳ. Với nhóm nguy cơ, các hướng dẫn chuyên khoa khuyến cáo siêu âm bụng khoảng 6 tháng một lần, có thể kèm xét nghiệm máu AFP.',
     G2: 'Việc nên làm trước tiên là xét nghiệm viêm gan B và C một lần, để biết mình có thuộc nhóm cần theo dõi gan hay không.',
     DD1: 'Khoảng 40 tuổi là mốc hợp lý để bắt đầu trao đổi với bác sĩ về tầm soát ung thư dạ dày. Việt Nam chưa có chương trình tầm soát toàn dân, nhưng người Việt có xu hướng mắc bệnh ở tuổi trẻ hơn so với phương Tây.',
     DD2: 'Bạn thuộc nhóm nên cân nhắc tầm soát dạ dày sớm và kỹ hơn. Hãy trao đổi với bác sĩ.',
+    DD3: 'Hút thuốc và uống nhiều rượu bia làm tăng nguy cơ ung thư dạ dày. Trước 40 tuổi, nếu không có triệu chứng thì thường chưa cần nội soi tầm soát; bỏ thuốc lá và hạn chế rượu bia là việc có ích nhất lúc này. Từ khoảng 40 tuổi, hãy trao đổi với bác sĩ về tầm soát dạ dày.',
     KHONG_KHOP: 'Với những gì bạn chọn, hiện chưa có loại tầm soát nào các hướng dẫn khuyến cáo riêng cho bạn. Hãy giữ lối sống lành mạnh và đi khám khi có dấu hiệu bất thường. Bạn có thể quay lại công cụ khi bước sang mốc tuổi mới.',
     MIEN_TRU: 'Kết quả này chỉ gợi ý những điều bạn nên hỏi bác sĩ, dựa trên các hướng dẫn phổ biến. Nó không phải chẩn đoán và không thay thế việc thăm khám. Mỗi người có hoàn cảnh riêng, bác sĩ sẽ tư vấn cụ thể sau khi khám.'
   };
@@ -70,7 +73,9 @@
 
     if (nu) {
       var vuNguyCo = co(gd, 'vu') || co(bt, 'brca') || co(bt, 'xa-tri-nguc');
-      if (tuoi <= 74 && vuNguyCo) them('V3', 'vu');
+      // Nhóm nguy cơ: chưa tới mốc chung thì "bắt đầu sớm hơn", đã qua mốc thì "theo dõi kỹ hơn"
+      if (tuoi <= 39 && vuNguyCo) them('V3', 'vu');
+      else if (tuoi <= 74 && vuNguyCo) them('V5', 'vu');
       else if (tuoi >= 75) them('V4', 'vu');
       else if (tuoi >= 40) them('V1', 'vu');
       else them('V2', 'vu');
@@ -83,7 +88,8 @@
     }
 
     var ruotNguyCo = co(gd, 'dai-truc-trang') || co(bt, 'polyp') || co(bt, 'viem-ruot');
-    if (tuoi <= 75 && ruotNguyCo) them('D2', 'dai-truc-trang');
+    if (tuoi <= 44 && ruotNguyCo) them('D2', 'dai-truc-trang');
+    else if (tuoi <= 75 && ruotNguyCo) them('D4', 'dai-truc-trang');
     else if (tuoi >= 76) them('D3', 'dai-truc-trang');
     else if (tuoi >= 45) them('D1', 'dai-truc-trang');
 
@@ -91,9 +97,13 @@
     if (ganNguyCo) them('G1', 'gan');
     else if (co(bt, 'chua-xn-viem-gan')) them('G2', 'gan');
 
-    var dayNguyCo = co(bt, 'hp') || co(gd, 'da-day') || co(bt, 'thuoc-ruou');
-    if (dayNguyCo) them('DD2', 'da-day');
+    // Hút thuốc / rượu bia chỉ đưa vào nhóm nguy cơ từ 40 tuổi (theo bài); HP và người thân
+    // thì mọi tuổi trưởng thành.
+    var dayNguyCo = co(bt, 'hp') || co(gd, 'da-day');
+    var loiSong = co(bt, 'thuoc-ruou');
+    if (dayNguyCo || (tuoi >= 40 && loiSong)) them('DD2', 'da-day');
     else if (tuoi >= 40) them('DD1', 'da-day');
+    else if (loiSong) them('DD3', 'da-day');
 
     return { dauHieu: !!traLoi.dauHieu, duoiTuoi: false, muc: muc };
   }

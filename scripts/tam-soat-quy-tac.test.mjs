@@ -64,14 +64,16 @@ test("T0: dưới 18 tuổi không có mục tầm soát nào, kể cả khi ch�
   assert.equal(ketQua({ tuoi: 18, gioi: "nam" }).duoiTuoi, false);
 });
 
-test("V1–V4: vú theo tuổi và nguy cơ", () => {
+test("V1–V5: vú theo tuổi và nguy cơ", () => {
   assert.deepEqual(ids({ tuoi: 39, gioi: "nu" }).filter((x) => x[0] === "V"), ["V2"]);
   assert.deepEqual(ids({ tuoi: 40, gioi: "nu" }).filter((x) => x[0] === "V"), ["V1"]);
   assert.deepEqual(ids({ tuoi: 74, gioi: "nu" }).filter((x) => x[0] === "V"), ["V1"]);
   assert.deepEqual(ids({ tuoi: 75, gioi: "nu" }).filter((x) => x[0] === "V"), ["V4"]);
   for (const nguyCo of [{ giaDinh: ["vu"] }, { banThan: ["brca"] }, { banThan: ["xa-tri-nguc"] }]) {
     assert.deepEqual(ids({ tuoi: 30, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V3"]);
-    assert.deepEqual(ids({ tuoi: 74, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V3"]);
+    assert.deepEqual(ids({ tuoi: 39, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V3"]);
+    assert.deepEqual(ids({ tuoi: 40, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V5"], "đã qua mốc 40 thì không nói 'sớm hơn'");
+    assert.deepEqual(ids({ tuoi: 74, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V5"]);
     assert.deepEqual(ids({ tuoi: 80, gioi: "nu", ...nguyCo }).filter((x) => x[0] === "V"), ["V4"]);
   }
   assert.equal(ids({ tuoi: 50, gioi: "nam", giaDinh: ["vu"], banThan: ["brca"] }).some((x) => x[0] === "V"), false);
@@ -92,7 +94,7 @@ test("C1–C4: cổ tử cung theo tuổi, miễn dịch, vắc-xin", () => {
   assert.equal(ids({ tuoi: 30, gioi: "nam", banThan: ["chua-tiem-hpv", "suy-giam-mien-dich"] }).some((x) => x[0] === "C"), false);
 });
 
-test("D1–D3: đại trực tràng theo tuổi và nguy cơ, mọi giới", () => {
+test("D1–D4: đại trực tràng theo tuổi và nguy cơ, mọi giới", () => {
   const d = (tl) => ids({ gioi: "nam", ...tl }).filter((x) => /^D\d/.test(x));
   assert.deepEqual(d({ tuoi: 44 }), []);
   assert.deepEqual(d({ tuoi: 45 }), ["D1"]);
@@ -100,7 +102,9 @@ test("D1–D3: đại trực tràng theo tuổi và nguy cơ, mọi giới", () 
   assert.deepEqual(d({ tuoi: 76 }), ["D3"]);
   for (const nguyCo of [{ giaDinh: ["dai-truc-trang"] }, { banThan: ["polyp"] }, { banThan: ["viem-ruot"] }]) {
     assert.deepEqual(d({ tuoi: 30, ...nguyCo }), ["D2"]);
-    assert.deepEqual(d({ tuoi: 75, ...nguyCo }), ["D2"]);
+    assert.deepEqual(d({ tuoi: 44, ...nguyCo }), ["D2"]);
+    assert.deepEqual(d({ tuoi: 45, ...nguyCo }), ["D4"], "đã qua mốc 45 thì không nói 'sớm hơn'");
+    assert.deepEqual(d({ tuoi: 75, ...nguyCo }), ["D4"]);
     assert.deepEqual(d({ tuoi: 80, ...nguyCo }), ["D3"]);
   }
   assert.deepEqual(ids({ tuoi: 45, gioi: "nu" }).filter((x) => /^D\d/.test(x)), ["D1"]);
@@ -116,14 +120,21 @@ test("G1–G2: gan theo tiền sử, không phụ thuộc tuổi hay giới", ()
   assert.deepEqual(g({ banThan: ["chua-xn-viem-gan", "viem-gan-b"] }), ["G1"], "G1 thắng G2");
 });
 
-test("DD1–DD2: dạ dày theo tuổi và nguy cơ", () => {
+test("DD1–DD3: dạ dày theo tuổi và nguy cơ", () => {
   const dd = (tl) => ids({ gioi: "nu", ...tl }).filter((x) => x.startsWith("DD"));
   assert.deepEqual(dd({ tuoi: 39 }), []);
   assert.deepEqual(dd({ tuoi: 40 }), ["DD1"]);
-  for (const nguyCo of [{ banThan: ["hp"] }, { giaDinh: ["da-day"] }, { banThan: ["thuoc-ruou"] }]) {
+  // HP và người thân: mọi tuổi trưởng thành
+  for (const nguyCo of [{ banThan: ["hp"] }, { giaDinh: ["da-day"] }]) {
     assert.deepEqual(dd({ tuoi: 25, ...nguyCo }), ["DD2"]);
     assert.deepEqual(dd({ tuoi: 60, ...nguyCo }), ["DD2"]);
   }
+  // Hút thuốc / rượu bia: chỉ là nhóm nguy cơ từ 40 tuổi; trước đó là lời khuyên lối sống
+  const thuoc = { banThan: ["thuoc-ruou"] };
+  assert.deepEqual(dd({ tuoi: 25, ...thuoc }), ["DD3"]);
+  assert.deepEqual(dd({ tuoi: 39, ...thuoc }), ["DD3"]);
+  assert.deepEqual(dd({ tuoi: 40, ...thuoc }), ["DD2"]);
+  assert.deepEqual(dd({ tuoi: 30, banThan: ["thuoc-ruou", "hp"] }), ["DD2"], "có HP thì DD2 thắng DD3");
 });
 
 test("không khớp mục nào: nam trẻ không tiền sử", () => {
