@@ -13,6 +13,9 @@
     ['.booking-result', 'form-dat-lich'],
     ['.hero', 'dau-trang'], // section đầu trang chủ không có id
     ['.tim-kiem', 'tim-kiem'], // gợi ý Zalo khi tìm không ra bài
+    // Mọi link trong kết quả công cụ tầm soát chung một tên: tách riêng khối cảnh báo
+    // triệu chứng sẽ để lộ câu trả lời "có dấu hiệu" của người dùng lên analytics.
+    ['.ts-ket-qua', 'cong-cu-tam-soat'],
     ['.site-header', 'header'],
     ['.site-footer', 'footer'],
   ];

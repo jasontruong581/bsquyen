@@ -1,0 +1,96 @@
+/* Công cụ "Tôi nên tầm soát gì?" — dùng chung biến màu/nút từ styles.css */
+
+.ts-rieng-tu {
+  font-size: .92rem;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
+}
+.ts-noscript {
+  margin-bottom: 1.6rem;
+  padding: 1rem 1.2rem;
+  background: var(--orange-soft);
+  border-radius: var(--radius);
+}
+
+.ts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+.ts-cau {
+  width: 100%;
+  margin: 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+}
+.ts-cau legend {
+  float: left; /* để legend nằm trong khung thay vì đè lên viền */
+  width: 100%;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: .7rem;
+}
+.ts-cau legend + * { clear: both; }
+.ts-goi-y { color: var(--muted); font-size: .9rem; margin-bottom: .5rem; }
+.ts-tuoi {
+  width: 8rem;
+  font: inherit;
+  padding: .6rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--ink);
+}
+.ts-tuoi:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.ts-tuoi[aria-invalid="true"] { border-color: #c0392b; }
+.ts-loi { color: #c0392b; font-size: .9rem; margin-top: .5rem; }
+
+.ts-chon {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: .45rem 0;
+  cursor: pointer;
+}
+.ts-chon input {
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: .2rem;
+  accent-color: var(--orange);
+}
+.ts-dau-hieu {
+  padding-left: 1.3rem;
+  margin-bottom: .8rem;
+  color: var(--ink);
+}
+.ts-dau-hieu li { margin-bottom: .25rem; }
+
+/* Kết quả */
+.ts-ket-qua h2 { margin-bottom: 1rem; }
+.ts-ket-qua h2:focus { outline: none; }
+.ts-lich { display: flex; flex-direction: column; gap: 1rem; }
+.ts-lich:focus { outline: none; }
+.ts-hop {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.4rem;
+}
+.ts-hop h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+.ts-hop p { margin-bottom: .6rem; }
+.ts-hop p:last-child { margin-bottom: 0; }
+.ts-canh-bao {
+  border-left: 4px solid var(--orange);
+  background: var(--orange-soft);
+  margin-bottom: 1rem;
+}
+.ts-hanh-dong a,
+.ts-doc-bai a { color: var(--orange-dark); font-weight: 600; }
+.ts-xem-them { margin-bottom: 1rem; }
+.ts-lien-he { margin-top: 1.6rem; color: var(--muted); }
+.ts-lien-he a { color: var(--orange-dark); font-weight: 600; }
+.ts-ket-qua > .btn { margin-top: 1rem; }

@@ -56,7 +56,7 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
 
 1. Trỏ domain vào Vercel (Project Settings → Domains), đặt làm **primary** để `*.vercel.app` tự 301 redirect — nhờ đó các URL đã được Google index không mất giá trị.
 
-2. Thay toàn bộ URL trong **source** (39 chỗ / 11 file — con số này thay đổi khi thêm
+2. Thay toàn bộ URL trong **source** (46 chỗ / 13 file — con số này thay đổi khi thêm
    template mới, nên **luôn chạy lệnh `grep` bên dưới** thay vì tin bảng này):
 
    | File | Số chỗ | Chứa gì |
@@ -65,13 +65,15 @@ Base URL hiện tại: `https://bsquyen.vercel.app`. Bản chính thức đượ
    | `_includes/layouts/bai-viet.njk` | 7 | canonical, `og:url`, `og:image`, JSON-LD của **mọi bài viết** |
    | `kien-thuc/index.njk` | 5 | canonical + Open Graph trang danh sách (kèm `rel=prev/next`) |
    | `kien-thuc/chu-de.njk` | 3 | canonical + Open Graph **6 trang lọc chủ đề** |
-   | `sitemap.njk` | 3 | `<loc>` trang gốc, trang danh sách, và từng bài |
-   | `llms.njk` | 3 | `<loc>`-tương đương: trang gốc, trang danh sách, và từng bài |
+   | `sitemap.njk` | 4 | `<loc>` trang gốc, trang danh sách, công cụ tầm soát, và từng bài |
+   | `llms.njk` | 4 | `<loc>`-tương đương: trang gốc, trang danh sách, công cụ tầm soát, và từng bài |
+   | `cong-cu/tam-soat.njk` | 3 | canonical + Open Graph trang công cụ tầm soát |
    | `robots.txt` | 1 | dòng `Sitemap:` |
    | `demo/index.html` | 3 | canonical bản demo (`noindex, follow`) |
    | `.github/workflows/dang-facebook.yml` | 1 | `SITE_URL` — link bài trong caption Facebook |
    | `_includes/partials/do-luong.njk` | 1 | `data-domains` của Umami — sót thì **site mới ngừng đếm số liệu** |
    | `scripts/caption-facebook.mjs` | 1 | `SITE_URL` mặc định, dùng chung cho job đăng Facebook và bot duyệt PR (workflow ghi đè bằng env, chạy tay thì dùng giá trị này) |
+   | `scripts/bao-cao-thang.mjs` | 2 | link bài trong issue báo cáo tháng |
 
    ```bash
    grep -rl 'bsquyen\.vercel\.app' \

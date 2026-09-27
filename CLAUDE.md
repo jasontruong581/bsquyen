@@ -9,7 +9,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 
 - `npm run build` — build Eleventy → `_site/`
 - `npm run dev` — dev server có watch, dùng để preview output đã build
-- `npm test` — test các script trong `scripts/` (giờ đăng Facebook, caption, bot duyệt PR, báo cáo tháng); chạy tự động trên mọi PR (`.github/workflows/kiem-tra.yml`)
+- `npm test` — test các script trong `scripts/` (giờ đăng Facebook, caption, bot duyệt PR, báo cáo tháng, quy tắc công cụ tầm soát); chạy tự động trên mọi PR (`.github/workflows/kiem-tra.yml`)
 
 ## Cấu trúc
 
@@ -23,6 +23,7 @@ Domain đã chốt: **bsquyen.com** (chưa mua — khi trỏ xong, chạy checkl
 - Đo lường: Umami (`_includes/partials/do-luong.njk` + bản sao trong `index.html`, listener `js/do-luong.js`) — sự kiện và quy tắc ở `docs/do-luong.md`. Không gửi dữ liệu cá nhân lên analytics.
 - Trang bài tự sinh (lúc build, trong `eleventy.config.js`): id cho mọi `##`, mục lục (≥4 mục), thời gian đọc, 3 bài liên quan cùng chủ đề. Nút chia sẻ ở `js/chia-se.js`
 - Tìm kiếm `/kien-thuc/`: `js/tim-kiem.js` + chỉ mục `kien-thuc/tim-kiem.json.njk`, **tự hiện khi vượt 15 bài** (`_data/timKiem.js`); thử sớm bằng `$env:NGUONG_TIM_KIEM=0; npm run build` (PowerShell)
+- Công cụ "Tôi nên tầm soát gì?" `/cong-cu/tam-soat/` (menu "Công cụ"): trang `cong-cu/tam-soat.njk`, quy tắc `js/tam-soat-quy-tac.js` — **chỉ theo bảng bác sĩ đã duyệt** ở `docs/quy-tac-cong-cu-tam-soat.md`; test so chữ trong code với bảng, sửa bảng thì sửa code cùng PR. Câu trả lời không rời trình duyệt.
 - `plans/` — plan đang chạy (không build ra site)
 
 ## Quy trình bài viết Kiến thức (QUAN TRỌNG)

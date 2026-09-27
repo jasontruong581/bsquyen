@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { baiTrongThang, khoangThang, layFacebook, layJobs, taoMarkdown, thangTruoc } from "./bao-cao-thang.mjs";
+import { baiTamSoatChuaDung, baiTrongThang, khoangThang, layFacebook, layJobs, taoMarkdown, thangTruoc } from "./bao-cao-thang.mjs";
 
 const vn = (s) => Date.parse(`${s}+07:00`);
 const JSON_RES = (ok, json, status = ok ? 200 : 400) => ({ ok, status, text: async () => JSON.stringify(json) });
@@ -174,4 +174,23 @@ test("markdown: đủ các phần, thoát ký tự đặc biệt, bảng Umami �
   assert.match(md, /Vắc-xin \\\| phòng @​ai #​12/, "phải thoát |, @ và #số");
   assert.match(md, /\(bài không có chữ\)/);
   assert.match(md, /0 lần lỗi · 3 lần chạy xong không lỗi/);
+  assert.ok(!md.includes("## Công cụ tầm soát"), "không có bài cần rà thì không hiện mục nhắc");
+});
+
+test("công cụ tầm soát: nhắc bài tag Tầm soát chưa có trong công cụ, bỏ qua bài khác tag", () => {
+  const ds = [
+    { slug: "tam-soat-ung-thu-vu", title: "Vú", tags: ["Tầm soát"] },
+    { slug: "tam-soat-ung-thu-phoi", title: "Phổi", tags: ["Tầm soát"] },
+    { slug: "morphin", title: "Morphin", tags: ["Chăm sóc giảm nhẹ"] },
+  ];
+  const chua = baiTamSoatChuaDung(ds, ["/kien-thuc/tam-soat-ung-thu-vu/"]);
+  assert.deepEqual(chua.map((b) => b.slug), ["tam-soat-ung-thu-phoi"]);
+
+  const md = taoMarkdown({ thang: "2026-09", bai: [], facebook: { loi: "x" }, jobs: { loi: "x" }, congCu: chua, nowMs: vn("2026-10-01T09:00:00") });
+  assert.match(md, /## Công cụ tầm soát — cần rà lại/);
+  assert.match(md, /\[Phổi\]\(https:\/\/bsquyen\.vercel\.app\/kien-thuc\/tam-soat-ung-thu-phoi\/\)/);
+
+  // Không đọc được file quy tắc: phải hiện ⚠, không được trông như "không có gì cần rà"
+  const loi = taoMarkdown({ thang: "2026-09", bai: [], facebook: { loi: "x" }, jobs: { loi: "x" }, congCuLoi: "Không kiểm được công cụ tầm soát: hỏng", nowMs: vn("2026-10-01T09:00:00") });
+  assert.match(loi, /## Công cụ tầm soát\n\n⚠ Không kiểm được/);
 });

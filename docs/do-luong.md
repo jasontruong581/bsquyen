@@ -29,16 +29,25 @@ Vercel hay chạy `npm run dev` sẽ không bị đếm — kiểm tra bằng ta
 | `bam-dat-lich` | bấm link tới `#dat-lich` | `vi_tri` |
 | `dat-lich-soan` | điền form đặt lịch hợp lệ, bấm soạn | — |
 | `tim-kiem` | ngừng gõ 1,5 giây trong ô tìm kiếm `/kien-thuc/` (mỗi truy vấn đếm 1 lần) | `so_ket_qua` — **không** gửi chữ người dùng gõ |
+| `dung-cong-cu` | bấm "Xem gợi ý" trên `/cong-cu/tam-soat/` | `cong_cu: tam-soat` — **không** gửi câu trả lời nào (tuổi, giới, dấu hiệu, tiền sử) |
 | `chia-se` | `he-thong`, `sao-chep`: khi chia sẻ / sao chép **xong**; `facebook`: khi **bấm** nút (Facebook không báo lại là người đọc có đăng hay không) | `kenh`: `he-thong` (bảng chia sẻ của máy — Zalo, Messenger…), `facebook`, `sao-chep` |
 
 `vi_tri` là nơi đặt nút: `dau-trang` (khối lớn đầu trang chủ), `header`, `thanh-nhanh` (thanh dưới đáy màn hình điện thoại), `tim-kiem` (gợi ý nhắn Zalo khi tìm không ra bài),
-`cuoi-bai` (khối CTA cuối bài Kiến thức), `form-dat-lich`, `footer`, hoặc tên section
+`cuoi-bai` (khối CTA cuối bài Kiến thức), `form-dat-lich`, `footer`,
+`cong-cu-tam-soat` (mọi link trong kết quả công cụ — cố ý chung một tên, tách riêng khối
+"nên đi khám sớm" sẽ để lộ việc người dùng có triệu chứng), hoặc tên section
 trên trang chủ (`gioi-thieu`, `phong-kham`…), hoặc `khac` khi không thuộc khối nào ở
 trên (vd link gọi nằm trong thân bài viết). Trang cụ thể thì Umami đã tự ghi theo URL.
 
 Listener nằm ở `js/do-luong.js` và bắt theo `href`, nên **nút liên hệ mới tự được đếm**.
 Chỉ cần đo thêm khi đó là `<button>` chứ không phải `<a>` — xem cách làm với nút Zalo của
 form trong `js/main.js`.
+
+**Công cụ tầm soát — giới hạn đã chấp nhận:** Umami vẫn ghi lượt xem trang như mọi trang
+khác, nên nếu người dùng bấm từ kết quả sang một bài (vd bài dấu hiệu cảnh báo, chỉ có trong
+khối "nên đi khám sớm"), chuỗi trang trong phiên đó gợi ý được một phần câu trả lời. Chấp
+nhận vì người xem ẩn danh (không cookie, không tên, không SĐT), và bài đó cũng được mở từ
+nhiều chỗ khác. Không bao giờ gửi câu trả lời thẳng lên analytics.
 
 **Không gửi dữ liệu cá nhân:** không họ tên, SĐT, dịch vụ chọn trong form, không nội
 dung người dùng gõ. Giữ nguyên tắc này khi thêm sự kiện mới.

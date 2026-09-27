@@ -543,10 +543,14 @@ h1 em { font-style: normal; color: var(--orange); }
   .hero-card { left: .5rem; }
 }
 
-@media (max-width: 760px) {
-  body { padding-bottom: 52px; } /* chừa chỗ cho quick-bar */
-  .quick-bar { display: flex; }
+/* Menu trang chủ có 7 mục: khít khoảng cách lại trước khi phải gập, để không rớt dòng. */
+@media (max-width: 1100px) {
+  .site-nav { gap: 1rem; }
+}
 
+/* Menu gập sớm hơn các phần khác: dưới ~980px, menu không còn vừa một dòng cạnh logo và
+   bị rớt xuống dòng thứ hai. */
+@media (max-width: 980px) {
   .nav-toggle { display: flex; }
   .site-nav {
     position: absolute;
@@ -563,6 +567,11 @@ h1 em { font-style: normal; color: var(--orange); }
   .site-nav.open { display: flex; }
   .site-nav a:not(.btn) { padding: .75rem 0; border-bottom: 1px dashed var(--line); }
   .site-nav .btn { margin-top: .8rem; justify-content: center; }
+}
+
+@media (max-width: 760px) {
+  body { padding-bottom: 52px; } /* chừa chỗ cho quick-bar */
+  .quick-bar { display: flex; }
 
   .booking-form { grid-template-columns: 1fr; padding: 1.4rem; }
   .info-list li { grid-template-columns: 1fr; gap: .15rem; }

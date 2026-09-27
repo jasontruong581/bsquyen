@@ -1,6 +1,6 @@
 # Mở rộng giai đoạn chạy thử (3–6 tháng)
 
-**Trạng thái:** code xong cả 5 phase, chờ merge · phase 4 chờ bác sĩ duyệt bảng quy tắc · **Mở:** 27/09/2026
+**Trạng thái:** phase 1, 2, 3, 5 đã merge · phase 4: bảng quy tắc đã duyệt (#37), công cụ chờ bác sĩ duyệt trên PR · **Mở:** 27/09/2026
 
 ## Mục tiêu
 
@@ -28,25 +28,19 @@ domain + Google Business Profile + đổi host (quyết ở mốc 3–6 tháng).
 
 | # | Phase | Trạng thái | PR | Phụ thuộc | File |
 |---|---|---|---|---|---|
-| 1 | Đo lường: Umami + lượt bấm Gọi/Zalo + UTM | ✅ xong, chờ merge | #34 | — | [phase-01](phase-01-do-luong.md) |
-| 2 | Trang Kiến thức: tìm kiếm, bài liên quan, mục lục, chia sẻ | ✅ xong, chờ merge | #35 | #34 | [phase-02](phase-02-trang-kien-thuc.md) |
-| 3 | Bot tóm tắt duyệt trên PR bài viết | ✅ xong, chờ merge | #39 | #35 | [phase-03](phase-03-bot-duyet-pr.md) |
-| 4 | Công cụ "Tôi nên tầm soát gì?" | ⏸ bước 1 xong (bảng quy tắc) — **chờ bác sĩ duyệt** rồi mới code | #37 | bác sĩ duyệt | [phase-04](phase-04-cong-cu-tam-soat.md) |
-| 5 | Báo cáo tháng | ✅ xong, chờ merge | #40 | độc lập; cột tiếp cận cần token có `read_insights` | [phase-05](phase-05-bao-cao-thang.md) |
-
-**Thứ tự merge:** #34 → #35 → #39 (nối tiếp nhau; GitHub tự đổi base về `main` khi PR trước
-được merge). #37 và #40 độc lập, merge lúc nào cũng được. Đã thử gộp cả 5 vào một nhánh tạm:
-không xung đột, build sạch, 41/41 test.
+| 1 | Đo lường: Umami + lượt bấm Gọi/Zalo + UTM | ✅ merged | #34 | — | [phase-01](phase-01-do-luong.md) |
+| 2 | Trang Kiến thức: tìm kiếm, bài liên quan, mục lục, chia sẻ | ✅ merged | #35 | #34 | [phase-02](phase-02-trang-kien-thuc.md) |
+| 3 | Bot tóm tắt duyệt trên PR bài viết | ✅ merged | #39 | #35 | [phase-03](phase-03-bot-duyet-pr.md) |
+| 4 | Công cụ "Tôi nên tầm soát gì?" | 🔄 bảng quy tắc merged (#37); công cụ code xong, **chờ bác sĩ duyệt** trên PR `feat/cong-cu-tam-soat` | #37 + PR mới | bác sĩ duyệt | [phase-04](phase-04-cong-cu-tam-soat.md) |
+| 5 | Báo cáo tháng | ✅ merged | #40 | cột tiếp cận cần token có `read_insights` | [phase-05](phase-05-bao-cao-thang.md) |
 
 ## Việc còn lại
 
-- **Phase 4:** bác sĩ duyệt `docs/quy-tac-cong-cu-tam-soat.md` (PR #37) và trả lời 7 câu hỏi
-  cuối file → code trang `/cong-cu/tam-soat/` + mục menu "Công cụ", mỗi quy tắc một test.
-- **Sau khi merge #34:** bấm thử nút Gọi trên site thật, xem sự kiện `bam-goi` trong Umami.
-- **Sau khi merge #40:** chạy tay workflow "Báo cáo tháng" một lần; lấy lại token Facebook có
-  `read_insights`.
-- **Sau khi merge #35:** đồng bộ scheduled task routine với `docs/routine-viet-bai.md` (bỏ
-  mục "Đọc thêm" cho bài mới).
+- **Phase 4:** bác sĩ thử công cụ trên preview và trả lời các câu hỏi nội dung trong PR
+  (lối cấp cứu ở R0, giới hạn tuổi C3, người dưới 18 đang theo dõi bệnh gan…).
+- **User:** bấm thử nút Gọi trên site thật, xem sự kiện `bam-goi` trong Umami.
+- **User:** lấy lại token Facebook có `read_insights`, rồi chạy tay workflow "Báo cáo tháng".
+- ~~Đồng bộ scheduled task routine (bỏ "Đọc thêm")~~ — xong 27/09.
 
 ## Tiêu chí hoàn thành chung
 
