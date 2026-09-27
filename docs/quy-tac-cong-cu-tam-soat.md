@@ -48,9 +48,11 @@ Cột **"Người dùng thấy"** là chữ hiện nguyên văn trên công cụ
 **Người dùng thấy:**
 > Những dấu hiệu bạn chọn nên được bác sĩ khám sớm, không nên chờ tới lịch tầm soát. Chúng
 > có thể do bệnh lành tính, nhưng dù nguyên nhân là gì thì bản thân triệu chứng cũng cần
-> được xử trí.
+> được xử trí. Nếu triệu chứng nặng hoặc xuất hiện đột ngột, hãy đến cơ sở cấp cứu gần
+> nhất hoặc gọi 115.
 
-Kèm số điện thoại / Zalo và link bài dấu hiệu cảnh báo. **Phần tầm soát bên dưới ẩn** cho
+Câu cấp cứu: bác sĩ duyệt (PR #41) — phòng khám không mở cả ngày, người đang nôn ra máu lúc
+ngoài giờ khám không nên chỉ thấy số Zalo. Kèm số điện thoại / Zalo và link bài dấu hiệu cảnh báo. **Phần tầm soát bên dưới ẩn** cho
 tới khi người dùng chủ động bấm "Xem thêm lịch tầm soát".
 
 ### T0 — Dưới 18 tuổi
@@ -60,19 +62,22 @@ tới khi người dùng chủ động bấm "Xem thêm lịch tầm soát".
 **Người dùng thấy:**
 > Ở tuổi của bạn, thường chưa cần tầm soát ung thư: cơ thể còn khỏe và các hướng dẫn tầm
 > soát đều bắt đầu từ tuổi trưởng thành. Chỉ nên đi khám khi có dấu hiệu bất thường rõ.
-> Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B giúp phòng một số bệnh
-> ung thư về sau.
+> Nếu bạn đang có bệnh mạn tính (ví dụ viêm gan B) và được bác sĩ theo dõi, hãy tiếp tục
+> tái khám đều đặn theo lịch. Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B
+> giúp phòng một số bệnh ung thư về sau.
 
 Kèm link bài [Vắc-xin phòng ung thư](../kien-thuc/vac-xin-phong-ung-thu.md). Nguồn: bác sĩ
-duyệt (PR #37) + bài vắc-xin.
+duyệt (PR #37; câu bệnh mạn tính: PR #41 — để "chỉ nên đi khám khi có dấu hiệu" không bị
+hiểu là bỏ lịch theo dõi) + bài vắc-xin.
 
 ### Ung thư vú — bài [Tầm soát ung thư vú](../kien-thuc/tam-soat-ung-thu-vu.md), mục "Ai nên tầm soát và từ tuổi nào?"
 
 | ID | Điều kiện | Người dùng thấy | Nguồn |
 |---|---|---|---|
-| V1 | Nữ, 40–74 tuổi, không thuộc V3 | Nên trao đổi với bác sĩ về chụp nhũ ảnh định kỳ. Các hướng dẫn quốc tế lấy mốc 40 tuổi (USPSTF 2024: mỗi 2 năm từ 40 đến 74 tuổi). | USPSTF 2024, ACS |
+| V1 | Nữ, 40–74 tuổi, không thuộc V5 | Nên trao đổi với bác sĩ về chụp nhũ ảnh định kỳ. Các hướng dẫn quốc tế lấy mốc 40 tuổi (USPSTF 2024: mỗi 2 năm từ 40 đến 74 tuổi). | USPSTF 2024, ACS |
 | V2 | Nữ, 18–39 tuổi, không thuộc V3 | Chưa cần chụp nhũ ảnh định kỳ. Việc nên làm là biết vú mình bình thường thế nào để nhận ra ngay khi có thay đổi, và đi khám khi thấy bất thường. | đoạn "Trước 40 tuổi…" |
-| V3 | Nữ, 18–74 tuổi, **và** có: người thân vú/buồng trứng, hoặc BRCA1/2, hoặc từng xạ trị vùng ngực | Bạn thuộc nhóm nên tầm soát sớm hơn và kỹ hơn. Hãy mang tiền sử gia đình cụ thể tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết. | danh sách "Bạn nên tầm soát sớm hơn…" |
+| V3 | Nữ, 18–39 tuổi, **và** có: người thân vú/buồng trứng, hoặc BRCA1/2, hoặc từng xạ trị vùng ngực | Bạn thuộc nhóm nên tầm soát sớm hơn và kỹ hơn. Hãy mang thông tin tiền sử của bạn và gia đình tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết. | danh sách "Bạn nên tầm soát sớm hơn…" |
+| V5 | Nữ, 40–74 tuổi, **và** có cùng các yếu tố như V3 | Bạn thuộc nhóm nguy cơ cao hơn, nên được theo dõi kỹ hơn người bình thường; bác sĩ có thể đề nghị chụp thêm MRI tuyến vú xen kẽ với nhũ ảnh. Hãy mang thông tin tiền sử của bạn và gia đình tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết. | danh sách "Bạn nên tầm soát sớm hơn…" + đoạn MRI tuyến vú |
 | V4 | Nữ, từ 75 tuổi | Sau 74 tuổi, bạn vẫn nên tầm soát vú khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu thấy thay đổi lạ ở vú thì nên đi khám ngay, không chờ tới lịch. | bác sĩ duyệt (PR #37) |
 
 ### Ung thư cổ tử cung — bài [Tầm soát ung thư cổ tử cung](../kien-thuc/tam-soat-ung-thu-co-tu-cung.md), mục "Ai nên tầm soát và từ tuổi nào?"
@@ -81,15 +86,16 @@ duyệt (PR #37) + bài vắc-xin.
 |---|---|---|---|
 | C1 | Nữ, 21–65 tuổi, không thuộc C2 | Nên trao đổi với bác sĩ về tầm soát ung thư cổ tử cung và lặp lại đều đặn theo lịch. Tùy phương pháp, các hướng dẫn bắt đầu từ 21 tuổi (Pap) hoặc 30 tuổi (xét nghiệm HPV). | WHO, USPSTF |
 | C2 | Nữ, 25–65 tuổi, **và** suy giảm miễn dịch | Người suy giảm miễn dịch nên tầm soát sớm hơn và dày hơn (WHO: từ 25 tuổi, mỗi 3–5 năm). Hãy trao đổi với bác sĩ về lịch riêng. | WHO |
-| C3 | Nữ, từ 18 tuổi, **và** chưa từng tiêm vắc-xin HPV | Người lớn chưa tiêm vắc-xin HPV vẫn có thể tiêm ở nhiều độ tuổi, dù lợi ích thấp hơn tiêm sớm. Bạn có thể hỏi bác sĩ xem với tuổi và hoàn cảnh của mình thì có nên tiêm không. | bài [Vắc-xin phòng ung thư](../kien-thuc/vac-xin-phong-ung-thu.md), mục "Tiêm phòng gồm những gì?" |
+| C3 | Nữ, từ 18 tuổi, **và** chưa từng tiêm vắc-xin HPV | Người lớn chưa tiêm vắc-xin HPV vẫn có thể tiêm ở nhiều độ tuổi, dù lợi ích thấp hơn tiêm sớm. Bạn có thể hỏi bác sĩ xem với tuổi và hoàn cảnh của mình thì có nên tiêm không. | bài [Vắc-xin phòng ung thư](../kien-thuc/vac-xin-phong-ung-thu.md), mục "Tiêm phòng gồm những gì?" · không giới hạn tuổi trên (bác sĩ quyết, PR #42) |
 | C4 | Nữ, từ 66 tuổi | Sau 65 tuổi, bạn vẫn nên tầm soát cổ tử cung khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu có ra máu bất thường hay triệu chứng lạ thì nên đi khám ngay, không chờ tới lịch. | bác sĩ duyệt (PR #37) |
 
 ### Ung thư đại trực tràng — bài [Tầm soát ung thư đại trực tràng](../kien-thuc/tam-soat-ung-thu-dai-truc-trang.md), mục "Ai cần tầm soát…"
 
 | ID | Điều kiện | Người dùng thấy | Nguồn |
 |---|---|---|---|
-| D1 | Mọi giới, 45–75 tuổi, không thuộc D2 | Nên trao đổi với bác sĩ về tầm soát ung thư đại trực tràng. Các hướng dẫn quốc tế khuyến cáo bắt đầu từ 45 tuổi với người nguy cơ trung bình. | ACS, USPSTF |
-| D2 | 18–75 tuổi, **và** có: người thân đại trực tràng/polyp, hoặc bản thân từng có polyp, hoặc viêm ruột mạn | Bạn thuộc nhóm cần bắt đầu sớm hơn mốc 45 tuổi. Hãy trao đổi kỹ với bác sĩ về thời điểm và phương pháp. | danh sách "Cần bắt đầu sớm hơn…" |
+| D1 | Mọi giới, 45–75 tuổi, không thuộc D4 | Nên trao đổi với bác sĩ về tầm soát ung thư đại trực tràng. Các hướng dẫn quốc tế khuyến cáo bắt đầu từ 45 tuổi với người nguy cơ trung bình. | ACS, USPSTF |
+| D2 | 18–44 tuổi, **và** có: người thân đại trực tràng/polyp, hoặc bản thân từng có polyp, hoặc viêm ruột mạn | Bạn thuộc nhóm cần bắt đầu sớm hơn mốc 45 tuổi. Hãy trao đổi kỹ với bác sĩ về thời điểm và phương pháp. | danh sách "Cần bắt đầu sớm hơn…" |
+| D4 | 45–75 tuổi, **và** có cùng các yếu tố như D2 | Bạn thuộc nhóm nguy cơ cao hơn, thường cần được theo dõi kỹ hơn người bình thường. Hãy trao đổi kỹ với bác sĩ về phương pháp và khoảng cách giữa các lần tầm soát. | danh sách "Cần bắt đầu sớm hơn và trao đổi kỹ…" |
 | D3 | Mọi giới, từ 76 tuổi | Sau 75 tuổi, bạn vẫn nên tầm soát đại trực tràng khoảng 2–3 năm một lần; bác sĩ sẽ giúp chọn cách phù hợp. Nếu đi cầu ra máu, đổi thói quen đi cầu hay sụt cân không rõ lý do thì nên đi khám ngay. | bác sĩ duyệt (PR #37) |
 
 ### Ung thư gan — bài [Tầm soát ung thư gan](../kien-thuc/tam-soat-ung-thu-gan.md), mục "Ai nên tầm soát và bao lâu một lần?"
@@ -104,7 +110,8 @@ duyệt (PR #37) + bài vắc-xin.
 | ID | Điều kiện | Người dùng thấy | Nguồn |
 |---|---|---|---|
 | DD1 | Mọi giới, từ 40 tuổi, không thuộc DD2 | Khoảng 40 tuổi là mốc hợp lý để bắt đầu trao đổi với bác sĩ về tầm soát ung thư dạ dày. Việt Nam chưa có chương trình tầm soát toàn dân, nhưng người Việt có xu hướng mắc bệnh ở tuổi trẻ hơn so với phương Tây. | nghiên cứu dịch tễ trích trong bài |
-| DD2 | Từ 18 tuổi, **và** có: nhiễm HP hoặc viêm loét dạ dày kéo dài, hoặc người thân ung thư dạ dày, hoặc hút thuốc / rượu bia nhiều | Bạn thuộc nhóm nên cân nhắc tầm soát dạ dày sớm và kỹ hơn. Hãy trao đổi với bác sĩ. | danh sách "Bạn nên cân nhắc tầm soát sớm…" |
+| DD2 | Từ 18 tuổi và có: nhiễm HP hoặc viêm loét dạ dày kéo dài, hoặc người thân ung thư dạ dày · **hoặc** từ 40 tuổi và hút thuốc / rượu bia nhiều | Bạn thuộc nhóm nên cân nhắc tầm soát dạ dày sớm và kỹ hơn. Hãy trao đổi với bác sĩ. | danh sách "Bạn nên cân nhắc tầm soát sớm…" + hình "người từ 40 tuổi có lối sống nguy cơ" |
+| DD3 | 18–39 tuổi, hút thuốc / rượu bia nhiều, **và** không thuộc DD2 | Hút thuốc và uống nhiều rượu bia làm tăng nguy cơ ung thư dạ dày. Trước 40 tuổi, nếu không có triệu chứng thì thường chưa cần nội soi tầm soát; bỏ thuốc lá và hạn chế rượu bia là việc có ích nhất lúc này. Từ khoảng 40 tuổi, hãy trao đổi với bác sĩ về tầm soát dạ dày. | hình "người từ 40 tuổi có lối sống nguy cơ" + mục phòng ngừa của bài |
 
 ### Không có mục nào khớp
 
