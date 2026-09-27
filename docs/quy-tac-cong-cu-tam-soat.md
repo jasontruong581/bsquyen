@@ -48,9 +48,11 @@ Cột **"Người dùng thấy"** là chữ hiện nguyên văn trên công cụ
 **Người dùng thấy:**
 > Những dấu hiệu bạn chọn nên được bác sĩ khám sớm, không nên chờ tới lịch tầm soát. Chúng
 > có thể do bệnh lành tính, nhưng dù nguyên nhân là gì thì bản thân triệu chứng cũng cần
-> được xử trí.
+> được xử trí. Nếu triệu chứng nặng hoặc xuất hiện đột ngột, hãy đến cơ sở cấp cứu gần
+> nhất hoặc gọi 115.
 
-Kèm số điện thoại / Zalo và link bài dấu hiệu cảnh báo. **Phần tầm soát bên dưới ẩn** cho
+Câu cấp cứu: bác sĩ duyệt (PR #41) — phòng khám không mở cả ngày, người đang nôn ra máu lúc
+ngoài giờ khám không nên chỉ thấy số Zalo. Kèm số điện thoại / Zalo và link bài dấu hiệu cảnh báo. **Phần tầm soát bên dưới ẩn** cho
 tới khi người dùng chủ động bấm "Xem thêm lịch tầm soát".
 
 ### T0 — Dưới 18 tuổi
@@ -60,11 +62,13 @@ tới khi người dùng chủ động bấm "Xem thêm lịch tầm soát".
 **Người dùng thấy:**
 > Ở tuổi của bạn, thường chưa cần tầm soát ung thư: cơ thể còn khỏe và các hướng dẫn tầm
 > soát đều bắt đầu từ tuổi trưởng thành. Chỉ nên đi khám khi có dấu hiệu bất thường rõ.
-> Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B giúp phòng một số bệnh
-> ung thư về sau.
+> Nếu bạn đang có bệnh mạn tính (ví dụ viêm gan B) và được bác sĩ theo dõi, hãy tiếp tục
+> tái khám đều đặn theo lịch. Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B
+> giúp phòng một số bệnh ung thư về sau.
 
 Kèm link bài [Vắc-xin phòng ung thư](../kien-thuc/vac-xin-phong-ung-thu.md). Nguồn: bác sĩ
-duyệt (PR #37) + bài vắc-xin.
+duyệt (PR #37; câu bệnh mạn tính: PR #41 — để "chỉ nên đi khám khi có dấu hiệu" không bị
+hiểu là bỏ lịch theo dõi) + bài vắc-xin.
 
 ### Ung thư vú — bài [Tầm soát ung thư vú](../kien-thuc/tam-soat-ung-thu-vu.md), mục "Ai nên tầm soát và từ tuổi nào?"
 

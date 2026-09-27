@@ -16,8 +16,8 @@
   };
 
   var CHU = {
-    R0: 'Những dấu hiệu bạn chọn nên được bác sĩ khám sớm, không nên chờ tới lịch tầm soát. Chúng có thể do bệnh lành tính, nhưng dù nguyên nhân là gì thì bản thân triệu chứng cũng cần được xử trí.',
-    T0: 'Ở tuổi của bạn, thường chưa cần tầm soát ung thư: cơ thể còn khỏe và các hướng dẫn tầm soát đều bắt đầu từ tuổi trưởng thành. Chỉ nên đi khám khi có dấu hiệu bất thường rõ. Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B giúp phòng một số bệnh ung thư về sau.',
+    R0: 'Những dấu hiệu bạn chọn nên được bác sĩ khám sớm, không nên chờ tới lịch tầm soát. Chúng có thể do bệnh lành tính, nhưng dù nguyên nhân là gì thì bản thân triệu chứng cũng cần được xử trí. Nếu triệu chứng nặng hoặc xuất hiện đột ngột, hãy đến cơ sở cấp cứu gần nhất hoặc gọi 115.',
+    T0: 'Ở tuổi của bạn, thường chưa cần tầm soát ung thư: cơ thể còn khỏe và các hướng dẫn tầm soát đều bắt đầu từ tuổi trưởng thành. Chỉ nên đi khám khi có dấu hiệu bất thường rõ. Nếu bạn đang có bệnh mạn tính (ví dụ viêm gan B) và được bác sĩ theo dõi, hãy tiếp tục tái khám đều đặn theo lịch. Việc đáng làm lúc này là tiêm phòng: vắc-xin HPV và viêm gan B giúp phòng một số bệnh ung thư về sau.',
     V1: 'Nên trao đổi với bác sĩ về chụp nhũ ảnh định kỳ. Các hướng dẫn quốc tế lấy mốc 40 tuổi (USPSTF 2024: mỗi 2 năm từ 40 đến 74 tuổi).',
     V2: 'Chưa cần chụp nhũ ảnh định kỳ. Việc nên làm là biết vú mình bình thường thế nào để nhận ra ngay khi có thay đổi, và đi khám khi thấy bất thường.',
     V3: 'Bạn thuộc nhóm nên tầm soát sớm hơn và kỹ hơn. Hãy mang tiền sử gia đình cụ thể tới gặp bác sĩ để có kế hoạch riêng, thay vì tự đặt lịch theo bài viết.',
