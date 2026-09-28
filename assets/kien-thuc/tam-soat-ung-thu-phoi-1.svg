@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Hai lá phổi được dải quét của máy chụp cắt lớp đi qua, phát hiện một nốt nhỏ trong phổi phải">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Khí quản + phế quản gốc -->
+  <path d="M380 62 V150 M380 150 L340 182 M380 150 L420 182" fill="none" stroke="#e08b4f" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M380 62 V150 M380 150 L340 182 M380 150 L420 182" fill="none" stroke="#f2a56e" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Phổi phải (bên trái người xem) -->
+  <path d="M352 168 C300 150 238 210 222 292 C210 352 236 392 290 386 L354 376 Z" fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Phổi trái (bên phải người xem) -->
+  <path d="M408 168 C460 150 522 210 538 292 C550 352 524 392 470 386 L406 376 Z" fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Cây phế quản trong phổi -->
+  <g fill="none" stroke="#fdeee2" stroke-width="6" stroke-linecap="round" opacity=".8">
+    <path d="M338 190 L310 240 L282 300"/>
+    <path d="M310 240 L258 262"/>
+    <path d="M318 226 L322 320"/>
+    <path d="M422 190 L450 240 L478 300"/>
+    <path d="M450 240 L502 262"/>
+    <path d="M442 226 L438 320"/>
+  </g>
+
+  <!-- Máy CT: hai trụ + dải quét (vẽ dải TRƯỚC nốt phổi) -->
+  <rect x="170" y="232" width="420" height="44" fill="#ffd9bd" opacity=".75"/>
+  <rect x="150" y="214" width="20" height="80" rx="10" fill="#123b63"/>
+  <rect x="590" y="214" width="20" height="80" rx="10" fill="#123b63"/>
+
+  <!-- Nốt phổi nhỏ phát hiện sớm -->
+  <circle cx="268" cy="256" r="14" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="263" cy="251" r="4" fill="#ffd9bd"/>
+
+  <!-- Huy hiệu dấu tích -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M623 105 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
