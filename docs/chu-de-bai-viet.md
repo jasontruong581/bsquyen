@@ -38,6 +38,7 @@ một dòng không kéo theo việc đánh số lại cả bảng.
 | `di-cau-ra-mau-tri-hay-ung-thu` | Đi cầu ra máu: trĩ hay ung thư đại tràng? |
 | `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? |
 | `vac-xin-phong-ung-thu` | Hai loại vắc-xin giúp phòng ung thư: HPV và viêm gan B |
+| `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm |
 
 ## Hàng đợi
 
@@ -45,7 +46,6 @@ Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và 
 
 | slug | Chủ đề | Loại | Nhóm |
 |---|---|---|---|
-| `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm | A | A |
 | `sut-can-khong-ro-nguyen-nhan` | Sụt cân không rõ nguyên nhân — khi nào là đáng lo? | B | B |
 | `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? | B | D |
 | `thuoc-la-va-ung-thu` | Thuốc lá gây ra bao nhiêu loại ung thư? **(mùa: tháng 5)** | B | C |
