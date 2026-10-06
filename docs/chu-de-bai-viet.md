@@ -39,6 +39,7 @@ một dòng không kéo theo việc đánh số lại cả bảng.
 | `morphin-co-gay-nghien-khong` | Dùng morphin có gây nghiện không? |
 | `vac-xin-phong-ung-thu` | Hai loại vắc-xin giúp phòng ung thư: HPV và viêm gan B |
 | `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm |
+| `tu-kham-vu-dung-cach` | Sờ thấy khối ở vú — tự khám vú đúng cách từng bước |
 
 ## Hàng đợi
 
@@ -54,7 +55,6 @@ Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và 
 | `buon-non-non-oi-xu-tri-tai-nha` | Buồn nôn, nôn ói: xử trí tại nhà và khi nào cần nhập viện | C | D |
 | `khi-nao-goi-bac-si-ngay` | Khi nào cần gọi bác sĩ ngay, khi nào cần nhập viện? | C | G |
 | `xet-nghiem-dau-an-ung-thu` | Dấu ấn ung thư (CEA, CA 19-9, CA 125…) — hiểu đúng để khỏi hoang mang | B | A |
-| `tu-kham-vu-dung-cach` | Sờ thấy khối ở vú — tự khám vú đúng cách từng bước **(mùa: tháng 10)** | C | B |
 | `chan-an-va-suy-mon` | Chán ăn và suy mòn — hiểu để không ép ăn sai cách | C | D |
 | `nhin-an-bo-doi-te-bao-ung-thu` | "Nhịn ăn để bỏ đói tế bào ung thư" — đúng hay sai? | B | F |
 | `tien-su-gia-dinh-ung-thu-tam-soat` | Có người thân bị ung thư, tôi nên tầm soát từ mấy tuổi? | A | A |
