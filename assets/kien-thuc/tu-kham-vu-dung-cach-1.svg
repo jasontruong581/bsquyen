@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Minh họa ba ngón tay áp phẳng lên vú, di chuyển theo các vòng tròn đồng tâm từ ngoài vào núm vú, phủ cả phần mô vú kéo dài lên hố nách, và nhận ra một khối nhỏ khác thường">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- vú nhìn thẳng + phần mô vú kéo dài lên hố nách (góc trái trên).
+       Vẽ 2 lớp: lớp viền (stroke dày) trước, lớp thân (chỉ fill) đè lên
+       để hai hình liền một khối, không lộ đường nối -->
+  <g fill="#e08b4f" stroke="#e08b4f" stroke-width="8" stroke-linejoin="round">
+    <ellipse cx="225" cy="150" rx="95" ry="48" transform="rotate(40 225 150)"/>
+    <circle cx="330" cy="245" r="135"/>
+  </g>
+  <g fill="#f2a56e">
+    <ellipse cx="225" cy="150" rx="95" ry="48" transform="rotate(40 225 150)"/>
+    <circle cx="330" cy="245" r="135"/>
+  </g>
+
+  <!-- đường đi tay: các vòng tròn đồng tâm từ ngoài vào núm vú -->
+  <g fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"
+     stroke-dasharray="14 12" opacity=".85">
+    <circle cx="330" cy="245" r="105"/>
+    <circle cx="330" cy="245" r="70"/>
+  </g>
+  <!-- mũi tên chỉ chiều đi tay trên hai vòng -->
+  <g fill="#ffffff" opacity=".9">
+    <path d="M330 130 l14 10 l-14 10 Z"/>
+    <path d="M330 365 l-14 -10 l14 -10 Z"/>
+    <path d="M330 165 l12 9 l-12 9 Z"/>
+  </g>
+
+  <!-- quầng vú + núm vú -->
+  <circle cx="330" cy="245" r="32" fill="#e08b4f" opacity=".5"/>
+  <circle cx="330" cy="245" r="15" fill="#e08b4f"/>
+
+  <!-- khối nhỏ khác thường (điều cần nhận ra) + vòng nhấn -->
+  <circle cx="262" cy="192" r="29" fill="none" stroke="#f26e21" stroke-width="3" opacity=".55"/>
+  <circle cx="262" cy="192" r="15" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="256" cy="186" r="4" fill="#ffd9bd"/>
+
+  <!-- vòng xoay nhỏ quanh đầu ngón giữa: di tay theo vòng tròn cỡ đồng xu -->
+  <circle cx="415" cy="192" r="40" fill="none" stroke="#123b63" stroke-width="3"
+          stroke-dasharray="8 8" opacity=".45"/>
+
+  <!-- ba ngón tay khép, áp phẳng, đi vào từ góc phải trên -->
+  <g stroke="#123b63" stroke-width="22" stroke-linecap="round">
+    <path d="M400 170 L690 -28"/>
+    <path d="M415 192 L705 -6"/>
+    <path d="M430 214 L720 16"/>
+  </g>
+  <!-- phần bụng ngón tay -->
+  <g fill="#e8f1fa">
+    <circle cx="403" cy="168" r="5"/>
+    <circle cx="418" cy="190" r="5"/>
+    <circle cx="433" cy="212" r="5"/>
+  </g>
+
+  <!-- huy hiệu dấu tích: nhận ra sớm -->
+  <circle cx="650" cy="350" r="36" fill="#f26e21"/>
+  <path d="M633 350 l13 13 l23 -26" fill="none" stroke="#fff" stroke-width="8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
