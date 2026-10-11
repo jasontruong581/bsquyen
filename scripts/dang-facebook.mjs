@@ -102,14 +102,26 @@ async function choLive(url, giayToiDa) {
   return false;
 }
 
-async function goiFB(duongDan, params) {
-  const res = await fetch(`${API}/${duongDan}`, {
-    method: "POST",
-    body: new URLSearchParams({ ...params, access_token: TOKEN }),
-  });
-  const json = await res.json().catch(() => ({}));
-  if (!res.ok) chet(`Facebook API lỗi ở ${duongDan}:\n${JSON.stringify(json, null, 2)}`);
-  return json;
+// thuLai: số lần thử thêm khi Facebook báo lỗi tạm thời (is_transient). Chỉ dùng cho bước
+// tải ảnh ở trạng thái chưa đăng — thử lại bước đó không thể làm bài lên page hai lần.
+// Bước /feed thì không thử lại: lỗi ở đó có thể đã tạo bài rồi.
+async function goiFB(duongDan, params, thuLai = 0) {
+  for (let lan = 0; ; lan++) {
+    const res = await fetch(`${API}/${duongDan}`, {
+      method: "POST",
+      body: new URLSearchParams({ ...params, access_token: TOKEN }),
+    });
+    const json = await res.json().catch(() => ({}));
+    if (res.ok) return json;
+    // Gặp thật: Facebook lấy ảnh ngay sau deploy rồi báo 324 "Missing or invalid image
+    // file" kèm is_transient, dù ảnh vẫn tải được bình thường.
+    if (lan < thuLai && json.error && json.error.is_transient) {
+      log(`  … Facebook báo lỗi tạm thời (${json.error.message}), thử lại sau 30 giây`);
+      await new Promise((r) => setTimeout(r, 30000));
+      continue;
+    }
+    chet(`Facebook API lỗi ở ${duongDan}:\n${JSON.stringify(json, null, 2)}`);
+  }
 }
 
 async function main() {
@@ -159,7 +171,7 @@ async function main() {
 
     // Hai bước: tải ảnh lên ở trạng thái chưa đăng, rồi gắn vào một bài hẹn giờ.
     // Gọi thẳng /photos kèm scheduled_publish_time là đường dễ gãy.
-    const anh = await goiFB(`${PAGE_ID}/photos`, { url: bai.linkAnh, published: "false" });
+    const anh = await goiFB(`${PAGE_ID}/photos`, { url: bai.linkAnh, published: "false" }, 3);
     log(`Đã tải ảnh lên: media_fbid=${anh.id}`);
 
     const gioDang = tinhGioDang(Date.now(), LICH);

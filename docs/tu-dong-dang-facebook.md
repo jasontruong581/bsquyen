@@ -152,7 +152,11 @@ Job fail thì GitHub gửi mail cho chủ repo. Log ở tab **Actions**.
 | `/me/accounts` không thấy page nào | User token thiếu `pages_show_list`, hoặc lúc đăng nhập chưa tick chọn page. Lấy lại token từ bước 3. |
 | `Token thiếu quyền pages_manage_posts` | App chưa bật quyền trong use case *Quản lý mọi thứ trên Trang* (Explorer vẫn tạo token, chỉ lặng lẽ bỏ quyền đó), hoặc bị bỏ tick trong hộp thoại đăng nhập. Bật quyền, lấy token mới, chạy lại script — secret mới ghi đè secret cũ. |
 
-Job **không** tự thử lại. Cố ý: đăng nhầm hai lần lên page tệ hơn là đăng trễ.
+| `Missing or invalid image file` (code 324, `is_transient: true`) | Facebook lấy ảnh hụt ngay sau lúc deploy, dù ảnh vẫn tải được. Bước tải ảnh tự thử lại 3 lần, cách 30 giây; vẫn lỗi thì Run workflow lại với slug đó. |
+
+Job **không** tự chạy lại cả lượt. Cố ý: đăng nhầm hai lần lên page tệ hơn là đăng trễ.
+Riêng bước tải ảnh (ảnh ở trạng thái chưa đăng) được thử lại khi Facebook báo lỗi tạm
+thời, vì lặp bước đó không thể làm bài lên page hai lần.
 
 ## Bảo trì
 
