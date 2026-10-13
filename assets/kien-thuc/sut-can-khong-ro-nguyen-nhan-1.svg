@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Trục thời gian theo dõi cân nặng của người nặng 60 kg: sau 1 tháng giảm 1 kg, sau 3 tháng giảm 2 kg, sau 6 tháng giảm 3 kg — tức 5%, nên đi khám">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Tiêu đề ảnh -->
+  <text x="380" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#123b63">Nặng 60 kg — sụt bao nhiêu thì đáng chú ý?</text>
+  <text x="380" y="82" text-anchor="middle" font-size="16" fill="#5b6b7b">Không ăn kiêng, không tập thêm mà cân vẫn giảm dần</text>
+
+  <!-- Cân sức khoẻ phía trên mốc thứ ba, kim lệch trái = cân giảm -->
+  <rect x="546" y="108" width="88" height="88" rx="20" fill="#ffffff" stroke="#123b63" stroke-width="6"/>
+  <path d="M562 146 a28 28 0 0 1 56 0 Z" fill="#fdeee2" stroke="#f2a56e" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M590 146 L576 126" stroke="#f26e21" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="590" cy="146" r="5" fill="#d85a10"/>
+  <rect x="561" y="162" width="24" height="20" rx="6" fill="#e8f1fa"/>
+  <rect x="595" y="162" width="24" height="20" rx="6" fill="#e8f1fa"/>
+
+  <!-- Trục thời gian + mũi tên -->
+  <path d="M80 280 H655" stroke="#ecdfd3" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M655 264 l30 16 l-30 16 Z" fill="#ecdfd3"/>
+
+  <!-- Mốc 1: sau 1 tháng -->
+  <circle cx="170" cy="280" r="26" fill="#fdeee2" stroke="#f2a56e" stroke-width="4"/>
+  <circle cx="170" cy="280" r="7" fill="#f2a56e"/>
+  <text x="170" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Sau 1 tháng</text>
+  <text x="170" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Giảm 1 kg</text>
+
+  <!-- Mốc 2: sau 3 tháng -->
+  <circle cx="380" cy="280" r="32" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <text x="380" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Sau 3 tháng</text>
+  <text x="380" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Giảm 2 kg — để ý</text>
+
+  <!-- Mốc 3: sau 6 tháng, mất 5% cân nặng -->
+  <circle cx="590" cy="280" r="40" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="577" cy="267" r="9" fill="#ffd9bd"/>
+  <text x="590" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Sau 6 tháng</text>
+  <text x="590" y="375" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Giảm 3 kg (5%): đi khám</text>
+
+  <text x="380" y="425" text-anchor="middle" font-size="12" fill="#5b6b7b">*Ngưỡng giảm hơn 5% trong 6–12 tháng — theo American Family Physician (2014)</text>
+</svg>
