@@ -41,6 +41,7 @@ một dòng không kéo theo việc đánh số lại cả bảng.
 | `tam-soat-ung-thu-phoi` | CT ngực liều thấp — tầm soát ung thư phổi cho người hút thuốc lâu năm |
 | `tu-kham-vu-dung-cach` | Sờ thấy khối ở vú — tự khám vú đúng cách từng bước |
 | `sut-can-khong-ro-nguyen-nhan` | Sụt cân không rõ nguyên nhân — khi nào là đáng lo? |
+| `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? |
 
 ## Hàng đợi
 
@@ -48,7 +49,6 @@ Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và 
 
 | slug | Chủ đề | Loại | Nhóm |
 |---|---|---|---|
-| `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? | B | D |
 | `thuoc-la-va-ung-thu` | Thuốc lá gây ra bao nhiêu loại ung thư? **(mùa: tháng 5)** | B | C |
 | `vi-khuan-hp-va-ung-thu-da-day` | Vi khuẩn HP và ung thư dạ dày — mối liên hệ đến đâu? | B | A |
 | `nuot-nghen-nuot-vuong` | Nuốt nghẹn, nuốt vướng — dấu hiệu sớm của ung thư thực quản | B | B |

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="So sánh bắt đầu chăm sóc giảm nhẹ sớm (song song với điều trị từ lúc chẩn đoán) và bắt đầu muộn (chỉ ở đoạn cuối)">
+  <!-- Nền chung layout 760x440 -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- ===== HÀNG TRÊN: BẮT ĐẦU SỚM ===== -->
+  <!-- Mốc chẩn đoán -->
+  <g stroke="#123b63" stroke-width="7" stroke-linecap="round" opacity=".25">
+    <path d="M128 100 L150 82"/>
+    <path d="M128 132 L150 150"/>
+  </g>
+  <circle cx="98" cy="116" r="30" fill="#ffffff" stroke="#123b63" stroke-width="8"/>
+  <circle cx="98" cy="116" r="10" fill="#123b63"/>
+  <!-- Dải điều trị đặc hiệu -->
+  <rect x="150" y="56" width="400" height="52" rx="26" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <circle cx="178" cy="82" r="18" fill="#ffffff"/>
+  <path d="M178 71 v22 M167 82 h22" stroke="#f26e21" stroke-width="7" stroke-linecap="round"/>
+  <!-- Dải chăm sóc giảm nhẹ: bắt đầu cùng lúc, dài hơn -->
+  <rect x="150" y="124" width="485" height="52" rx="26" fill="#f26e21" stroke="#d85a10" stroke-width="4"/>
+  <circle cx="178" cy="150" r="18" fill="#ffffff"/>
+  <path d="M178 158 c-7 -5 -11 -8.5 -11 -12.5 a4.5 4.5 0 0 1 11 -3 a4.5 4.5 0 0 1 11 3 c0 4 -4 7.5 -11 12.5 Z" fill="#f26e21"/>
+  <g fill="#ffffff" opacity=".5">
+    <circle cx="340" cy="150" r="7"/><circle cx="440" cy="150" r="7"/><circle cx="540" cy="150" r="7"/>
+  </g>
+  <!-- Huy hiệu dấu tích: cách làm khuyến cáo -->
+  <circle cx="680" cy="150" r="26" fill="#f26e21"/>
+  <path d="M668 150 l8 8 l16 -18" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Vạch ngăn -->
+  <path d="M60 222 H690" stroke="#ecdfd3" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <!-- ===== HÀNG DƯỚI: BẮT ĐẦU MUỘN ===== -->
+  <g stroke="#123b63" stroke-width="7" stroke-linecap="round" opacity=".25">
+    <path d="M128 290 L150 272"/>
+  </g>
+  <circle cx="98" cy="306" r="30" fill="#ffffff" stroke="#5b6b7b" stroke-width="8"/>
+  <circle cx="98" cy="306" r="10" fill="#5b6b7b"/>
+  <!-- Dải điều trị -->
+  <rect x="150" y="246" width="400" height="52" rx="26" fill="#f2a56e" stroke="#e08b4f" stroke-width="4" opacity=".7"/>
+  <circle cx="178" cy="272" r="18" fill="#ffffff"/>
+  <path d="M178 261 v22 M167 272 h22" stroke="#f26e21" stroke-width="7" stroke-linecap="round"/>
+  <!-- Khoảng trống đứt nét: giai đoạn không được nâng đỡ -->
+  <rect x="150" y="314" width="380" height="52" rx="26" fill="none" stroke="#5b6b7b" stroke-width="3" stroke-dasharray="8 9" opacity=".45"/>
+  <!-- Dải chăm sóc giảm nhẹ ngắn, chỉ ở cuối -->
+  <rect x="540" y="314" width="95" height="52" rx="26" fill="#f26e21" stroke="#d85a10" stroke-width="4"/>
+  <circle cx="566" cy="340" r="18" fill="#ffffff"/>
+  <path d="M566 348 c-7 -5 -11 -8.5 -11 -12.5 a4.5 4.5 0 0 1 11 -3 a4.5 4.5 0 0 1 11 3 c0 4 -4 7.5 -11 12.5 Z" fill="#f26e21"/>
+  <!-- Huy hiệu đồng hồ: đến muộn -->
+  <circle cx="680" cy="340" r="26" fill="#5b6b7b"/>
+  <circle cx="680" cy="340" r="15" fill="none" stroke="#ffffff" stroke-width="5"/>
+  <path d="M680 331 v10 l7 5" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
