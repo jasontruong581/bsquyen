@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" role="img" font-family="'Be Vietnam Pro', system-ui, sans-serif" aria-label="Ba mốc sau khi bỏ thuốc: 5 đến 10 năm nguy cơ ung thư miệng họng giảm một nửa; 10 đến 15 năm nguy cơ ung thư phổi giảm một nửa; 20 năm nguy cơ một số ung thư gần bằng người không hút">
+  <rect width="760" height="320" fill="#fff9f4"/>
+
+  <!-- Thẻ 1: 5–10 năm -->
+  <rect x="20" y="20" width="226" height="280" rx="18" fill="#ffffff" stroke="#ecdfd3"/>
+  <circle cx="133" cy="108" r="46" fill="none" stroke="#f2a56e" stroke-width="10"/>
+  <text x="133" y="118" text-anchor="middle" font-size="28" font-weight="800" fill="#f26e21">5–10</text>
+  <text x="133" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b63">Sau 5–10 năm</text>
+  <text x="133" y="235" text-anchor="middle" font-size="16" fill="#5b6b7b">Ung thư miệng, họng</text>
+  <text x="133" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Nguy cơ giảm một nửa*</text>
+
+  <!-- Thẻ 2: 10–15 năm -->
+  <rect x="267" y="20" width="226" height="280" rx="18" fill="#ffffff" stroke="#ecdfd3"/>
+  <circle cx="380" cy="108" r="46" fill="none" stroke="#f2a56e" stroke-width="10"/>
+  <text x="380" y="118" text-anchor="middle" font-size="26" font-weight="800" fill="#f26e21">10–15</text>
+  <text x="380" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b63">Sau 10–15 năm</text>
+  <text x="380" y="235" text-anchor="middle" font-size="16" fill="#5b6b7b">Ung thư phổi</text>
+  <text x="380" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Nguy cơ giảm một nửa*</text>
+
+  <!-- Thẻ 3: 20 năm (nhấn) -->
+  <rect x="514" y="20" width="226" height="280" rx="18" fill="#fdeee2" stroke="#f2a56e"/>
+  <circle cx="627" cy="108" r="46" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <text x="627" y="119" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">20+</text>
+  <text x="627" y="205" text-anchor="middle" font-size="21" font-weight="700" fill="#123b63">Sau 20 năm</text>
+  <text x="627" y="235" text-anchor="middle" font-size="16" fill="#5b6b7b">Miệng, họng, tụy…</text>
+  <text x="627" y="272" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Gần người không hút</text>
+
+  <!-- Ghi chú nguồn -->
+  <text x="380" y="313" text-anchor="middle" font-size="12" fill="#5b6b7b">*Phần nguy cơ tăng thêm giảm khoảng một nửa, so với người tiếp tục hút · Nguồn: CDC</text>
+</svg>
