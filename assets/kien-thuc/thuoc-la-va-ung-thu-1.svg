@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-label="Hình bóng cơ thể người với điếu thuốc đang cháy; các chấm cam đánh dấu nhiều cơ quan có thể bị ung thư do thuốc lá">
+  <!-- Khung nền chung -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Điếu thuốc bên trái + khói bay về phía cơ thể -->
+  <g>
+    <rect x="70" y="300" width="150" height="26" rx="6" fill="#ffffff" stroke="#5b6b7b" stroke-width="3"/>
+    <rect x="70" y="300" width="44" height="26" rx="6" fill="#f2a56e" stroke="#e08b4f" stroke-width="3"/>
+    <rect x="214" y="300" width="14" height="26" rx="4" fill="#f26e21" stroke="#d85a10" stroke-width="3"/>
+    <circle cx="224" cy="306" r="3" fill="#ffd9bd"/>
+  </g>
+  <g fill="none" stroke="#5b6b7b" stroke-width="7" stroke-linecap="round" opacity=".35">
+    <path d="M226 292 q-14 -24 6 -44 q20 -20 6 -44"/>
+    <path d="M250 286 q18 -26 0 -50 q-14 -22 14 -42"/>
+  </g>
+
+  <!-- Hình bóng cơ thể -->
+  <g fill="#f2a56e" stroke="#e08b4f" stroke-width="4" stroke-linejoin="round">
+    <circle cx="440" cy="78" r="44"/>
+    <path d="M422 118 h36 v18 h-36 Z"/>
+    <path d="M360 140 Q440 124 520 140 Q548 148 548 180 V330 Q548 360 520 372 L500 420 H380 L360 372 Q332 360 332 330 V180 Q332 148 360 140 Z"/>
+  </g>
+
+  <!-- Phổi (lòng sáng) -->
+  <g fill="#fdeee2" stroke="#e08b4f" stroke-width="3">
+    <path d="M400 168 q-30 6 -32 50 q-2 44 22 50 q22 4 24 -20 V176 Q414 166 400 168 Z"/>
+    <path d="M480 168 q30 6 32 50 q2 44 -22 50 q-22 4 -24 -20 V176 Q466 166 480 168 Z"/>
+  </g>
+
+  <!-- Chấm cam = vị trí ung thư liên quan thuốc lá -->
+  <g fill="#f26e21" stroke="#d85a10" stroke-width="4">
+    <circle cx="440" cy="98" r="10"/>   <!-- miệng -->
+    <circle cx="440" cy="128" r="9"/>   <!-- họng, thanh quản -->
+    <circle cx="394" cy="214" r="12"/>  <!-- phổi trái -->
+    <circle cx="486" cy="226" r="12"/>  <!-- phổi phải -->
+    <circle cx="440" cy="196" r="8"/>   <!-- thực quản -->
+    <circle cx="470" cy="286" r="10"/>  <!-- dạ dày -->
+    <circle cx="404" cy="282" r="10"/>  <!-- gan -->
+    <circle cx="440" cy="304" r="8"/>   <!-- tụy -->
+    <circle cx="372" cy="318" r="8"/>   <!-- thận -->
+    <circle cx="508" cy="318" r="8"/>   <!-- thận -->
+    <circle cx="440" cy="346" r="9"/>   <!-- đại tràng -->
+    <circle cx="440" cy="386" r="10"/>  <!-- bàng quang -->
+  </g>
+  <g fill="#ffd9bd">
+    <circle cx="390" cy="210" r="3"/>
+    <circle cx="482" cy="222" r="3"/>
+  </g>
+
+  <!-- Huy hiệu cảnh báo góc phải trên -->
+  <circle cx="640" cy="105" r="36" fill="#f26e21"/>
+  <path d="M640 86 v24" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="640" cy="124" r="5" fill="#fff"/>
+</svg>
