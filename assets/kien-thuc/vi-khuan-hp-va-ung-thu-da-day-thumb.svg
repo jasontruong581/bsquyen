@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Vi khuẩn HP xoắn ở đầu một trục thời gian có ba chấm tròn lớn dần, kính lúp đặt trên chấm giữa">
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- vi khuẩn HP phóng to trên mốc 1 -->
+  <g transform="translate(170,140) scale(1.3) translate(-118,-110)">
+    <path d="M108 70 q28 12 0 26 q-28 14 0 28 q28 14 0 28" fill="none" stroke="#f26e21" stroke-width="12" stroke-linecap="round"/>
+    <g stroke="#d85a10" stroke-width="6" stroke-linecap="round">
+      <path d="M112 66 l16 -12"/><path d="M124 96 l18 -6"/>
+      <path d="M112 122 l16 12"/><path d="M124 152 l18 6"/>
+    </g>
+  </g>
+
+  <!-- kính lúp trên mốc 2 -->
+  <circle cx="362" cy="130" r="44" fill="#ffffff" stroke="#123b63" stroke-width="11"/>
+  <circle cx="362" cy="130" r="16" fill="#f2a56e" stroke="#e08b4f" stroke-width="5"/>
+  <path d="M395 163 l30 30" stroke="#123b63" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- trục thời gian -->
+  <path d="M80 300 H640" stroke="#ecdfd3" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M640 276 l44 24 l-44 24 Z" fill="#ecdfd3"/>
+
+  <circle cx="170" cy="300" r="34" fill="#fdeee2" stroke="#f2a56e" stroke-width="6"/>
+  <circle cx="170" cy="300" r="10" fill="#f2a56e"/>
+  <circle cx="370" cy="300" r="44" fill="#f2a56e" stroke="#e08b4f" stroke-width="6"/>
+  <circle cx="570" cy="300" r="56" fill="#f26e21" stroke="#d85a10" stroke-width="7"/>
+  <circle cx="552" cy="282" r="12" fill="#ffd9bd"/>
+</svg>

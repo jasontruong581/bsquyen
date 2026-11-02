@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Trục thời gian từ nhiễm vi khuẩn HP đến ung thư dạ dày: viêm dạ dày mạn, rồi teo niêm mạc và dị sản ruột, cuối cùng là ung thư ở một số ít người; chặng đường kéo dài nhiều năm và có thể được phát hiện, chặn lại sớm">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Tiêu đề ảnh -->
+  <text x="380" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#123b63">Từ nhiễm HP đến ung thư — một chặng rất dài</text>
+  <text x="380" y="82" text-anchor="middle" font-size="16" fill="#5b6b7b">Diễn tiến qua nhiều năm, và có thể được chặn lại sớm</text>
+
+  <!-- Vi khuẩn HP xoắn phía trên mốc 1 -->
+  <g transform="translate(62,62)">
+    <path d="M108 70 q28 12 0 26 q-28 14 0 28 q28 14 0 28" fill="none" stroke="#f26e21" stroke-width="12" stroke-linecap="round"/>
+    <g stroke="#d85a10" stroke-width="6" stroke-linecap="round">
+      <path d="M112 66 l16 -12"/><path d="M124 96 l18 -6"/>
+      <path d="M112 122 l16 12"/><path d="M124 152 l18 6"/>
+    </g>
+  </g>
+
+  <!-- Kính lúp nhỏ phía trên mốc 2: phát hiện sớm bằng nội soi -->
+  <circle cx="372" cy="170" r="32" fill="#ffffff" stroke="#123b63" stroke-width="8"/>
+  <circle cx="372" cy="170" r="12" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <path d="M396 194 l24 24" stroke="#123b63" stroke-width="15" stroke-linecap="round"/>
+
+  <!-- Trục thời gian + mũi tên -->
+  <path d="M80 280 H655" stroke="#ecdfd3" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M655 264 l30 16 l-30 16 Z" fill="#ecdfd3"/>
+
+  <!-- Mốc 1: viêm dạ dày mạn -->
+  <circle cx="170" cy="280" r="26" fill="#fdeee2" stroke="#f2a56e" stroke-width="4"/>
+  <circle cx="170" cy="280" r="7" fill="#f2a56e"/>
+  <text x="170" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Viêm dạ dày mạn</text>
+  <text x="170" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Thường ít triệu chứng</text>
+
+  <!-- Mốc 2: tổn thương tiền ung thư -->
+  <circle cx="380" cy="280" r="32" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <text x="380" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Teo, dị sản ruột</text>
+  <text x="380" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Tổn thương tiền ung thư</text>
+
+  <!-- Mốc 3: ung thư, chỉ ở số ít người -->
+  <circle cx="590" cy="280" r="40" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="577" cy="267" r="9" fill="#ffd9bd"/>
+  <text x="590" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Ung thư dạ dày</text>
+  <text x="590" y="375" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Chỉ ở số ít người</text>
+
+  <text x="380" y="425" text-anchor="middle" font-size="12" fill="#5b6b7b">*Phần lớn người nhiễm HP không đi hết chặng này. Diệt HP sớm giúp giảm nguy cơ đi tiếp.</text>
+</svg>
