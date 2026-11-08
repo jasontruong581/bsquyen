@@ -8,6 +8,16 @@ tags:
   - "Phòng ngừa"
 cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-gan-og.png
+facebook: |
+  Không phải ai cũng cần tầm soát ung thư gan — nhưng người viêm gan B, C
+  hoặc xơ gan thì rất nên theo dõi đều đặn.
+
+  Gan chịu đựng rất giỏi nên khối u có thể lớn dần mà không gây triệu chứng.
+  Với nhóm nguy cơ, các hướng dẫn chuyên khoa khuyến cáo siêu âm bụng mỗi
+  khoảng 6 tháng. Còn nếu bạn chưa từng xét nghiệm viêm gan B và C, một lần
+  xét nghiệm là bước đáng làm nhất để biết mình có thuộc nhóm đó không.
+
+  Siêu âm gan không đau, không cần gây mê, thường chỉ 10–15 phút.
 sources:
   - title: "IARC — GLOBOCAN 2022, số liệu ung thư Việt Nam"
     url: "https://gco.iarc.who.int/media/globocan/factsheets/populations/704-viet-nam-fact-sheet.pdf"
