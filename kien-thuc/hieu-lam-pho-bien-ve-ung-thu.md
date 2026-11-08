@@ -6,6 +6,19 @@ thumb: /assets/kien-thuc/hieu-lam-pho-bien-ve-ung-thu-thumb.svg
 tags:
   - "Phòng ngừa"
 image: /assets/kien-thuc/hieu-lam-pho-bien-ve-ung-thu-og.png
+facebook: |
+  "Nhà tôi không ai bị ung thư, chắc tôi không sao" — câu này đúng hay sai?
+
+  Bài viết đặt bảy hiểu lầm hay gặp cạnh những gì bằng chứng y khoa nói: ung
+  thư có lây không, mổ hay sinh thiết có làm bệnh lan nhanh không, "cắt
+  đường" có bỏ đói được tế bào ung thư không, thuốc nam có thay được hóa trị
+  không.
+
+  Riêng câu mở đầu: theo Viện Ung thư Quốc gia Hoa Kỳ, chỉ khoảng 5–10% ca
+  ung thư do gen di truyền, nên phần lớn xảy ra ở người không có tiền sử gia
+  đình.
+
+  Kiểm chứng một điều bạn đang tin, rồi hỏi bác sĩ điều chưa rõ.
 sources:
   - title: "National Cancer Institute (NCI) — Common Cancer Myths and Misconceptions"
     url: "https://www.cancer.gov/about-cancer/causes-prevention/risk/myths"
