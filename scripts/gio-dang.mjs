@@ -1,6 +1,7 @@
 // Tính giờ hẹn đăng Facebook (unix giây).
 //
-// Hai chế độ:
+// Ba chế độ (thứ tự ưu tiên):
+//   gioHen "2026-11-09 19:30" — đúng thời điểm đó, giờ Việt Nam; không dời, sai thì báo lỗi
 //   gioCoDinh "19:30" — đăng lúc 19:30 giờ Việt Nam cùng ngày; quá muộn thì dời sang hôm sau
 //   delayPhut 120     — đăng sau N phút, dùng khi không đặt giờ cố định
 //
@@ -13,7 +14,28 @@ const LECH_VN_MS = 7 * 3600 * 1000;
 const TOI_THIEU_MS = 10 * 60 * 1000;
 const MOT_NGAY_MS = 24 * 3600 * 1000;
 
-export function tinhGioDang(nowMs, { gioCoDinh, delayPhut }) {
+export function tinhGioDang(nowMs, { gioHen, gioCoDinh, delayPhut }) {
+  // Hẹn đúng một thời điểm "YYYY-MM-DD HH:MM" giờ VN (đăng lại bài cũ theo lịch tự đặt).
+  // Người nhập đã chọn ngày nên không dời hộ: quá gần hoặc đã qua thì báo lỗi.
+  if (gioHen && gioHen.trim()) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})$/.exec(gioHen.trim());
+    if (!m) throw new Error(`GIO_HEN "${gioHen}" không hợp lệ — dùng dạng YYYY-MM-DD HH:MM, vd 2026-11-09 19:30.`);
+    const [nam, thang, ngay, gio, phut] = m.slice(1).map(Number);
+    const dich = Date.UTC(nam, thang - 1, ngay, gio, phut);
+    const hopLe = new Date(dich);
+    if (
+      gio > 23 || phut > 59 ||
+      hopLe.getUTCFullYear() !== nam || hopLe.getUTCMonth() !== thang - 1 || hopLe.getUTCDate() !== ngay
+    ) {
+      throw new Error(`GIO_HEN "${gioHen}" không phải ngày giờ có thật.`);
+    }
+    const dichMs = dich - LECH_VN_MS;
+    if (dichMs - nowMs < TOI_THIEU_MS) {
+      throw new Error(`GIO_HEN "${gioHen}" đã qua hoặc cách hiện tại dưới 10 phút — Facebook không nhận.`);
+    }
+    return Math.floor(dichMs / 1000);
+  }
+
   if (gioCoDinh && gioCoDinh.trim()) {
     const m = /^(\d{1,2}):(\d{2})$/.exec(gioCoDinh.trim());
     if (!m || Number(m[1]) > 23 || Number(m[2]) > 59) {
