@@ -7,6 +7,17 @@ tags:
   - "Tầm soát"
 cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-vu-og.png
+facebook: |
+  Tự khám vú có đủ chưa? Siêu âm hay nhũ ảnh? Và nên bắt đầu từ tuổi nào?
+
+  Ung thư vú giai đoạn sớm gần như không đau, nên cảm giác "vẫn khỏe" chưa
+  loại trừ được bệnh. Các hướng dẫn quốc tế lấy mốc khoảng 40 tuổi cho phụ nữ
+  nguy cơ trung bình. Nhũ ảnh là nền tảng của tầm soát; siêu âm bổ sung chứ
+  không thay thế. Tự khám giúp bạn nhận ra thay đổi ở chính mình, nhưng không
+  còn được xem là xét nghiệm tầm soát.
+
+  Cảm giác ép khi chụp nhũ ảnh chỉ kéo dài vài giây. Đọc bài để chuẩn bị câu
+  hỏi cho buổi khám.
 sources:
   - title: "USPSTF — Breast Cancer: Screening (2024)"
     url: "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/breast-cancer-screening"
