@@ -6,6 +6,18 @@ thumb: /assets/kien-thuc/dau-hieu-canh-bao-ung-thu-thumb.svg
 tags:
   - "Dấu hiệu"
 image: /assets/kien-thuc/dau-hieu-canh-bao-ung-thu-og.png
+facebook: |
+  "Chắc không có gì đâu" — câu nhiều người tự nói khi cơ thể có một thay đổi
+  lạ.
+
+  Phần lớn những thay đổi nhỏ không phải ung thư. Nhưng một triệu chứng mới,
+  kéo dài quá 2–3 tuần hoặc nặng dần, nhất là khi kèm chảy máu hoặc sụt cân
+  không rõ nguyên nhân, thì nên để bác sĩ xem. Bài viết tổng hợp 10 dấu hiệu
+  từ Hiệp hội Ung thư Hoa Kỳ và Viện Ung thư Quốc gia Hoa Kỳ, cùng ba câu hỏi
+  giúp bạn phân biệt.
+
+  Đi khám sớm hơn một chút, kể cả khi kết quả là "không có gì", vẫn là việc
+  đáng làm.
 sources:
   - title: "American Cancer Society — Signs and Symptoms of Cancer"
     url: "https://www.cancer.org/cancer/diagnosis-staging/signs-and-symptoms-of-cancer.html"
