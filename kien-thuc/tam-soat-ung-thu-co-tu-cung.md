@@ -8,6 +8,17 @@ tags:
   - "Phòng ngừa"
 cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-co-tu-cung-og.png
+facebook: |
+  Pap khác HPV thế nào, và tiêm vắc-xin HPV rồi có còn cần tầm soát không?
+
+  Gần như toàn bộ ung thư cổ tử cung bắt nguồn từ nhiễm dai dẳng vi-rút HPV,
+  và thường mất 15–20 năm mới thành ung thư — đủ thời gian để phát hiện tổn
+  thương tiền ung thư khi còn xử lý được. WHO khuyến cáo bắt đầu tầm soát từ
+  30 tuổi bằng xét nghiệm HPV, lặp lại mỗi 5–10 năm nếu kết quả âm tính. Tiêm
+  vắc-xin rồi vẫn cần tầm soát.
+
+  Lấy mẫu chỉ mất vài phút, thường chỉ tức nhẹ. Bạn có thể trao đổi với bác
+  sĩ để chọn lịch phù hợp.
 sources:
   - title: "WHO — Human papillomavirus and cancer (fact sheet)"
     url: "https://www.who.int/news-room/fact-sheets/detail/human-papilloma-virus-and-cancer"
