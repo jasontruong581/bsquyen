@@ -7,6 +7,17 @@ tags:
   - "Chăm sóc giảm nhẹ"
 cta: tai-nha
 image: /assets/kien-thuc/kiem-soat-dau-ung-thu-og.png
+facebook: |
+  "Chịu được thì cứ chịu, uống thuốc giảm đau nhiều sợ hư người" — nhưng phần
+  lớn cơn đau do ung thư có thể được giảm bớt.
+
+  Theo Tổ chức Y tế Thế giới, thuốc đơn giản dùng đường uống, nếu dùng đúng
+  nguyên tắc, giúp giảm phần lớn các cơn đau này. Nguyên tắc ấy gồm chọn nhóm
+  thuốc theo mức đau (thang 3 bậc), uống theo giờ thay vì chờ đau, và mô tả
+  cơn đau bằng thang điểm 0–10 để bác sĩ điều chỉnh cho đúng.
+
+  Mục tiêu là bạn ngủ được, ăn được, trò chuyện được với người thân. Nói ra
+  con số đau của mình là bước đầu tiên.
 sources:
   - title: "Tổ chức Y tế Thế giới (WHO) — Guidelines for the pharmacological and radiotherapeutic management of cancer pain in adults and adolescents (2018)"
     url: "https://www.who.int/publications/i/item/9789241550390"
