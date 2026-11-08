@@ -7,6 +7,18 @@ tags:
   - "Tầm soát"
 cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-dai-truc-trang-og.png
+facebook: |
+  Ung thư đại trực tràng có thể phòng ngừa được — nếu tìm ra polyp trước khi
+  nó kịp trở thành ung thư.
+
+  Phần lớn ung thư đại trực tràng bắt đầu từ polyp, những khối nhỏ lành tính
+  phải mất nhiều năm mới hóa ác, và hầu như không gây triệu chứng gì. Cắt
+  polyp qua nội soi là phòng bệnh thật sự. Các hướng dẫn quốc tế khuyến cáo
+  người nguy cơ trung bình bắt đầu tầm soát từ 45 tuổi, bằng xét nghiệm máu
+  ẩn trong phân (FIT) hoặc nội soi.
+
+  Nội soi thường có an thần nên không đau. Bài viết giúp bạn chọn cách phù
+  hợp để trao đổi với bác sĩ.
 sources:
   - title: "American Cancer Society — Colorectal Cancer Screening Guidelines"
     url: "https://www.cancer.org/cancer/types/colon-rectal-cancer/detection-diagnosis-staging/acs-recommendations.html"
