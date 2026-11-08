@@ -12,6 +12,10 @@ on:
         description: "Slug bài cần đăng (bỏ trống = dò bài mới từ commit cuối)"
         required: false
         type: string
+      gio_hen:
+        description: "Hẹn đúng giờ VN, dạng YYYY-MM-DD HH:MM (bỏ trống = 19:30 theo GIO_DANG)"
+        required: false
+        type: string
       dry_run:
         description: "Chỉ in caption sẽ đăng, không gọi Facebook"
         required: false
@@ -40,6 +44,7 @@ jobs:
         env:
           # Input đi qua env, không nội suy vào dòng lệnh shell.
           INPUT_SLUG: ${{ inputs.slug }}
+          INPUT_GIO_HEN: ${{ inputs.gio_hen }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}

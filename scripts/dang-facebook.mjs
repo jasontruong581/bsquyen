@@ -20,7 +20,12 @@ import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
 
 const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
 // GIO_DANG (HH:MM giờ VN) thắng DELAY_PHUT; để trống thì đăng sau DELAY_PHUT phút.
-const LICH = { gioCoDinh: process.env.GIO_DANG || "", delayPhut: process.env.DELAY_PHUT || 120 };
+// INPUT_GIO_HEN (YYYY-MM-DD HH:MM giờ VN) thắng cả hai, dùng khi đăng lại bài cũ theo lịch tự đặt.
+const LICH = {
+  gioHen: process.env.INPUT_GIO_HEN || "",
+  gioCoDinh: process.env.GIO_DANG || "",
+  delayPhut: process.env.DELAY_PHUT || 120,
+};
 const PAGE_ID = process.env.FB_PAGE_ID;
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
 

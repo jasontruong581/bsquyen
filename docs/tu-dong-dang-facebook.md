@@ -39,11 +39,15 @@ chắn nhất là để nó điền hộ thay vì chép tay.
 
 1. Vào <https://developers.facebook.com/apps> → **Create App** → loại **Business**
 2. Thêm sản phẩm **Facebook Login**
-3. Để app ở chế độ **Development**
+3. **Publish app sang chế độ Live** (Developer Dashboard → mục *Đăng* / Publish; Meta đòi
+   Privacy Policy URL và Category trước)
 
-**Không cần App Review.** Đây là chỗ nhiều người tưởng nhầm rồi bỏ cuộc: App Review chỉ
-bắt buộc khi *người khác* dùng app của bạn. App ở chế độ Development vẫn cấp đủ quyền cho
-chính admin/developer/tester của app — tức là bạn.
+⚠️ **App phải Live, không để Development.** Bài đăng qua app đang ở Development chỉ hiện
+với người có vai trò trong app (admin/developer/tester); người ngoài không thấy dù bài
+vẫn nằm trên page. Gặp thật: cả loạt bài đầu tiên lên page mà không ai xem được.
+
+**Không cần App Review** để đăng lên chính page của bạn: App Review chỉ bắt buộc khi
+*người khác* cấp quyền cho app. Chuyển Live không phải qua duyệt.
 
 *(Meta thỉnh thoảng đòi Business Verification cho một số quyền. Nếu bị chặn ở bước 3 thì
 làm xác minh doanh nghiệp trong Business Manager rồi quay lại.)*
@@ -111,6 +115,16 @@ In ra caption hoàn chỉnh (đã nối link + hashtag) và kiểm tra URL bài/
 Khi đã nạp secret, chạy `Run workflow` với `dry_run` tắt trên một bài cũ để kiểm tra
 đường đi thật. Bài sẽ nằm ở mục *Đã lên lịch* — vào Business Suite huỷ là xong, không
 có gì lên page.
+
+## Đăng lại bài cũ theo lịch tự đặt
+
+Run workflow có thêm ô `gio_hen` (giờ VN, dạng `2026-11-09 19:30`). Có ô này thì bài hẹn
+đúng thời điểm đó, thay cho 19:30 hôm nay; giờ đã qua hoặc cách dưới 10 phút thì job báo
+lỗi, không tự dời. Mỗi lần chạy một bài, nên đăng lại nhiều bài thì chạy mỗi bài một lần
+với `gio_hen` cách nhau theo ý muốn (vd 2 ngày/bài).
+
+Facebook chỉ nhận giờ hẹn cách hiện tại tối đa 30 ngày (một số tài liệu của Meta ghi 75).
+Lịch dài hơn thì bài xa nhất bị từ chối ngay lúc gọi API; hẹn bù khi đã vào cửa sổ.
 
 ## Caption được ghép thế nào
 

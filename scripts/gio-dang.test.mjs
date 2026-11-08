@@ -37,6 +37,27 @@ test("GIO_DANG trống thì đăng sau DELAY_PHUT phút", () => {
   assert.equal(raVN(tinhGioDang(vn("2026-09-28T14:05:00"), cfg)), "2026-09-28 16:05");
 });
 
+test("gioHen: hẹn đúng thời điểm, thắng giờ cố định, không phụ thuộc múi giờ máy", () => {
+  const now = vn("2026-11-08T23:50:00");
+  const cfg = { gioHen: "2026-11-09 19:30", gioCoDinh: "08:00", delayPhut: 120 };
+  assert.equal(raVN(tinhGioDang(now, cfg)), "2026-11-09 19:30");
+  assert.equal(raVN(tinhGioDang(now, { gioHen: "2026-12-13T19:30" })), "2026-12-13 19:30");
+});
+
+test("gioHen: đã qua hoặc dưới 10 phút thì báo lỗi, không dời hộ", () => {
+  const now = vn("2026-11-08T19:25:00");
+  assert.throws(() => tinhGioDang(now, { gioHen: "2026-11-08 19:30" }), /dưới 10 phút/);
+  assert.throws(() => tinhGioDang(now, { gioHen: "2026-11-07 19:30" }), /đã qua/);
+  assert.equal(raVN(tinhGioDang(now, { gioHen: "2026-11-08 19:35" })), "2026-11-08 19:35");
+});
+
+test("gioHen: sai định dạng hoặc ngày không có thật thì báo lỗi", () => {
+  const now = vn("2026-11-08T09:00:00");
+  for (const gio of ["09/11/2026 19:30", "2026-11-09", "2026-02-30 19:30", "2026-11-09 24:00"]) {
+    assert.throws(() => tinhGioDang(now, { gioHen: gio }), /GIO_HEN/);
+  }
+});
+
 test("cấu hình sai thì báo lỗi, không đoán", () => {
   const now = vn("2026-09-28T09:00:00");
   for (const gio of ["7h30", "24:00", "19:60"]) {
