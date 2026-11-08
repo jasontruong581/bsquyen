@@ -7,6 +7,17 @@ tags:
   - "Tầm soát"
 cta: tam-soat
 image: /assets/kien-thuc/tam-soat-ung-thu-da-day-og.png
+facebook: |
+  Ung thư dạ dày giai đoạn sớm gần như "im lặng", dễ nhầm với đầy bụng, khó
+  tiêu thông thường.
+
+  Ở Việt Nam bệnh thường được phát hiện muộn, trong khi phát hiện sớm thì
+  điều trị hiệu quả hơn nhiều — có trường hợp chỉ cần cắt tổn thương qua nội
+  soi. Vi khuẩn HP là yếu tố nguy cơ quan trọng, và nhiễm HP kiểm tra được,
+  điều trị được. Mốc từ khoảng 40 tuổi là hợp lý để bắt đầu trao đổi với bác
+  sĩ về tầm soát, sớm hơn nếu bạn có nguy cơ cao.
+
+  Nội soi hiện nay thường có an thần nhẹ, chỉ khoảng 5–15 phút.
 sources:
   - title: "IARC — GLOBOCAN 2022, số liệu ung thư Việt Nam"
     url: "https://gco.iarc.who.int/media/globocan/factsheets/populations/704-viet-nam-fact-sheet.pdf"
