@@ -7,6 +7,17 @@ tags:
   - "Chăm sóc giảm nhẹ"
 cta: tai-nha
 image: /assets/kien-thuc/cham-soc-giam-nhe-la-gi-og.png
+facebook: |
+  Nghe nhắc đến "chăm sóc giảm nhẹ", nhiều gia đình nghĩ ngay: "vậy là hết
+  cách rồi". Thực ra không phải vậy.
+
+  Chăm sóc giảm nhẹ đi song song với điều trị ung thư, không thay thế nó:
+  giúp người bệnh bớt đau, ăn được, ngủ được và bớt lo lắng. Theo Tổ chức Y
+  tế Thế giới, nên bắt đầu sớm, ngay từ khi chẩn đoán — không phải đợi đến
+  giai đoạn cuối.
+
+  Bài viết gỡ bốn hiểu lầm hay gặp, từ morphin đến chăm sóc tại nhà, để bạn
+  và người thân bớt băn khoăn khi trao đổi với bác sĩ điều trị.
 sources:
   - title: "WHO — Palliative care (Fact sheet)"
     url: "https://www.who.int/news-room/fact-sheets/detail/palliative-care"
