@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     font-family="'Be Vietnam Pro', system-ui, sans-serif"
+     aria-label="Trục thời gian ba mốc nuốt nghẹn tăng dần, lòng thực quản hẹp dần: từ thức ăn cứng sang thức ăn mềm rồi đến cả chất lỏng">
+  <!-- Nền + khối trang trí -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- Tiêu đề ảnh -->
+  <text x="380" y="52" text-anchor="middle" font-size="24" font-weight="700" fill="#123b63">Nuốt nghẹn do khối u thường tăng dần</text>
+  <text x="380" y="82" text-anchor="middle" font-size="16" fill="#5b6b7b">Lòng thực quản hẹp dần — từ đồ cứng sang cả đồ lỏng</text>
+
+  <!-- Đoạn thực quản trên mỗi mốc: lòng ống hẹp dần -->
+  <!-- Mốc 1: hơi hẹp -->
+  <rect x="140" y="112" width="60" height="110" rx="22" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <rect x="155" y="112" width="30" height="110" fill="#fdeee2"/>
+  <circle cx="157" cy="168" r="7" fill="#f26e21"/>
+  <!-- Mốc 2: hẹp hơn -->
+  <rect x="350" y="112" width="60" height="110" rx="22" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <rect x="365" y="112" width="30" height="110" fill="#fdeee2"/>
+  <path d="M365 140 q18 28 0 56 Z" fill="#f26e21" stroke="#d85a10" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Mốc 3: gần như bít -->
+  <rect x="560" y="112" width="60" height="110" rx="22" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <rect x="575" y="112" width="30" height="110" fill="#fdeee2"/>
+  <path d="M575 132 q24 35 0 72 Z" fill="#f26e21" stroke="#d85a10" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M605 132 q-24 35 0 72 Z" fill="#f26e21" stroke="#d85a10" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="584" cy="150" r="4" fill="#ffd9bd"/>
+
+  <!-- Trục thời gian + mũi tên -->
+  <path d="M80 280 H655" stroke="#ecdfd3" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M655 264 l30 16 l-30 16 Z" fill="#ecdfd3"/>
+
+  <!-- Mốc 1 -->
+  <circle cx="170" cy="280" r="26" fill="#fdeee2" stroke="#f2a56e" stroke-width="4"/>
+  <circle cx="170" cy="280" r="7" fill="#f2a56e"/>
+  <text x="170" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Thịt, bánh mì</text>
+  <text x="170" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Phải chiêu nước</text>
+
+  <!-- Mốc 2 -->
+  <circle cx="380" cy="280" r="32" fill="#f2a56e" stroke="#e08b4f" stroke-width="4"/>
+  <text x="380" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Cơm mềm</text>
+  <text x="380" y="375" text-anchor="middle" font-size="16" fill="#5b6b7b">Chuyển sang ăn cháo</text>
+
+  <!-- Mốc 3 -->
+  <circle cx="590" cy="280" r="40" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="577" cy="267" r="9" fill="#ffd9bd"/>
+  <text x="590" y="345" text-anchor="middle" font-size="20" font-weight="700" fill="#123b63">Cả cháo, nước</text>
+  <text x="590" y="375" text-anchor="middle" font-size="17" font-weight="700" fill="#d85a10">Cần nội soi sớm</text>
+
+  <text x="380" y="425" text-anchor="middle" font-size="12" fill="#5b6b7b">*Không nên đợi đến mốc cuối — nghẹn mới xuất hiện và kéo dài đã nên đi khám</text>
+</svg>
