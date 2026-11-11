@@ -44,6 +44,7 @@ một dòng không kéo theo việc đánh số lại cả bảng.
 | `bat-dau-cham-soc-giam-nhe-khi-nao` | Nên bắt đầu chăm sóc giảm nhẹ từ khi nào? |
 | `thuoc-la-va-ung-thu` | Thuốc lá gây ra bao nhiêu loại ung thư? |
 | `vi-khuan-hp-va-ung-thu-da-day` | Vi khuẩn HP và ung thư dạ dày — mối liên hệ đến đâu? |
+| `nuot-nghen-nuot-vuong` | Nuốt nghẹn, nuốt vướng — dấu hiệu sớm của ung thư thực quản |
 
 ## Hàng đợi
 
@@ -51,7 +52,6 @@ Thứ tự dòng = thứ tự viết. Routine xoá dòng khỏi bảng này và 
 
 | slug | Chủ đề | Loại | Nhóm |
 |---|---|---|---|
-| `nuot-nghen-nuot-vuong` | Nuốt nghẹn, nuốt vướng — dấu hiệu sớm của ung thư thực quản | B | B |
 | `buon-non-non-oi-xu-tri-tai-nha` | Buồn nôn, nôn ói: xử trí tại nhà và khi nào cần nhập viện | C | D |
 | `khi-nao-goi-bac-si-ngay` | Khi nào cần gọi bác sĩ ngay, khi nào cần nhập viện? | C | G |
 | `xet-nghiem-dau-an-ung-thu` | Dấu ấn ung thư (CEA, CA 19-9, CA 125…) — hiểu đúng để khỏi hoang mang | B | A |
