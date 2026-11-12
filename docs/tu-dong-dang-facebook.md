@@ -123,8 +123,10 @@ Run workflow có thêm ô `gio_hen` (giờ VN, dạng `2026-11-09 19:30`). Có �
 lỗi, không tự dời. Mỗi lần chạy một bài, nên đăng lại nhiều bài thì chạy mỗi bài một lần
 với `gio_hen` cách nhau theo ý muốn (vd 2 ngày/bài).
 
-Facebook chỉ nhận giờ hẹn cách hiện tại tối đa 30 ngày (một số tài liệu của Meta ghi 75).
-Lịch dài hơn thì bài xa nhất bị từ chối ngay lúc gọi API; hẹn bù khi đã vào cửa sổ.
+Facebook từ chối giờ hẹn quá xa (`(#100) The specified scheduled publish time is invalid`).
+Đo thực tế: hẹn được khi còn cách ≤ 28 ngày 19 giờ, bị từ chối ở 29 ngày 23 giờ — chặt hơn
+con số 30 ngày trong tài liệu Meta. Nên chỉ hẹn bài còn cách **tối đa 28 ngày**, bài xa hơn
+thì hẹn bù sau. Lần bị từ chối chỉ để lại ảnh chưa đăng, không tạo bài, chạy lại an toàn.
 
 ## Caption được ghép thế nào
 
