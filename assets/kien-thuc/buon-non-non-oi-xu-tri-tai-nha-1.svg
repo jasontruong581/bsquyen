@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" font-family="'Be Vietnam Pro', system-ui, sans-serif" aria-label="Ba mức xử trí nôn ói: mức 1 buồn nôn nhẹ, vẫn uống được nước thì tự xử trí tại nhà; mức 2 nôn suốt ngày, không giữ được nước hay thuốc thì gọi bác sĩ; mức 3 nôn ra máu hoặc chất như bã cà phê, người lả, chóng mặt, lơ mơ thì đi cấp cứu; ở mọi mức nên uống từng ngụm nhỏ và ghi lại số lần nôn">
+  <!-- nền -->
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- tiêu đề ảnh -->
+  <text x="52" y="62" font-size="26" font-weight="800" fill="#123b63">Nôn ói: xử trí theo mức độ</text>
+  <text x="52" y="92" font-size="15" fill="#5b6b7b">Mức càng cao càng cần người có chuyên môn hỗ trợ sớm</text>
+
+  <!-- mức 1: tại nhà -->
+  <rect x="52" y="282" width="200" height="90" rx="14" fill="#ffffff" stroke="#ecdfd3" stroke-width="3"/>
+  <text x="152" y="315" text-anchor="middle" font-size="19" font-weight="700" fill="#123b63">Tự xử trí tại nhà</text>
+  <text x="152" y="341" text-anchor="middle" font-size="16" fill="#5b6b7b">Buồn nôn nhẹ,</text>
+  <text x="152" y="361" text-anchor="middle" font-size="15" fill="#5b6b7b">vẫn uống được nước</text>
+
+  <!-- mức 2: gọi bác sĩ -->
+  <rect x="272" y="207" width="200" height="165" rx="14" fill="#fdeee2" stroke="#f2a56e" stroke-width="3"/>
+  <text x="372" y="242" text-anchor="middle" font-size="19" font-weight="700" fill="#123b63">Gọi bác sĩ</text>
+  <text x="372" y="270" text-anchor="middle" font-size="16" fill="#5b6b7b">Nôn suốt ngày,</text>
+  <text x="372" y="293" text-anchor="middle" font-size="15" fill="#5b6b7b">không giữ được nước</text>
+  <text x="372" y="314" text-anchor="middle" font-size="15" fill="#5b6b7b">hay thuốc uống</text>
+  <!-- điện thoại nhỏ -->
+  <rect x="358" y="326" width="28" height="38" rx="6" fill="#f26e21" stroke="#d85a10" stroke-width="3"/>
+  <rect x="364" y="333" width="16" height="20" rx="2" fill="#ffd9bd"/>
+
+  <!-- mức 3: cấp cứu — mức được nhấn -->
+  <rect x="492" y="132" width="200" height="240" rx="14" fill="#f26e21" stroke="#d85a10" stroke-width="3"/>
+  <text x="592" y="169" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">Đi cấp cứu</text>
+  <text x="592" y="198" text-anchor="middle" font-size="16" fill="#ffd9bd">Nôn ra máu,</text>
+  <text x="592" y="221" text-anchor="middle" font-size="15" fill="#ffd9bd">chất như bã cà phê</text>
+  <text x="592" y="244" text-anchor="middle" font-size="15" fill="#ffd9bd">Lả, chóng mặt, lơ mơ</text>
+  <!-- dấu cộng y tế -->
+  <circle cx="592" cy="310" r="34" fill="#ffffff"/>
+  <path d="M592 292 v36 M574 310 h36" stroke="#f26e21" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- dải nền chung -->
+  <rect x="52" y="386" width="640" height="42" rx="14" fill="#e8f1fa"/>
+  <text x="372" y="413" text-anchor="middle" font-size="16" fill="#123b63">Ở mọi mức: uống từng ngụm nhỏ, ghi lại số lần nôn</text>
+</svg>
