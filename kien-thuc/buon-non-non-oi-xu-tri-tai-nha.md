@@ -8,8 +8,8 @@ cta: tai-nha
 image: /assets/kien-thuc/buon-non-non-oi-xu-tri-tai-nha-og.png
 thumb: /assets/kien-thuc/buon-non-non-oi-xu-tri-tai-nha-thumb.svg
 facebook: |
-  "Má cứ ăn được vài muỗng là nôn hết ra, cả nhà không biết phải làm sao" —
-  người chăm sóc người bệnh ung thư rất hay gặp tình huống này.
+  "Má ăn vài muỗng là nôn hết ra, cả nhà không biết làm sao" — người chăm
+  sóc người bệnh ung thư rất hay gặp cảnh này.
 
   Buồn nôn, nôn ói có nhiều nguyên nhân: do thuốc, do táo bón, do chính bệnh,
   có khi do lo âu. Bài viết hướng dẫn những việc người thân làm được tại nhà —
@@ -22,9 +22,9 @@ facebook: |
   bác sĩ sớm, đừng cố chịu đựng.
 sources:
   - title: "American Cancer Society — Managing Nausea and Vomiting at Home"
-    url: "https://www.cancer.org/cancer/managing-cancer/side-effects/eating-problems/nausea-and-vomiting/managing.html"
+    url: "https://www.cancer.org/cancer/side-effects/eating-problems/nausea-and-vomiting/managing.html"
   - title: "Viện Ung thư Quốc gia Hoa Kỳ (NCI) — Nausea and Vomiting and Cancer Treatment"
-    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/nausea"
+    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/nausea-vomiting"
   - title: "Cancer Research UK — A blocked bowel (bowel obstruction)"
     url: "https://www.cancerresearchuk.org/about-cancer/coping/physically/bowel-problems/types/blocked-bowel-obstruction"
 ---
