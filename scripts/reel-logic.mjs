@@ -33,7 +33,9 @@ export function docPostVideo(videoDir, thuMuc) {
   const duongDan = `${videoDir}/${thuMuc}/post.json`;
   if (!existsSync(duongDan)) return null;
   try {
-    return { thuMuc, duongDan, post: JSON.parse(readFileSync(duongDan, "utf8")) };
+    // Bỏ BOM: PowerShell 5.1 (Set-Content -Encoding utf8) ghi kèm BOM, JSON.parse không nhận.
+    const text = readFileSync(duongDan, "utf8").replace(/^﻿/, "");
+    return { thuMuc, duongDan, post: JSON.parse(text) };
   } catch (e) {
     return { thuMuc, duongDan, loi: `không đọc được JSON: ${e.message}` };
   }
