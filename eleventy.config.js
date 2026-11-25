@@ -17,6 +17,8 @@ module.exports = function (eleventyConfig) {
   // Không quét các thư mục không thuộc website
   eleventyConfig.ignores.add("docs/**");
   eleventyConfig.ignores.add("plans/**");
+  // Pipeline dựng video Reels (Remotion), có package.json và node_modules riêng
+  eleventyConfig.ignores.add("video/**");
   eleventyConfig.ignores.add("README.md");
   // Hướng dẫn nội bộ — không được thành trang public (trước đây lọt ra /CLAUDE/)
   eleventyConfig.ignores.add("CLAUDE.md");

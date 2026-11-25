@@ -1,0 +1,26 @@
+{
+  "name": "bsquyen-video",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "voice": "tsx scripts/tao-giong.ts",
+    "sample": "tsx scripts/mau-giong.ts",
+    "studio": "remotion studio src/index.ts",
+    "render": "node scripts/render.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/phat-am.test.mjs"
+  },
+  "dependencies": {
+    "@fontsource/be-vietnam-pro": "5.3.0",
+    "@remotion/cli": "4.0.535",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "18.3.12",
+    "tsx": "4.19.2",
+    "typescript": "5.7.2"
+  }
+}
