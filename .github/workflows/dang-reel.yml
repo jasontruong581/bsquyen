@@ -1,6 +1,6 @@
 name: Đăng Reel Kiến thức lên Facebook
 
-# Xuất bản = merge PR video vào main. Job chỉ đăng khi video/<slug>/post.json được THÊM MỚI;
+# Xuất bản = merge PR video vào main. Job chỉ đăng khi video/<V001 - YYYY-MM-DD - slug>/post.json được THÊM MỚI;
 # sửa post.json cũ không đăng lại. mp4 nằm ở GitHub Release video-<slug>, không nằm trong git.
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: "Slug video cần đăng (bỏ trống = dò video mới từ commit cuối)"
+        description: "Slug (hp-va-da-day) hoặc id (V001) của video cần đăng (bỏ trống = dò video mới từ commit cuối)"
         required: false
         type: string
       gio_hen:

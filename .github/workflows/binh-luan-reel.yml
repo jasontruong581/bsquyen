@@ -1,7 +1,7 @@
 name: Bình luận link bài lên Reel của Page
 
 # Facebook không cho bình luận lên Reel đang hẹn giờ, nên link bài (bình luận đầu tiên của Page)
-# được đăng ở job này, sau giờ đăng 19:30. Ghép Reel với video/<slug>/post.json bằng caption;
+# được đăng ở job này, sau giờ đăng 19:30. Ghép Reel với video/<thư mục>/post.json bằng caption;
 # Reel đã có bình luận của Page thì bỏ qua, nên chạy lại không bình luận lặp.
 # Chạy theo lịch chỉ khi biến repo BINH_LUAN_REEL = on (đặt sau khi token đã có quyền
 # pages_manage_engagement và đã thử chạy tay một lần). Chạy tay luôn được; dry_run mặc định

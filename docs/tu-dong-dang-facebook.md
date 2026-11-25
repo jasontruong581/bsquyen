@@ -197,31 +197,45 @@ thì dời sang hôm sau; module dùng chung `scripts/gio-dang.mjs`). Pipeline d
 - Workflow đăng: `.github/workflows/dang-reel.yml` · Script: `scripts/dang-reel.mjs`
 - Workflow bình luận: `.github/workflows/binh-luan-reel.yml` · Script: `scripts/binh-luan-reel.mjs`
 - Tải mp4 lên Release (chạy ở máy local): `scripts/tai-video-len-release.mjs`
-- Logic thuần (dò video mới, caption, bình luận, ghép Reel với bài): `scripts/reel-logic.mjs`, có test
+- Logic thuần (dò video mới, tra video theo slug/id, caption, bình luận, ghép Reel với bài): `scripts/reel-logic.mjs`, có test
+
+### Quy ước thư mục video
+
+Mỗi video một thư mục `video/V001 - YYYY-MM-DD - <slug>/` (tên **có dấu cách**), ví dụ
+`video/V001 - 2026-11-25 - hp-va-da-day/`. Trong đó:
+
+- `post.json` = `{"id": "V001", "slug": "hp-va-da-day", "article": "...", "caption": "..."}`
+  (`article` là slug bài Kiến thức tương ứng). **`id` và `slug` lấy từ nội dung post.json,
+  không suy từ tên thư mục**; thư mục chỉ để người đọc.
+- mp4 render ở local nằm tại `<thư mục>/out/<slug>.mp4`.
+- Release vẫn là tag `video-<slug>`, asset `<slug>.mp4`.
+
+Mọi chỗ cần chỉ định một video (`--slug=`, input `slug` của workflow, tham số của
+`tai-video-len-release.mjs`) nhận **slug** (`hp-va-da-day`) hoặc **id** (`V001`) và tìm thư
+mục bằng cách quét `video/*/post.json`.
 
 ### Luồng mỗi video
 
 ```
-render ──► node scripts/tai-video-len-release.mjs <slug> ──► PR video ──► merge ──► Reel hẹn 19:30 ──► bình luận link bài
-           (Release video-<slug>, asset <slug>.mp4)       (video/<slug>/post.json)
+render ──► node scripts/tai-video-len-release.mjs <slug|V001> ──► PR video ──► merge ──► Reel hẹn 19:30 ──► bình luận link bài
+           (Release video-<slug>, asset <slug>.mp4)             (video/<V001 - ... - slug>/post.json)
 ```
 
-1. Render ra `video/out/<slug>.mp4`.
-2. `node scripts/tai-video-len-release.mjs <slug>`: tạo (hoặc ghi đè, `--clobber`) Release
+1. Render ra `video/<thư mục>/out/<slug>.mp4`.
+2. `node scripts/tai-video-len-release.mjs <slug|V001>`: tạo (hoặc ghi đè, `--clobber`) Release
    `video-<slug>` kèm file `<slug>.mp4`. **Làm bước này trước khi merge**: mp4 không nằm
    trong git, job đăng tải nó từ Release.
-3. Mở PR có `video/<slug>/post.json` = `{"slug", "article", "caption"}` (`article` là slug
-   bài Kiến thức tương ứng). Chủ kênh duyệt, **merge = xuất bản**.
+3. Mở PR có `video/<thư mục>/post.json` như trên. Chủ kênh duyệt, **merge = xuất bản**.
 4. Job **Đăng Reel Kiến thức lên Facebook** chạy khi `video/*/post.json` được **thêm mới**
    vào `main` (sửa post.json cũ không đăng lại), tải mp4 từ Release và hẹn Reel.
    Trước giờ đăng, sửa/đổi giờ/huỷ được trong Meta Business Suite → Nội dung → Đã lên lịch.
 5. Sau giờ đăng, job **Bình luận link bài lên Reel của Page** đăng bình luận đầu tiên.
 
-Chạy tay: **Actions → Đăng Reel Kiến thức lên Facebook → Run workflow**, nhập `slug`
-(và `gio_hen` dạng `2026-12-01 19:30` nếu muốn giờ riêng); mặc định `dry_run` bật. Thử ở
-máy: `node scripts/dang-reel.mjs --slug=<slug> --dry-run` (có thể đặt `GIO_DANG=19:30` để
-giờ hiện ra giống workflow) — in caption, giờ hẹn, nội dung bình luận, không tải video và
-không gọi Facebook.
+Chạy tay: **Actions → Đăng Reel Kiến thức lên Facebook → Run workflow**, nhập `slug` (slug
+hoặc id như `V001`; và `gio_hen` dạng `2026-12-01 19:30` nếu muốn giờ riêng); mặc định
+`dry_run` bật. Thử ở máy: `node scripts/dang-reel.mjs --slug=<slug|V001> --dry-run` (có thể
+đặt `GIO_DANG=19:30` để giờ hiện ra giống workflow) — in caption, giờ hẹn, nội dung bình
+luận, không tải video và không gọi Facebook.
 
 ### Caption và bình luận
 
@@ -233,7 +247,7 @@ không gọi Facebook.
 - Reel đang hẹn giờ chưa công khai nên chưa có chỗ bình luận; repo videobds cũng chỉ bình
   luận lên Reel đã công khai. Vì vậy bình luận do job riêng làm **sau** giờ đăng, theo cách
   đã chạy ở videobds: chạy lúc 20:20 và 22:20
-  giờ VN, bù 08:20 hôm sau. Job ghép Reel với `video/<slug>/post.json` bằng phần chữ của
+  giờ VN, bù 08:20 hôm sau. Job ghép Reel với `video/<thư mục>/post.json` bằng phần chữ của
   caption và bỏ qua Reel đã có bình luận của Page, nên chạy lại không bình luận lặp; Reel
   không khớp video nào thì không đụng tới.
 - Job bình luận **chỉ chạy theo lịch khi biến repo `BINH_LUAN_REEL` = `on`** (Settings →
@@ -266,7 +280,7 @@ chắc Reel chưa lên lịch.
 | Triệu chứng | Nguyên nhân thường gặp |
 |---|---|
 | `Không tải được release video-<slug>` / `không có file <slug>.mp4` | Chưa chạy `tai-video-len-release.mjs`, hoặc tên asset khác `<slug>.mp4`. Tải lên rồi Run workflow với slug đó. |
-| `post.json chưa đạt` | Thiếu/sai `slug`, `article` hoặc `caption`. Sửa trên `main` rồi Run workflow với slug. |
+| `post.json chưa đạt` | Thiếu/sai `id`, `slug`, `article` hoặc `caption`. Sửa trên `main` rồi Run workflow với slug hoặc id. |
 | `trỏ tới bài "…" nhưng không thấy kien-thuc/….md` | `article` sai hoặc bài chưa merge. |
 | `video_status=error` / `publish_status=error` | Facebook từ chối file (Reel chỉ nhận 9:16, 3–90 giây, codec/âm thanh hợp lệ). Log in nguyên văn lý do. |
 | `Token hoặc Page ID không dùng được` | Như bài ảnh: lấy lại token theo bước 3–4. |

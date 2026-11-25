@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Tải video đã render lên GitHub Release để job đăng Reels lấy về.
 //
-//   node scripts/tai-video-len-release.mjs <slug>
+//   node scripts/tai-video-len-release.mjs <slug|V001>
 //
-// Cần: video/out/<slug>.mp4 (đã render), video/<slug>/post.json, `gh` đã đăng nhập.
+// Cần: video/<V001 - YYYY-MM-DD - slug>/out/<slug>.mp4 (đã render), post.json cùng thư mục,
+// `gh` đã đăng nhập. Tra thư mục theo slug hoặc id trong post.json (không theo tên thư mục).
 // Tạo (hoặc cập nhật) Release `video-<slug>` với asset `<slug>.mp4`. Chạy ở máy local,
 // TRƯỚC khi merge PR video: merge là lúc job đăng, nó cần mp4 đã có trên Release.
 import { spawnSync } from "node:child_process";
@@ -11,7 +12,8 @@ import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const SLUG_RE = /^[a-z0-9][a-z0-9-]*$/;
+import { docThuMucVideo, kiemTraPostReel, laKhoaVideo, timVideo } from "./reel-logic.mjs";
+
 const goc = dirname(dirname(fileURLToPath(import.meta.url)));
 
 const chet = (msg) => {
@@ -21,13 +23,23 @@ const chet = (msg) => {
 const gh = (args, nuot = false) =>
   spawnSync("gh", args, { cwd: goc, encoding: "utf8", stdio: nuot ? "pipe" : ["ignore", "inherit", "inherit"] });
 
-const slug = process.argv.slice(2).find((a) => !a.startsWith("--"));
-if (!slug || !SLUG_RE.test(slug)) chet("Cách dùng: node scripts/tai-video-len-release.mjs <slug>");
+const khoa = process.argv.slice(2).find((a) => !a.startsWith("--"));
+if (!khoa || !laKhoaVideo(khoa)) chet("Cách dùng: node scripts/tai-video-len-release.mjs <slug|V001>");
 
-const mp4 = join(goc, "video", "out", `${slug}.mp4`);
-const post = join(goc, "video", slug, "post.json");
-if (!existsSync(post)) chet(`Thiếu video/${slug}/post.json (slug, article, caption) — Release không có post.json thì job đăng cũng không chạy.`);
-if (!existsSync(mp4)) chet(`Thiếu video/out/${slug}.mp4 — chạy render trước (trong video/: npm run render -- ${slug}).`);
+let muc;
+try {
+  muc = timVideo(docThuMucVideo(join(goc, "video")), khoa);
+} catch (e) {
+  chet(e.message);
+}
+if (!muc) chet(`Không thấy video "${khoa}" trong video/*/post.json (khớp theo slug hoặc id trong post.json) — Release không có post.json thì job đăng cũng không chạy.`);
+if (muc.loi) chet(`${muc.thuMuc}/post.json: ${muc.loi}`);
+const loiPost = kiemTraPostReel(muc.post);
+if (loiPost.length) chet(`video/${muc.thuMuc}/post.json chưa đạt:\n  - ${loiPost.join("\n  - ")}`);
+
+const slug = muc.post.slug;
+const mp4 = join(goc, "video", muc.thuMuc, "out", `${slug}.mp4`);
+if (!existsSync(mp4)) chet(`Thiếu video/${muc.thuMuc}/out/${slug}.mp4 — chạy render trước.`);
 
 const tag = `video-${slug}`;
 const probe = gh(["--version"], true);

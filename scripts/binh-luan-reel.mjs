@@ -6,15 +6,13 @@
 //
 // Vì sao tách khỏi job đăng: Facebook không cho bình luận lên Reel đang hẹn giờ, nên bình luận
 // chỉ làm được sau giờ đăng. Script không giữ trạng thái:
-//   - Reel được ghép với video/<slug>/post.json bằng phần chữ của caption (mô tả Reel bắt đầu bằng nó);
+//   - Reel được ghép với video/<V001 - YYYY-MM-DD - slug>/post.json bằng phần chữ của caption (mô tả Reel bắt đầu bằng nó);
 //     Reel không khớp video nào (Reel cũ, bài đăng khác) thì bỏ qua.
 //   - Một Reel coi là xong khi đã có bình luận cấp 1 do chính Page đăng, nên chạy lại không bình luận lặp.
 // Env: FB_PAGE_ID, FB_PAGE_ACCESS_TOKEN, FB_API_VERSION, SITE_URL, INPUT_DRY_RUN, INPUT_NGAY.
 // Cần quyền pages_manage_engagement (xem docs/tu-dong-dang-facebook.md, mục Đăng Reels).
-import { existsSync, readFileSync, readdirSync } from "node:fs";
-
 import { SITE_URL, gonCaption } from "./caption-facebook.mjs";
-import { SLUG_RE, khopReel, kiemTraPostReel, taoBinhLuan } from "./reel-logic.mjs";
+import { docThuMucVideo, khopReel, kiemTraPostReel, taoBinhLuan } from "./reel-logic.mjs";
 
 const API = `https://graph.facebook.com/${process.env.FB_API_VERSION || "v26.0"}`;
 const PAGE_ID = process.env.FB_PAGE_ID;
@@ -33,22 +31,16 @@ if (!(ngay > 0)) {
   process.exit(1);
 }
 
-/** Gom mọi video/<slug>/post.json hợp lệ; file hỏng chỉ cảnh báo, không chặn các video khác. */
+/** Gom mọi video/<thư mục>/post.json hợp lệ; file hỏng chỉ cảnh báo, không chặn các video khác. */
 function docMoiPost() {
-  if (!existsSync("video")) return [];
   const posts = [];
-  for (const ent of readdirSync("video", { withFileTypes: true })) {
-    if (!ent.isDirectory() || !SLUG_RE.test(ent.name)) continue;
-    const duongDan = `video/${ent.name}/post.json`;
-    if (!existsSync(duongDan)) continue;
-    try {
-      const post = JSON.parse(readFileSync(duongDan, "utf8"));
-      const loi = kiemTraPostReel(post, ent.name);
-      if (loi.length) throw new Error(loi.join("; "));
-      posts.push({ slug: ent.name, chu: gonCaption(post.caption), binhLuan: taoBinhLuan(post.article, SITE_URL) });
-    } catch (e) {
-      console.warn(`⚠ Bỏ qua ${duongDan}: ${e.message}`);
+  for (const { duongDan, post, loi: loiDoc } of docThuMucVideo("video")) {
+    const loi = loiDoc ? [loiDoc] : kiemTraPostReel(post);
+    if (loi.length) {
+      console.warn(`⚠ Bỏ qua ${duongDan}: ${loi.join("; ")}`);
+      continue;
     }
+    posts.push({ slug: post.slug, chu: gonCaption(post.caption), binhLuan: taoBinhLuan(post.article, SITE_URL) });
   }
   return posts;
 }

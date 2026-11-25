@@ -2,7 +2,7 @@
 // Đăng video Kiến thức lên Facebook Page dưới dạng Reel hẹn giờ.
 //
 //   node scripts/dang-reel.mjs                 # dò video mới thêm ở commit cuối
-//   node scripts/dang-reel.mjs --slug=<slug>   # chỉ định video
+//   node scripts/dang-reel.mjs --slug=<slug|V001>   # chỉ định video theo slug hoặc id trong post.json
 //   node scripts/dang-reel.mjs --dry-run       # in caption, giờ hẹn, bình luận; KHÔNG tải video, KHÔNG gọi Facebook
 //
 // Trong GitHub Actions các tuỳ chọn đọc từ env INPUT_SLUG / INPUT_GIO_HEN / INPUT_DRY_RUN,
@@ -11,7 +11,8 @@
 // Env bắt buộc khi đăng thật: FB_PAGE_ID, FB_PAGE_ACCESS_TOKEN, GH_TOKEN (tải mp4 từ Release)
 // Env có mặc định: SITE_URL, FB_API_VERSION, GIO_DANG, DELAY_PHUT
 //
-// mp4 không nằm trong git: `node scripts/tai-video-len-release.mjs <slug>` đẩy nó lên GitHub
+// Video nằm ở video/<V001 - YYYY-MM-DD - slug>/post.json; slug lấy từ nội dung post.json, không từ tên thư mục.
+// mp4 không nằm trong git: `node scripts/tai-video-len-release.mjs <slug|V001>` đẩy nó lên GitHub
 // Release `video-<slug>` (asset `<slug>.mp4`), script này tải về bằng `gh` rồi tải lên Facebook.
 // Link bài không đặt trong caption mà trong bình luận đầu tiên: Facebook không cho bình luận
 // lên Reel đang hẹn giờ nên việc đó do binh-luan-reel.mjs làm sau giờ đăng.
@@ -24,7 +25,16 @@ import matter from "gray-matter";
 
 import { SITE_URL } from "./caption-facebook.mjs";
 import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
-import { SLUG_RE, kiemTraPostReel, slugMoiTuDiff, taoBinhLuan, taoCaptionReel } from "./reel-logic.mjs";
+import {
+  docPostVideo,
+  docThuMucVideo,
+  kiemTraPostReel,
+  laKhoaVideo,
+  taoBinhLuan,
+  taoCaptionReel,
+  thuMucMoiTuDiff,
+  timVideo,
+} from "./reel-logic.mjs";
 
 const VER = process.env.FB_API_VERSION || "v26.0";
 const API = `https://graph.facebook.com/${VER}`;
@@ -38,7 +48,7 @@ const PAGE_ID = process.env.FB_PAGE_ID;
 const TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
 
 const argv = process.argv.slice(2);
-const slugChiDinh = (argv.find((a) => a.startsWith("--slug="))?.slice(7) || process.env.INPUT_SLUG || "").trim();
+const khoaChiDinh = (argv.find((a) => a.startsWith("--slug="))?.slice(7) || process.env.INPUT_SLUG || "").trim();
 const dryRun = argv.includes("--dry-run") || process.env.INPUT_DRY_RUN === "true";
 
 const log = (...a) => console.log(...a);
@@ -48,26 +58,36 @@ const chet = (msg) => {
 };
 const ngu = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/** Trả về [{ thuMuc, duongDan, post | loi }] — video chỉ định (slug hoặc id) hoặc video mới thêm ở commit cuối. */
 function doVideoMoi() {
-  if (slugChiDinh) return [slugChiDinh];
+  if (khoaChiDinh) {
+    if (!laKhoaVideo(khoaChiDinh)) chet(`slug/id không hợp lệ: "${khoaChiDinh}" (vd hp-va-da-day hoặc V001)`);
+    let muc;
+    try {
+      muc = timVideo(docThuMucVideo("video"), khoaChiDinh);
+    } catch (e) {
+      chet(e.message);
+    }
+    if (!muc) chet(`Không thấy video "${khoaChiDinh}" trong video/*/post.json (khớp theo slug hoặc id trong post.json).`);
+    return [muc];
+  }
   let out;
   try {
-    out = execFileSync("git", ["diff", "--name-only", "--diff-filter=A", "HEAD^", "HEAD", "--", "video/*/post.json"], {
+    // -z: đường dẫn cách nhau bằng NUL, git không bọc nháy/escape tên thư mục có dấu cách hay tiếng Việt.
+    out = execFileSync("git", ["diff", "-z", "--name-only", "--diff-filter=A", "HEAD^", "HEAD", "--", "video/*/post.json"], {
       encoding: "utf8",
     });
   } catch {
     chet("Không đọc được lịch sử git — checkout cần fetch-depth ≥ 2.");
   }
-  return slugMoiTuDiff(out);
+  return thuMucMoiTuDiff(out).map((thuMuc) => docPostVideo("video", thuMuc));
 }
 
-function docVideo(slug) {
-  if (!SLUG_RE.test(slug)) chet(`slug không hợp lệ: "${slug}"`);
-  const duongDan = `video/${slug}/post.json`;
-  if (!existsSync(duongDan)) chet(`Không thấy ${duongDan}`);
-  const post = JSON.parse(readFileSync(duongDan, "utf8"));
-  const loi = kiemTraPostReel(post, slug);
+function docVideo({ duongDan, post, loi: loiDoc }) {
+  if (loiDoc) chet(`${duongDan}: ${loiDoc}`);
+  const loi = kiemTraPostReel(post);
   if (loi.length) chet(`${duongDan} chưa đạt:\n  - ${loi.join("\n  - ")}`);
+  const slug = post.slug;
 
   const baiMd = `kien-thuc/${post.article}.md`;
   if (!existsSync(baiMd)) chet(`${duongDan} trỏ tới bài "${post.article}" nhưng không thấy ${baiMd}`);
@@ -196,12 +216,12 @@ async function dangReel(file, caption, gio) {
 }
 
 async function main() {
-  const slugs = doVideoMoi();
-  if (!slugs.length) {
+  const muc = doVideoMoi();
+  if (!muc.length) {
     log("Không có video nào mới ở commit này — không đăng gì.");
     return;
   }
-  log(`Video cần đăng: ${slugs.join(", ")}${dryRun ? "  (DRY RUN)" : ""}`);
+  log(`Video cần đăng: ${muc.map((m) => m.thuMuc).join(", ")}${dryRun ? "  (DRY RUN)" : ""}`);
 
   // Kiểm tra cấu hình lịch ngay đầu, kể cả dry run: GIO_DANG / gio_hen sai thì biết trước khi tải gì.
   try {
@@ -220,9 +240,10 @@ async function main() {
     await lietKeBaiHenGio();
   }
 
-  for (const slug of slugs) {
-    const video = docVideo(slug);
-    log(`\n─── ${slug}`);
+  for (const m of muc) {
+    const video = docVideo(m);
+    const slug = video.slug;
+    log(`\n─── ${slug} (${m.thuMuc})`);
     log(`Caption (${video.caption.length} ký tự):\n${video.caption}\n`);
     log(`Bình luận đầu tiên (đăng sau giờ đăng bởi binh-luan-reel):\n${video.binhLuan}\n`);
 
