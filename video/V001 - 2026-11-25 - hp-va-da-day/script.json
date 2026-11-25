@@ -1,0 +1,52 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.35,
+  "phat_am": {"HP": "hát pê", "Follow": "phô lô"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Dạ dày ngâm axit cả ngày. Sao nó không tự tiêu hoá chính mình?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Bí mật là một lớp nhầy, như chiếc áo mưa. Axit chỉ chạm được lớp ngoài.",
+      "labels": [{"at": "áo", "text": "ÁO MƯA NHẦY"}]
+    },
+    {
+      "id": "s3",
+      "text": "Vi khuẩn rơi vào đây là tan. Trừ một kẻ lì đòn: vi khuẩn HP.",
+      "labels": [{"at": "HP", "text": "VI KHUẨN HP"}]
+    },
+    {
+      "id": "s4",
+      "text": "Nó xoáy như cái mở nút chai, chui vào lớp nhầy, rồi tự quấn một lớp kiềm quanh mình cho khỏi bỏng.",
+      "labels": [{"at": "kiềm", "text": "LỚP KIỀM"}]
+    },
+    {
+      "id": "s5",
+      "text": "Ở lì nhiều năm, nó làm niêm mạc viêm âm ỉ, mà thường chẳng đau gì.",
+      "labels": [{"at": "viêm", "text": "VIÊM ÂM Ỉ"}]
+    },
+    {
+      "id": "s6",
+      "text": "Đa số người nhiễm không sao cả. Chỉ một số ít, niêm mạc viêm lâu năm mới biến đổi thành ung thư.",
+      "labels": [{"at": "đa", "text": "ĐA SỐ KHÔNG SAO"}]
+    },
+    {
+      "id": "s7",
+      "text": "Tin vui: diệt HP giúp giảm gần một nửa số ca ung thư dạ dày. Không về không, nhưng giảm rõ.",
+      "labels": [{"at": "giảm", "text": "GIẢM GẦN 1/2"}]
+    },
+    {
+      "id": "s8",
+      "text": "HP còn tự khai nữa: nó ăn urê, ợ ra khí theo hơi thở. Thổi vào một túi nhỏ là bắt được.",
+      "labels": [{"at": "thổi", "text": "TEST HƠI THỞ"}]
+    },
+    {
+      "id": "s9",
+      "text": "Xét nghiệm, điều trị đủ đợt theo bác sĩ, rồi kiểm tra lại. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
