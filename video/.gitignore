@@ -1,3 +1,5 @@
 # File sinh ra: giọng đọc + timeline (npm run voice), video xuất ra (npm run render)
 public/*/
+!public/sfx/
+!public/music/
 out/
