@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 
 import { HASHTAG, gonCaption } from "./caption-facebook.mjs";
+import { TOI_DA_MS, TOI_DA_NGAY, tinhGioDang } from "./gio-dang.mjs";
 
 export const SLUG_RE = /^[a-z0-9][a-z0-9-]*$/;
 export const ID_RE = /^V\d{3,}$/;
@@ -61,6 +62,55 @@ export function timVideo(muc, khoa) {
   return khop[0];
 }
 
+/** `ngay_dang` tùy chọn: bỏ trống (undefined/null) là hợp lệ; còn lại phải là ngày có thật dạng YYYY-MM-DD. Trả về chuỗi lỗi hoặc null. */
+export function kiemTraNgayDang(ngayDang) {
+  if (ngayDang === undefined || ngayDang === null) return null;
+  const m = typeof ngayDang === "string" ? /^(\d{4})-(\d{2})-(\d{2})$/.exec(ngayDang) : null;
+  const sai = `ngay_dang "${ngayDang}" sai dạng — dùng YYYY-MM-DD, vd 2026-12-01`;
+  if (!m) return sai;
+  const [nam, thang, ngay] = m.slice(1).map(Number);
+  const d = new Date(Date.UTC(nam, thang - 1, ngay));
+  const coThat = d.getUTCFullYear() === nam && d.getUTCMonth() === thang - 1 && d.getUTCDate() === ngay;
+  return coThat ? null : `ngay_dang "${ngayDang}" không phải ngày có thật`;
+}
+
+/**
+ * Giờ hẹn của một Reel. Ưu tiên: `lich.gioHen` (input workflow_dispatch) > `ngayDang` (post.json) > quy tắc
+ * mặc định của gio-dang.mjs. Trả về `{ gio (unix giây), nguon: "gio_hen" | "ngay_dang" | "mac_dinh", canhBao: [] }`.
+ * - ngày sai dạng, hoặc xa hơn giới hạn hẹn giờ của Facebook → ném lỗi;
+ * - giờ 19:30 của ngày đó đã qua / còn dưới 10 phút → quay về quy tắc mặc định kèm cảnh báo, không lỗi.
+ */
+export function tinhGioDangReel(nowMs, lich, ngayDang) {
+  const canhBao = [];
+  if (lich.gioHen && lich.gioHen.trim()) {
+    return { gio: tinhGioDang(nowMs, lich), nguon: "gio_hen", canhBao };
+  }
+  const macDinh = () => ({ gio: tinhGioDang(nowMs, lich), nguon: "mac_dinh", canhBao });
+
+  const loiNgay = kiemTraNgayDang(ngayDang);
+  if (loiNgay) throw new Error(loiNgay);
+  if (ngayDang === undefined || ngayDang === null) return macDinh();
+
+  const gioCoDinh = (lich.gioCoDinh || "").trim();
+  if (!gioCoDinh) throw new Error(`ngay_dang "${ngayDang}" cần GIO_DANG (HH:MM) để biết hẹn lúc mấy giờ, nhưng GIO_DANG đang trống.`);
+  macDinh(); // kiểm GIO_DANG hợp lệ trước, để lỗi của nó không bị nhầm với "giờ đã qua"
+
+  let gio;
+  try {
+    gio = tinhGioDang(nowMs, { gioHen: `${ngayDang} ${gioCoDinh}` });
+  } catch {
+    const kq = macDinh();
+    kq.canhBao.push(
+      `ngay_dang "${ngayDang}" ${gioCoDinh} đã qua hoặc cách hiện tại dưới 10 phút — dùng quy tắc mặc định thay thế.`
+    );
+    return kq;
+  }
+  if (gio * 1000 - nowMs > TOI_DA_MS) {
+    throw new Error(`ngay_dang "${ngayDang}" xa quá ${TOI_DA_NGAY} ngày kể từ bây giờ — Facebook không nhận giờ hẹn xa vậy. Merge PR muộn hơn hoặc chọn ngày gần hơn.`);
+  }
+  return { gio, nguon: "ngay_dang", canhBao };
+}
+
 /** Trả về danh sách lỗi (rỗng = hợp lệ). */
 export function kiemTraPostReel(post) {
   const loi = [];
@@ -71,6 +121,8 @@ export function kiemTraPostReel(post) {
     loi.push(`article thiếu hoặc sai dạng: "${post.article}" (slug bài Kiến thức, vd vi-khuan-hp-va-ung-thu-da-day)`);
   }
   if (typeof post.caption !== "string" || !gonCaption(post.caption)) loi.push("caption trống");
+  const loiNgay = kiemTraNgayDang(post.ngay_dang);
+  if (loiNgay) loi.push(loiNgay);
   return loi;
 }
 
