@@ -1,8 +1,9 @@
 /* Nhân vật vi khuẩn HP (phản diện dễ thương): thân xoắn uốn sóng, đuôi có roi, đầu tròn có mặt luôn thẳng đứng
-   dù thân xoay. Biểu cảm: gian (cười gian), vui, la (la hét), an (nhai), o (ợ). */
+   dù thân xoay. Biểu cảm: gian (cười gian), vui, lo (mặt lo, nhìn sang bên — dùng khi có chữ ung thư hoặc tế bào bất thường),
+   la (la hét), an (nhai), o (ợ). */
 import {NAVY} from '../../src/common/overlays';
 
-export type Mood = 'gian' | 'vui' | 'la' | 'an' | 'o';
+export type Mood = 'gian' | 'vui' | 'lo' | 'la' | 'an' | 'o';
 const L = 150;
 const DARK = '#7a1f2a';
 
@@ -33,6 +34,14 @@ const Face = ({mood, t}: {mood: Mood; t: number}) => {
           <Eye cx={-12} cy={-5} r={10} blink={blink} look={[1, 0]} />
           <Eye cx={12} cy={-5} r={10} blink={blink} look={[1, 0]} />
           <path d="M -24 -21 L -4 -14 M 24 -21 L 4 -14" stroke={NAVY} strokeWidth={5} strokeLinecap="round" />
+        </>
+      )}
+      {mood === 'lo' && (
+        <>
+          <Eye cx={-12} cy={-5} r={10} blink={blink} look={[-1.5, 0.5]} />
+          <Eye cx={12} cy={-5} r={10} blink={blink} look={[-1.5, 0.5]} />
+          <path d="M -24 -14 L -6 -22 M 24 -14 L 6 -22" stroke={NAVY} strokeWidth={5} strokeLinecap="round" />
+          <path d="M -11 19 Q 0 12 11 19" fill="none" stroke={NAVY} strokeWidth={5} strokeLinecap="round" />
         </>
       )}
       {mood === 'vui' && <path d="M -21 -2 Q -12 -15 -3 -2 M 3 -2 Q 12 -15 21 -2" fill="none" stroke={NAVY} strokeWidth={5} strokeLinecap="round" />}

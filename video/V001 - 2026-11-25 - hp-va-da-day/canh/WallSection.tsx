@@ -26,7 +26,9 @@ export const bugsAt = (t: number): Bug[] => {
   const dive = P(t, diveStart, W(4, 'nhầy') + 0.3 - diveStart);
   const yIn = lerp(-200, 520, P(t, enter, 1.5));
   const gone = (i: number) => 1 - P(t, killAt(i), 0.35);
-  const moodOf = (): Mood => (t >= W(7, 'diệt') ? 'la' : t >= S(5) ? 'vui' : 'gian');
+  /* vui chỉ ở phần cơ chế; từ lúc mô bắt đầu đỏ thì lém lỉnh nhẹ; từ "chỉ một số ít" tới khi bị diệt (có chữ ung thư, tế bào đổi) thì mặt lo */
+  const moodOf = (): Mood =>
+    t >= W(7, 'diệt') ? 'la' : t >= W(6, 'chỉ') - 0.2 ? 'lo' : t >= W(5, 'viêm') - 0.2 ? 'gian' : t >= S(5) ? 'vui' : 'gian';
   const main: Bug = {
     x: 540 + 10 * Math.sin(t * 2) + 46 * Math.sin(t * 9) * Math.sin(Math.PI * dive),
     y: lerp(yIn, 960, dive),
@@ -124,9 +126,11 @@ export const WallSection = ({t}: {t: number}) => {
 
   /* trạng thái tế bào */
   const inflame = P(t, W(5, 'viêm') - 0.2, 1.6) * (1 - 0.75 * P(t, W(6, 'đa') - 0.1, 0.8)) * (1 - 0.8 * P(t, W(7, 'diệt') + 0.5, 2));
-  const meta = P(t, W(6, 'biến'), 0.8);
-  const dark = P(t, W(6, 'ung') - 0.1, 0.9);
-  const thinSick = P(t, W(6, 'niêm'), 1.2);
+  /* tế bào bất thường chỉ ở lại tới hết phần biểu đồ; trả về bình thường khi khung test hơi thở che nền, để không còn sót ở cảnh sau */
+  const keep = 1 - P(t, S(8) + 0.3, 0.8);
+  const meta = P(t, W(6, 'biến'), 0.8) * keep;
+  const dark = P(t, W(6, 'ung') - 0.1, 0.9) * keep;
+  const thinSick = P(t, W(6, 'niêm'), 1.2) * keep;
   const pulse = 0.5 + 0.5 * Math.sin(t * 6);
   const tickFade = 1 - P(t, W(6, 'ung') + 0.6, 0.4);
 
@@ -174,7 +178,7 @@ export const WallSection = ({t}: {t: number}) => {
         const sick = i === SICK;
         const h = sick ? lerp(300, 245, thinSick) : 300;
         const redBase = Math.min(1, inflame * (0.85 + 0.15 * pulse));
-        const red = sick ? Math.max(redBase, 0.9 * P(t, W(6, 'niêm'), 0.6) * (1 - meta)) : redBase;
+        const red = sick ? Math.max(redBase, 0.9 * P(t, W(6, 'niêm'), 0.6) * (1 - P(t, W(6, 'biến'), 0.8)) * keep) : redBase;
         let fill = interpolateColors(red, [0, 1], ['#F7C1B2', '#EE6B5B']);
         if (sick && meta > 0) fill = interpolateColors(meta, [0, 1], [fill, '#B79CDB']);
         if (sick && dark > 0) fill = interpolateColors(dark, [0, 1], [fill, '#5A2448']);

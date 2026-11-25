@@ -44,11 +44,11 @@ const keysB = (): Key[] => [
 
 /* điểm neo bong bóng thoại: HP chính ở thế giới B, hoặc đầu HP trong khung tròn ở cảnh 8 */
 type Who = 'hp' | 'khung';
-const bubbles: (BubbleSpec & {who: Who})[] = [
+const bubbles: (BubbleSpec & {who: Who; v?: number})[] = [
   {at: W(3, 'hp') + 0.1, dur: 1.9, text: 'Chào cả nhà!', who: 'hp'},
   {at: W(4, 'cho') - 0.15, dur: 1.4, text: 'Axit à? Chuyện nhỏ!', who: 'hp'},
-  {at: W(5, 'năm') - 0.05, dur: 1.6, text: 'Ở đây vui ghê~', who: 'hp'},
-  {at: W(7, 'hp') - 0.05, dur: 0.55, text: 'Á á á!', who: 'hp'},
+  {at: W(5, 'năm') - 0.05, dur: 1.3, text: 'Ở đây ấm, ở lì thôi~', who: 'hp'},
+  {at: W(7, 'hp') - 0.05, dur: 0.55, text: 'Á á á!', who: 'hp', size: 0.7, v: 0.2},
   {at: W(8, 'ợ'), dur: 1.4, text: 'Ợ… lộ rồi!', who: 'khung'},
 ];
 
@@ -60,7 +60,7 @@ const sfx: Sfx[] = [
   {t: W(7, 'tin'), src: 'sfx/ding-01.wav', v: 0.4},
   ...acidImpacts(W(2, 'axit') - 0.2, E(2) + 0.2).map((t) => ({t, src: 'sfx/ping-01.wav', v: 0.3})),
   ...timeline.scenes.flatMap((s) => s.labels.map((l) => ({t: l.t, src: 'sfx/pop-01.wav', v: 0.35}))),
-  ...bubbles.map((b) => ({t: b.at, src: 'sfx/pop-03.wav', v: 0.4})),
+  ...bubbles.map((b) => ({t: b.at, src: 'sfx/pop-03.wav', v: b.v ?? 0.4})),
   {t: W(9, 'xét'), src: 'sfx/pop-03.wav', v: 0.35},
   {t: W(9, 'điều'), src: 'sfx/pop-03.wav', v: 0.35},
   {t: W(9, 'kiểm'), src: 'sfx/pop-03.wav', v: 0.35},
@@ -126,7 +126,7 @@ export const HpVideo = () => {
       <Steps t={t} frame={frame} />
       {bubbles.map((b, i) => {
         const a = b.who === 'hp' ? hpScreen : {x: khungHead.x - 120, y: khungHead.y - 40};
-        return <Bubble key={i} t={t} frame={frame} at={b.at} dur={b.dur} text={b.text} x={a.x} y={a.y} />;
+        return <Bubble key={i} t={t} frame={frame} at={b.at} dur={b.dur} text={b.text} size={b.size} x={a.x} y={a.y} />;
       })}
       <Labels t={t} frame={frame} tl={timeline} />
       <Captions t={t} tl={timeline} />

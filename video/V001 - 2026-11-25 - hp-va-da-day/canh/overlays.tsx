@@ -185,7 +185,7 @@ export const Steps = ({t, frame}: {t: number; frame: number}) => {
         const sp = spring({frame: frame - Math.round((s.at - 0.1) * FPS), fps: FPS, config: {damping: 13}});
         const tick = P(t, s.at + 0.6, 0.35);
         return (
-          <div key={i} style={{display: 'flex', alignItems: 'center', gap: 24, background: '#fff', borderRadius: 30, padding: '20px 28px', boxShadow: '0 8px 26px rgba(18,59,99,0.16)', transform: `translateX(${(1 - sp) * -900}px)`, opacity: t < s.at - 0.1 ? 0 : 1}}>
+          <div key={i} style={{display: 'flex', alignItems: 'center', gap: 24, background: '#fff', borderRadius: 30, padding: '20px 28px', boxShadow: '0 8px 26px rgba(18,59,99,0.16)', transform: `translateX(${(1 - sp) * -1100}px)`, opacity: t < s.at - 0.1 || sp < 0.01 ? 0 : 1}}>
             <div style={{width: 72, height: 72, flex: 'none', borderRadius: 36, background: tick > 0.5 ? '#2E9E6A' : ORANGE, color: '#fff', fontFamily: FONT, fontWeight: 900, fontSize: 42, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
               {tick > 0.5 ? '✓' : i + 1}
             </div>

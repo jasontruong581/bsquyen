@@ -5,11 +5,12 @@ import {FPS, P} from '../timeline';
 import {FONT, NAVY} from './overlays';
 import {RIGHT_EDGE, SAFE} from './layout';
 
-export type BubbleSpec = {at: number; dur: number; text: string};
+/** `size`: hệ số thu phóng quanh đầu đuôi (mặc định 1; bong bóng phụ như tiếng la thì nhỏ hơn) */
+export type BubbleSpec = {at: number; dur: number; text: string; size?: number};
 
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 
-export const Bubble = ({t, frame, at, dur, text, x, y}: BubbleSpec & {t: number; frame: number; x: number; y: number}) => {
+export const Bubble = ({t, frame, at, dur, text, size = 1, x, y}: BubbleSpec & {t: number; frame: number; x: number; y: number}) => {
   if (t < at - 0.02 || t > at + dur + 0.25) return null;
   const s = spring({frame: frame - Math.round(at * FPS), fps: FPS, config: {damping: 10, stiffness: 190}});
   const out = P(t, at + dur, 0.25);
@@ -22,7 +23,7 @@ export const Bubble = ({t, frame, at, dur, text, x, y}: BubbleSpec & {t: number;
   const r = 34;
   const d = `M ${bx + r} ${by} H ${bx + w - r} Q ${bx + w} ${by} ${bx + w} ${by + r} V ${by + h - r} Q ${bx + w} ${by + h} ${bx + w - r} ${by + h} H ${tailX + 22} L ${x} ${tipY} L ${tailX - 22} ${by + h} H ${bx + r} Q ${bx} ${by + h} ${bx} ${by + h - r} V ${by + r} Q ${bx} ${by} ${bx + r} ${by} Z`;
   return (
-    <svg width={1080} height={1920} style={{position: 'absolute', inset: 0, opacity: 1 - out, transformOrigin: `${x}px ${tipY}px`, transform: `scale(${s * (1 - 0.2 * out)})`}}>
+    <svg width={1080} height={1920} style={{position: 'absolute', inset: 0, opacity: 1 - out, transformOrigin: `${x}px ${tipY}px`, transform: `scale(${s * size * (1 - 0.2 * out)})`}}>
       <path d={d} fill="#fff" stroke={NAVY} strokeWidth={7} strokeLinejoin="round" />
       <text x={bx + w / 2} y={by + h / 2 + 16} textAnchor="middle" fontFamily={FONT} fontWeight={800} fontSize={46} fill={NAVY}>
         {text}
