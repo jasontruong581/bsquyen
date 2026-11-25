@@ -186,3 +186,103 @@ thời, vì lặp bước đó không thể làm bài lên page hai lần.
   thoại, tạo bằng `.claude/skills/bai-kien-thuc/scripts/tao-anh-facebook.mjs`. Ảnh dùng
   hình minh họa của chính bài (field `thumb`) nên mỗi bài một hình. Ảnh OG 1200×630 vẫn
   dùng cho website (thẻ preview khi share link), không đăng lên page.
+
+## Đăng Reels
+
+Bài đăng ảnh gần như không có lượt xem, nên video dọc từ bài Kiến thức được đăng thành
+**Reel hẹn giờ lúc 19:30 (giờ Việt Nam)**, cùng quy tắc giờ như bài ảnh (merge sau 19:20
+thì dời sang hôm sau; module dùng chung `scripts/gio-dang.mjs`). Pipeline dựng video nằm
+ở `video/`; phần này chỉ nói về khâu đăng.
+
+- Workflow đăng: `.github/workflows/dang-reel.yml` · Script: `scripts/dang-reel.mjs`
+- Workflow bình luận: `.github/workflows/binh-luan-reel.yml` · Script: `scripts/binh-luan-reel.mjs`
+- Tải mp4 lên Release (chạy ở máy local): `scripts/tai-video-len-release.mjs`
+- Logic thuần (dò video mới, tra video theo slug/id, caption, bình luận, ghép Reel với bài): `scripts/reel-logic.mjs`, có test
+
+### Quy ước thư mục video
+
+Mỗi video một thư mục `video/V001 - YYYY-MM-DD - <slug>/` (tên **có dấu cách**), ví dụ
+`video/V001 - 2026-11-25 - hp-va-da-day/`. Trong đó:
+
+- `post.json` = `{"id": "V001", "slug": "hp-va-da-day", "article": "...", "caption": "..."}`
+  (`article` là slug bài Kiến thức tương ứng). **`id` và `slug` lấy từ nội dung post.json,
+  không suy từ tên thư mục**; thư mục chỉ để người đọc.
+- mp4 render ở local nằm tại `<thư mục>/out/<slug>.mp4`.
+- Release vẫn là tag `video-<slug>`, asset `<slug>.mp4`.
+
+Mọi chỗ cần chỉ định một video (`--slug=`, input `slug` của workflow, tham số của
+`tai-video-len-release.mjs`) nhận **slug** (`hp-va-da-day`) hoặc **id** (`V001`) và tìm thư
+mục bằng cách quét `video/*/post.json`.
+
+### Luồng mỗi video
+
+```
+render ──► node scripts/tai-video-len-release.mjs <slug|V001> ──► PR video ──► merge ──► Reel hẹn 19:30 ──► bình luận link bài
+           (Release video-<slug>, asset <slug>.mp4)             (video/<V001 - ... - slug>/post.json)
+```
+
+1. Render ra `video/<thư mục>/out/<slug>.mp4`.
+2. `node scripts/tai-video-len-release.mjs <slug|V001>`: tạo (hoặc ghi đè, `--clobber`) Release
+   `video-<slug>` kèm file `<slug>.mp4`. **Làm bước này trước khi merge**: mp4 không nằm
+   trong git, job đăng tải nó từ Release.
+3. Mở PR có `video/<thư mục>/post.json` như trên. Chủ kênh duyệt, **merge = xuất bản**.
+4. Job **Đăng Reel Kiến thức lên Facebook** chạy khi `video/*/post.json` được **thêm mới**
+   vào `main` (sửa post.json cũ không đăng lại), tải mp4 từ Release và hẹn Reel.
+   Trước giờ đăng, sửa/đổi giờ/huỷ được trong Meta Business Suite → Nội dung → Đã lên lịch.
+5. Sau giờ đăng, job **Bình luận link bài lên Reel của Page** đăng bình luận đầu tiên.
+
+Chạy tay: **Actions → Đăng Reel Kiến thức lên Facebook → Run workflow**, nhập `slug` (slug
+hoặc id như `V001`; và `gio_hen` dạng `2026-12-01 19:30` nếu muốn giờ riêng); mặc định
+`dry_run` bật. Thử ở máy: `node scripts/dang-reel.mjs --slug=<slug|V001> --dry-run` (có thể
+đặt `GIO_DANG=19:30` để giờ hiện ra giống workflow) — in caption, giờ hẹn, nội dung bình
+luận, không tải video và không gọi Facebook.
+
+### Caption và bình luận
+
+- **Caption** = `caption` trong post.json (gộp dòng gãy như bài ảnh) + hashtag suy từ `tags`
+  của bài `kien-thuc/<article>.md`, qua bảng hashtag ở `scripts/caption-facebook.mjs`.
+  **Không có link**, không nêu tên bác sĩ.
+- **Link bài** đi vào bình luận đầu tiên của Page:
+  `Xem bài viết đầy đủ: <SITE_URL>/kien-thuc/<article>/?utm_source=facebook&utm_medium=reel`.
+- Reel đang hẹn giờ chưa công khai nên chưa có chỗ bình luận; repo videobds cũng chỉ bình
+  luận lên Reel đã công khai. Vì vậy bình luận do job riêng làm **sau** giờ đăng, theo cách
+  đã chạy ở videobds: chạy lúc 20:20 và 22:20
+  giờ VN, bù 08:20 hôm sau. Job ghép Reel với `video/<thư mục>/post.json` bằng phần chữ của
+  caption và bỏ qua Reel đã có bình luận của Page, nên chạy lại không bình luận lặp; Reel
+  không khớp video nào thì không đụng tới.
+- Job bình luận **chỉ chạy theo lịch khi biến repo `BINH_LUAN_REEL` = `on`** (Settings →
+  Secrets and variables → Actions → Variables). Chạy tay luôn được, `dry_run` mặc định bật.
+  Tới khi bật biến này, link bài phải đăng bằng tay hoặc chạy tay job sau giờ đăng.
+
+### Quyền token cho Reels
+
+- **Đăng Reel** (`/video_reels`): dùng đúng ba quyền đã có ở bước 3 phía trên
+  (`pages_show_list`, `pages_manage_posts`, `pages_read_engagement`) — repo videobds đăng Reel
+  thật với bộ quyền này. Không cần cấp lại token.
+- **Bình luận** từ Page cần thêm **`pages_manage_engagement`**. Cảnh báo ở bước 3 (thêm quyền
+  này trực tiếp trong Explorer làm hộp thoại báo *Invalid Scopes*) vẫn đúng với cách thêm đó;
+  videobds đã cấp được bằng cách bật quyền trong use case *Quản lý mọi thứ trên Trang* của
+  app rồi chạy lại `node scripts/lay-token-facebook.mjs` để ghi đè secret
+  `FB_PAGE_ACCESS_TOKEN`. Chưa thử với app của page này. Chưa cấp thì job đăng Reel vẫn chạy
+  bình thường; chỉ job bình luận báo thiếu quyền (mã 10/200/283), và
+  `lay-token-facebook.mjs` hiện chỉ kiểm hai quyền `pages_manage_posts`, `pages_read_engagement`
+  nên sẽ không báo thiếu quyền này.
+- Graph API dùng cùng `FB_API_VERSION` (`v26.0`) với job bài ảnh — đổi version thì đổi cả
+  ba workflow (`dang-facebook.yml`, `dang-reel.yml`, `binh-luan-reel.yml`). Đổi domain thì
+  sửa `SITE_URL` ở `dang-facebook.yml`, `dang-reel.yml`, `binh-luan-reel.yml`.
+
+### Khi có sự cố (Reels)
+
+Job không tự chạy lại: đăng nhầm hai lần tệ hơn đăng trễ. Trước khi chạy lại sau lỗi, xem
+danh sách bài đang hẹn giờ mà job in ra ở đầu log (hoặc Business Suite → Đã lên lịch) để
+chắc Reel chưa lên lịch.
+
+| Triệu chứng | Nguyên nhân thường gặp |
+|---|---|
+| `Không tải được release video-<slug>` / `không có file <slug>.mp4` | Chưa chạy `tai-video-len-release.mjs`, hoặc tên asset khác `<slug>.mp4`. Tải lên rồi Run workflow với slug đó. |
+| `post.json chưa đạt` | Thiếu/sai `id`, `slug`, `article` hoặc `caption`. Sửa trên `main` rồi Run workflow với slug hoặc id. |
+| `trỏ tới bài "…" nhưng không thấy kien-thuc/….md` | `article` sai hoặc bài chưa merge. |
+| `video_status=error` / `publish_status=error` | Facebook từ chối file (Reel chỉ nhận 9:16, 3–90 giây, codec/âm thanh hợp lệ). Log in nguyên văn lý do. |
+| `Token hoặc Page ID không dùng được` | Như bài ảnh: lấy lại token theo bước 3–4. |
+| Lỗi giờ hẹn | Giờ hẹn phải cách hiện tại ≥ 10 phút và không quá ~28 ngày (đo thực tế, xem mục đăng lại bài cũ). |
+| Reel lên rồi mà không có bình luận | Chưa bật `BINH_LUAN_REEL`, token thiếu `pages_manage_engagement`, hoặc caption trên Facebook đã bị sửa nên không còn khớp post.json. Chạy tay job bình luận (dry run trước). |

@@ -1,0 +1,65 @@
+name: Đăng Reel Kiến thức lên Facebook
+
+# Xuất bản = merge PR video vào main. Job chỉ đăng khi video/<V001 - YYYY-MM-DD - slug>/post.json được THÊM MỚI;
+# sửa post.json cũ không đăng lại. mp4 nằm ở GitHub Release video-<slug>, không nằm trong git.
+on:
+  push:
+    branches: [main]
+    paths: ["video/*/post.json"]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Slug (hp-va-da-day) hoặc id (V001) của video cần đăng (bỏ trống = dò video mới từ commit cuối)"
+        required: false
+        type: string
+      gio_hen:
+        description: "Hẹn đúng giờ VN, dạng YYYY-MM-DD HH:MM (bỏ trống = 19:30 theo GIO_DANG)"
+        required: false
+        type: string
+      dry_run:
+        description: "Chỉ in caption, giờ hẹn và bình luận sẽ đăng, không gọi Facebook"
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read # tải file mp4 từ GitHub Release của chính repo
+
+# Cố ý không có khối concurrency: GitHub chỉ giữ một job chờ mỗi nhóm, nên job thứ ba
+# xếp hàng sẽ huỷ job đang chờ — và job bị huỷ không gửi mail như job fail, video đó lặng
+# lẽ không lên page. Mỗi job đăng một video riêng nên chạy song song không có hại.
+jobs:
+  dang-reel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # cần HEAD^ để so ra file mới thêm
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Đăng Reel
+        env:
+          # Input đi qua env, không nội suy vào dòng lệnh shell.
+          INPUT_SLUG: ${{ inputs.slug }}
+          INPUT_GIO_HEN: ${{ inputs.gio_hen }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          GH_TOKEN: ${{ github.token }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          # Đổi domain thì sửa đúng một dòng này (cùng giá trị với dang-facebook.yml) —
+          # xem docs/tu-dong-dang-facebook.md
+          SITE_URL: https://bsquyen.vercel.app
+          # Phiên bản Graph API hết hạn sau ~2 năm; giữ khớp với dang-facebook.yml.
+          FB_API_VERSION: v26.0
+          # Giờ đăng cố định, giờ Việt Nam (HH:MM). Merge sau 19:20 thì dời sang 19:30
+          # hôm sau, vì Facebook đòi giờ hẹn cách hiện tại ít nhất 10 phút.
+          GIO_DANG: "19:30"
+          # Chỉ dùng khi GIO_DANG để trống: đăng sau N phút kể từ lúc merge (≥ 10).
+          DELAY_PHUT: "120"
+        run: node scripts/dang-reel.mjs
