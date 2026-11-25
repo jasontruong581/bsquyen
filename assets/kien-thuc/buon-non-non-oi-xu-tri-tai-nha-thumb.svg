@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img"
+     aria-label="Ba bậc cao dần tượng trưng ba mức xử trí nôn ói: giọt nước tại nhà, điện thoại gọi bác sĩ, dấu cộng cấp cứu">
+  <rect width="760" height="440" fill="#fff9f4"/>
+  <circle cx="690" cy="380" r="110" fill="#fdeee2"/>
+  <circle cx="70" cy="65" r="80" fill="#e8f1fa"/>
+
+  <!-- mức 1 · giọt nước (tự xử trí tại nhà) -->
+  <rect x="70" y="270" width="180" height="90" rx="20" fill="#ffffff" stroke="#ecdfd3" stroke-width="5"/>
+  <path d="M160 288 C160 288 140 312 140 326 a20 20 0 0 0 40 0 C180 312 160 288 160 288 Z" fill="#f2a56e"/>
+
+  <!-- mức 2 · điện thoại (gọi bác sĩ) -->
+  <rect x="290" y="195" width="180" height="165" rx="20" fill="#fdeee2" stroke="#f2a56e" stroke-width="5"/>
+  <rect x="352" y="232" width="56" height="90" rx="12" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <rect x="363" y="246" width="34" height="52" rx="4" fill="#ffd9bd"/>
+  <circle cx="380" cy="310" r="5" fill="#ffd9bd"/>
+
+  <!-- mức 3 · dấu cộng (cấp cứu) -->
+  <rect x="510" y="110" width="180" height="250" rx="20" fill="#f26e21" stroke="#d85a10" stroke-width="5"/>
+  <circle cx="600" cy="235" r="50" fill="#ffffff"/>
+  <path d="M600 208 v54 M573 235 h54" stroke="#f26e21" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- nền chung -->
+  <rect x="70" y="382" width="620" height="38" rx="19" fill="#e8f1fa"/>
+</svg>
