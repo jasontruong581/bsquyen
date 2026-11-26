@@ -1,6 +1,6 @@
 /* Hai thẻ duy nhất của V008, cùng nằm ở dải dưới (y tới 1135, lề phải 160):
-   Thẻ 1 (cảnh 6): hai ô "quen thuốc" -> bác sĩ chỉnh liều; "lệ thuộc thể chất" -> giảm từ từ, không tự ngưng.
-   Thẻ 2 (cảnh 9): ba ô thang 0–10, uống đúng giờ, không tự đổi liều, kèm dòng "theo chỉ định của bác sĩ". */
+   Thẻ 1 (cảnh 7): hai ô "quen thuốc" -> bác sĩ chỉnh liều; "lệ thuộc thể chất" -> giảm từ từ, không tự ngưng.
+   Thẻ 2 (cảnh 10): ba ô thang 0–10, uống đúng giờ, không tự đổi liều, kèm dòng "theo chỉ định của bác sĩ". */
 import {spring} from 'remotion';
 import {FONT, NAVY, ORANGE} from '../../src/common/overlays';
 import {FPS, P} from '../../src/timeline';
@@ -21,15 +21,15 @@ const Frame = ({x, y, w, h}: {x: number; y: number; w: number; h: number}) => (
 const C1 = {x: 56, y: 922, w: 864, h: 213};
 
 export const Card1 = ({t, frame}: {t: number; frame: number}) => {
-  const a0 = W(6, 'Quen') - 0.1;
+  const a0 = W(7, 'Quen') - 0.1;
   if (t < a0 - 0.05) return null;
   const inn = sp(frame, a0, 13);
-  const out = smooth(P(t, E(6) - 0.05, 0.35)); // tắt hẳn trước khi cảnh 7 bắt đầu
+  const out = smooth(P(t, E(7) - 0.05, 0.35)); // tắt hẳn trước khi cảnh 8 bắt đầu
   if (out >= 1) return null;
   const w = (C1.w - 60) / 2;
   const cells = [
-    {icon: 'bars' as const, title: 'QUEN THUỐC', sub: 'đáp ứng kém dần', act: 'Bác sĩ chỉnh liều', act2: '', from: a0, to: W(6, 'Lệ') - 0.1, actAt: W(6, 'nên')},
-    {icon: 'chain' as const, title: 'LỆ THUỘC', sub: 'thể chất', act: 'Giảm từ từ', act2: 'không tự ngưng', from: W(6, 'Lệ') - 0.15, to: Infinity, actAt: W(6, 'nên', 1)},
+    {icon: 'bars' as const, title: 'QUEN THUỐC', sub: 'đáp ứng kém dần', act: 'Bác sĩ chỉnh liều', act2: '', from: a0, to: W(7, 'Lệ') - 0.1, actAt: W(7, 'nên')},
+    {icon: 'chain' as const, title: 'LỆ THUỘC', sub: 'thể chất', act: 'Giảm từ từ', act2: 'không tự ngưng', from: W(7, 'Lệ') - 0.15, to: Infinity, actAt: W(7, 'nên', 1)},
   ];
   return (
     <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
@@ -109,18 +109,18 @@ const LockIcon = () => (
 );
 
 export const Card2 = ({t, frame}: {t: number; frame: number}) => {
-  const a0 = W(9, 'nói') - 0.15;
+  const a0 = W(10, 'nói') - 0.15;
   if (t < a0 - 0.05) return null;
   const inn = sp(frame, a0, 13);
-  const out = smooth(P(t, E(9) - 0.05, 0.35)); // tắt hẳn trước khi cảnh 10 bắt đầu
+  const out = smooth(P(t, E(10) - 0.05, 0.35)); // tắt hẳn trước khi cảnh 11 bắt đầu
   if (out >= 1) return null;
   const w = (C2.w - 32 - 28) / 3;
   const cells = [
-    {title: 'THANG 0–10', sub: 'nói đúng mức đau', at: a0, to: W(9, 'uống') - 0.15},
-    {title: 'ĐÚNG GIỜ', sub: 'uống theo giờ', at: W(9, 'uống') - 0.15, to: W(9, 'và') - 0.05},
-    {title: 'KHÔNG TỰ ĐỔI', sub: 'tăng, giảm, ngưng', at: W(9, 'và') - 0.05, to: Infinity},
+    {title: 'THANG 0–10', sub: 'nói đúng mức đau', at: a0, to: W(10, 'uống') - 0.15},
+    {title: 'ĐÚNG GIỜ', sub: 'uống theo giờ', at: W(10, 'uống') - 0.15, to: W(10, 'và') - 0.05},
+    {title: 'KHÔNG TỰ ĐỔI', sub: 'tăng, giảm, ngưng', at: W(10, 'và') - 0.05, to: Infinity},
   ];
-  const line = Math.min(1, t >= W(9, 'tăng') - 0.1 ? sp(frame, W(9, 'tăng') - 0.05, 12) : 0);
+  const line = Math.min(1, t >= W(10, 'tăng') - 0.1 ? sp(frame, W(10, 'tăng') - 0.05, 12) : 0);
   return (
     <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
       <defs>

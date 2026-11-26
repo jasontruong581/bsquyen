@@ -50,3 +50,10 @@ test('khoá là số có dấu chấm hoặc số thường: dấu câu theo sau
   assert.deepEqual(r.tokens.find((x) => x.text === '7.000'), {text: '7.000', n: 2});
   assert.deepEqual(r.tokens.at(-1), {text: '6606.', n: 4});
 });
+test('phần trăm: khoá viết cả dấu %, dấu phẩy theo sau vẫn giữ', () => {
+  const map = {'79%': 'bảy mươi chín phần trăm', '13%': 'mười ba phần trăm'};
+  const r = buildPhatAm('Theo WHO, 79% dân số chỉ dùng 13%, hết.', map);
+  assert.equal(r.ttsText, 'Theo WHO, bảy mươi chín phần trăm dân số chỉ dùng mười ba phần trăm, hết.');
+  assert.deepEqual(r.tokens.find((x) => x.text === '79%'), {text: '79%', n: 5});
+  assert.deepEqual(r.tokens.find((x) => x.text === '13%,'), {text: '13%,', n: 4});
+});

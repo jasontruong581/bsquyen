@@ -1,9 +1,9 @@
-/* Đường dây thần kinh của V008 (toạ độ thế giới): từ chỗ đau ở bụng, vòng ra phía lưng, chạy lên dọc cột sống, qua cổ tới não.
+/* Đường dây thần kinh của V008 (toạ độ thế giới): từ chỗ đau ở cột sống thắt lưng, chạy lên dọc cột sống, qua cổ tới não.
    Mỗi đoạn là một Bézier bậc ba; dựng bảng điểm theo độ dài cung để tra vị trí và hướng theo u (độ dài đã đi, tính từ chỗ đau). */
 
 type Seg = [number, number, number, number, number, number, number, number];
 const SEGS: Seg[] = [
-  [360, 1080, 470, 1135, 640, 1115, 700, 990],
+  [746, 1134, 722, 1090, 704, 1040, 700, 990],
   [700, 990, 735, 880, 728, 720, 706, 600],
   [706, 600, 690, 500, 652, 452, 622, 392],
   [622, 392, 602, 352, 584, 330, 566, 292],

@@ -24,11 +24,11 @@ export const T = {
   morphin: W(4, 'Morphin') - 0.05,
   heavy: W(4, 'nặng') - 0.1,
   essential: W(4, 'thiết') - 0.1,
-  sign: [W(5, 'quen') - 0.15, W(5, 'lệ') - 0.15, W(5, 'nghiện', 1) - 0.2], // ba biển báo
-  split: W(7, 'Dùng', 1) - 0.3, // biển báo thứ ba tách riêng ("Dùng đúng chỉ định...")
-  shield: W(7, 'đúng') - 0.2,
-  doc: W(8, 'nói') - 0.3, // bàn tay chỉ vào "BÁC SĨ"
-  caution: S(8) + 0.1,
+  sign: [W(6, 'quen') - 0.15, W(6, 'lệ') - 0.15, W(6, 'nghiện', 1) - 0.2], // ba biển báo
+  split: W(8, 'Dùng', 1) - 0.3, // biển báo thứ ba tách riêng ("Dùng đúng chỉ định...")
+  shield: W(8, 'đúng') - 0.2,
+  doc: W(9, 'nói') - 0.3, // bàn tay chỉ vào "BÁC SĨ"
+  caution: S(9) + 0.1,
 };
 
 /* ---------- độ "to" của cơn đau: 1 = lớn, hạ dần theo từng nấc, thấp nhất khi tới nấc 3 (morphin) ---------- */
@@ -39,8 +39,8 @@ const VOL: [number, number][] = [
   [T.tag[1] + 0.3, 0.6],
   [T.morphin, 0.6],
   [T.morphin + 0.9, 0.2],
-  [S(10), 0.2],
-  [S(10) + 2.4, 0.1],
+  [S(11), 0.2],
+  [S(11) + 2.4, 0.1],
 ];
 export const loud = (t: number) => track(VOL, t);
 
@@ -71,11 +71,12 @@ const TIN_U: [number, number][] = [
   [S(3) + 5.3, U_SIGN],
   [S(4) + 0.75, U_REST],
   [E(4) - 0.1, U_REST],
-  [S(5) + 0.85, U_SIGN],
-  [E(8) + 0.2, U_SIGN],
-  [S(9) + 1.35, U_REST],
-  [E(9) + 0.3, U_REST],
-  [S(10) + 1.3, U_SLEEP], // đi vài bước ra giữa dây cáp rồi nằm xuống ngủ
+  [E(5) - 0.1, U_REST],
+  [S(6) + 0.85, U_SIGN],
+  [E(9) + 0.2, U_SIGN],
+  [S(10) + 1.35, U_REST],
+  [E(10) + 0.3, U_REST],
+  [S(11) + 1.3, U_SLEEP], // đi vài bước ra giữa dây cáp rồi nằm xuống ngủ
 ];
 export const tinU = (t: number) => track(TIN_U, t);
 
@@ -83,12 +84,12 @@ export type TinPose = 'stand' | 'run' | 'sit' | 'sleep';
 export const tinPose = (t: number): TinPose => {
   const sp = Math.abs(tinU(t + 0.06) - tinU(t - 0.06)) / 0.12;
   if (sp > 190) return 'run';
-  if (t >= S(10) + 1.5) return 'sleep';
-  if (t >= T.morphin + 1.0 && t < S(5) + 0.1) return 'sit';
+  if (t >= S(11) + 1.5) return 'sleep';
+  if (t >= T.morphin + 1.0 && t < S(6) + 0.1) return 'sit';
   return 'stand';
 };
 /** Mức lo lắng của Tin 0..1 (nhăn mày, vã mồ hôi khi cơn đau to; dịu dần khi âm lượng hạ) */
-export const tinWorry = (t: number) => clamp01(loud(t) * 0.95 + (t >= S(5) && t < S(7) ? 0.1 : 0));
+export const tinWorry = (t: number) => clamp01(loud(t) * 0.95 + (t >= S(6) && t < S(8) ? 0.1 : 0));
 
 /** Hướng mặt: +1 quay sang phải màn hình, -1 sang trái; đứng yên thì quay sang trái (vào phía cơ thể/bảng); làm trơn ±0,15s để lật mượt */
 export const tinFace = (t: number) => {
