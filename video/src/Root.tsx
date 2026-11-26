@@ -7,6 +7,7 @@ import * as ganThamLang from '../V004 - 2026-11-26 - gan-tham-lang/canh';
 import * as vacXinPhongUngThu from '../V006 - 2026-11-26 - vac-xin-phong-ung-thu/canh';
 import * as polypDaiTrang from '../V007 - 2026-11-26 - polyp-dai-trang/canh';
 import * as morphinNghien from '../V008 - 2026-11-26 - morphin-nghien/canh';
+import * as tuKhamVu from '../V009 - 2026-11-26 - tu-kham-vu/canh';
 
 /* Mỗi video là một Composition, id = slug (trùng "slug" trong post.json của thư mục video/V<số> - <ngày> - <slug>/).
    Thêm video mới: import phần canh/ của nó và thêm vào danh sách. */
@@ -18,6 +19,7 @@ const videos = [
   {id: vacXinPhongUngThu.id, component: vacXinPhongUngThu.VacXinVideo, durationInFrames: vacXinPhongUngThu.durationInFrames},
   {id: polypDaiTrang.id, component: polypDaiTrang.PolypVideo, durationInFrames: polypDaiTrang.durationInFrames},
   {id: morphinNghien.id, component: morphinNghien.MorphinVideo, durationInFrames: morphinNghien.durationInFrames},
+  {id: tuKhamVu.id, component: tuKhamVu.KhamVuVideo, durationInFrames: tuKhamVu.durationInFrames},
 ];
 
 export const Root = () => (
