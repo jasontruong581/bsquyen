@@ -1,7 +1,7 @@
 /* Chuyển động của ống soi (Soi) theo thời gian: vị trí đầu soi trên đường tâm đại tràng, khoảng cách tới polyp, hướng mặt.
    Dùng chung cho camera (World.tsx), Soi.tsx và index.tsx. */
 import {lerp} from '../../src/timeline';
-import {E, S, W} from './timeline';
+import {E, S, W, nearUngThu} from './timeline';
 import {U_DESC, U_POLYP, U_RECTUM, U_SIGMA, pathAt} from './Path';
 
 export const smooth = (p: number) => p * p * (3 - 2 * p);
@@ -61,7 +61,7 @@ export const soiMood = (t: number): SoiMood => {
   if (t < W(3, 'hoá') - 0.5) return 'smile';
   if (t < E(4) + 0.3) return 'serious'; // "hoá ác", "ung thư" và cảnh 4
   if (t < S(6)) return 'happy'; // tin tốt: cắt polyp
-  if (t < S(8)) return 'smile';
+  if (t < S(8)) return nearUngThu(t, 0.1) ? 'calm' : 'smile'; // cảnh 6 có chữ "ung thư" (nhóm nguy cơ cao): không cười ±2 giây
   if (t < S(9)) return 'happy';
   if (t < E(9) + 0.3) return 'serious';
   return 'happy';

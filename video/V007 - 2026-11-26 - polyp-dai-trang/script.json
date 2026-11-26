@@ -1,7 +1,7 @@
 {
   "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
   "gap": 0.3,
-  "phat_am": {"Follow": "phô lô", "polyp": "pô líp", "Polyp": "pô líp", "FIT": "phít", "45": "bốn mươi lăm", "10": "mười", "20": "hai mươi", "30": "ba mươi"},
+  "phat_am": {"Follow": "phô lô", "polyp": "pô líp", "Polyp": "pô líp", "FIT": "phít", "FAP": "ép a pê", "Lynch": "lin", "45": "bốn mươi lăm", "10": "mười", "20": "hai mươi", "30": "ba mươi"},
   "scenes": [
     {
       "id": "s1",
@@ -30,7 +30,7 @@
     },
     {
       "id": "s6",
-      "text": "Nguy cơ trung bình: bắt đầu từ 45 tuổi. Có người thân từng mắc, hoặc từng có polyp: hỏi bác sĩ để bắt đầu sớm hơn.",
+      "text": "Nguy cơ trung bình: bắt đầu từ 45 tuổi. Có người thân trực hệ từng mắc ung thư đại trực tràng, hoặc có hội chứng di truyền như đa polyp gia đình FAP hay hội chứng Lynch: hỏi bác sĩ để bắt đầu sớm hơn.",
       "labels": [{"at": "45", "text": "TỪ 45 TUỔI"}]
     },
     {
