@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.35,
+  "phat_am": {"Follow": "phô lô", "CT": "xê tê", "X-quang": "ích quang", "X": "ích", "gói-năm": "gói năm", "20": "hai mươi", "50": "năm mươi", "80": "tám mươi", "3": "ba"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Phổi không biết đau, vậy ta tìm bệnh bằng gì?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Phổi có rất ít đầu dây thần kinh cảm giác, nên một khối u nhỏ có thể lớn dần mà ta vẫn thấy bình thường.",
+      "labels": [{"at": "ít", "text": "ÍT DÂY THẦN KINH"}]
+    },
+    {
+      "id": "s3",
+      "text": "Bác sĩ đo mức hút bằng gói-năm: số bao mỗi ngày nhân số năm hút. Một bao mỗi ngày trong 20 năm là 20 gói-năm.",
+      "labels": [{"at": "gói", "text": "GÓI-NĂM"}]
+    },
+    {
+      "id": "s4",
+      "text": "Nên chụp mỗi năm nếu bạn từ 50 đến 80 tuổi, có từ 20 gói-năm trở lên, và đang hút hoặc đã bỏ thuốc.",
+      "labels": [{"at": "50", "text": "50–80 TUỔI · 20 GÓI-NĂM"}]
+    },
+    {
+      "id": "s5",
+      "text": "Cách làm là chụp cắt lớp ngực liều thấp: nằm lên bàn, vòng máy quét từng lát cắt, không đau, vài phút là xong.",
+      "labels": [{"at": "liều", "text": "CT LIỀU THẤP"}]
+    },
+    {
+      "id": "s6",
+      "text": "X-quang phổi thường không thay được CT: phim chồng lớp nên nốt nhỏ dễ bị tim và xương sườn che khuất.",
+      "labels": [{"at": "X-quang", "text": "X-QUANG ≠ CT"}]
+    },
+    {
+      "id": "s7",
+      "text": "Thấy nốt phổi thì đừng hoảng: rất thường gặp và phần lớn lành tính, như sẹo cũ sau viêm phổi. Bác sĩ thường hẹn chụp lại.",
+      "labels": [{"at": "phần", "text": "PHẦN LỚN LÀ LÀNH TÍNH"}]
+    },
+    {
+      "id": "s8",
+      "text": "CT dùng tia X, nên chỉ dành cho nhóm nguy cơ cao. Hãy trao đổi với bác sĩ xem mình có thuộc nhóm đó không.",
+      "labels": [{"at": "chỉ", "text": "ĐÚNG NGƯỜI, ĐÚNG NHỊP"}]
+    },
+    {
+      "id": "s9",
+      "text": "Có ho kéo dài trên 3 tuần hay ho ra máu thì đi khám ngay, đừng đợi lịch chụp.",
+      "labels": [{"at": "đừng", "text": "KHÔNG ĐỢI LỊCH CHỤP"}]
+    },
+    {
+      "id": "s10",
+      "text": "Còn việc đáng làm nhất là bỏ thuốc, ở tuổi nào cũng có lợi. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
