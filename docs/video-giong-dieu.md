@@ -39,6 +39,20 @@ Bong bóng phụ như tiếng la ("Á á á!") để nhỏ (khoảng 70% cỡ bo
 - Không nêu tên bác sĩ trong video đăng trên page "Hiểu Đúng Y Khoa" (watermark là tên page).
 - Có dòng thông tin tham khảo, không thay thế tư vấn của bác sĩ.
 
+## Chất lượng hình 2D
+
+Áp dụng từ V004 (chủ kênh nhận xét V003 "hơi sơ sài": hình nhỏ, giản lược, chuyển cảnh mờ dần và thẻ chữ chen vào). Chuẩn so sánh là video mẫu "Bs Y khoa" của chủ kênh.
+
+1. **Cỡ chủ thể:** cơ quan hoặc cảnh chính chiếm 60-70% chiều ngang khung, trong vùng an toàn y 250-1150; được tràn ra ngoài khi zoom gần.
+2. **Một mô hình, camera liên tục:** cả video dựa trên một mô hình chính, thêm hoặc tách bộ phận dần; camera zoom, pan, xoay (nội suy Hermite để không khựng ở mốc). Không mờ dần sang cảnh khác; chuyển hẳn sang mô hình khác tối đa một lần mỗi video.
+3. **Chi tiết giải phẫu:** mỗi cơ quan có ít nhất 3 lớp (viền, mảng chuyển màu, vùng sáng và bóng) và có cấu trúc bên trong khi zoom vào (phế quản, nếp niêm mạc, tiểu thùy...). Phần không nói tới làm mờ khoảng 30-40%.
+4. **Nền có không gian:** gradient, hạt bay chậm, thân người mờ phía sau (xương sườn, mạch, cơ quan khác, thị sai). Không để nền trơn một màu.
+5. **Thẻ chữ và biểu đồ:** tối đa 2 mỗi video. Nhãn khác đặt ngay trên hình (đường chỉ hoặc huy hiệu gắn vào bộ phận), không dùng khung riêng che hình.
+6. **Chuyển động phụ:** cơ quan luôn có nhịp nhẹ (phập phồng, dòng máu, nhu động), camera luôn trôi nhẹ. Không khung nào đứng yên quá 1 giây.
+7. **Tự kiểm:** xuất khung (`fps=1/2` toàn video, `fps=4` 3 giây đầu) và so với video mẫu. Khung nào có hơn 40% diện tích là nền trống (trừ vùng dành cho giao diện Reels, y 1450 trở xuống) thì sửa. Khung kết (thương hiệu) là ngoại lệ.
+
+Khuôn tham chiếu: `video/V004 - 2026-11-26 - gan-tham-lang/canh/` (`World.tsx` camera Hermite, nền, thân mờ, tiểu thùy; `Gan.tsx` nhân vật là chính cơ quan).
+
 ## Kỹ thuật
 
 - Phát âm: từ tiếng Anh và từ viết tắt khai báo trong khối `phat_am` của `script.json` theo phiên âm Việt (ví dụ `"HP": "hát pê"`, `"Follow": "phô lô"`); phụ đề vẫn hiện chữ gốc. Nghe lại sau khi tạo giọng.
