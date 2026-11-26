@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.35,
+  "phat_am": {"Follow": "phô lô", "ADN": "a đê en", "7.000": "bảy nghìn", "69": "sáu mươi chín", "20": "hai mươi", "10": "mười", "15": "mười lăm", "1800": "một tám không không", "6606": "sáu sáu không sáu"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Một hơi thuốc đi đâu trong cơ thể? Không chỉ ở phổi đâu.",
+      "labels": [{"at": "Không", "text": "KHÔNG CHỈ Ở PHỔI"}]
+    },
+    {
+      "id": "s2",
+      "text": "Khói thuốc chứa hơn 7.000 hoá chất, trong đó ít nhất 69 chất có thể gây ung thư.",
+      "labels": [{"at": "7.000", "text": "7.000 HOÁ CHẤT"}]
+    },
+    {
+      "id": "s3",
+      "text": "Chúng ngấm vào máu, đi khắp cơ thể, rồi được lọc qua gan, thận, xuống bàng quang.",
+      "labels": [{"at": "máu", "text": "THEO MÁU ĐI KHẮP NƠI"}]
+    },
+    {
+      "id": "s4",
+      "text": "Ở mỗi tế bào, chúng làm hỏng ADN. Một lần thì cơ thể tự sửa được.",
+      "labels": [{"at": "ADN", "text": "ADN"}]
+    },
+    {
+      "id": "s5",
+      "text": "Nhưng ngày nào cũng bị phá, nhiều năm liền, lỗi chồng lỗi, đến lúc tế bào mất kiểm soát thành ung thư.",
+      "labels": [{"at": "lỗi", "text": "LỖI CHỒNG LỖI"}]
+    },
+    {
+      "id": "s6",
+      "text": "Vì vậy thuốc lá liên quan đến hơn 20 loại ung thư, từ miệng đến bàng quang.",
+      "labels": [{"at": "hơn", "text": "HƠN 20 LOẠI"}]
+    },
+    {
+      "id": "s7",
+      "text": "Hút ít, thuốc lào hay thuốc lá điện tử cũng không an toàn hơn.",
+      "labels": [{"at": "Hút", "text": "KHÔNG CÓ MỨC AN TOÀN"}]
+    },
+    {
+      "id": "s8",
+      "text": "Tin vui: bỏ thuốc ở tuổi nào cũng có lợi. Sau 10 đến 15 năm, phần nguy cơ ung thư phổi tăng thêm giảm khoảng một nửa.",
+      "labels": [{"at": "Tin", "text": "BỎ THUỐC LUÔN CÓ LỢI"}]
+    },
+    {
+      "id": "s9",
+      "text": "Bỏ thuốc khó vì nicotin gây nghiện thật, thử vài lần là bình thường. Cần hỗ trợ, gọi tổng đài miễn phí 1800 6606.",
+      "labels": []
+    },
+    {
+      "id": "s10",
+      "text": "Mỗi ngày không hút là một ngày cơ thể hồi phục. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}

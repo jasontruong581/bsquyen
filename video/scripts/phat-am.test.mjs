@@ -42,3 +42,11 @@ test('số chữ TTS lệch thì báo lỗi thay vì gộp sai', () => {
   const {tokens} = buildPhatAm('HP ở đây', MAP);
   assert.throws(() => mergePhatAm([{text: 'a', t0: 0, t1: 1}], tokens), /không khớp/);
 });
+
+test('khoá là số có dấu chấm hoặc số thường: dấu câu theo sau vẫn giữ', () => {
+  const map = {'7.000': 'bảy nghìn', '69': 'sáu mươi chín', '1800': 'một tám không không', '6606': 'sáu sáu không sáu'};
+  const r = buildPhatAm('hơn 7.000 hoá chất, 69 chất, gọi 1800 6606.', map);
+  assert.equal(r.ttsText, 'hơn bảy nghìn hoá chất, sáu mươi chín chất, gọi một tám không không sáu sáu không sáu.');
+  assert.deepEqual(r.tokens.find((x) => x.text === '7.000'), {text: '7.000', n: 2});
+  assert.deepEqual(r.tokens.at(-1), {text: '6606.', n: 4});
+});
