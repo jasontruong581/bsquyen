@@ -1,0 +1,20 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "oxy": "ô xi", "B": "bê"},
+  "scenes": [
+    {"id": "s1", "text": "Một cơ quan làm hàng trăm việc cùng lúc, mà bạn chẳng hề thấy. Hôm nay ta lắp nó từ đầu!", "labels": []},
+    {"id": "s2", "text": "Đầu tiên là một khối mô lớn, nằm ở bên phải bụng trên, nặng khoảng một ký rưỡi. Nó có hai thùy, thùy phải to hơn.", "labels": []},
+    {"id": "s3", "text": "Nhưng gan phải xử lý mọi thứ bạn ăn. Nên máu từ ruột chảy thẳng về đây qua một mạch riêng, gọi là tĩnh mạch cửa.", "labels": []},
+    {"id": "s4", "text": "Gan cũng cần oxy như mọi cơ quan, nên có thêm động mạch gan mang máu giàu oxy tới.", "labels": []},
+    {"id": "s5", "text": "Máu xử lý xong thì sao? Ba tĩnh mạch gan đưa nó ra khỏi gan.", "labels": []},
+    {"id": "s6", "text": "Bây giờ ta phóng to. Gan được ghép từ vô số tiểu thùy nhỏ xíu, hình gần như lục giác.", "labels": []},
+    {"id": "s7", "text": "Ở mỗi góc có một nhánh tĩnh mạch cửa, một nhánh động mạch và một ống mật. Máu chảy qua các tế bào gan rồi dồn vào tĩnh mạch ở giữa.", "labels": []},
+    {"id": "s8", "text": "Tế bào gan làm gì với dòng máu đó? Cất đường để dành, và lọc thuốc, cồn, các chất lạ trước khi chúng đi khắp người.", "labels": []},
+    {"id": "s9", "text": "Gan còn làm ra dịch mật để tiêu hóa mỡ. Nhưng bữa ăn đâu có liên tục, nên ống mật dẫn mật tới túi mật, nơi trữ lại.", "labels": []},
+    {"id": "s10", "text": "Khi bạn ăn, nhất là món nhiều mỡ, túi mật co lại, đẩy mật xuống ruột non.", "labels": []},
+    {"id": "s11", "text": "Điều kỳ lạ nhất: gan là một trong số ít cơ quan có thể tự tái tạo. Dù phẫu thuật cắt gần hai phần ba, phần còn lại vẫn có thể lớn lại, ở người mất khoảng ba tháng.", "labels": []},
+    {"id": "s12", "text": "Nhưng đó là khả năng của gan khỏe. Muốn gan nhẹ gánh, hãy tiêm ngừa viêm gan B và hạn chế rượu bia.", "labels": []},
+    {"id": "s13", "text": "CHÚC MỪNG! Bạn vừa lắp xong một lá gan! Follow để hiểu rõ hơn về cơ thể mình nhé!", "labels": []}
+  ]
+}

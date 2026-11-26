@@ -1,7 +1,8 @@
 /* Render một video ra <thư mục video>/out/<slug>.mp4: dựng hình bằng Remotion rồi chuẩn hoá âm lượng bằng ffmpeg.
    Dùng: npm run render -- <slug hoặc id>   (vd hp-va-da-day hoặc V001; cần chạy npm run voice -- <...> trước)
    Video có nhiều bản cùng kịch bản (V005): npm run render -- V005 --ban 3d  →  out/phoi-3d.mp4 (composition "phoi-3d", dùng WebGL --gl=angle)
-                                            npm run render -- V005 --ban 2d  →  out/phoi-2d.mp4 */
+                                            npm run render -- V005 --ban 2d  →  out/phoi-2d.mp4
+   Video 3D chỉ một bản (V011): đặt "render3d": true trong post.json để render bằng WebGL --gl=angle  →  out/<slug>.mp4 */
 import fs from 'node:fs';
 import path from 'node:path';
 import {createRequire} from 'node:module';
@@ -41,7 +42,9 @@ const run = (cmd, args) => {
 // Gọi thẳng CLI của Remotion bằng node, tránh phải chạy qua shell trên Windows
 const remotionCli = path.join(path.dirname(createRequire(import.meta.url).resolve('@remotion/cli/package.json')), 'remotion-cli.js');
 const t0 = Date.now();
-run(process.execPath, [remotionCli, 'render', 'src/index.ts', compId, raw, ...(ban === '3d' ? ['--gl=angle'] : [])]);
+// Video 3D dùng WebGL: bản --ban 3d của V005, hoặc video có "render3d": true trong post.json (V011)
+const post3d = JSON.parse(fs.readFileSync(path.join(dir, 'post.json'), 'utf8')).render3d === true;
+run(process.execPath, [remotionCli, 'render', 'src/index.ts', compId, raw, ...(ban === '3d' || post3d ? ['--gl=angle'] : [])]);
 console.log(`Dựng hình ${compId}: ${((Date.now() - t0) / 60000).toFixed(1)} phút`);
 run('ffmpeg', ['-v', 'error', '-y', '-i', raw, '-c:v', 'copy', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', final]);
 fs.rmSync(raw, {force: true});
