@@ -40,7 +40,7 @@
     },
     {
       "id": "s8",
-      "text": "Việc ba, nếu sờ thấy khối: bình tĩnh ghi lại vị trí, kích cỡ rồi đi khám. Khối không mất sau kỳ kinh thì đừng chờ thêm.",
+      "text": "Việc ba, nếu sờ thấy khối: bình tĩnh ghi lại vị trí, kích cỡ rồi đi khám. Khối cứng, mới xuất hiện thì đi khám sớm. Còn nếu không chắc, khối không mất sau kỳ kinh thì đừng chờ thêm.",
       "labels": [{"at": "Việc", "text": "VIỆC 3: GHI LẠI, ĐI KHÁM"}]
     },
     {

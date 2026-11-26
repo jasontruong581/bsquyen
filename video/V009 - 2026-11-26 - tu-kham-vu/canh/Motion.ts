@@ -50,7 +50,7 @@ export const T = {
   lump8: W(8, 'sờ') - 0.1,
   ruler: W(8, 'bình') - 0.35,
   note: W(8, 'ghi') - 0.15,
-  moon8: W(8, 'Khối', 1) - 0.1,
+  moon8: W(8, 'khối', 2) - 0.1,
   clinic: W(8, 'đi') - 0.05,
   stay: W(8, 'đừng') - 0.15,
   probe: W(9, 'siêu') - 0.2,
