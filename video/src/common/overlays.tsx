@@ -65,11 +65,107 @@ export const Captions = ({t, tl}: {t: number; tl: Timeline}) => {
 };
 
 /* ---------- chữ lớn vàng viền xanh (dùng cho nhãn và câu mở đầu) ---------- */
-export const BigLabel = ({text, scale = 1, opacity = 1, size}: {text: string; scale?: number; opacity?: number; size?: number}) => (
-  <div style={{position: 'absolute', left: 0, right: 0, top: SAFE.labelTop, display: 'flex', justifyContent: 'center', transform: `scale(${scale}) rotate(-3deg)`, opacity}}>
-    <span style={{fontFamily: FONT, fontWeight: 900, fontSize: size ?? Math.min(104, Math.floor(1400 / text.length)), whiteSpace: 'nowrap', color: '#FFC93C', WebkitTextStroke: `14px ${NAVY}`, paintOrder: 'stroke fill', letterSpacing: 1, textShadow: '0 10px 0 rgba(18,59,99,0.25)'}}>{text}</span>
-  </div>
-);
+const LABEL_STROKE = 14;
+const LABEL_SPACING = 1;
+const LABEL_TILT = 3; // độ nghiêng (xoay ngược chiều kim đồng hồ)
+const LABEL_LINE_H = 1.2;
+/** Hệ số phóng tối đa khi spring nảy quá đà; kích cỡ chữ được tính chừa sẵn chỗ cho hệ số này */
+const LABEL_MAX_SCALE = 1.08;
+const LABEL_MIN_SIZE = 30;
+const LABEL_TWO_LINE_BELOW = 64; // 1 dòng bị ép nhỏ hơn cỡ này thì thử xuống 2 dòng
+const LABEL_TWO_LINE_CAP = 84;
+
+let measureCtx: CanvasRenderingContext2D | null | undefined;
+const widthCache = new Map<string, number>();
+/** Bề rộng chữ ở cỡ 100px, đo bằng canvas với đúng font đã tải (dự phòng: ước lượng theo số ký tự) */
+const textWidth100 = (s: string) => {
+  const hit = widthCache.get(s);
+  if (hit !== undefined) return hit;
+  if (measureCtx === undefined) measureCtx = typeof document === 'undefined' ? null : document.createElement('canvas').getContext('2d');
+  let w = s.length * 80;
+  let loaded = false;
+  if (measureCtx) {
+    measureCtx.font = `900 100px ${FONT}`;
+    w = measureCtx.measureText(s).width;
+    // Chỉ nhớ kết quả khi font thật đã tải; trước đó canvas đo bằng font dự phòng nên số sẽ sai
+    loaded = document.fonts.check(`900 100px "Be Vietnam Pro"`, s);
+  }
+  if (loaded) widthCache.set(s, w);
+  return w;
+};
+
+const rad = (LABEL_TILT * Math.PI) / 180;
+/** Bề rộng ngoài cùng của khối chữ sau khi xoay: gồm khoảng cách chữ, viền và độ nghiêng */
+const boxWidth = (lines: string[], size: number) => {
+  const w = Math.max(...lines.map((l) => (textWidth100(l) * size) / 100 + LABEL_SPACING * l.length)) + LABEL_STROKE;
+  const h = size * LABEL_LINE_H * lines.length + LABEL_STROKE;
+  return {w: w * Math.cos(rad) + h * Math.sin(rad), h: h * Math.cos(rad) + w * Math.sin(rad)};
+};
+
+/** Cỡ chữ lớn nhất (≤ cap) để khối chữ nằm trọn trong lề hai bên, kể cả lúc phóng to tối đa */
+const fitSize = (lines: string[], cap: number) => {
+  const avail = (1080 - 2 * SAFE.labelSideMargin) / LABEL_MAX_SCALE;
+  let size = Math.floor(cap);
+  while (size > LABEL_MIN_SIZE && boxWidth(lines, size).w > avail) size--;
+  return size;
+};
+
+/** Tách thành 2 dòng cân đối nhất, chỉ ngắt ở khoảng trắng; ký hiệu như → dính với chữ đứng trước */
+const splitTwoLines = (text: string): string[] | null => {
+  const words: string[] = [];
+  for (const tok of text.split(/\s+/).filter(Boolean)) {
+    if (words.length && !/[\p{L}\p{N}]/u.test(tok)) words[words.length - 1] += ` ${tok}`;
+    else words.push(tok);
+  }
+  if (words.length < 2) return null;
+  let best: string[] | null = null;
+  let bestW = Infinity;
+  for (let i = 1; i < words.length; i++) {
+    const lines = [words.slice(0, i).join(' '), words.slice(i).join(' ')];
+    // Ưu tiên ngắt ngay sau ký hiệu (vd "VIÊM → XƠ GAN →" / "UNG THƯ") cho dễ đọc theo ý
+    const w = Math.max(...lines.map((l) => textWidth100(l))) * (/[^\p{L}\p{N}\s]$/u.test(lines[0]) ? 0.8 : 1);
+    if (w < bestW) {
+      bestW = w;
+      best = lines;
+    }
+  }
+  return best;
+};
+
+/** Chọn số dòng và cỡ chữ cho nhãn: ưu tiên 1 dòng, quá nhỏ thì xuống 2 dòng cân đối */
+export const layoutLabel = (text: string, maxSize?: number) => {
+  const cap = maxSize ?? Math.min(104, Math.floor(1400 / text.length));
+  let lines = [text];
+  let size = fitSize(lines, cap);
+  // Chỉ khi 1 dòng bị ép nhỏ lại (không vừa) và đã nhỏ hơn ngưỡng mới thử xuống 2 dòng; nhãn vừa sẵn giữ nguyên
+  if (size < cap && size < LABEL_TWO_LINE_BELOW) {
+    const two = splitTwoLines(text);
+    if (two) {
+      const size2 = fitSize(two, Math.min(maxSize ?? LABEL_TWO_LINE_CAP, LABEL_TWO_LINE_CAP));
+      if (size2 >= size * 1.2) {
+        lines = two;
+        size = size2;
+      }
+    }
+  }
+  return {lines, size};
+};
+
+export const BigLabel = ({text, scale = 1, opacity = 1, size}: {text: string; scale?: number; opacity?: number; size?: number}) => {
+  const {lines, size: fontSize} = layoutLabel(text, size);
+  const s = Math.min(scale, LABEL_MAX_SCALE);
+  const box = boxWidth(lines, fontSize);  // Đẩy khối xuống đúng phần góc xoay + phóng to hất lên, để mép trên luôn ≥ SAFE.labelTop (không chạm watermark)
+  const lift = (box.h - (fontSize * LABEL_LINE_H * lines.length + LABEL_STROKE)) / 2 + (box.h * (LABEL_MAX_SCALE - 1)) / 2;
+  return (
+    <div style={{position: 'absolute', left: 0, right: 0, top: SAFE.labelTop + lift, display: 'flex', justifyContent: 'center', transform: `scale(${s}) rotate(-${LABEL_TILT}deg)`, opacity}}>
+      <div style={{fontFamily: FONT, fontWeight: 900, fontSize, lineHeight: LABEL_LINE_H, textAlign: 'center', whiteSpace: 'nowrap', color: '#FFC93C', WebkitTextStroke: `${LABEL_STROKE}px ${NAVY}`, paintOrder: 'stroke fill', letterSpacing: LABEL_SPACING, textShadow: '0 10px 0 rgba(18,59,99,0.25)'}}>
+        {lines.map((l, i) => (
+          <div key={i}>{l}</div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 /* ---------- nhãn bật lên đúng lúc đọc tới; luôn tắt trước khi cảnh chứa nó kết thúc (+0,2s), không dính sang cảnh sau ---------- */
 export const Labels = ({t, frame, tl}: {t: number; frame: number; tl: Timeline}) => {

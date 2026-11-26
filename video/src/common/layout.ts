@@ -5,6 +5,8 @@ export const SAFE = {
   watermarkTop: 150,
   /** Nhãn lớn: đỉnh khối chữ, cao khoảng 130px */
   labelTop: 260,
+  /** Nhãn lớn: lề tối thiểu mỗi bên (đã tính viền chữ, góc xoay và phóng to) */
+  labelSideMargin: 60,
   /** Hình quan trọng nằm trong khoảng y này */
   figureTop: 250,
   figureBottom: 1150,
