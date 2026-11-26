@@ -184,13 +184,13 @@ export const Labels = ({t, frame, tl}: {t: number; frame: number; tl: Timeline})
   );
 };
 
-/* ---------- màn kết ---------- */
+/* ---------- màn kết: phủ kín khung nên căn giữa đúng tâm ngang (x=540), không áp lề phải của vùng an toàn ---------- */
 export const Outro = ({t, tl}: {t: number; tl: Timeline}) => {
   const p = P(t, endOf(tl) + 0.4, 0.6);
   if (p <= 0) return null;
   return (
     <div style={{position: 'absolute', inset: 0, background: `rgba(255,249,244,${0.96 * p})`, opacity: p}}>
-      <div style={{position: 'absolute', left: 0, right: SAFE.rightMargin - 60, top: 560, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30}}>
+      <div style={{position: 'absolute', left: 0, right: 0, top: 560, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 30}}>
         <div style={{fontFamily: FONT, fontWeight: 900, fontSize: 92, color: NAVY, transform: `translateY(${(1 - p) * 40}px)`, textAlign: 'center'}}>Hiểu Đúng Y Khoa</div>
         <div style={{width: 140, height: 10, borderRadius: 5, background: ORANGE}} />
         <div style={{fontFamily: FONT, fontWeight: 700, fontSize: 46, color: NAVY, textAlign: 'center', lineHeight: 1.35}}>
@@ -199,7 +199,7 @@ export const Outro = ({t, tl}: {t: number; tl: Timeline}) => {
           Follow để hiểu rõ hơn về cơ thể mình
         </div>
       </div>
-      <div style={{position: 'absolute', top: 1180, left: 80, right: SAFE.rightMargin, fontFamily: FONT, fontWeight: 600, fontSize: 32, color: '#5b6b7b', textAlign: 'center', lineHeight: 1.3}}>
+      <div style={{position: 'absolute', top: 1180, left: 80, right: 80, fontFamily: FONT, fontWeight: 600, fontSize: 32, color: '#5b6b7b', textAlign: 'center', lineHeight: 1.3}}>
         Thông tin tham khảo, không thay thế chẩn đoán và điều trị của bác sĩ.
       </div>
     </div>
