@@ -1,6 +1,6 @@
 {
   "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
-  "gap": 0.05,
+  "gap": 0.3,
   "phat_am": {"Follow": "phô lô", "HPV": "hát pê vê", "B": "bê", "5": "năm", "10": "mười", "24": "hai mươi bốn", "9": "chín", "14": "mười bốn", "90": "chín mươi"},
   "scenes": [
     {
