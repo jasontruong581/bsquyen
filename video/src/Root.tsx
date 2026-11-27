@@ -8,6 +8,8 @@ import * as vacXinPhongUngThu from '../V006 - 2026-11-26 - vac-xin-phong-ung-thu
 import * as polypDaiTrang from '../V007 - 2026-11-26 - polyp-dai-trang/canh';
 import * as morphinNghien from '../V008 - 2026-11-26 - morphin-nghien/canh';
 import * as tuKhamVu from '../V009 - 2026-11-26 - tu-kham-vu/canh';
+import * as phoi3d from '../V005 - 2026-11-26 - phoi-tam-soat/canh-3d';
+import * as phoi2d from '../V005 - 2026-11-26 - phoi-tam-soat/canh-2d';
 
 /* Mỗi video là một Composition, id = slug (trùng "slug" trong post.json của thư mục video/V<số> - <ngày> - <slug>/).
    Thêm video mới: import phần canh/ của nó và thêm vào danh sách. */
@@ -20,6 +22,9 @@ const videos = [
   {id: polypDaiTrang.id, component: polypDaiTrang.PolypVideo, durationInFrames: polypDaiTrang.durationInFrames},
   {id: morphinNghien.id, component: morphinNghien.MorphinVideo, durationInFrames: morphinNghien.durationInFrames},
   {id: tuKhamVu.id, component: tuKhamVu.KhamVuVideo, durationInFrames: tuKhamVu.durationInFrames},
+  // V005 có hai bản cùng kịch bản (post.json slug "phoi-tam-soat"): id composition = phoi-3d / phoi-2d
+  {id: phoi3d.id, component: phoi3d.Phoi3dVideo, durationInFrames: phoi3d.durationInFrames},
+  {id: phoi2d.id, component: phoi2d.Phoi2dVideo, durationInFrames: phoi2d.durationInFrames},
 ];
 
 export const Root = () => (
