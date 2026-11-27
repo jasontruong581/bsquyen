@@ -1,0 +1,25 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "flo": "phờ lo", "axit": "a xít"},
+  "scenes": [
+    {"id": "s1", "text": "Lớp cứng nhất cơ thể bạn nằm ngay trong miệng. Hôm nay ta lắp một chiếc răng từ đầu!", "labels": []},
+    {"id": "s2", "text": "Bắt đầu ở trong cùng là tủy răng, một khối mềm chứa mạch máu và dây thần kinh.", "labels": []},
+    {"id": "s3", "text": "Nhưng phần mềm cần chỗ che. Nên bên ngoài là ngà răng, một lớp cứng bao lấy tủy.", "labels": []},
+    {"id": "s4", "text": "Ngoài cùng của thân răng là men răng, chất cứng nhất cơ thể, cứng hơn cả xương. Khoảng chín mươi lăm phần trăm của men là khoáng chất.", "labels": []},
+    {"id": "s5", "text": "Còn chân răng được bọc một lớp mỏng gọi là xê măng, rồi cắm vào xương hàm. Một lớp dây chằng nhỏ ở giữa giữ răng chắc, lại đệm cho răng khi nhai.", "labels": []},
+    {"id": "s6", "text": "Cuối cùng, nướu ôm quanh cổ răng như một vòng bảo vệ.", "labels": []},
+    {"id": "s7", "text": "Nhưng trên mặt răng luôn có một lớp màng dính gọi là mảng bám, nơi vi khuẩn sinh sống.", "labels": []},
+    {"id": "s8", "text": "Khi ta ăn đồ ngọt hay tinh bột, vi khuẩn cũng có bữa ăn. Chúng biến đường thành axit.", "labels": []},
+    {"id": "s9", "text": "Giờ ta phóng to vào men răng. Men như một bức tường khoáng chất xếp sát nhau. Axit từ từ rút từng chút khoáng ra khỏi tường.", "labels": []},
+    {"id": "s10", "text": "Nếu chuyện này lặp lại nhiều lần, men mất khoáng và hiện một đốm trắng. Đó là dấu hiệu sâu răng sớm.", "labels": []},
+    {"id": "s11", "text": "Tin vui là men có thể tự sửa. Nước bọt và flo giúp men lấy lại khoáng. Ở giai đoạn sớm, sâu răng còn có thể dừng lại.", "labels": []},
+    {"id": "s12", "text": "Nhưng nếu men mất khoáng nhiều hơn mức nó sửa kịp, men sẽ vỡ ra thành một lỗ sâu. Men đã mất thì không mọc lại.", "labels": []},
+    {"id": "s13", "text": "Lỗ sâu không tự lành. Nó lan dần qua ngà, rồi tới tủy.", "labels": []},
+    {"id": "s14", "text": "Lúc đầu thường chưa đau gì. Đến khi gần dây thần kinh mới đau rõ. Nên không đau chưa chắc là không sâu.", "labels": []},
+    {"id": "s15", "text": "Vậy làm sao bảo vệ răng? Hãy đánh răng hai lần mỗi ngày bằng kem có flo, và làm sạch kẽ răng mỗi ngày.", "labels": []},
+    {"id": "s16", "text": "Hạn chế ăn vặt đồ ngọt cả ngày, vì mỗi lần ăn là vi khuẩn lại sinh axit. Với bé nhỏ, hãy hỏi nha sĩ cách dùng kem có flo cho phù hợp lứa tuổi.", "labels": []},
+    {"id": "s17", "text": "Và đi khám răng định kỳ, để nha sĩ phát hiện lỗ sâu khi còn nhỏ.", "labels": []},
+    {"id": "s18", "text": "CHÚC MỪNG! Bạn vừa lắp xong chiếc răng! Follow để hiểu rõ hơn về cơ thể mình nhé!", "labels": []}
+  ]
+}
