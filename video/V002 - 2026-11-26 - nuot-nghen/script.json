@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.35,
+  "phat_am": {"Follow": "phô lô"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Nuốt một miếng cơm tưởng dễ, mà thật ra là cả một cuộc vượt chướng ngại vật.",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Đầu tiên, nắp thanh quản đóng lại như cánh cửa, để cơm không lạc vào đường thở.",
+      "labels": [{"at": "nắp", "text": "NẮP THANH QUẢN"}]
+    },
+    {
+      "id": "s3",
+      "text": "Rồi thực quản bóp từng đợt, đẩy cơm xuống như bóp tuýp kem đánh răng.",
+      "labels": [{"at": "thực", "text": "THỰC QUẢN"}]
+    },
+    {
+      "id": "s4",
+      "text": "Cuối đường, một cái van mở ra cho cơm vào dạ dày, rồi đóng lại.",
+      "labels": [{"at": "van", "text": "CỬA DẠ DÀY"}]
+    },
+    {
+      "id": "s5",
+      "text": "Nhưng nếu cơm bị mắc lại giữa đường, phải chiêu ngụm nước mới trôi, đó là nuốt nghẹn.",
+      "labels": [{"at": "trôi", "text": "NUỐT NGHẸN"}]
+    },
+    {
+      "id": "s6",
+      "text": "Khác với cảm giác vướng ở cổ khi căng thẳng, mà ăn vẫn trôi bình thường.",
+      "labels": [{"at": "vướng", "text": "VƯỚNG ≠ NGHẸN"}]
+    },
+    {
+      "id": "s7",
+      "text": "Đa số trường hợp là do bệnh lành tính, như trào ngược.",
+      "labels": [{"at": "đa", "text": "ĐA SỐ LÀNH TÍNH"}]
+    },
+    {
+      "id": "s8",
+      "text": "Nhưng nếu nghẹn tăng dần, từ miếng thịt, sang cơm mềm, rồi cả cháo, thì đừng chờ. Đó có thể là dấu hiệu sớm của ung thư thực quản.",
+      "labels": [{"at": "nghẹn", "text": "NGHẸN TĂNG DẦN"}]
+    },
+    {
+      "id": "s9",
+      "text": "Nội soi chỉ mất vài phút, nhiều nơi có gây mê nhẹ, giúp biết chắc nguyên nhân.",
+      "labels": [{"at": "nội", "text": "NỘI SOI"}]
+    },
+    {
+      "id": "s10",
+      "text": "Mẹo nhỏ: để trà, canh nguội bớt rồi hẵng uống. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}

@@ -4,6 +4,9 @@ import {FPS, type Timeline} from '../timeline';
 
 export type Sfx = {t: number; src: string; v: number};
 
+// Chủ kênh thấy nhạc nền hơi ồn ở V002 (26/11/2026) nên giảm 20% so với mức 0.1 ban đầu.
+const MUSIC_VOLUME = 0.08;
+
 export const Mix = ({tl, sfx, music = 'music/hope-piano.mp3'}: {tl: Timeline; sfx: Sfx[]; music?: string}) => (
   <>
     {tl.scenes.map((s) => (
@@ -19,7 +22,7 @@ export const Mix = ({tl, sfx, music = 'music/hope-piano.mp3'}: {tl: Timeline; sf
     <Audio
       src={staticFile(music)}
       loop
-      volume={(f) => 0.1 * interpolate(f, [0, 20, tl.total * FPS - 45, tl.total * FPS], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}
+      volume={(f) => MUSIC_VOLUME * interpolate(f, [0, 20, tl.total * FPS - 45, tl.total * FPS], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})}
     />
   </>
 );
