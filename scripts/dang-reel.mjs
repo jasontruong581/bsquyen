@@ -24,7 +24,7 @@ import { join } from "node:path";
 import matter from "gray-matter";
 
 import { SITE_URL } from "./caption-facebook.mjs";
-import { hienGioVN, tinhGioDang } from "./gio-dang.mjs";
+import { hienGioVN } from "./gio-dang.mjs";
 import {
   docPostVideo,
   docThuMucVideo,
@@ -34,11 +34,17 @@ import {
   taoCaptionReel,
   thuMucMoiTuDiff,
   timVideo,
+  tinhGioDangReel,
 } from "./reel-logic.mjs";
 
 const VER = process.env.FB_API_VERSION || "v26.0";
 const API = `https://graph.facebook.com/${VER}`;
-// Cùng thứ tự ưu tiên với dang-facebook.mjs: INPUT_GIO_HEN > GIO_DANG > DELAY_PHUT.
+const NGUON_LICH = {
+  gio_hen: "gio_hen (input workflow)",
+  ngay_dang: "ngay_dang (post.json)",
+  mac_dinh: "mặc định (GIO_DANG / DELAY_PHUT)",
+};
+// Thứ tự ưu tiên: INPUT_GIO_HEN > ngay_dang trong post.json > GIO_DANG > DELAY_PHUT.
 const LICH = {
   gioHen: process.env.INPUT_GIO_HEN || "",
   gioCoDinh: process.env.GIO_DANG || "",
@@ -223,11 +229,15 @@ async function main() {
   }
   log(`Video cần đăng: ${muc.map((m) => m.thuMuc).join(", ")}${dryRun ? "  (DRY RUN)" : ""}`);
 
-  // Kiểm tra cấu hình lịch ngay đầu, kể cả dry run: GIO_DANG / gio_hen sai thì biết trước khi tải gì.
-  try {
-    log(`Lịch dự kiến: ${hienGioVN(tinhGioDang(Date.now(), LICH))} (giờ VN)`);
-  } catch (e) {
-    chet(e.message);
+  // Kiểm tra lịch của mọi video ngay đầu, kể cả dry run: GIO_DANG / gio_hen / ngay_dang sai thì biết trước khi đăng gì.
+  for (const m of muc) {
+    if (!m.post) continue; // JSON hỏng: docVideo báo lỗi ở vòng dưới
+    try {
+      const l = tinhGioDangReel(Date.now(), LICH, m.post.ngay_dang);
+      log(`Lịch dự kiến ${m.thuMuc}: ${hienGioVN(l.gio)} (giờ VN)`);
+    } catch (e) {
+      chet(`${m.thuMuc}: ${e.message}`);
+    }
   }
 
   if (!dryRun) {
@@ -248,13 +258,15 @@ async function main() {
     log(`Bình luận đầu tiên (đăng sau giờ đăng bởi binh-luan-reel):\n${video.binhLuan}\n`);
 
     // Giờ tính sát lúc gọi Facebook: gio_hen đã qua thì dừng ngay, chưa tải file nặng.
-    let gio;
+    let lich;
     try {
-      gio = tinhGioDang(Date.now(), LICH);
+      lich = tinhGioDangReel(Date.now(), LICH, m.post.ngay_dang);
     } catch (e) {
       chet(`${slug}: ${e.message}`);
     }
-    log(`Lịch đăng: ${hienGioVN(gio)} (giờ VN)`);
+    const gio = lich.gio;
+    lich.canhBao.forEach((c) => console.warn(`⚠ ${slug}: ${c}`));
+    log(`Lịch đăng: ${hienGioVN(gio)} (giờ VN) — nguồn: ${NGUON_LICH[lich.nguon]}`);
 
     if (dryRun) {
       log("DRY RUN — không tải video, không gọi Facebook.");

@@ -13,6 +13,9 @@ const LECH_VN_MS = 7 * 3600 * 1000;
 // Facebook không nhận giờ hẹn gần hơn 10 phút.
 const TOI_THIEU_MS = 10 * 60 * 1000;
 const MOT_NGAY_MS = 24 * 3600 * 1000;
+// Facebook từ chối giờ hẹn xa hơn ~28 ngày (đo thực tế, xem docs/tu-dong-dang-facebook.md).
+export const TOI_DA_NGAY = 28;
+export const TOI_DA_MS = TOI_DA_NGAY * MOT_NGAY_MS;
 
 export function tinhGioDang(nowMs, { gioHen, gioCoDinh, delayPhut }) {
   // Hẹn đúng một thời điểm "YYYY-MM-DD HH:MM" giờ VN (đăng lại bài cũ theo lịch tự đặt).

@@ -13,7 +13,7 @@ on:
         required: false
         type: string
       gio_hen:
-        description: "Hẹn đúng giờ VN, dạng YYYY-MM-DD HH:MM (bỏ trống = 19:30 theo GIO_DANG)"
+        description: "Hẹn đúng giờ VN, dạng YYYY-MM-DD HH:MM (bỏ trống = ngay_dang trong post.json, rồi đến 19:30 theo GIO_DANG)"
         required: false
         type: string
       dry_run:

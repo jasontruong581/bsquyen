@@ -11,11 +11,13 @@ import {
   docThuMucVideo,
   khopReel,
   kiemTraPostReel,
+  kiemTraNgayDang,
   laKhoaVideo,
   taoBinhLuan,
   taoCaptionReel,
   thuMucMoiTuDiff,
   timVideo,
+  tinhGioDangReel,
 } from "./reel-logic.mjs";
 
 const vn = (s) => Date.parse(`${s}+07:00`);
@@ -135,4 +137,79 @@ test("giờ hẹn Reel: 19:30 giờ VN cùng ngày, merge sau 19:20 dời sang h
   assert.equal(raVN(tinhGioDang(vn("2026-11-25T10:00:00"), cfg)), "2026-11-25 19:30");
   assert.equal(raVN(tinhGioDang(vn("2026-11-25T19:21:00"), cfg)), "2026-11-26 19:30");
   assert.equal(raVN(tinhGioDang(vn("2026-11-25T10:00:00"), { ...cfg, gioHen: "2026-12-01 19:30" })), "2026-12-01 19:30");
+});
+
+const LICH = { gioCoDinh: "19:30", delayPhut: 120 };
+const BAY_GIO = vn("2026-11-25T10:00:00");
+
+test("tinhGioDangReel: không có ngay_dang thì dùng quy tắc mặc định", () => {
+  for (const v of [undefined, null]) {
+    const kq = tinhGioDangReel(BAY_GIO, LICH, v);
+    assert.equal(raVN(kq.gio), "2026-11-25 19:30");
+    assert.equal(kq.nguon, "mac_dinh");
+    assert.deepEqual(kq.canhBao, []);
+  }
+  // Merge sau 19:20 vẫn dời sang hôm sau như cũ
+  assert.equal(raVN(tinhGioDangReel(vn("2026-11-25T19:21:00"), LICH).gio), "2026-11-26 19:30");
+});
+
+test("tinhGioDangReel: có ngay_dang thì hẹn 19:30 ngày đó, bất kể ngày merge", () => {
+  const kq = tinhGioDangReel(BAY_GIO, LICH, "2026-12-01");
+  assert.equal(raVN(kq.gio), "2026-12-01 19:30");
+  assert.equal(kq.nguon, "ngay_dang");
+  assert.deepEqual(kq.canhBao, []);
+  // Ngày merge trùng ngay_dang và còn kịp → vẫn 19:30 hôm đó
+  assert.equal(raVN(tinhGioDangReel(BAY_GIO, LICH, "2026-11-25").gio), "2026-11-25 19:30");
+  // Theo GIO_DANG của workflow, không cứng 19:30
+  assert.equal(raVN(tinhGioDangReel(BAY_GIO, { ...LICH, gioCoDinh: "20:15" }, "2026-12-01").gio), "2026-12-01 20:15");
+});
+
+test("tinhGioDangReel: gio_hen của workflow_dispatch thắng ngay_dang", () => {
+  const kq = tinhGioDangReel(BAY_GIO, { ...LICH, gioHen: "2026-12-05 21:00" }, "2026-12-01");
+  assert.equal(raVN(kq.gio), "2026-12-05 21:00");
+  assert.equal(kq.nguon, "gio_hen");
+  // gio_hen sai/đã qua vẫn báo lỗi như cũ, không rơi về ngay_dang
+  assert.throws(() => tinhGioDangReel(BAY_GIO, { ...LICH, gioHen: "2026-11-24 19:30" }, "2026-12-01"), /GIO_HEN/);
+});
+
+test("tinhGioDangReel: ngay_dang sai định dạng hoặc không có thật thì ném lỗi", () => {
+  for (const sai of ["1/12/2026", "2026-12-1", "2026-12-01 19:30", "2026-13-01", "2026-02-30", "", 20261201, "hôm nay"]) {
+    assert.throws(() => tinhGioDangReel(BAY_GIO, LICH, sai), /ngay_dang/, `phải lỗi với ${JSON.stringify(sai)}`);
+  }
+});
+
+test("tinhGioDangReel: ngày đã qua hoặc 19:30 còn dưới 10 phút thì dùng quy tắc mặc định kèm cảnh báo", () => {
+  const qua = tinhGioDangReel(BAY_GIO, LICH, "2026-11-20");
+  assert.equal(raVN(qua.gio), "2026-11-25 19:30");
+  assert.equal(qua.nguon, "mac_dinh");
+  assert.equal(qua.canhBao.length, 1);
+  assert.match(qua.canhBao[0], /2026-11-20.*đã qua/);
+
+  // 19:25 cùng ngày: còn 5 phút → dời như quy tắc cũ (hôm sau)
+  const sat = tinhGioDangReel(vn("2026-11-25T19:25:00"), LICH, "2026-11-25");
+  assert.equal(raVN(sat.gio), "2026-11-26 19:30");
+  assert.equal(sat.nguon, "mac_dinh");
+  assert.equal(sat.canhBao.length, 1);
+});
+
+test("tinhGioDangReel: ngày quá xa giới hạn hẹn giờ của Facebook thì ném lỗi", () => {
+  // 25/11 10:00 + 28 ngày = 23/12 10:00 → 19:30 ngày 22/12 còn trong hạn, 19:30 ngày 23/12 thì quá
+  assert.equal(raVN(tinhGioDangReel(BAY_GIO, LICH, "2026-12-22").gio), "2026-12-22 19:30");
+  assert.throws(() => tinhGioDangReel(BAY_GIO, LICH, "2026-12-23"), /xa quá 28 ngày/);
+  assert.throws(() => tinhGioDangReel(BAY_GIO, LICH, "2027-06-01"), /xa quá 28 ngày/);
+});
+
+test("tinhGioDangReel: GIO_DANG trống hoặc sai thì báo lỗi rõ khi có ngay_dang", () => {
+  assert.throws(() => tinhGioDangReel(BAY_GIO, { gioCoDinh: "", delayPhut: 120 }, "2026-12-01"), /GIO_DANG/);
+  assert.throws(() => tinhGioDangReel(BAY_GIO, { gioCoDinh: "25:99", delayPhut: 120 }, "2026-12-01"), /GIO_DANG/);
+});
+
+test("kiemTraNgayDang và kiemTraPostReel: ngay_dang tùy chọn, có thì phải đúng dạng", () => {
+  assert.equal(kiemTraNgayDang(undefined), null);
+  assert.equal(kiemTraNgayDang("2026-12-01"), null);
+  assert.match(kiemTraNgayDang("2026-02-30"), /không phải ngày có thật/);
+  const post = { id: "V001", slug: "hp", article: "bai", caption: "Câu." };
+  assert.deepEqual(kiemTraPostReel(post), []);
+  assert.deepEqual(kiemTraPostReel({ ...post, ngay_dang: "2026-12-01" }), []);
+  assert.equal(kiemTraPostReel({ ...post, ngay_dang: "01/12/2026" }).length, 1);
 });

@@ -207,12 +207,49 @@ Mỗi video một thư mục `video/V001 - YYYY-MM-DD - <slug>/` (tên **có d�
 - `post.json` = `{"id": "V001", "slug": "hp-va-da-day", "article": "...", "caption": "..."}`
   (`article` là slug bài Kiến thức tương ứng). **`id` và `slug` lấy từ nội dung post.json,
   không suy từ tên thư mục**; thư mục chỉ để người đọc.
+- `post.json` còn nhận trường tùy chọn `"ngay_dang": "YYYY-MM-DD"` — xem mục *Hẹn ngày đăng* dưới đây.
 - mp4 render ở local nằm tại `<thư mục>/out/<slug>.mp4`.
 - Release vẫn là tag `video-<slug>`, asset `<slug>.mp4`.
 
 Mọi chỗ cần chỉ định một video (`--slug=`, input `slug` của workflow, tham số của
 `tai-video-len-release.mjs`) nhận **slug** (`hp-va-da-day`) hoặc **id** (`V001`) và tìm thư
 mục bằng cách quét `video/*/post.json`.
+
+### Hẹn ngày đăng (`ngay_dang`)
+
+Muốn đăng đều (vd 3 ngày một video) thì chuẩn bị video trước, merge PR lúc nào cũng được
+và Reel vẫn lên đúng ngày: thêm vào `post.json`
+
+```json
+{"id": "V003", "slug": "...", "article": "...", "caption": "...", "ngay_dang": "2026-12-04"}
+```
+
+Reel được hẹn **19:30 (giờ VN, theo `GIO_DANG`) ngày `ngay_dang`**. Thứ tự ưu tiên khi chọn giờ:
+
+1. Ô `gio_hen` của Run workflow (giờ riêng, `YYYY-MM-DD HH:MM`).
+2. `ngay_dang` trong `post.json`.
+3. Quy tắc cũ: 19:30 cùng ngày merge, merge sau 19:20 thì dời sang hôm sau.
+
+Kiểm tra (logic ở `tinhGioDangReel` trong `scripts/reel-logic.mjs`, dùng lại `scripts/gio-dang.mjs`):
+
+| Trường hợp | Kết quả |
+|---|---|
+| Sai dạng / ngày không có thật (`01/12/2026`, `2026-02-30`) | Job **dừng**, báo rõ lỗi `ngay_dang` |
+| 19:30 ngày đó đã qua, hoặc còn dưới 10 phút | **Không lỗi**: dùng quy tắc cũ (19:30 gần nhất hợp lệ) và in cảnh báo `⚠` trong log |
+| Xa hơn 28 ngày kể từ lúc job chạy (giới hạn hẹn giờ của Facebook, xem mục đăng lại bài cũ) | Job **dừng**, báo rõ; merge muộn hơn hoặc chọn ngày gần hơn |
+
+Ví dụ lịch 3 ngày/video, ba video chuẩn bị xong cùng lúc:
+
+| Video | `ngay_dang` | Reel lên lúc |
+|---|---|---|
+| V010 | `2026-12-01` | 19:30 01/12 |
+| V011 | `2026-12-04` | 19:30 04/12 |
+| V012 | `2026-12-07` | 19:30 07/12 |
+
+Lưu ý: merge trễ quá ngày hẹn thì Reel không còn đúng ngày (rơi về quy tắc cũ, có cảnh báo);
+mỗi video nằm trong PR riêng nên nên merge trước ngày hẹn vài ngày. Dry-run
+(`node scripts/dang-reel.mjs --slug=<slug|V001> --dry-run`) in dòng
+`Lịch đăng: … — nguồn: gio_hen | ngay_dang | mặc định` để biết giờ cuối cùng đến từ đâu.
 
 ### Luồng mỗi video
 
