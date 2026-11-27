@@ -1,0 +1,22 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "enzym": "en dim", "axit": "a xít", "vitamin": "vi ta min"},
+  "scenes": [
+    {"id": "s1", "text": "Bữa cơm vừa rồi của bạn đang đi một hành trình dài. Hôm nay ta lắp cả đường ống cho nó đi!", "labels": []},
+    {"id": "s2", "text": "Hành trình bắt đầu ở miệng. Răng nghiền nhỏ, lưỡi nhào đều, nước bọt làm ướt thức ăn thành một viên mềm. Nước bọt còn có enzym, bắt đầu bẻ nhỏ tinh bột.", "labels": []},
+    {"id": "s3", "text": "Nhưng viên thức ăn phải đi xuống. Nên có thực quản, một ống cơ co bóp từng đợt để đẩy xuống. Từ lúc bạn nuốt, mọi thứ chạy tự động.", "labels": []},
+    {"id": "s4", "text": "Phía dưới là dạ dày, một túi cơ cong như chữ J. Cơ ở đây nhào trộn thức ăn như một cái máy xay.", "labels": []},
+    {"id": "s5", "text": "Tuyến trong thành dạ dày tiết ra axit và enzym, để bẻ nhỏ thức ăn, nhất là chất đạm.", "labels": []},
+    {"id": "s6", "text": "Rồi thức ăn xuống ruột non, một ống dài vài mét, cuộn gọn trong bụng. Nó chia ba đoạn: tá tràng, hỗng tràng và hồi tràng.", "labels": []},
+    {"id": "s7", "text": "Ngay đoạn đầu, tụy gửi dịch có enzym để tiêu đường, mỡ và đạm. Gan làm ra mật, túi mật trữ lại, rồi đổ xuống giúp tiêu mỡ.", "labels": []},
+    {"id": "s8", "text": "Bây giờ ta phóng to vào thành ruột. Bên trong phủ đầy những nếp li ti như ngón tay, gọi là nhung mao. Chúng làm bề mặt rộng ra rất nhiều, để hút được nhiều chất dinh dưỡng.", "labels": []},
+    {"id": "s9", "text": "Mỗi nhung mao có những mạch máu nhỏ xíu. Chất dinh dưỡng thấm qua thành, theo máu đi nuôi cả cơ thể.", "labels": []},
+    {"id": "s10", "text": "Phần còn lại đi tiếp vào ruột già, một khung lớn bao quanh ruột non. Ở đây nước được hút bớt, phần còn lại đặc dần. Ruột già còn là nhà của vi khuẩn giúp phân giải nốt những gì còn sót.", "labels": []},
+    {"id": "s11", "text": "Cuối cùng là trực tràng và hậu môn. Trực tràng chứa tạm phần bã, rồi đưa ra ngoài khi cần. Hành trình kết thúc ở đây.", "labels": []},
+    {"id": "s12", "text": "Và điều làm nên tất cả là nhu động: những đợt co bóp nhịp nhàng chạy dọc đường ống. Cơ phía sau co lại, cơ phía trước giãn ra, thức ăn cứ thế đi tiếp.", "labels": []},
+    {"id": "s13", "text": "Cả đường ống này dài vài mét, thế mà phần lớn thời gian, bạn chẳng hề để ý.", "labels": []},
+    {"id": "s14", "text": "Nếu bụng có gì bất thường kéo dài, đừng cố chịu một mình, hãy đến gặp bác sĩ nhé.", "labels": []},
+    {"id": "s15", "text": "CHÚC MỪNG! Bạn vừa lắp xong hệ tiêu hóa! Follow để hiểu rõ hơn về cơ thể mình nhé!", "labels": []}
+  ]
+}

@@ -12,6 +12,7 @@ import * as chamSocGiamNhe from '../V010 - 2026-11-27 - cham-soc-giam-nhe/canh';
 import * as phoi3d from '../V005 - 2026-11-26 - phoi-tam-soat/canh-3d';
 import * as phoi2d from '../V005 - 2026-11-26 - phoi-tam-soat/canh-2d';
 import * as lapGan from '../V011 - 2026-11-27 - lap-gan/canh-3d';
+import * as lapTieuHoa from '../V012 - 2026-11-27 - lap-tieu-hoa/canh-3d';
 
 /* Mỗi video là một Composition, id = slug (trùng "slug" trong post.json của thư mục video/V<số> - <ngày> - <slug>/).
    Thêm video mới: import phần canh/ của nó và thêm vào danh sách. */
@@ -30,6 +31,8 @@ const videos = [
   {id: phoi2d.id, component: phoi2d.Phoi2dVideo, durationInFrames: phoi2d.durationInFrames},
   // V011: video 3D dài "lắp ráp cơ thể" (lá gan), một composition id = slug
   {id: lapGan.id, component: lapGan.GanLapVideo, durationInFrames: lapGan.durationInFrames},
+  // V012: video 3D dài "lắp ráp cơ thể" (hệ tiêu hóa), viên thức ăn đi từ miệng xuống hậu môn
+  {id: lapTieuHoa.id, component: lapTieuHoa.TieuHoaVideo, durationInFrames: lapTieuHoa.durationInFrames},
 ];
 
 export const Root = () => (

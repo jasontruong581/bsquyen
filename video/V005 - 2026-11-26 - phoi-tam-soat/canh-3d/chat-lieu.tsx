@@ -113,7 +113,7 @@ void main() { gl_FragColor = vec4(uColor, 1.0); }
 
 export const OUTLINE = '#0b1c2e';
 
-type Static = {color: string; rimColor?: string; breath?: number; doubleSide?: boolean; depthWrite?: boolean};
+type Static = {color: string; rimColor?: string; breath?: number; doubleSide?: boolean; depthWrite?: boolean; depthTest?: boolean};
 
 const makeToon = (o: Static) => {
   const defines = o.breath ? {USE_BREATH: ''} : {};
@@ -123,6 +123,7 @@ const makeToon = (o: Static) => {
     defines,
     side: o.doubleSide ? THREE.DoubleSide : THREE.FrontSide,
     depthWrite: o.depthWrite ?? true,
+    depthTest: o.depthTest ?? true,
     uniforms: {
       uColor: {value: new THREE.Color(o.color)},
       uOpacity: {value: 1},
@@ -142,6 +143,7 @@ const makeToon = (o: Static) => {
     fragmentShader: hullFrag,
     defines,
     side: THREE.BackSide,
+    depthTest: o.depthTest ?? true,
     polygonOffset: true,
     polygonOffsetFactor: 3,
     polygonOffsetUnits: 3,
@@ -170,8 +172,11 @@ type Props = {
   /** độ dày viền (điểm ảnh); 0 = không viền */
   outline?: number;
   depthWrite?: boolean;
+  /** false: vẽ đè lên mọi vật (nhìn xuyên thành cơ quan), dùng cho viên thức ăn */
+  depthTest?: boolean;
   position?: [number, number, number];
   rotation?: [number, number, number];
+  quaternion?: THREE.Quaternion;
   scale?: number | [number, number, number];
   castShadow?: boolean;
   renderOrder?: number;
@@ -179,15 +184,15 @@ type Props = {
 };
 
 /** Vật toon có viền. Các tham số đổi theo khung hình (opacity, rim, outline) được ghi thẳng vào uniform mỗi lần dựng. */
-export const ToonMesh = ({geometry, color, opacity = 1, rim = 0, rimColor, breath = 0, doubleSide = false, outline = 6, depthWrite, position, rotation, scale, castShadow = false, renderOrder, visible = true}: Props) => {
-  const {body, hull} = useMemo(() => makeToon({color, rimColor, breath, doubleSide, depthWrite: depthWrite ?? rim === 0}), [color, rimColor, breath, doubleSide, depthWrite, rim === 0]);
+export const ToonMesh = ({geometry, color, opacity = 1, rim = 0, rimColor, breath = 0, doubleSide = false, outline = 6, depthWrite, depthTest = true, position, rotation, quaternion, scale, castShadow = false, renderOrder, visible = true}: Props) => {
+  const {body, hull} = useMemo(() => makeToon({color, rimColor, breath, doubleSide, depthWrite: depthWrite ?? rim === 0, depthTest}), [color, rimColor, breath, doubleSide, depthWrite, depthTest, rim === 0]);
   body.uniforms.uOpacity.value = opacity;
   body.uniforms.uRim.value = rim;
   body.transparent = opacity < 0.999 || rim > 0;
   const showHull = outline > 0 && opacity > 0.98 && rim === 0;
   hull.uniforms.uPx.value = outline;
   return (
-    <group position={position} rotation={rotation} scale={scale} visible={visible && (opacity > 0.003 || rim > 0.003)}>
+    <group position={position} rotation={rotation} quaternion={quaternion} scale={scale} visible={visible && (opacity > 0.003 || rim > 0.003)}>
       <mesh geometry={geometry} material={body} castShadow={castShadow} renderOrder={renderOrder} />
       {showHull && <mesh geometry={geometry} material={hull} renderOrder={renderOrder} />}
     </group>
