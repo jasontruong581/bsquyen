@@ -86,13 +86,15 @@ const PillLabel = ({p, t, frame}: {p: Pill; t: number; frame: number}) => {
 
 /* ---------- chữ lớn cam viền trắng ---------- */
 type Big = {text: string; from: number; to: number; size?: number; y?: number};
+/** Ở toàn cảnh, chữ lớn đặt thấp hơn mặc định để không che miệng ở đầu mô hình */
+const BIG_LOW = 370;
 export const BIGS: Big[] = [
   {text: 'HÀNH TRÌNH BỮA CƠM', from: 0.15, to: T.mouthIn + 0.2},
   {text: 'BỀ MẶT RỘNG RA!', from: T.surface, to: T.surface + 2.3},
-  {text: 'NHU ĐỘNG', from: T.peristalsis - 0.1, to: T.peristalsis + 3.0},
-  {text: 'DÀI VÀI MÉT!', from: T.meters - 0.1, to: E(13) + 0.2},
-  {text: 'CHÚC MỪNG!', from: W(15, 'CHÚC') - 0.05, to: E(15) + 0.9},
-  {text: 'BẠN VỪA LẮP XONG HỆ TIÊU HÓA!', from: W(15, 'Bạn') - 0.05, to: E(15) + 0.9, size: 44, y: 405},
+  {text: 'NHU ĐỘNG', from: T.peristalsis - 0.1, to: T.peristalsis + 3.0, y: BIG_LOW},
+  {text: 'DÀI VÀI MÉT!', from: T.meters - 0.1, to: E(13) + 0.2, y: BIG_LOW},
+  {text: 'CHÚC MỪNG!', from: W(15, 'CHÚC') - 0.05, to: E(15) + 0.9, y: BIG_LOW},
+  {text: 'BẠN VỪA LẮP XONG HỆ TIÊU HÓA!', from: W(15, 'Bạn') - 0.05, to: E(15) + 0.9, size: 44, y: BIG_LOW + 135},
 ];
 const BigText = ({b, t, frame}: {b: Big; t: number; frame: number}) => {
   if (t < b.from - 0.05 || t > b.to + 0.3) return null;

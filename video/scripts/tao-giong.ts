@@ -58,5 +58,5 @@ for (const [i, s] of spec.scenes.entries()) {
 const total = +(t - spec.gap + 2.4).toFixed(3); // sau lời đọc cuối còn màn kết ~2,4 giây
 fs.writeFileSync(path.join(pubDir, 'timeline.json'), JSON.stringify({total, scenes}, null, 1));
 console.log(`Tổng: ${total.toFixed(1)}s`);
-if (total > 90) console.warn('CẢNH BÁO: tổng thời lượng vượt 90 giây, quá giới hạn Reels');
+if (total > 90) console.log('Lưu ý: dài hơn 90 giây, job đăng sẽ đăng qua /videos thay cho API Reels');
 else if (total < 40 || total > 55) console.warn('LƯU Ý: tổng thời lượng ngoài khoảng 40-55 giây theo đặc tả');

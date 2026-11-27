@@ -1,7 +1,7 @@
 /* Hành trình của viên thức ăn (mạch xuyên suốt video): vị trí, cỡ và tâm trạng theo thời gian, tính từ mốc lời đọc.
    Hàm thuần theo t; các bán kính ống (chỗ phình nhu động) cũng lấy vị trí viên thức ăn từ đây. */
 import * as THREE from 'three';
-import {ANUS_POS, COLON_CURVE, ESO_CURVE, MOUTH_CAVITY, SI_CURVE, STO_CURVE, THROAT, V} from './giai-phau';
+import {ANUS_POS, COLON_CURVE, ESO_CURVE, MOUTH_C, MOUTH_CAVITY, SI_CURVE, STO_CURVE, THROAT, V} from './giai-phau';
 import {S, T, clamp01, kf, sm, smooth} from './moc';
 
 export type Tract = 'none' | 'eso' | 'sto' | 'si' | 'col';
@@ -24,7 +24,9 @@ export const B = {
 
 const ESO_END = ESO_CURVE.getPointAt(1);
 const STO_ENTER = STO_CURVE.getPointAt(0.12);
-const MOUTH_REST = V(0, 4.92, 0.98);
+const MOUTH_REST = V(0, MOUTH_C.y - 0.13, 0.98);
+
+const HOVER_Y = MOUTH_C.y + 1.95;
 
 export type Bolus = {p: THREE.Vector3; s: number; tract: Tract; u: number; mood: Mood; face: boolean; chew: number; visible: boolean};
 
@@ -49,15 +51,15 @@ const colU = (t: number) =>
 export const bolusAt = (t: number): Bolus => {
   const out: Bolus = {p: new THREE.Vector3(), s: 0.5, tract: 'none', u: 0, mood: 'tinh', face: true, chew: 0, visible: true};
   // viên thức ăn tượng trưng cho cả bữa cơm: to ở miệng, thu nhỏ khi đi vào ống
-  out.s = kf([[0, 0.55], [T.mouthIn + 1.1, 0.42], [B.swallow, 0.42], [B.esoIn + 0.3, 0.15], [B.esoOut - 0.3, 0.15], [B.stoSettle, 0.42], [B.stoLeave, 0.42], [B.siIn + 0.3, 0.17], [B.colIn, 0.19], [T.water + 3, 0.15]], t);
+  out.s = kf([[0, 0.5], [T.mouthIn + 1.1, 0.36], [B.swallow, 0.36], [B.esoIn + 0.3, 0.15], [B.esoOut - 0.3, 0.15], [B.stoSettle, 0.42], [B.stoLeave, 0.42], [B.siIn + 0.3, 0.17], [B.colIn, 0.19], [T.water + 3, 0.15]], t);
   if (t < T.mouthIn) {
     // nhảy tưng tưng phía trên miệng, chờ được lắp
-    out.p.set(0.35 * Math.sin(t * 1.7), 7.0 + 0.4 * Math.abs(Math.sin(t * 3.4)), 1.1);
+    out.p.set(0.35 * Math.sin(t * 1.7), HOVER_Y + 0.4 * Math.abs(Math.sin(t * 3.4)), 1.1);
     out.mood = 'vui';
   } else if (t < T.mouthIn + 1.1) {
     const f = sm(t, T.mouthIn, 1.1);
     const g = f * f;
-    out.p.set(0, 7.0 + (MOUTH_REST.y - 7.0) * g, 1.1 + (MOUTH_REST.z - 1.1) * f);
+    out.p.set(0, HOVER_Y + (MOUTH_REST.y - HOVER_Y) * g, 1.1 + (MOUTH_REST.z - 1.1) * f);
     out.mood = 'vui';
   } else if (t < B.swallow) {
     // nhai: viên thức ăn bị ép dẹt theo nhịp răng

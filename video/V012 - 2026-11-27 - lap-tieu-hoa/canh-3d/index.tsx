@@ -173,7 +173,7 @@ const Mouth = ({t}: {t: number}) => {
   const tTo = t < T.tongue - 0.15 ? 0 : pop(t, T.tongue - 0.15, 0.5);
   const open = t > B.swallow && t < B.swallow + 1.2 ? 1 : 0;
   return (
-    <group position={[MOUTH_C.x, MOUTH_C.y, MOUTH_C.z]} scale={0.8}>
+    <group position={[MOUTH_C.x, MOUTH_C.y, MOUTH_C.z]} scale={0.66}>
       <ToonMesh geometry={GEO.cavity} color={C.cavity} scale={[1.25, 0.8, 1]} position={[0, 0, -0.08]} outline={0} />
       {/* lÆ°á»¡i */}
       <group scale={Math.max(0.0001, tTo)} position={[0, -0.42, 0]}>
@@ -270,7 +270,7 @@ const Scene = ({t}: {t: number}) => {
       {/* tÆ°á»ng phÃ­a sau chá»‰ Ä‘á»ƒ há»©ng bÃ³ng Ä‘á»• cá»§a cÃ¡c cÆ¡ quan */}
       <mesh position={[0, 0, WALL_Z]} receiveShadow>
         <planeGeometry args={[60, 60]} />
-        <shadowMaterial opacity={0.14} color="#0b2a4a" />
+        <shadowMaterial opacity={0.07} color="#0b2a4a" />
       </mesh>
 
       {/* thÃ¢n ngÆ°á»i má» vÃ  cá»™t sá»‘ng lÃ m bá»‘i cáº£nh */}

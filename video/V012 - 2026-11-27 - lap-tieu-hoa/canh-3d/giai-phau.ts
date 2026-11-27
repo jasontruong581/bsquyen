@@ -104,7 +104,7 @@ export class Pipe {
 const catmull = (pts: THREE.Vector3[]) => new THREE.CatmullRomCurve3(pts, false, 'centripetal');
 
 /* ---------------- thực quản ---------------- */
-export const ESO_CURVE = catmull([V(0, 4.4, -0.1), V(-0.06, 3.8, -0.2), V(0.04, 3.3, -0.15), V(0.3, 2.95, -0.02), V(0.75, 2.62, 0.1)]);
+export const ESO_CURVE = catmull([V(0, 3.6, -0.1), V(-0.05, 3.3, -0.18), V(0.06, 3.0, -0.12), V(0.32, 2.8, 0.0), V(0.75, 2.62, 0.1)]);
 export const ESO_R = 0.19;
 
 /* ---------------- dạ dày hình chữ J ---------------- */
@@ -242,9 +242,9 @@ export const buildPancreas = () => {
 export const PANC_DUCT = catmull([V(-0.95, -0.55, -0.05), V(-1.1, -0.55, -0.03), V(-1.27, -0.55, -0.02)]);
 
 /* ---------------- miệng ---------------- */
-export const MOUTH_C = V(0, 5.05, 0.95);
+export const MOUTH_C = V(0, 4.25, 0.95);
 export const MOUTH_CAVITY = MOUTH_C.clone().add(V(0, 0, -0.1));
-export const THROAT = V(0, 4.45, 0.0);
+export const THROAT = V(0, 3.65, 0.0);
 export const buildTeethRow = (upper: boolean) => {
   const gs: THREE.BufferGeometry[] = [];
   const n = 7;
@@ -263,7 +263,7 @@ export const buildTeethRow = (upper: boolean) => {
 
 /* ---------------- thân người mờ, cột sống ---------------- */
 export const buildTorso = () => {
-  const half: [number, number][] = [[0, 6.65], [0.9, 6.3], [1.3, 5.4], [1.08, 4.55], [0.58, 4.1], [0.55, 3.75], [1.6, 3.5], [3.0, 3.15], [3.5, 2.2], [3.38, 0.0], [3.12, -2.0], [3.22, -4.0], [3.0, -5.6], [2.2, -6.3], [0, -6.45]];
+  const half: [number, number][] = [[0, 5.85], [0.9, 5.5], [1.3, 4.6], [1.08, 3.75], [0.58, 3.3], [0.55, 3.1], [1.6, 3.0], [3.0, 2.85], [3.5, 2.0], [3.38, 0.0], [3.12, -2.0], [3.22, -4.0], [3.0, -5.6], [2.2, -6.3], [0, -6.45]];
   const right = new THREE.SplineCurve(half.map(([x, y]) => new THREE.Vector2(x, y))).getPoints(160);
   const left = right.slice(1, -1).reverse().map((p) => new THREE.Vector2(-p.x, p.y));
   const shape = new THREE.Shape([...right, ...left]);
