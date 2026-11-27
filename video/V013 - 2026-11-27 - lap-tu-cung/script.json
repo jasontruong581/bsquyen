@@ -1,0 +1,22 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "hormone": "hóc môn"},
+  "scenes": [
+    {"id": "s1", "text": "Một cơ quan nhỏ bằng quả lê, làm việc không nghỉ. Hôm nay ta lắp nó từ đầu!", "labels": []},
+    {"id": "s2", "text": "Bắt đầu bằng một khối cơ rỗng, hình quả lê, nằm giữa khung chậu. Đó là tử cung.", "labels": []},
+    {"id": "s3", "text": "Nhưng nó phải vừa chắc, vừa co giãn được. Nên thành tử cung là một lớp cơ dày, để nâng đỡ và co bóp.", "labels": []},
+    {"id": "s4", "text": "Bên trong thì phải mềm. Nên có một lớp lót, gọi là nội mạc tử cung. Mỗi chu kỳ, lớp lót dày lên như trải sẵn một tấm nệm êm.", "labels": []},
+    {"id": "s5", "text": "Hai bên là hai buồng trứng hình bầu dục, to cỡ quả óc chó. Chúng làm ra trứng, và cả hormone.", "labels": []},
+    {"id": "s6", "text": "Mỗi quả trứng nằm trong một túi nhỏ chứa dịch, gọi là nang trứng.", "labels": []},
+    {"id": "s7", "text": "Nhưng trứng cần một đường đi. Nên hai vòi trứng nối từ tử cung ra hai bên, dài khoảng mười đến mười ba xăng ti mét.", "labels": []},
+    {"id": "s8", "text": "Điều bất ngờ là vòi trứng không dính liền với buồng trứng. Đầu vòi xòe ra những tua nhỏ như ngón tay, quét lấy trứng khi trứng rụng.", "labels": []},
+    {"id": "s9", "text": "Giờ ta phóng to. Khi đến kỳ, một nang trứng phồng lên ở mặt buồng trứng, rồi nứt ra, thả quả trứng ra ngoài.", "labels": []},
+    {"id": "s10", "text": "Các tua vòi đón lấy quả trứng nhỏ xíu, đưa vào vòi trứng. Rồi nó đi dọc vòi, về phía tử cung.", "labels": []},
+    {"id": "s11", "text": "Nếu trứng được thụ tinh, nơi gặp nhau thường là ngay trong vòi trứng. Lớp lót ở tử cung đã sẵn sàng để nuôi phôi.", "labels": []},
+    {"id": "s12", "text": "Còn nếu không, lớp trên của lớp lót sẽ bong ra. Đó là kỳ kinh, rồi chu kỳ mới bắt đầu lại.", "labels": []},
+    {"id": "s13", "text": "Dưới cùng là cổ tử cung, một ống hẹp nối tử cung với bên ngoài. Máu kinh cũng đi ra qua đây.", "labels": []},
+    {"id": "s14", "text": "Cổ tử cung cũng là nơi nên được tầm soát định kỳ. Bạn có thể hỏi bác sĩ lịch phù hợp với mình.", "labels": []},
+    {"id": "s15", "text": "CHÚC MỪNG! Bạn vừa lắp xong tử cung và buồng trứng! Follow để hiểu rõ hơn về cơ thể mình nhé!", "labels": []}
+  ]
+}
