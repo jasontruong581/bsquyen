@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "HPV": "hát pê vê", "B": "bê", "5": "năm", "10": "mười", "24": "hai mươi bốn", "9": "chín", "14": "mười bốn", "90": "chín mươi"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Có vắc-xin phòng ung thư thật không? Có đấy.",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Nói cho chính xác: vắc-xin không chữa ung thư. Nó chặn vi-rút gây ra một số ung thư, ngay từ đầu.",
+      "labels": [{"at": "chặn", "text": "CHẶN VI-RÚT TỪ ĐẦU"}]
+    },
+    {
+      "id": "s3",
+      "text": "Cơ chế như tờ truy nã: vắc-xin cho hệ miễn dịch xem mặt vi-rút trước, để gặp thật là nhận ra ngay.",
+      "labels": [{"at": "xem", "text": "XEM MẶT TRƯỚC"}]
+    },
+    {
+      "id": "s4",
+      "text": "Vi-rút viêm gan B gây viêm gan kéo dài, có thể dẫn tới xơ gan và ung thư gan.",
+      "labels": [{"at": "viêm", "text": "VIÊM GAN B"}]
+    },
+    {
+      "id": "s5",
+      "text": "Trẻ nhiễm quanh lúc sinh có khoảng 90 phần trăm thành mạn tính. Người lớn chỉ khoảng 5 đến 10 phần trăm.",
+      "labels": [{"at": "Người", "text": "90% so với 5–10%"}]
+    },
+    {
+      "id": "s6",
+      "text": "Vì vậy mũi viêm gan B nên tiêm càng sớm càng tốt, trong vòng 24 giờ sau sinh.",
+      "labels": [{"at": "24", "text": "24 GIỜ ĐẦU"}]
+    },
+    {
+      "id": "s7",
+      "text": "HPV rất phổ biến. Phần lớn tự khỏi, nhưng nhiễm dai dẳng týp nguy cơ cao gây gần như toàn bộ ung thư cổ tử cung.",
+      "labels": [{"at": "HPV", "text": "HPV"}]
+    },
+    {
+      "id": "s8",
+      "text": "HPV còn liên quan một số ung thư khác, cả ở nam. Tuổi ưu tiên tiêm HPV là 9 đến 14.",
+      "labels": [{"at": "9", "text": "9–14 TUỔI"}]
+    },
+    {
+      "id": "s9",
+      "text": "Tiêm rồi vẫn cần tầm soát, vì vắc-xin không phòng mọi týp. Còn đã nhiễm rồi thì tiêm không chữa được.",
+      "labels": [{"at": "Tiêm", "text": "TIÊM RỒI VẪN TẦM SOÁT"}]
+    },
+    {
+      "id": "s10",
+      "text": "Người lớn chưa rõ mình có miễn dịch viêm gan B? Xét nghiệm máu rồi hỏi bác sĩ. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
