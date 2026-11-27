@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "40": "bốn mươi", "30": "ba mươi", "10": "mười"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Sờ thấy cục ở vú? Bình tĩnh, làm ba việc này.",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Phần lớn khối ở vú là lành tính. Vú còn đổi theo chu kỳ kinh: trước kỳ thì căng, sau kỳ thì mềm.",
+      "labels": [{"at": "Phần", "text": "PHẦN LỚN LÀ LÀNH TÍNH"}]
+    },
+    {
+      "id": "s3",
+      "text": "Nhưng chỉ bằng tay thì không ai phân biệt chắc được, kể cả bác sĩ. Nên việc cần làm là biết vú mình bình thường ra sao.",
+      "labels": [{"at": "biết", "text": "BIẾT “BÌNH THƯỜNG” CỦA MÌNH"}]
+    },
+    {
+      "id": "s4",
+      "text": "Mỗi tháng một lần là đủ. Còn kinh thì chọn vài ngày sau sạch kinh. Mãn kinh thì chọn một ngày cố định.",
+      "labels": [{"at": "Mỗi", "text": "MỖI THÁNG 1 LẦN"}]
+    },
+    {
+      "id": "s5",
+      "text": "Việc một, nhìn trước gương: tay xuôi, chống hông, giơ cao. Để ý hình dạng, da lõm hay núm vú mới bị tụt.",
+      "labels": [{"at": "Việc", "text": "VIỆC 1: NHÌN"}]
+    },
+    {
+      "id": "s6",
+      "text": "Việc hai, sờ khi nằm. Dùng bụng ba ngón giữa, xoay vòng nhỏ cỡ đồng xu, ấn ba mức: nhẹ, vừa, mạnh.",
+      "labels": [{"at": "Việc", "text": "VIỆC 2: SỜ BẰNG 3 NGÓN"}]
+    },
+    {
+      "id": "s7",
+      "text": "Đi tay theo một đường cố định cho khỏi sót, và nhớ phần kéo dài lên hố nách, chỗ hay bị bỏ quên nhất.",
+      "labels": [{"at": "nhớ", "text": "NHỚ CẢ HỐ NÁCH"}]
+    },
+    {
+      "id": "s8",
+      "text": "Việc ba, nếu sờ thấy khối: bình tĩnh ghi lại vị trí, kích cỡ rồi đi khám. Khối cứng, mới xuất hiện thì đi khám sớm. Còn nếu không chắc, khối không mất sau kỳ kinh thì đừng chờ thêm.",
+      "labels": [{"at": "Việc", "text": "VIỆC 3: GHI LẠI, ĐI KHÁM"}]
+    },
+    {
+      "id": "s9",
+      "text": "Bác sĩ sẽ khám, rồi siêu âm hoặc chụp nhũ ảnh. Nếu cần có thể sinh thiết kim, gây tê tại chỗ, để có câu trả lời rõ ràng.",
+      "labels": [{"at": "sinh", "text": "SINH THIẾT: ĐỂ CÓ CÂU TRẢ LỜI RÕ"}]
+    },
+    {
+      "id": "s10",
+      "text": "Tự khám không thay được nhũ ảnh, từ khoảng 40 tuổi hãy hỏi bác sĩ về lịch tầm soát. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}

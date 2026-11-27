@@ -1,5 +1,5 @@
 /* Hai thẻ duy nhất của V007, cùng nằm ở dải dưới (y 940–1135, lề phải 160) dưới đại tràng đang lùi ra toàn cảnh:
-   Thẻ 1 (cảnh 6): "45 tuổi" lớn + hai nhóm cần bắt đầu sớm hơn. Thẻ 2 (cảnh 7): hai ô song song FIT / nội soi. */
+   Thẻ 1 (cảnh 6): "45 tuổi" lớn + hai nhóm nguy cơ cao cần bắt đầu sớm hơn. Thẻ 2 (cảnh 7): hai ô song song FIT / nội soi. */
 import {spring} from 'remotion';
 import {FONT, NAVY, ORANGE} from '../../src/common/overlays';
 import {FPS, P} from '../../src/timeline';
@@ -40,8 +40,8 @@ export const Card1 = ({t, frame}: {t: number; frame: number}) => {
   if (out >= 1) return null;
   const big = sp(frame, W(6, '45') - 0.1, 9);
   const rows = [
-    {at: W(6, 'Có'), label: 'Người thân từng mắc', icon: <PeopleIcon />},
-    {at: W(6, 'hoặc'), label: 'Từng có polyp', icon: <PolypIcon />},
+    {at: W(6, 'Có'), label: 'Người thân trực hệ từng mắc', icon: <PeopleIcon />},
+    {at: W(6, 'hoặc'), label: 'Di truyền: FAP, Lynch', icon: <PolypIcon />},
   ];
   return (
     <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
@@ -60,19 +60,19 @@ export const Card1 = ({t, frame}: {t: number; frame: number}) => {
         </g>
         <path d={`M ${C.x + 300} ${C.y + 26} V ${C.y + C.h - 26}`} stroke={NAVY} strokeWidth={4} strokeDasharray="3 12" strokeLinecap="round" opacity={0.45} />
         <text x={C.x + 330} y={C.y + 52} fontFamily={FONT} fontWeight={800} fontSize={31} fill={NAVY} opacity={Math.min(1, sp(frame, W(6, 'Có') - 0.2, 14))}>
-          Nên bắt đầu sớm hơn, hỏi bác sĩ:
+          Nguy cơ cao: bắt đầu sớm hơn
         </text>
         {rows.map((r, i) => {
           const s = Math.min(1, t >= r.at - 0.05 ? sp(frame, r.at, 11) : 0);
           const y = C.y + 70 + i * 60;
           return (
             <g key={i} transform={`translate(${C.x + 330} ${y}) scale(${Math.max(0.01, s)})`} opacity={s} style={{transformBox: 'fill-box'}}>
-              <rect x={0} y={0} width={480} height={50} rx={25} fill="#FFE9D6" stroke={NAVY} strokeWidth={4.5} />
+              <rect x={0} y={0} width={520} height={50} rx={25} fill="#FFE9D6" stroke={NAVY} strokeWidth={4.5} />
               <g transform="translate(34 25)">
                 <circle r={20} fill="#fff" stroke={NAVY} strokeWidth={3.5} />
                 <g transform="scale(0.62)">{r.icon}</g>
               </g>
-              <text x={68} y={35} fontFamily={FONT} fontWeight={800} fontSize={30} fill={NAVY}>
+              <text x={68} y={35} fontFamily={FONT} fontWeight={800} fontSize={28} fill={NAVY}>
                 {r.label}
               </text>
             </g>

@@ -2,7 +2,8 @@
    ("hát pê", "phô lô"), rồi gộp mốc thời gian các âm tiết phiên âm về lại đúng một chữ hiển thị trên phụ đề.
    Hàm thuần, không đụng file hay mạng. */
 
-const EDGE = /^([^\p{L}\p{N}]*)(.*?)([^\p{L}\p{N}]*)$/su;
+/* Dấu % thuộc về chữ ("79%" là một chữ hiển thị, khoá bảng phiên âm viết cả dấu %); các dấu câu khác chỉ bám ngoài rìa */
+const EDGE = /^([^\p{L}\p{N}%]*)(.*?)([^\p{L}\p{N}%]*)$/su;
 
 /**
  * Tách lời đọc thành các chữ hiển thị và dựng câu gửi TTS.

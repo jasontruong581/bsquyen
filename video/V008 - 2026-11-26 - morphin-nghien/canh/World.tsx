@@ -1,6 +1,6 @@
 /* Thế giới của V008: MỘT dáng người nhìn nghiêng trong suốt (mặt quay sang trái) làm bản đồ, camera bay liên tục theo Tin.
    Các lớp: nền gradient + hạt bay (màn hình) -> mạng tế bào thần kinh mờ phía xa (thị sai) -> thân người trong suốt nhiều lớp (viền sáng, mảng chuyển màu, xương sườn,
-   phổi, ruột, cột sống) -> dây thần kinh có xung sáng chạy -> não -> dây cáp ra bảng tổng đài -> chỗ đau. Không vẽ mặt người, không vẽ khối u. */
+   phổi, cột sống, khung chậu) -> dây thần kinh có xung sáng chạy -> não -> dây cáp ra bảng tổng đài -> chỗ đau. Không vẽ mặt người, không vẽ khối u. */
 import {NAVY} from '../../src/common/overlays';
 import {lerp} from '../../src/timeline';
 import {CABLE_D, NERVE_D, U_SEG, pathAt} from './Path';
@@ -21,24 +21,26 @@ for (let tt = T.run0 + 0.3; tt < T.arrive - 0.15; tt += 0.4) {
 const KEYS: Key[] = [
   [0, 440, 540, 0.74, 0],
   [S(2) + 0.25, 470, 780, 0.92, 0],
-  [T.run0, 400, 1020, 1.36, 0],
+  [T.run0, 640, 1040, 1.36, 0],
   ...runKeys,
   [T.arrive + 0.45, 540, 345, 1.16, 0],
   [S(3) + 1.8, 500, 930, 0.88, 0],
   [S(3) + 5.0, 495, 925, 0.89, 0],
   [S(4) + 0.8, 215, 285, 1.02, 0],
   [E(4) - 0.4, 200, 272, 1.08, 0],
-  [S(5) + 1.0, 545, 652, 0.92, 0],
-  [E(5), 548, 648, 0.93, 0],
-  [E(6), 546, 645, 0.95, 0],
-  [S(7) + 1.2, 520, 640, 0.95, 0],
-  [E(7), 520, 660, 0.95, 0],
-  [S(8) + 0.5, 515, 880, 1.0, 0],
-  [E(8), 518, 878, 1.03, 0],
-  [S(9) + 1.4, 205, 285, 1.0, 0],
-  [E(9), 200, 278, 1.04, 0],
-  [S(10) + 1.2, 235, 340, 1.0, 0],
-  [E(10) + 1.4, 250, 380, 0.9, 0],
+  [S(5) + 0.6, 205, 282, 1.05, 0],
+  [E(5), 215, 296, 1.0, 0],
+  [S(6) + 1.0, 545, 652, 0.92, 0],
+  [E(6), 548, 648, 0.93, 0],
+  [E(7), 546, 645, 0.95, 0],
+  [S(8) + 1.2, 520, 640, 0.95, 0],
+  [E(8), 520, 660, 0.95, 0],
+  [S(9) + 0.5, 515, 880, 1.0, 0],
+  [E(9), 518, 878, 1.03, 0],
+  [S(10) + 1.4, 205, 285, 1.0, 0],
+  [E(10), 200, 278, 1.04, 0],
+  [S(11) + 1.2, 235, 340, 1.0, 0],
+  [E(11) + 1.4, 250, 380, 0.9, 0],
 ];
 
 const hermite = (v: number[], ts: number[], i: number, u: number) => {
@@ -310,19 +312,6 @@ export const Body = ({t}: {t: number}) => {
           <path d="M 440 640 C 520 600 640 640 668 760 C 690 860 640 930 560 920 C 470 910 420 800 440 640 Z" fill="#FFD3DE" fillOpacity={0.55} stroke="#E79AB2" strokeOpacity={0.6} strokeWidth={6} />
           <path d="M 560 700 C 540 760 548 820 566 870 M 560 770 C 590 780 620 800 636 830 M 556 740 C 520 740 494 760 486 790" fill="none" stroke="#fff" strokeOpacity={0.75} strokeWidth={6} strokeLinecap="round" />
         </g>
-        {/* ruột cuộn trong bụng */}
-        <g fill="none" strokeLinecap="round" strokeLinejoin="round" opacity={0.85}>
-          {[1010, 1096, 1182, 1268].map((y, i) => {
-            const d = `M 300 ${y} C 380 ${y - 36} 470 ${y + 36} 560 ${y} C 620 ${y - 26} 650 ${y + 8} 650 ${y + 44}`;
-            return (
-              <g key={i}>
-                <path d={d} stroke="#E889A2" strokeOpacity={0.5} strokeWidth={50} />
-                <path d={d} stroke="#F6B9C8" strokeOpacity={0.6} strokeWidth={36} />
-                <path d={d} stroke="#fff" strokeOpacity={0.55} strokeWidth={9} transform="translate(0 -9)" strokeDasharray="44 70" strokeDashoffset={-t * 14 + i * 20} />
-              </g>
-            );
-          })}
-        </g>
         {/* khung chậu */}
         <path d="M 270 1500 C 330 1580 520 1620 780 1560 M 250 1420 C 300 1500 440 1540 520 1540" fill="none" stroke="#8FA9D8" strokeOpacity={0.3} strokeWidth={34} strokeLinecap="round" />
         <path d="M 270 1500 C 330 1580 520 1620 780 1560 M 250 1420 C 300 1500 440 1540 520 1540" fill="none" stroke="#fff" strokeOpacity={0.8} strokeWidth={20} strokeLinecap="round" />
@@ -386,8 +375,6 @@ export const Brain = ({t, glow, calm}: {t: number; glow: number; calm: number}) 
 
 /* ---------- dây thần kinh + xung sáng (cường độ theo độ to của cơn đau) ---------- */
 const TWIGS = [
-  'M 470 1118 C 440 1170 470 1230 520 1260',
-  'M 560 1118 C 600 1180 580 1240 540 1290',
   'M 708 940 C 640 930 600 900 560 930',
   'M 722 800 C 660 790 620 770 590 790',
   'M 716 660 C 650 650 610 640 570 660',
@@ -431,7 +418,7 @@ export const Cable = ({t}: {t: number}) => (
 );
 
 /* ---------- chỗ đau: chấm cam sáng, nhịp đập và vòng sóng lan ra (nhỏ lại, dịu đi khi cơn đau hạ) ---------- */
-export const PAIN = {x: 360, y: 1080};
+export const PAIN = {x: 746, y: 1134};
 export const PainSpot = ({t, vol}: {t: number; vol: number}) => {
   const beat = 1 + 0.09 * vol * Math.sin(t * 7.5) + 0.03 * Math.sin(t * 2);
   const R = 24 + 14 * vol;

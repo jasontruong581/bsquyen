@@ -22,14 +22,14 @@ const sfx: Sfx[] = [
   ...T.st.map((t) => ({t, src: 'sfx/ping-01.wav', v: 0.18})),
   ...T.tag.map((t) => ({t, src: 'sfx/click-01.wav', v: 0.22})),
   {t: T.morphin, src: 'sfx/click-01.wav', v: 0.3},
-  {t: S(5) + 0.15, src: 'sfx/whoosh-02.wav', v: 0.16},
+  {t: S(6) + 0.15, src: 'sfx/whoosh-02.wav', v: 0.16},
   ...T.sign.map((t) => ({t, src: 'sfx/ping-01.wav', v: 0.2})),
   {t: T.split, src: 'sfx/click-01.wav', v: 0.2},
   {t: T.shield, src: 'sfx/ping-01.wav', v: 0.2},
   {t: T.doc, src: 'sfx/ping-01.wav', v: 0.2},
-  {t: S(9) - 0.1, src: 'sfx/whoosh-02.wav', v: 0.16},
-  {t: W(9, 'tự') - 0.1, src: 'sfx/click-01.wav', v: 0.25},
-  {t: W(10, 'Follow'), src: 'sfx/ding-01.wav', v: 0.25},
+  {t: S(10) - 0.1, src: 'sfx/whoosh-02.wav', v: 0.16},
+  {t: W(10, 'tự') - 0.1, src: 'sfx/click-01.wav', v: 0.25},
+  {t: W(11, 'Follow'), src: 'sfx/ding-01.wav', v: 0.25},
   ...timeline.scenes.flatMap((s) => s.labels.map((l) => ({t: l.t, src: 'sfx/ping-01.wav', v: 0.18}))),
 ];
 
@@ -40,13 +40,15 @@ const FOCUS_KEYS: FK[] = [
   [S(4) + 0.6, 60, 260, 520, 0],
   [S(4) + 1.4, 60, 270, 360, 0.7],
   [E(4) - 0.2, 60, 270, 360, 0.7],
-  [S(5) + 0.9, 500, 660, 560, 0],
-  [S(5) + 1.6, 500, 665, 430, 0.6],
-  [E(7), 500, 700, 430, 0.6],
-  [S(8) + 0.6, 480, 880, 400, 0.6],
-  [E(8), 480, 880, 400, 0.6],
-  [S(9) + 1.4, 60, 270, 560, 0],
-  [S(10) + 1.5, 500, 700, 900, 0],
+  [S(5) + 0.6, 100, 270, 620, 0],
+  [E(5), 100, 270, 620, 0],
+  [S(6) + 0.9, 500, 660, 560, 0],
+  [S(6) + 1.6, 500, 665, 430, 0.6],
+  [E(8), 500, 700, 430, 0.6],
+  [S(9) + 0.6, 480, 880, 400, 0.6],
+  [E(9), 480, 880, 400, 0.6],
+  [S(10) + 1.4, 60, 270, 560, 0],
+  [S(11) + 1.5, 500, 700, 900, 0],
 ];
 const focusAt = (t: number) => {
   const k = FOCUS_KEYS;
@@ -81,13 +83,13 @@ export const MorphinVideo = () => {
   const pose = tinPose(t);
   const tp = tinPos(t);
   const face = tinFace(t);
-  const tinScale = 1.2 + 0.25 * smooth(P(t, S(10) + 0.6, 1.2));
+  const tinScale = 1.2 + 0.25 * smooth(P(t, S(11) + 0.6, 1.2));
   const worry = tinWorry(t);
   const glow = smooth(P(t, T.arrive - 0.15, 0.3)) * (1 - smooth(P(t, T.arrive + 1.0, 1.0)));
   const calm = (1 - vol) * smooth(P(t, T.morphin + 0.5, 1.6));
-  // bảng tổng đài mờ đi khi camera ở xa nó (cảnh 5–8) rồi hiện lại khi Tin quay về
-  const consoleFade = 1 - 0.55 * smooth(P(t, E(4) + 0.1, 0.6)) * (1 - smooth(P(t, S(9) - 0.3, 0.9)));
-  const lookTarget: [number, number] = t >= T.doc - 0.3 && t < S(9) ? [0.4, 0.5] : [0.8, 0.1];
+  // bảng tổng đài mờ đi khi camera ở xa nó (cảnh 6–9) rồi hiện lại khi Tin quay về
+  const consoleFade = 1 - 0.55 * smooth(P(t, E(5) + 0.1, 0.6)) * (1 - smooth(P(t, S(10) - 0.3, 0.9)));
+  const lookTarget: [number, number] = t >= T.doc - 0.3 && t < S(10) ? [0.4, 0.5] : [0.8, 0.1];
   const tinScreen = toScreen(tp.x, tp.y - 135, cam);
 
   return (

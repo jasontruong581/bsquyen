@@ -1,7 +1,7 @@
 {
   "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
   "gap": 0.3,
-  "phat_am": {"Follow": "phô lô", "WHO": "đáp liu hát ô", "morphin": "mo phin", "Morphin": "mo phin", "0": "không", "10": "mười"},
+  "phat_am": {"Follow": "phô lô", "WHO": "đáp liu hát ô", "79%": "bảy mươi chín phần trăm", "13%": "mười ba phần trăm", "morphin": "mo phin", "Morphin": "mo phin", "0": "không", "10": "mười"},
   "scenes": [
     {
       "id": "s1",
@@ -22,6 +22,11 @@
       "id": "s4",
       "text": "Thuốc giảm đau chọn theo mức đau, qua thang ba bậc của WHO. Morphin ở bậc cao nhất, cho đau nặng, và là thuốc thiết yếu của WHO.",
       "labels": [{"at": "thang", "text": "THANG 3 BẬC"}]
+    },
+    {
+      "id": "s4b",
+      "text": "Ở các nước thu nhập cao, morphin được dùng rộng rãi. Theo WHO, 79% dân số thế giới chỉ dùng 13% lượng morphin. Đây là thuốc cần thiết để người bệnh bớt đau, nhất là giai đoạn cuối. Dùng đúng chỉ định, có bác sĩ theo dõi thì an toàn và rất hiếm khi gây nghiện.",
+      "labels": [{"at": "79%", "text": "79% DÂN SỐ THẾ GIỚI"}, {"at": "13%", "text": "CHỈ DÙNG 13% MORPHIN (WHO 2018)"}, {"at": "rất", "text": "RẤT HIẾM GÂY NGHIỆN"}]
     },
     {
       "id": "s5",

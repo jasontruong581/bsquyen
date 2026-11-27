@@ -1,5 +1,5 @@
-/* Đạo cụ của V008 (toạ độ thế giới): bảng tổng đài có núm âm lượng 3 nấc + loa "tiếng đau" (cảnh 4, 9, 10), bốn trạm phát tín hiệu (cảnh 3),
-   ba biển báo trên đường dây (cảnh 5–7), dải "đúng chỉ định" (cảnh 7), biển cảnh giác + bàn tay chỉ vào "BÁC SĨ" (cảnh 8). Không hộp thuốc, không ống tiêm, không khối u. */
+/* Đạo cụ của V008 (toạ độ thế giới): bảng tổng đài có núm âm lượng 3 nấc + loa "tiếng đau" (cảnh 4, 5, 10, 11), bốn trạm phát tín hiệu (cảnh 3),
+   ba biển báo trên đường dây (cảnh 6–8), dải "đúng chỉ định" (cảnh 8), biển cảnh giác + bàn tay chỉ vào "BÁC SĨ" (cảnh 9). Không hộp thuốc, không ống tiêm, không khối u. */
 import {spring} from 'remotion';
 import {FONT, NAVY, ORANGE} from '../../src/common/overlays';
 import {FPS, P} from '../../src/timeline';
@@ -31,7 +31,7 @@ export const Console = ({t, frame, fade = 1}: {t: number; frame: number; fade?: 
   const heavy = smooth(P(t, T.heavy, 0.3)) * (1 - smooth(P(t, T.heavy + 1.2, 0.4)));
   const who = Math.min(1, t >= W(4, 'WHO') - 0.2 ? sp(frame, W(4, 'WHO') - 0.15, 11) : 0);
   const check = Math.min(1, t >= T.essential ? sp(frame, T.essential, 10) : 0);
-  const lock = Math.min(1, t >= W(9, 'tự') - 0.15 && t < S(10) + 0.2 ? sp(frame, W(9, 'tự') - 0.1, 9) : 0);
+  const lock = Math.min(1, t >= W(10, 'tự') - 0.15 && t < S(11) + 0.2 ? sp(frame, W(10, 'tự') - 0.1, 9) : 0);
   const bars = Array.from({length: 7}, (_, i) => {
     const h = 6 + 44 * L * (0.45 + 0.55 * Math.abs(Math.sin(t * (4.2 + i * 1.1) + i * 1.7)));
     return h;
@@ -109,7 +109,7 @@ export const Console = ({t, frame, fade = 1}: {t: number; frame: number; fade?: 
           MORPHIN
         </text>
       </g>
-      {/* ổ khoá: không tự xoay núm (cảnh 9) */}
+      {/* ổ khoá: không tự xoay núm (cảnh 10) */}
       {lock > 0.01 && (
         <g transform={`translate(78 -60) scale(${Math.max(0.01, lock) * (1 + 0.04 * Math.sin(t * 6))})`}>
           <circle r={38} fill="#fff" stroke={NAVY} strokeWidth={5} />
@@ -125,7 +125,7 @@ export const Console = ({t, frame, fade = 1}: {t: number; frame: number; fade?: 
 /* ============================ bốn trạm phát tín hiệu (cảnh 3) ============================ */
 type StationIcon = 'squeeze' | 'bone' | 'nerve' | 'care';
 const STATIONS: {x: number; y: number; tag: string; icon: StationIcon; to: [number, number]}[] = [
-  {x: 395, y: 1275, tag: 'Chèn ép', icon: 'squeeze', to: [470, 1116]},
+  {x: 520, y: 1250, tag: 'Chèn ép', icon: 'squeeze', to: [746, 1134]},
   {x: 540, y: 925, tag: 'Xương', icon: 'bone', to: [706, 936]},
   {x: 495, y: 740, tag: 'Thần kinh', icon: 'nerve', to: [722, 790]},
   {x: 470, y: 548, tag: 'Điều trị', icon: 'care', to: [706, 600]},
@@ -213,7 +213,7 @@ export const Stations = ({t, frame}: {t: number; frame: number}) => {
   );
 };
 
-/* ============================ ba biển báo (cảnh 5–7) ============================ */
+/* ============================ ba biển báo (cảnh 6–8) ============================ */
 type SignIcon = 'bars' | 'chain' | 'loop';
 export const SIGNS: {y: number; label: string; color: string; icon: SignIcon}[] = [
   {y: 800, label: 'QUEN THUỐC', color: '#BFE0FF', icon: 'bars'},
@@ -250,7 +250,7 @@ export const SignIconSvg = ({icon, t}: {icon: SignIcon; t: number}) => {
 };
 
 export const Signs = ({t, frame}: {t: number; frame: number}) => {
-  const out = 1 - smooth(P(t, S(8) - 0.5, 0.5));
+  const out = 1 - smooth(P(t, S(9) - 0.5, 0.5));
   if (out < 0.01) return null;
   const split = smooth(P(t, T.split, 0.8));
   return (
@@ -290,10 +290,10 @@ export const Signs = ({t, frame}: {t: number; frame: number}) => {
   );
 };
 
-/** Dải "ĐÚNG CHỈ ĐỊNH · CÓ BÁC SĨ THEO DÕI" ngay dưới các biển báo (cảnh 7) */
+/** Dải "ĐÚNG CHỈ ĐỊNH · CÓ BÁC SĨ THEO DÕI" ngay dưới các biển báo (cảnh 8) */
 export const Ribbon = ({t, frame}: {t: number; frame: number}) => {
   const a0 = T.shield;
-  const out = 1 - smooth(P(t, E(7) - 0.1, 0.4));
+  const out = 1 - smooth(P(t, E(8) - 0.1, 0.4));
   if (t < a0 - 0.05 || out < 0.01) return null;
   const k = Math.min(1.06, sp(frame, a0, 12));
   return (
@@ -314,14 +314,14 @@ export const Ribbon = ({t, frame}: {t: number; frame: number}) => {
   );
 };
 
-/* ============================ cảnh 8: cảnh giác, bàn tay chỉ vào "BÁC SĨ" ============================ */
+/* ============================ cảnh 9: cảnh giác, bàn tay chỉ vào "BÁC SĨ" ============================ */
 const DOC = {x: 560, y: 900};
 const CAUTION = {x: 345, y: 770};
 const HAND = {x: 280, y: 945};
 
 export const Doctor = ({t, frame}: {t: number; frame: number}) => {
   const a0 = T.caution;
-  const out = 1 - smooth(P(t, E(8) - 0.15, 0.4));
+  const out = 1 - smooth(P(t, E(9) - 0.15, 0.4));
   if (t < a0 - 0.05 || out < 0.01) return null;
   const kc = Math.min(1.1, sp(frame, a0, 10));
   const kd = Math.min(1.08, t >= T.doc - 0.2 ? sp(frame, T.doc - 0.2, 11) : 0);
