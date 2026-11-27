@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "polyp": "pô líp", "Polyp": "pô líp", "FIT": "phít", "45": "bốn mươi lăm", "10": "mười", "20": "hai mươi", "30": "ba mươi"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Cắt một polyp nhỏ có thể phòng ung thư. Vì sao?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Polyp là khối nhỏ lành tính mọc trong lòng ruột, và hầu như không gây triệu chứng gì.",
+      "labels": [{"at": "Polyp", "text": "POLYP: LÀNH, IM LẶNG"}]
+    },
+    {
+      "id": "s3",
+      "text": "Chúng lớn rất chậm. Phải mất nhiều năm, một polyp mới có thể hoá ác. Khoảng thời gian đó là cửa sổ vàng.",
+      "labels": [{"at": "cửa", "text": "CỬA SỔ VÀNG"}]
+    },
+    {
+      "id": "s4",
+      "text": "Nếu bỏ mặc, có thể thành ung thư. Khi đã ra máu, đau bụng, sụt cân, bệnh thường không còn ở giai đoạn sớm nhất.",
+      "labels": [{"at": "Khi", "text": "KHÔNG ĐỢI TRIỆU CHỨNG"}]
+    },
+    {
+      "id": "s5",
+      "text": "Tin tốt: nội soi cắt được polyp ngay lúc soi. Đó là phòng bệnh thật sự.",
+      "labels": [{"at": "nội", "text": "CẮT NGAY KHI SOI"}]
+    },
+    {
+      "id": "s6",
+      "text": "Nguy cơ trung bình: bắt đầu từ 45 tuổi. Có người thân từng mắc, hoặc từng có polyp: hỏi bác sĩ để bắt đầu sớm hơn.",
+      "labels": [{"at": "45", "text": "TỪ 45 TUỔI"}]
+    },
+    {
+      "id": "s7",
+      "text": "Cách một: xét nghiệm máu ẩn trong phân, FIT, mỗi năm, làm tại nhà. Cách hai: nội soi, nếu bình thường thường khoảng 10 năm mới soi lại.",
+      "labels": [{"at": "FIT", "text": "FIT MỖI NĂM"}, {"at": "nội", "text": "NỘI SOI ~10 NĂM"}]
+    },
+    {
+      "id": "s8",
+      "text": "Nội soi thường có an thần, ngủ nhẹ, không đau, khoảng 20 đến 30 phút. Phần vất vả nhất là thuốc làm sạch ruột hôm trước.",
+      "labels": [{"at": "ngủ", "text": "NGỦ NHẸ · 20–30 PHÚT"}]
+    },
+    {
+      "id": "s9",
+      "text": "Thấy máu khi đi cầu, đừng tự kết luận là trĩ. Đa số là lành tính, nhưng chỉ có khám mới biết chắc.",
+      "labels": [{"at": "đừng", "text": "ĐỪNG TỰ KẾT LUẬN LÀ TRĨ"}]
+    },
+    {
+      "id": "s10",
+      "text": "Cách tốt nhất là cách bạn làm đều đặn. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
