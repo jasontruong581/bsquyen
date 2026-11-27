@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "WHO": "đáp liu hát ô", "ASCO": "át cô", "2010": "hai nghìn không trăm mười", "14%": "mười bốn phần trăm", "8": "tám"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Chăm sóc giảm nhẹ có phải là bỏ cuộc không?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Không. Theo WHO, chăm sóc giảm nhẹ nhằm cải thiện chất lượng sống của người bệnh và gia đình.",
+      "labels": [{"at": "cải", "text": "CẢI THIỆN CHẤT LƯỢNG SỐNG"}]
+    },
+    {
+      "id": "s3",
+      "text": "Nói đơn giản: điều trị ung thư nhắm vào khối u, còn chăm sóc giảm nhẹ nhắm vào con người.",
+      "labels": [{"at": "con", "text": "NHẮM VÀO CON NGƯỜI"}]
+    },
+    {
+      "id": "s4",
+      "text": "Hai việc đi song song, không thay thế nhau. Khi triệu chứng được kiểm soát tốt, người bệnh thường đủ sức theo hết liệu trình.",
+      "labels": [{"at": "song", "text": "ĐI SONG SONG"}]
+    },
+    {
+      "id": "s5",
+      "text": "Không phải đợi giai đoạn cuối. WHO khuyến cáo bắt đầu sớm; với ung thư tiến xa, ASCO nói lý tưởng là trong khoảng 8 tuần sau chẩn đoán.",
+      "labels": [{"at": "bắt", "text": "BẮT ĐẦU SỚM"}]
+    },
+    {
+      "id": "s6",
+      "text": "Một thử nghiệm năm 2010 ở người bệnh ung thư phổi di căn: gặp đội chăm sóc giảm nhẹ sớm thì chất lượng sống tốt hơn và ít triệu chứng trầm cảm hơn.",
+      "labels": [{"at": "chất", "text": "CHẤT LƯỢNG SỐNG TỐT HƠN"}]
+    },
+    {
+      "id": "s7",
+      "text": "Nhưng theo WHO, chỉ khoảng 14% người cần chăm sóc giảm nhẹ trên thế giới được tiếp cận.",
+      "labels": [{"at": "14%", "text": "CHỈ 14% ĐƯỢC TIẾP CẬN"}]
+    },
+    {
+      "id": "s8",
+      "text": "Chăm sóc giảm nhẹ có thể thực hiện ngay tại nhà: bác sĩ đến khám, kiểm soát đau và triệu chứng, hướng dẫn gia đình chăm sóc.",
+      "labels": [{"at": "tại", "text": "CÓ THỂ TẠI NHÀ"}]
+    },
+    {
+      "id": "s9",
+      "text": "Hãy chủ động hỏi bác sĩ khi người bệnh đau hay khó thở kéo dài, ăn ngủ kém, hoặc cả nhà quá tải. Điều đó không có nghĩa là hết cách.",
+      "labels": [{"at": "chủ", "text": "HÃY CHỦ ĐỘNG HỎI"}]
+    },
+    {
+      "id": "s10",
+      "text": "Hỏi về chăm sóc giảm nhẹ là hỏi: làm sao để người thân bớt khổ từ bây giờ. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
