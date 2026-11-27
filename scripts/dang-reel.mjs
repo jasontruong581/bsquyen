@@ -14,6 +14,9 @@
 // Video nằm ở video/<V001 - YYYY-MM-DD - slug>/post.json; slug lấy từ nội dung post.json, không từ tên thư mục.
 // mp4 không nằm trong git: `node scripts/tai-video-len-release.mjs <slug|V001>` đẩy nó lên GitHub
 // Release `video-<slug>` (asset `<slug>.mp4`), script này tải về bằng `gh` rồi tải lên Facebook.
+// Thời lượng đo từ chính mp4 (hộp mvhd): ≤ 90 s đăng bằng API Reels (/video_reels); > 90 s API Reels
+// không nhận nên đăng qua /videos của Page (graph-video), vẫn hẹn giờ như nhau.
+// `article` trong post.json là tùy chọn: video không gắn bài dùng hashtag mặc định và bình luận trỏ về /kien-thuc/.
 // Link bài không đặt trong caption mà trong bình luận đầu tiên: Facebook không cho bình luận
 // lên Reel đang hẹn giờ nên việc đó do binh-luan-reel.mjs làm sau giờ đăng.
 import { execFileSync } from "node:child_process";
@@ -29,9 +32,12 @@ import {
   docPostVideo,
   docThuMucVideo,
   kiemTraPostReel,
+  REEL_TOI_DA_GIAY,
+  chonDuongDang,
   laKhoaVideo,
   taoBinhLuan,
   taoCaptionReel,
+  thoiLuongMp4TuFile,
   thuMucMoiTuDiff,
   timVideo,
   tinhGioDangReel,
@@ -39,6 +45,7 @@ import {
 
 const VER = process.env.FB_API_VERSION || "v26.0";
 const API = `https://graph.facebook.com/${VER}`;
+const API_VIDEO = `https://graph-video.facebook.com/${VER}`;
 const NGUON_LICH = {
   gio_hen: "gio_hen (input workflow)",
   ngay_dang: "ngay_dang (post.json)",
@@ -95,11 +102,15 @@ function docVideo({ duongDan, post, loi: loiDoc }) {
   if (loi.length) chet(`${duongDan} chưa đạt:\n  - ${loi.join("\n  - ")}`);
   const slug = post.slug;
 
-  const baiMd = `kien-thuc/${post.article}.md`;
-  if (!existsSync(baiMd)) chet(`${duongDan} trỏ tới bài "${post.article}" nhưng không thấy ${baiMd}`);
-  const { data } = matter(readFileSync(baiMd, "utf8"));
+  // Video không gắn bài (article bỏ trống): không có tags để suy hashtag, taoCaptionReel dùng hashtag mặc định.
+  let tags;
+  if (post.article) {
+    const baiMd = `kien-thuc/${post.article}.md`;
+    if (!existsSync(baiMd)) chet(`${duongDan} trỏ tới bài "${post.article}" nhưng không thấy ${baiMd}`);
+    tags = matter(readFileSync(baiMd, "utf8")).data.tags;
+  }
 
-  const { caption, tagLa } = taoCaptionReel(post, data.tags);
+  const { caption, tagLa } = taoCaptionReel(post, tags);
   tagLa.forEach((t) => console.warn(`⚠ Tag "${t}" chưa có hashtag trong bảng — bỏ qua.`));
   return { slug, caption, binhLuan: taoBinhLuan(post.article, SITE_URL) };
 }
@@ -221,6 +232,92 @@ async function dangReel(file, caption, gio) {
   return { id: bat.video_id, xacNhan: Boolean(tt) };
 }
 
+/**
+ * Video > 90 s: API Reels không nhận, đăng qua endpoint video của Page (graph-video) bằng chunked upload
+ * start → transfer (từng đoạn Facebook chỉ định qua start_offset/end_offset) → finish kèm lịch hẹn.
+ * Từ 6/2025 Facebook hiển thị video dọc của Page như Reel. Lỗi từng đoạn được thử lại (tải tiếp theo offset
+ * nên an toàn); lỗi ở start/finish có thể đã tạo bài nên không thử lại.
+ */
+async function dangVideoDai(file, caption, gio) {
+  const buf = readFileSync(file);
+  const url = `${API_VIDEO}/${PAGE_ID}/videos`;
+  const bat = await goiFB(url, { method: "POST", body: form({ upload_phase: "start", file_size: String(buf.length) }) }, "videos (start)");
+  const phien = bat.upload_session_id;
+  const videoId = bat.video_id;
+  if (!phien || !videoId) chet(`videos (start) không trả upload_session_id/video_id:\n${JSON.stringify(bat)}`);
+  log(`Đã mở phiên upload: video_id=${videoId}`);
+
+  let batDau = Number(bat.start_offset);
+  let ketThuc = Number(bat.end_offset);
+  while (batDau !== ketThuc) {
+    if (!(batDau >= 0 && ketThuc > batDau && ketThuc <= buf.length)) {
+      chet(`Facebook trả offset lạ (start=${batDau}, end=${ketThuc}, file=${buf.length}).`);
+    }
+    let kq;
+    for (let lan = 1; ; lan++) {
+      const fd = new FormData();
+      fd.set("access_token", TOKEN);
+      fd.set("upload_phase", "transfer");
+      fd.set("upload_session_id", phien);
+      fd.set("start_offset", String(batDau));
+      fd.set("video_file_chunk", new Blob([buf.subarray(batDau, ketThuc)]), "chunk.mp4");
+      try {
+        const res = await fetch(url, { method: "POST", body: fd });
+        const json = await doiJson(res);
+        if (res.ok && !json.error) {
+          kq = json;
+          break;
+        }
+        if (lan >= 3) chet(`Facebook API lỗi ở videos (transfer từ byte ${batDau}) (HTTP ${res.status}):\n${JSON.stringify(json, null, 2)}`);
+      } catch (e) {
+        if (lan >= 3) chet(`Lỗi mạng ở videos (transfer từ byte ${batDau}): ${e.message}`);
+      }
+      log(`  … đoạn từ byte ${batDau} lỗi, thử lại lần ${lan + 1}`);
+      await ngu(3000 * lan);
+    }
+    batDau = Number(kq.start_offset);
+    ketThuc = Number(kq.end_offset);
+  }
+  log(`Đã tải ${(buf.length / 1e6).toFixed(1)} MB lên Facebook`);
+
+  await goiFB(
+    url,
+    {
+      method: "POST",
+      body: form({
+        upload_phase: "finish",
+        upload_session_id: phien,
+        description: caption,
+        published: "false",
+        scheduled_publish_time: String(gio),
+        unpublished_content_type: "SCHEDULED",
+      }),
+    },
+    "videos (finish)"
+  );
+
+  // Giờ hẹn được ghi ngay lúc finish; xử lý video có thể còn chạy tiếp nên chỉ chờ xác nhận lịch.
+  const han = Date.now() + 180 * 1000;
+  let cuoi = {};
+  while (Date.now() < han) {
+    const res = await fetch(`${API}/${videoId}?fields=status,published,scheduled_publish_time&access_token=${TOKEN}`);
+    cuoi = await doiJson(res);
+    if (cuoi.status?.video_status === "error") chet(`Video xử lý lỗi:\n${JSON.stringify(cuoi, null, 2)}`);
+    if ((cuoi.published === false && cuoi.scheduled_publish_time) || cuoi.status?.publishing_phase?.publish_status === "scheduled") {
+      return { id: videoId, xacNhan: true };
+    }
+    await ngu(5000);
+  }
+  log(`  … Chờ xác nhận hẹn giờ: chưa xác nhận sau 180s (${JSON.stringify(cuoi)})`);
+  return { id: videoId, xacNhan: false };
+}
+
+/** Mô tả đường đăng cho log: kèm thời lượng đã đo. */
+const moTaDuong = (giay) =>
+  chonDuongDang(giay) === "videos"
+    ? `> ${REEL_TOI_DA_GIAY} s → /videos (endpoint video của Page, chunked upload)`
+    : `≤ ${REEL_TOI_DA_GIAY} s → /video_reels (API Reels)`;
+
 async function main() {
   const muc = doVideoMoi();
   if (!muc.length) {
@@ -269,14 +366,34 @@ async function main() {
     log(`Lịch đăng: ${hienGioVN(gio)} (giờ VN) — nguồn: ${NGUON_LICH[lich.nguon]}`);
 
     if (dryRun) {
+      // Dry run không tải Release; nếu mp4 đã render sẵn ở máy thì đo thời lượng để báo đường đăng sẽ dùng.
+      const local = join("video", m.thuMuc, "out", `${slug}.mp4`);
+      if (existsSync(local)) {
+        try {
+          const giay = thoiLuongMp4TuFile(local);
+          log(`Thời lượng ${giay.toFixed(1)} s (đo từ ${local}) → ${moTaDuong(giay)}`);
+        } catch (e) {
+          console.warn(`⚠ Không đo được thời lượng ${local}: ${e.message}`);
+        }
+      } else {
+        log(`Chưa có ${local} ở máy — đường đăng sẽ chọn theo thời lượng mp4 sau khi tải từ Release (> ${REEL_TOI_DA_GIAY} s → /videos, còn lại /video_reels).`);
+      }
       log("DRY RUN — không tải video, không gọi Facebook.");
       continue;
     }
 
     const file = taiMp4(slug);
-    const kq = await dangReel(file, video.caption, gio);
+    let giay;
+    try {
+      giay = thoiLuongMp4TuFile(file);
+    } catch (e) {
+      chet(`${slug}: không đo được thời lượng mp4 để chọn đường đăng: ${e.message}`);
+    }
+    const duong = chonDuongDang(giay);
+    log(`Thời lượng ${giay.toFixed(1)} s → ${moTaDuong(giay)}`);
+    const kq = duong === "videos" ? await dangVideoDai(file, video.caption, gio) : await dangReel(file, video.caption, gio);
     log(
-      `✓ ${kq.xacNhan ? "Đã hẹn lịch" : "Đã gửi (chưa xác nhận lịch — kiểm tra Business Suite)"}: Reel ${kq.id} — tự đăng lúc ${hienGioVN(gio)}.\n` +
+      `✓ ${kq.xacNhan ? "Đã hẹn lịch" : "Đã gửi (chưa xác nhận lịch — kiểm tra Business Suite)"}: ${duong === "videos" ? "Video" : "Reel"} ${kq.id} — tự đăng lúc ${hienGioVN(gio)}.\n` +
         `  Sửa hoặc huỷ trong Meta Business Suite → Nội dung → Đã lên lịch.`
     );
   }

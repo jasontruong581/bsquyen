@@ -8,6 +8,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 import {
+  HASHTAG_MAC_DINH,
+  REEL_TOI_DA_GIAY,
+  chonDuongDang,
   docThuMucVideo,
   khopReel,
   kiemTraPostReel,
@@ -15,6 +18,8 @@ import {
   laKhoaVideo,
   taoBinhLuan,
   taoCaptionReel,
+  thoiLuongMp4TuBuffer,
+  thoiLuongMp4TuFile,
   thuMucMoiTuDiff,
   timVideo,
   tinhGioDangReel,
@@ -101,7 +106,7 @@ test("kiemTraPostReel: báo đủ lỗi id sai, slug sai, article sai, caption t
 
 test("taoCaptionReel: chữ + hashtag, gộp dòng gãy, không có link", () => {
   const r = taoCaptionReel(
-    { caption: "Câu một dài\nbị gãy dòng.\n\nĐoạn hai." },
+    { caption: "Câu một dài\nbị gãy dòng.\n\nĐoạn hai.", article: "bai" },
     ["Tầm soát", "Điều trị", "Tầm soát"]
   );
   assert.equal(r.caption, "Câu một dài bị gãy dòng.\n\nĐoạn hai.\n\n#TamSoatUngThu #DieuTriUngThu");
@@ -110,10 +115,109 @@ test("taoCaptionReel: chữ + hashtag, gộp dòng gãy, không có link", () =>
 });
 
 test("taoCaptionReel: tag lạ bị bỏ kèm trong tagLa; không có tag thì không thừa dòng trống", () => {
-  const r = taoCaptionReel({ caption: "Chữ." }, ["Tầm soát", "Lạ"]);
+  const r = taoCaptionReel({ caption: "Chữ.", article: "bai" }, ["Tầm soát", "Lạ"]);
   assert.deepEqual(r.tagLa, ["Lạ"]);
   assert.equal(r.caption, "Chữ.\n\n#TamSoatUngThu");
-  assert.equal(taoCaptionReel({ caption: "Chữ." }, undefined).caption, "Chữ.");
+  assert.equal(taoCaptionReel({ caption: "Chữ.", article: "bai" }, undefined).caption, "Chữ.");
+});
+
+test("taoCaptionReel: video không có article dùng hashtag mặc định #HieuDungYKhoa", () => {
+  const r = taoCaptionReel({ caption: "Cơ thể lắp ráp thế nào." }, undefined);
+  assert.equal(r.caption, "Cơ thể lắp ráp thế nào.\n\n#HieuDungYKhoa");
+  assert.deepEqual(r.hashtags, [HASHTAG_MAC_DINH]);
+  assert.deepEqual(r.tagLa, []);
+});
+
+test("kiemTraPostReel: article tùy chọn, có thì vẫn phải đúng dạng slug", () => {
+  const khongBai = { id: "V012", slug: "lap-gan", caption: "Câu." };
+  assert.deepEqual(kiemTraPostReel(khongBai), []);
+  assert.deepEqual(kiemTraPostReel({ ...khongBai, article: null }), []);
+  for (const sai of ["../x", "Sai Slug", "", 5]) {
+    const loi = kiemTraPostReel({ ...khongBai, article: sai });
+    assert.equal(loi.length, 1, JSON.stringify(sai));
+    assert.match(loi[0], /article/);
+  }
+});
+
+test("taoBinhLuan: không có article thì trỏ về trang Kiến thức chung, có UTM", () => {
+  const url = "https://bsquyen.vercel.app";
+  const chung = `Thêm kiến thức dễ hiểu về cơ thể: ${url}/kien-thuc/?utm_source=facebook&utm_medium=reel`;
+  assert.equal(taoBinhLuan(undefined, url), chung);
+  assert.equal(taoBinhLuan(null, url), chung);
+});
+
+/** Hộp mp4: size(4) + type(4) + payload. */
+const hop = (loai, payload) => {
+  const h = Buffer.alloc(8);
+  h.writeUInt32BE(8 + payload.length, 0);
+  h.write(loai, 4, "latin1");
+  return Buffer.concat([h, payload]);
+};
+/** mvhd phiên bản 0 (4 byte duration) hoặc 1 (8 byte duration). */
+const mvhd = (version, timescale, duration) => {
+  const p = Buffer.alloc(version === 1 ? 112 : 100);
+  p[0] = version;
+  if (version === 1) {
+    p.writeUInt32BE(timescale, 20);
+    p.writeBigUInt64BE(BigInt(duration), 24);
+  } else {
+    p.writeUInt32BE(timescale, 12);
+    p.writeUInt32BE(duration, 16);
+  }
+  return hop("mvhd", p);
+};
+const mp4Gia = (version, timescale, duration, { moovTruoc = false } = {}) => {
+  const ftyp = hop("ftyp", Buffer.from("isom\0\0\0\0isom"));
+  const moov = hop("moov", mvhd(version, timescale, duration));
+  const mdat = hop("mdat", Buffer.alloc(64));
+  return Buffer.concat(moovTruoc ? [ftyp, moov, mdat] : [ftyp, mdat, moov]);
+};
+
+test("thoiLuongMp4TuBuffer: đọc mvhd phiên bản 0 và 1, moov trước hoặc sau mdat", () => {
+  assert.equal(thoiLuongMp4TuBuffer(mp4Gia(0, 1000, 81400)), 81.4);
+  assert.equal(thoiLuongMp4TuBuffer(mp4Gia(0, 600, 54000, { moovTruoc: true })), 90);
+  // v1: duration 64-bit, vượt 2^32 vẫn đúng
+  assert.equal(thoiLuongMp4TuBuffer(mp4Gia(1, 1000, 120500)), 120.5);
+  assert.equal(thoiLuongMp4TuBuffer(mp4Gia(1, 1000, 2 ** 33)), 2 ** 33 / 1000);
+});
+
+test("thoiLuongMp4TuBuffer: hộp largesize (size=1) và hộp cuối size=0 vẫn duyệt được", () => {
+  const ftyp = hop("ftyp", Buffer.from("isom\0\0\0\0isom"));
+  const lon = Buffer.alloc(16 + 10);
+  lon.writeUInt32BE(1, 0);
+  lon.write("free", 4, "latin1");
+  lon.writeBigUInt64BE(26n, 8);
+  const moov = hop("moov", mvhd(0, 1000, 95000));
+  assert.equal(thoiLuongMp4TuBuffer(Buffer.concat([ftyp, lon, moov])), 95);
+  const cuoi = Buffer.from(moov);
+  cuoi.writeUInt32BE(0, 0); // size=0: tới hết file
+  assert.equal(thoiLuongMp4TuBuffer(Buffer.concat([ftyp, cuoi])), 95);
+});
+
+test("thoiLuongMp4TuBuffer: file không có moov hoặc timescale 0 thì ném lỗi", () => {
+  assert.throws(() => thoiLuongMp4TuBuffer(hop("ftyp", Buffer.alloc(8))), /moov/);
+  assert.throws(() => thoiLuongMp4TuBuffer(Buffer.alloc(0)), /moov/);
+  assert.throws(() => thoiLuongMp4TuBuffer(hop("moov", hop("trak", Buffer.alloc(8)))), /mvhd/);
+  assert.throws(() => thoiLuongMp4TuBuffer(mp4Gia(0, 0, 1000)), /timescale/);
+});
+
+test("thoiLuongMp4TuFile: đọc từ đĩa giống đọc từ bộ nhớ", () => {
+  const goc = mkdtempSync(join(tmpdir(), "mp4-test-"));
+  try {
+    const f = join(goc, "a.mp4");
+    writeFileSync(f, mp4Gia(0, 1000, 100250));
+    assert.equal(thoiLuongMp4TuFile(f), 100.25);
+  } finally {
+    rmSync(goc, { recursive: true, force: true });
+  }
+});
+
+test("chonDuongDang: > 90.0 giây đăng qua /videos, còn lại giữ API Reels", () => {
+  assert.equal(REEL_TOI_DA_GIAY, 90);
+  for (const g of [3, 59.9, 81.4, 90]) assert.equal(chonDuongDang(g), "reel", String(g));
+  for (const g of [90.001, 91, 120.5, 600]) assert.equal(chonDuongDang(g), "videos", String(g));
+  assert.equal(chonDuongDang(thoiLuongMp4TuBuffer(mp4Gia(0, 1000, 90000))), "reel");
+  assert.equal(chonDuongDang(thoiLuongMp4TuBuffer(mp4Gia(0, 1000, 90001))), "videos");
 });
 
 test("taoBinhLuan: link bài có UTM, không nêu tên bác sĩ", () => {
