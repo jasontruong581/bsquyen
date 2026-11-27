@@ -1,0 +1,57 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.3,
+  "phat_am": {"Follow": "phô lô", "WHO": "đáp liu hát ô", "morphin": "mo phin", "Morphin": "mo phin", "0": "không", "10": "mười"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Dùng morphin là nghiện, có đúng không?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Trước hết, đau là một tín hiệu: chạy từ chỗ đau, theo dây thần kinh, lên não.",
+      "labels": [{"at": "Trước", "text": "ĐƯỜNG ĐI CỦA ĐAU"}]
+    },
+    {
+      "id": "s3",
+      "text": "Trong ung thư, đau có nhiều nguồn: u chèn ép, di căn xương, dây thần kinh tổn thương, hoặc do chính điều trị.",
+      "labels": [{"at": "nguồn", "text": "ĐAU CÓ NHIỀU NGUỒN"}]
+    },
+    {
+      "id": "s4",
+      "text": "Thuốc giảm đau chọn theo mức đau, qua thang ba bậc của WHO. Morphin ở bậc cao nhất, cho đau nặng, và là thuốc thiết yếu của WHO.",
+      "labels": [{"at": "thang", "text": "THANG 3 BẬC"}]
+    },
+    {
+      "id": "s5",
+      "text": "Nỗi sợ nghiện đến từ ba chuyện khác nhau bị gộp thành một: quen thuốc, lệ thuộc thể chất và nghiện.",
+      "labels": [{"at": "ba", "text": "3 THỨ KHÁC NHAU"}]
+    },
+    {
+      "id": "s6",
+      "text": "Quen thuốc: cơ thể đáp ứng kém dần, nên bác sĩ chỉnh liều. Lệ thuộc thể chất: ngừng đột ngột thì khó chịu, nên phải giảm từ từ.",
+      "labels": [{"at": "Quen", "text": "QUEN THUỐC · LỆ THUỘC"}]
+    },
+    {
+      "id": "s7",
+      "text": "Nghiện là rối loạn hành vi: thèm thuốc, dùng bất chấp hậu quả. Dùng đúng chỉ định, có bác sĩ theo dõi thì phần lớn là an toàn.",
+      "labels": [{"at": "Nghiện", "text": "NGHIỆN LÀ CHUYỆN KHÁC"}]
+    },
+    {
+      "id": "s8",
+      "text": "Nguy cơ nghiện không phải bằng không, nên hãy nói thật với bác sĩ, nhất là nếu từng lệ thuộc rượu hay chất gây nghiện.",
+      "labels": [{"at": "nói", "text": "NÓI THẬT VỚI BÁC SĨ"}]
+    },
+    {
+      "id": "s9",
+      "text": "Hãy nói đúng mức đau theo thang 0 đến 10, uống đúng giờ, và không tự tăng, giảm hay ngưng thuốc.",
+      "labels": [{"at": "tự", "text": "KHÔNG TỰ ĐỔI LIỀU"}]
+    },
+    {
+      "id": "s10",
+      "text": "Đau cần được nói ra để bác sĩ cùng chọn thuốc phù hợp. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
