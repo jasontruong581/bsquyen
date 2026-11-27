@@ -185,7 +185,7 @@ export const Labels = ({t, frame, tl}: {t: number; frame: number; tl: Timeline})
 };
 
 /* ---------- màn kết: phủ kín khung nên căn giữa đúng tâm ngang (x=540), không áp lề phải của vùng an toàn ---------- */
-export const Outro = ({t, tl}: {t: number; tl: Timeline}) => {
+export const Outro = ({t, tl, note = 'Bài đầy đủ ở phần bình luận'}: {t: number; tl: Timeline; note?: string}) => {
   const p = P(t, endOf(tl) + 0.4, 0.6);
   if (p <= 0) return null;
   return (
@@ -194,7 +194,7 @@ export const Outro = ({t, tl}: {t: number; tl: Timeline}) => {
         <div style={{fontFamily: FONT, fontWeight: 900, fontSize: 92, color: NAVY, transform: `translateY(${(1 - p) * 40}px)`, textAlign: 'center'}}>Hiểu Đúng Y Khoa</div>
         <div style={{width: 140, height: 10, borderRadius: 5, background: ORANGE}} />
         <div style={{fontFamily: FONT, fontWeight: 700, fontSize: 46, color: NAVY, textAlign: 'center', lineHeight: 1.35}}>
-          Bài đầy đủ ở phần bình luận
+          {note}
           <br />
           Follow để hiểu rõ hơn về cơ thể mình
         </div>

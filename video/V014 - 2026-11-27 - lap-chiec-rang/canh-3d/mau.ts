@@ -1,0 +1,48 @@
+/* Bảng màu V014 theo nhóm màu của dòng "lắp ráp cơ thể": trắng xanh = men răng, kem = ngà, hồng = tủy và nướu (mô mềm),
+   xanh dương = xương hàm (khung), cam = dây chằng và nhấn, vàng = thần kinh/tín hiệu, đỏ = mạch máu, tím nhẹ = mảng bám, vi khuẩn, axit,
+   xanh lá = bàn chải, flo (bảo vệ). Ghi theo mã sRGB; raw() đảo phép đổi màu của three để màu hiện đúng mã đã ghi (cùng cách với V012). */
+import {raw} from '../../V012 - 2026-11-27 - lap-tieu-hoa/canh-3d/mau';
+
+export {raw};
+
+export const P0 = {
+  enamel: '#F1FAFF',
+  enamelRim: '#7FA7C9',
+  dentin: '#FFE08A',
+  dentinRim: '#B88A1C',
+  pulp: '#FF7C9E',
+  pulpRim: '#B03358',
+  cement: '#E0B07A',
+  ligament: '#FF9B4A',
+  bone: '#8FB8F5',
+  boneRim: '#3F6FB8',
+  gum: '#FF9DB8',
+  gumRim: '#B94668',
+  nerve: '#FFD23C',
+  vessel: '#E63B4F',
+  sugar: '#F7FCFF',
+  sugarRim: '#6FA8D8',
+  bacteria: '#9C66E6',
+  bacteriaDark: '#6A3DB0',
+  plaque: '#C9B0F2',
+  acid: '#C7A8FF',
+  mineral: '#CFF3FF',
+  brick: '#E6F4FF',
+  brickRim: '#5C86B3',
+  decay: '#5D4160',
+  saliva: '#BFE8FF',
+  flo: '#3FD9A6',
+  floDark: '#1E8F6A',
+  brushBlue: '#38A8E8',
+  brushBristle: '#FFFFFF',
+  mirror: '#D9F2FF',
+  metal: '#B9C6D4',
+  check: '#2FC46B',
+  cheek: '#FF9B8A',
+  ghost: '#EAF7F4',
+  white: '#FFFFFF',
+  dark: '#2B0B0E',
+  pupil: '#101820',
+  spark: '#FFE14D',
+};
+export const C = Object.fromEntries(Object.entries(P0).map(([k, v]) => [k, raw(v)])) as typeof P0;
