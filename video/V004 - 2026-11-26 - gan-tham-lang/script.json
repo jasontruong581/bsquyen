@@ -1,0 +1,58 @@
+{
+  "tts": {"engine": "vieneu", "voice": "Ngọc Linh"},
+  "gap": 0.35,
+  "phat_am": {"Follow": "phô lô", "B": "bê", "C": "xê", "6": "sáu", "10": "mười", "15": "mười lăm"},
+  "scenes": [
+    {
+      "id": "s1",
+      "text": "Gan ốm nhiều năm mà không kêu một tiếng. Vì sao vậy?",
+      "labels": []
+    },
+    {
+      "id": "s2",
+      "text": "Vì gan chịu đựng rất giỏi: nó có thể ốm lâu mà ta vẫn ăn uống, làm việc bình thường.",
+      "labels": [{"at": "chịu", "text": "CHỊU ĐỰNG GIỎI"}]
+    },
+    {
+      "id": "s3",
+      "text": "Hai vi-rút hay gặp nhất là viêm gan B và C. Chúng gây viêm âm thầm, kéo dài nhiều năm.",
+      "labels": [{"at": "viêm", "text": "VIÊM GAN B VÀ C"}]
+    },
+    {
+      "id": "s4",
+      "text": "Nhiều người mang vi-rút mà không hề biết, vì giai đoạn đầu hầu như không có triệu chứng.",
+      "labels": [{"at": "không", "text": "KHÔNG BIẾT MÌNH CÓ"}]
+    },
+    {
+      "id": "s5",
+      "text": "Viêm kéo dài dẫn tới xơ gan. Trên nền gan đã tổn thương như vậy, ung thư dễ hình thành hơn.",
+      "labels": [{"at": "Viêm", "text": "VIÊM → XƠ GAN → UNG THƯ"}]
+    },
+    {
+      "id": "s6",
+      "text": "Đến khi đau tức, vàng da, bụng to thì bệnh thường đã tiến xa. Vì vậy phải đi trước triệu chứng.",
+      "labels": [{"at": "đi", "text": "ĐI TRƯỚC TRIỆU CHỨNG"}]
+    },
+    {
+      "id": "s7",
+      "text": "Tin tốt: nhóm nguy cơ rất rõ. Với xơ gan, viêm gan B hoặc C mạn, bác sĩ khuyến cáo siêu âm bụng khoảng 6 tháng một lần.",
+      "labels": [{"at": "siêu", "text": "SIÊU ÂM 6 THÁNG/LẦN"}]
+    },
+    {
+      "id": "s8",
+      "text": "Siêu âm không đau, không cần gây mê, thường chỉ mất 10 đến 15 phút.",
+      "labels": [{"at": "Siêu", "text": "KHÔNG ĐAU · 10–15 PHÚT"}]
+    },
+    {
+      "id": "s9",
+      "text": "Chưa từng xét nghiệm viêm gan B và C? Làm một lần để biết mình có thuộc nhóm nguy cơ không.",
+      "labels": [{"at": "Làm", "text": "XÉT NGHIỆM 1 LẦN"}]
+    },
+    {
+      "id": "s10",
+      "text": "Hạn chế rượu bia, tiêm vắc-xin viêm gan B nếu chưa có miễn dịch. Follow để hiểu rõ hơn về cơ thể mình nhé!",
+      "labels": []
+    }
+  ]
+}
+
