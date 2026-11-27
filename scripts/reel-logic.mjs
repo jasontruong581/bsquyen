@@ -1,6 +1,6 @@
 // Logic thuần của job đăng Reels: dò video mới, dựng caption, dựng bình luận, ghép Reel với bài.
 // Tách khỏi dang-reel.mjs / binh-luan-reel.mjs để test được mà không gọi Facebook hay GitHub.
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { closeSync, existsSync, fstatSync, openSync, readFileSync, readSync, readdirSync } from "node:fs";
 
 import { HASHTAG, gonCaption } from "./caption-facebook.mjs";
 import { TOI_DA_MS, TOI_DA_NGAY, tinhGioDang } from "./gio-dang.mjs";
@@ -117,8 +117,9 @@ export function kiemTraPostReel(post) {
   if (!post || typeof post !== "object") return ["post.json không phải object"];
   if (typeof post.id !== "string" || !ID_RE.test(post.id)) loi.push(`id thiếu hoặc sai dạng: "${post.id}" (vd V001)`);
   if (typeof post.slug !== "string" || !SLUG_RE.test(post.slug)) loi.push(`slug thiếu hoặc sai dạng: "${post.slug}" (vd hp-va-da-day)`);
-  if (typeof post.article !== "string" || !SLUG_RE.test(post.article)) {
-    loi.push(`article thiếu hoặc sai dạng: "${post.article}" (slug bài Kiến thức, vd vi-khuan-hp-va-ung-thu-da-day)`);
+  // `article` tùy chọn (video không gắn bài, vd series 3D về cơ thể): bỏ trống hợp lệ, có thì phải đúng dạng slug.
+  if (post.article !== undefined && post.article !== null && (typeof post.article !== "string" || !SLUG_RE.test(post.article))) {
+    loi.push(`article sai dạng: "${post.article}" (slug bài Kiến thức, vd vi-khuan-hp-va-ung-thu-da-day; bỏ trường này nếu video không gắn bài)`);
   }
   if (typeof post.caption !== "string" || !gonCaption(post.caption)) loi.push("caption trống");
   const loiNgay = kiemTraNgayDang(post.ngay_dang);
@@ -126,21 +127,95 @@ export function kiemTraPostReel(post) {
   return loi;
 }
 
+/** Hashtag cho video không gắn bài Kiến thức (không có `tags` để suy). */
+export const HASHTAG_MAC_DINH = "#HieuDungYKhoa";
+
 /**
  * Caption Reel = chữ trong post.json + hashtag suy từ `tags` của bài Kiến thức.
+ * Video không có `article` thì không có tags để suy: dùng hashtag mặc định HASHTAG_MAC_DINH.
  * Không có link: link đi vào bình luận đầu tiên (xem taoBinhLuan). Không nêu tên bác sĩ.
  * Tag không có trong bảng hashtag được trả về ở `tagLa` để caller cảnh báo.
  */
-export function taoCaptionReel({ caption }, tags) {
+export function taoCaptionReel({ caption, article }, tags) {
   const chu = gonCaption(caption || "");
   const tagLa = (tags || []).filter((t) => !HASHTAG[t]);
-  const hashtags = [...new Set((tags || []).map((t) => HASHTAG[t]).filter(Boolean))];
+  const hashtags = article
+    ? [...new Set((tags || []).map((t) => HASHTAG[t]).filter(Boolean))]
+    : [HASHTAG_MAC_DINH];
   return { chu, hashtags, tagLa, caption: [chu, hashtags.join(" ")].filter(Boolean).join("\n\n") };
 }
 
-/** Bình luận đầu tiên của Page: link bài, kèm UTM để Umami tách lượt đến từ Reels. */
+/**
+ * Bình luận đầu tiên của Page, kèm UTM để Umami tách lượt đến từ Reels: link bài nếu video có `article`,
+ * không thì link trang Kiến thức chung.
+ */
 export function taoBinhLuan(article, siteUrl) {
+  if (!article) return `Thêm kiến thức dễ hiểu về cơ thể: ${siteUrl}/kien-thuc/?utm_source=facebook&utm_medium=reel`;
   return `Xem bài viết đầy đủ: ${siteUrl}/kien-thuc/${article}/?utm_source=facebook&utm_medium=reel`;
+}
+
+// ── Chọn đường đăng theo thời lượng ──────────────────────────────────────────────────────────
+
+/** API Reels (/video_reels) chỉ nhận 3–90 giây; dài hơn thì đăng qua /videos. */
+export const REEL_TOI_DA_GIAY = 90;
+
+/** "reel" (≤ 90 s, /video_reels) hay "videos" (> 90 s, /videos). */
+export const chonDuongDang = (giay) => (giay > REEL_TOI_DA_GIAY ? "videos" : "reel");
+
+/**
+ * Thời lượng (giây) của mp4 từ hộp moov/mvhd — không cần ffprobe.
+ * `doc(offset, len)` trả Buffer (có thể ngắn hơn len nếu hết file); `tong` là tổng số byte.
+ * Hộp: size(4) + type(4) [+ largesize(8) nếu size=1; size=0 nghĩa là tới hết file]. mvhd: version(1)
+ * + flags(3), v0: ngày tạo(4) + ngày sửa(4) + timescale(4) + duration(4); v1: 8+8+4+8.
+ */
+export function thoiLuongMp4(doc, tong) {
+  const timHop = (batDau, ketThuc, loai) => {
+    for (let o = batDau; o + 8 <= ketThuc; ) {
+      const h = doc(o, 16);
+      if (h.length < 8) break;
+      let size = h.readUInt32BE(0);
+      let dauHop = 8;
+      if (size === 1) {
+        if (h.length < 16) break;
+        size = Number(h.readBigUInt64BE(8));
+        dauHop = 16;
+      } else if (size === 0) {
+        size = ketThuc - o;
+      }
+      if (size < dauHop || o + size > ketThuc) break; // hộp hỏng hoặc file bị cắt
+      if (h.toString("latin1", 4, 8) === loai) return { dau: o + dauHop, cuoi: o + size };
+      o += size;
+    }
+    return null;
+  };
+
+  const moov = timHop(0, tong, "moov");
+  if (!moov) throw new Error("mp4 không có hộp moov (file hỏng hoặc bị cắt)");
+  const mvhd = timHop(moov.dau, moov.cuoi, "mvhd");
+  if (!mvhd) throw new Error("mp4 không có hộp mvhd");
+  const b = doc(mvhd.dau, mvhd.cuoi - mvhd.dau);
+  const v1 = b[0] === 1;
+  if (b.length < (v1 ? 32 : 20)) throw new Error("hộp mvhd quá ngắn");
+  const timescale = b.readUInt32BE(v1 ? 20 : 12);
+  const duration = v1 ? Number(b.readBigUInt64BE(24)) : b.readUInt32BE(16);
+  if (!timescale) throw new Error("mvhd có timescale = 0");
+  return duration / timescale;
+}
+
+/** Thời lượng mp4 đang nằm trong bộ nhớ. */
+export const thoiLuongMp4TuBuffer = (buf) => thoiLuongMp4((o, l) => buf.subarray(o, o + l), buf.length);
+
+/** Thời lượng mp4 trên đĩa; chỉ đọc đầu các hộp và moov, không nạp cả file. */
+export function thoiLuongMp4TuFile(duongDan) {
+  const fd = openSync(duongDan, "r");
+  try {
+    return thoiLuongMp4((o, l) => {
+      const b = Buffer.alloc(l);
+      return b.subarray(0, readSync(fd, b, 0, l, o));
+    }, fstatSync(fd).size);
+  } finally {
+    closeSync(fd);
+  }
 }
 
 /**

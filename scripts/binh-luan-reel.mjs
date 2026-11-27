@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Đăng bình luận đầu tiên (link bài Kiến thức) từ chính Page lên các Reel đã công khai mà Page chưa bình luận.
+// Đăng bình luận đầu tiên (link bài Kiến thức, hoặc link /kien-thuc/ nếu video không gắn bài) từ chính Page lên các
+// Reel/video đã công khai mà Page chưa bình luận. Gồm cả video dài đăng qua /videos (xem dang-reel.mjs).
 //
 //   node scripts/binh-luan-reel.mjs --dry-run              # chỉ liệt kê Reel sẽ bình luận và nội dung
 //   node scripts/binh-luan-reel.mjs [--ngay=60]            # đăng; chỉ xét Reel tải lên trong 60 ngày
@@ -65,9 +66,17 @@ if (!ds.ok) {
   console.error(`✖ Không đọc được danh sách Reel (HTTP ${ds.status}): ${JSON.stringify(ds.json)}`);
   process.exit(1);
 }
+// Video dài (> 90 s) đăng qua /videos của Page chứ không qua /video_reels, nên không chắc có trong danh sách Reel:
+// đọc thêm danh sách video của Page và gộp theo id. Bình luận lên video dùng cùng edge /comments.
+// Lỗi đọc danh sách này chỉ cảnh báo, để Reel thường vẫn được bình luận.
+const dsVideo = await goi(`${API}/${PAGE_ID}/videos?fields=id,created_time,published,description&limit=25&access_token=${TOKEN}`);
+if (!dsVideo.ok) console.warn(`⚠ Không đọc được danh sách video của Page (HTTP ${dsVideo.status}): ${JSON.stringify(dsVideo.json).slice(0, 200)}`);
+const gop = new Map();
+for (const r of [...ds.json.data, ...(dsVideo.ok ? dsVideo.json.data || [] : [])]) if (!gop.has(r.id)) gop.set(r.id, r);
+
 const tu = Date.now() - ngay * 864e5;
-const xet = ds.json.data.filter((r) => r.published !== false && Date.parse(r.created_time) >= tu);
-console.log(`Reel đã công khai trong ${ngay} ngày: ${xet.length}${dryRun ? "  (DRY RUN)" : ""}`);
+const xet = [...gop.values()].filter((r) => r.published !== false && Date.parse(r.created_time) >= tu);
+console.log(`Reel/video đã công khai trong ${ngay} ngày: ${xet.length}${dryRun ? "  (DRY RUN)" : ""}`);
 
 let loi = 0;
 for (const r of xet) {

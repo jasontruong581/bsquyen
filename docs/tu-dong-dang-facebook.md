@@ -205,8 +205,9 @@ Mỗi video một thư mục `video/V001 - YYYY-MM-DD - <slug>/` (tên **có d�
 `video/V001 - 2026-11-25 - hp-va-da-day/`. Trong đó:
 
 - `post.json` = `{"id": "V001", "slug": "hp-va-da-day", "article": "...", "caption": "..."}`
-  (`article` là slug bài Kiến thức tương ứng). **`id` và `slug` lấy từ nội dung post.json,
-  không suy từ tên thư mục**; thư mục chỉ để người đọc.
+  (`article` là slug bài Kiến thức tương ứng, **tùy chọn**: video không gắn bài, như series
+  3D về cơ thể, bỏ trường này — xem *Caption và bình luận*). **`id` và `slug` lấy từ nội dung
+  post.json, không suy từ tên thư mục**; thư mục chỉ để người đọc.
 - `post.json` còn nhận trường tùy chọn `"ngay_dang": "YYYY-MM-DD"` — xem mục *Hẹn ngày đăng* dưới đây.
 - mp4 render ở local nằm tại `<thư mục>/out/<slug>.mp4`.
 - Release vẫn là tag `video-<slug>`, asset `<slug>.mp4`.
@@ -274,13 +275,34 @@ hoặc id như `V001`; và `gio_hen` dạng `2026-12-01 19:30` nếu muốn gi�
 đặt `GIO_DANG=19:30` để giờ hiện ra giống workflow) — in caption, giờ hẹn, nội dung bình
 luận, không tải video và không gọi Facebook.
 
+### Video dài hơn 90 giây
+
+API Reels (`/video_reels`) chỉ nhận video 3–90 giây. Job **đo thời lượng từ chính mp4**
+(hộp `moov/mvhd`, hàm `thoiLuongMp4` trong `scripts/reel-logic.mjs`, không cần ffprobe) rồi chọn đường đăng:
+
+| Thời lượng | Đường đăng |
+|---|---|
+| ≤ 90,0 s | `/video_reels` như cũ |
+| > 90,0 s | `POST graph-video.facebook.com/<ver>/<page-id>/videos`: chunked upload (`upload_phase` start → transfer → finish), finish kèm `description` = caption, `published=false`, `unpublished_content_type=SCHEDULED`, `scheduled_publish_time` |
+
+Giờ hẹn tính y hệt Reel (`gio_hen` > `ngay_dang` > 19:30, giới hạn 28 ngày). Từ 6/2025
+Facebook hiển thị video dọc của Page như Reel nên bài vẫn ra dạng Reel trên feed. Dry-run in
+thời lượng và đường đăng nếu mp4 đã có ở `video/<thư mục>/out/<slug>.mp4` trên máy; chưa có
+thì chỉ báo ngưỡng (job thật mới tải Release và đo). Tên tham số lấy theo tài liệu Graph API
+`/{page-id}/videos`; chưa đăng thử video dài thật, nên lần đầu hãy hẹn rồi kiểm tra trong
+Meta Business Suite → Đã lên lịch. Job bình luận đọc thêm `/<page-id>/videos` để thấy video
+đăng theo đường này.
+
 ### Caption và bình luận
 
 - **Caption** = `caption` trong post.json (gộp dòng gãy như bài ảnh) + hashtag suy từ `tags`
   của bài `kien-thuc/<article>.md`, qua bảng hashtag ở `scripts/caption-facebook.mjs`.
+  Video không có `article` dùng hashtag mặc định `#HieuDungYKhoa`.
   **Không có link**, không nêu tên bác sĩ.
 - **Link bài** đi vào bình luận đầu tiên của Page:
   `Xem bài viết đầy đủ: <SITE_URL>/kien-thuc/<article>/?utm_source=facebook&utm_medium=reel`.
+  Không có `article` thì bình luận trỏ về trang Kiến thức chung:
+  `Thêm kiến thức dễ hiểu về cơ thể: <SITE_URL>/kien-thuc/?utm_source=facebook&utm_medium=reel`.
 - Reel đang hẹn giờ chưa công khai nên chưa có chỗ bình luận; repo videobds cũng chỉ bình
   luận lên Reel đã công khai. Vì vậy bình luận do job riêng làm **sau** giờ đăng, theo cách
   đã chạy ở videobds: chạy lúc 20:20 và 22:20
